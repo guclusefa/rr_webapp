@@ -1,13 +1,13 @@
 <template>
-  <section>
+  <footer>
     <div class="container">
-      <h1>About page</h1>
+        <p>Footer</p>
     </div>
-  </section>
+  </footer>
 </template>
 
 <script>
 export default {
-  name: 'AboutView',
-}
+  name: "FooterItem",
+};
 </script>
