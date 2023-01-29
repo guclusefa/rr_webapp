@@ -1,6 +1,15 @@
-[data-bs-theme="dark"] {
-    color-scheme: dark;
-}
+// All variables
 @import '_variables';
-@import 'bootstrap';
+// Handling the different themes
+[data-bs-theme="dark"] {
+    background-color: $d-primary-color;
+    $primary: $d-primary-color;
+}
+[data-bs-theme="light"] {
+    background-color: $l-primary-color;
+    $primary: $l-primary-color;
+}
+$primary: $d-primary-color;
+
+// Bootstrap
 @import '~bootstrap/scss/bootstrap';
