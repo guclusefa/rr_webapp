@@ -4,6 +4,7 @@
       <nav>
         <router-link to="/">{{ $t("home.page") }}</router-link> |
         <router-link to="/about">{{ $t("about.page") }}</router-link> |
+        <ThemeSwitcher /> |
         <LocaleSwitcher />
       </nav>
     </div>
@@ -11,25 +12,14 @@
 </template>
 
 <script>
+import ThemeSwitcher from "./ThemeSwitcher.vue";
 import LocaleSwitcher from "./LocaleSwitcher.vue";
 
 export default {
   name: "HeaderItem",
   components: {
+    ThemeSwitcher,
     LocaleSwitcher,
   },
 };
 </script>
-
-<style lang="scss" scoped>
-nav {
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: $secondary;
-    }
-  }
-}
-</style>
