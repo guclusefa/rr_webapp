@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import UsersView from '../views/user/UsersView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: UsersView
   },
   {
     path: '/about',
@@ -20,6 +26,11 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.name + ' - ' + process.env.VUE_APP_TITLE;
+  next()
 })
 
 export default router

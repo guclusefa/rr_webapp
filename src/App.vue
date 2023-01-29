@@ -18,3 +18,14 @@ export default {
   }
 }
 </script>
+
+<style>
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    margin-top: auto;
+}
+</style>

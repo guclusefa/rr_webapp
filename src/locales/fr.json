@@ -1,7 +1,15 @@
 {
+  "app": {
+    "name_short": "RR",
+    "name": "RESSOURCES RELATIONNELLES"
+  },
   "home": {
     "page": "Accueil",
     "title": "Bienvenue sur mon site"
+  },
+  "users": {
+    "page": "Utilisateurs",
+    "title": "Liste des utilisateurs"
   },
   "about": {
     "page": "A propos",

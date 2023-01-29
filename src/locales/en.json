@@ -1,4 +1,8 @@
 {
+    "app": {
+        "name_short": "RR",
+        "name": "RESSOURCES RELATIONNELLES"
+    },
     "home": {
         "page": "Home",
         "title": "Welcome to my website"
