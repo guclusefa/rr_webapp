@@ -4,6 +4,7 @@
     <router-link to="/about">About</router-link>
   </nav>
   <router-view/>
+  <button class="btn btn-primary">trjk</button>
 </template>
 
 <style lang="scss">
