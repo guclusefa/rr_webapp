@@ -1,0 +1,13 @@
+{
+  "home": {
+    "page": "Accueil",
+    "title": "Bienvenue sur mon site"
+  },
+  "about": {
+    "page": "A propos",
+    "title": "A propos de moi"
+  },
+  "footer": {
+    "copyright": "© {year} Mon site"
+  }
+}

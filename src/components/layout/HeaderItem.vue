@@ -2,16 +2,22 @@
   <header>
     <div class="container">
       <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/">{{ $t("home.page") }}</router-link> |
+        <router-link to="/about">{{ $t("about.page") }}</router-link> |
+        <LocaleSwitcher />
       </nav>
     </div>
   </header>
 </template>
 
 <script>
+import LocaleSwitcher from "./LocaleSwitcher.vue";
+
 export default {
   name: "HeaderItem",
+  components: {
+    LocaleSwitcher,
+  },
 };
 </script>
 
