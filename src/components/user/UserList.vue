@@ -9,8 +9,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <div class="text-center" v-if="loading">
+    <div class="col" v-if="loading && users.length === 0">
+      <div class="text-center">
         <div class="spinner-border" role="status">
           <span class="sr-only"></span>
         </div>
@@ -22,9 +22,16 @@
       <button
         class="btn btn-primary mb-3"
         @click="loadMore"
-        v-if="meta.next && !loading"
+        :disabled="loading"
+        v-if="meta.next"
       >
-        Voir plus
+        <span v-if="loading && users.length > 0">
+          <span class="spinner-border spinner-border-sm" role="status">
+            <span class="sr-only"></span>
+          </span>
+          Chargement...
+        </span>
+        <span v-else>Voir plus</span>
       </button>
     </div>
   </div>
@@ -59,7 +66,7 @@ export default {
       this.loading = true;
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/users?page=" + this.page
+          "http://localhost:8000/api/users?limit=2&page=" + this.page
         );
         this.meta = response.data["meta"];
         this.users.push(...response.data["data"]);
@@ -70,6 +77,7 @@ export default {
       }
     },
     loadMore() {
+      this.loading = true;
       this.page++;
       this.getUsers();
     },
@@ -82,4 +90,3 @@ export default {
   },
 };
 </script>
-  
