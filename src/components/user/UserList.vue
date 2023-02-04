@@ -1,18 +1,20 @@
 <template>
   <div class="row">
-    <div
-      class="col-xxl-3 col-xl-4 col-md-6 col-12"
-      v-for="user in users"
-      :key="user.id"
-    >
-      <UserCard :user="user" />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col" v-if="loading && users.length === 0">
-      <div class="text-center">
-        <div class="spinner-border" role="status">
-          <span class="sr-only"></span>
+    <div class="col">
+      <div class="row">
+        <div
+          class="col-12 col-md-6 col-lg-3"
+          v-for="user in users"
+          :key="user.id"
+        >
+          <UserCard :user="user" />
+        </div>
+        <div
+          class="col-12 col-md-6 col-lg-3"
+          v-for="skeletonCard in skeletonCards"
+          :key="skeletonCard"
+        >
+          <UserCardSkeleton />
         </div>
       </div>
     </div>
@@ -22,71 +24,74 @@
       <button
         class="btn btn-primary mb-3"
         @click="loadMore"
-        :disabled="loading"
+        :disabled="isLoading"
         v-if="meta.next"
       >
-        <span v-if="loading && users.length > 0">
-          <span class="spinner-border spinner-border-sm" role="status">
-            <span class="sr-only"></span>
-          </span>
-          Chargement...
-        </span>
-        <span v-else>Voir plus</span>
+        <span v-if="isLoading"> {{ $t("app.loading") }} </span>
+        <span v-else>{{ $t("app.see_more") }}</span>
       </button>
     </div>
   </div>
   <div class="row">
     <div class="col">
       <p v-if="users.length > 0">
-        {{ meta.end }} éléments pour un total de {{ meta.total }} ({{
-          meta.limit
-        }}
-        éléments par page)
+        {{ $t("app.showing", { end: meta.end, total: meta.total }) }}
       </p>
-      <p v-else-if="!loading">Aucun résultat</p>
+      <p v-else-if="!isLoading">{{ $t("app.no_results") }}</p>
     </div>
   </div>
 </template>
-  
-  <script>
+<script>
 import axios from "axios";
 import UserCard from "@/components/user/UserCard.vue";
+import UserCardSkeleton from "@/components/user/UserCardSkeleton.vue";
+
+const api = axios.create({
+  baseURL: "http://localhost:8000/api"
+});
 
 export default {
   data() {
     return {
       users: [],
-      meta: [],
+      meta: {},
       page: 1,
-      loading: false,
+      limit: 10,
+      isLoading: false,
+      skeletonCards: [],
     };
   },
   methods: {
-    async getUsers() {
-      this.loading = true;
+    async fetchUsers() {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/users?limit=2&page=" + this.page
-        );
-        this.meta = response.data["meta"];
-        this.users.push(...response.data["data"]);
+        this.isLoading = true;
+        this.skeletonCards = Array.from({ length: this.limit }, (_, i) => i);
+        const response = await api.get(`/users`, {
+          params: {
+            limit: this.limit,
+            page: this.page
+          }
+        });
+        this.meta = response.data.meta;
+        this.users.push(...response.data.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       } finally {
-        this.loading = false;
+        this.isLoading = false;
+        this.skeletonCards = [];
       }
     },
     loadMore() {
-      this.loading = true;
       this.page++;
-      this.getUsers();
-    },
+      this.fetchUsers();
+    }
   },
   mounted() {
-    this.getUsers();
+    this.fetchUsers();
   },
   components: {
     UserCard,
-  },
+    UserCardSkeleton
+  }
 };
 </script>

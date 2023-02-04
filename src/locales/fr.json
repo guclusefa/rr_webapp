@@ -1,7 +1,11 @@
 {
   "app": {
     "name_short": "RR",
-    "name": "RESSOURCES RELATIONNELLES"
+    "name": "RESSOURCES RELATIONNELLES",
+    "loading": "Chargement...",
+    "no_results": "Aucun résultat",
+    "see_more": "Voir plus",
+    "showing": "Affichage de {end} sur {total} résultats"
   },
   "home": {
     "page": "Accueil",
