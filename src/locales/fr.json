@@ -6,7 +6,11 @@
     "no_results": "Aucun résultat",
     "no_response": "Il y a eu un problème avec la réponse du serveur veuillez réessayer",
     "see_more": "Voir plus",
-    "showing": "Affichage de {end} sur {total} résultats"
+    "showing": "Affichage de {end} sur {total} résultats",
+    "filter": "Filtrer",
+    "search": "Rechercher",
+    "yes": "Oui",
+    "no": "Non"
   },
   "home": {
     "page": "Accueil",
@@ -14,7 +18,8 @@
   },
   "users": {
     "page": "Utilisateurs",
-    "title": "Liste des utilisateurs"
+    "title": "Liste des utilisateurs",
+    "certified": "Certifié"
   },
   "about": {
     "page": "A propos",
