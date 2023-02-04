@@ -1,4 +1,22 @@
 <template>
+  <div class="div">
+    <div class="col">
+      <form @submit.prevent="fetchData({ page: 1 })">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search"
+            v-model="params.search"
+          />
+          <button class="btn btn-primary" type="submit">
+            {{ $t("app.search") }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <UserCards :users="users" :skeletons="skeletons" />
 
   <template v-if="Object.keys(meta).length">
@@ -38,6 +56,7 @@ export default {
       params: {
         limit: 4,
         page: 1,
+        search: "",
       },
       isLoading: false,
       isDown: false,
@@ -46,6 +65,10 @@ export default {
   methods: {
     async fetchData(params = {}) {
       try {
+        // if filterd reset users
+        if (params.page) {
+          params.page === 1 ? (this.users = []) : null;
+        }
         // show skeleton cards on load
         this.isLoading = true;
         this.skeletons = Array.from({ length: this.params.limit });
