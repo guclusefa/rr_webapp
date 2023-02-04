@@ -21,6 +21,3 @@ export default {
   name: "UserCardSkeleton",
 };
 </script>
-
-<style>
-</style>
