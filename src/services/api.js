@@ -6,12 +6,10 @@ const api = axios.create({
 
 export const fetchData = async (url, params) => {
     try {
-        const response = await api.get(url, {
-            params,
-        });
+        const response = await api.get(url, { params });
         return response.data;
     } catch (error) {
-        console.error(error);
-        return error;
+        console.log(error);
+        return null;
     }
 }

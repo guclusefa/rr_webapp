@@ -1,12 +1,7 @@
 <template>
-  <div class="row">
-    <div class="col">
-      <p v-if="items.length > 0">
-        {{ $t("app.showing", { end: meta.end, total: meta.total }) }}
-      </p>
-      <p v-else-if="!isLoading">{{ $t("app.no_results") }}</p>
-    </div>
-  </div>
+  <p v-if="items.length > 0">
+    {{ $t("app.showing", { end: meta.end, total: meta.total }) }}
+  </p>
 </template>
 
 <script>
@@ -18,10 +13,6 @@ export default {
     },
     meta: {
       type: Object,
-      required: true,
-    },
-    isLoading: {
-      type: Boolean,
       required: true,
     },
   },
