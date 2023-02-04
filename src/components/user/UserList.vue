@@ -1,30 +1,17 @@
 <template>
-  <div class="row">
-    <div class="col-12 col-md-6 col-lg-3" v-for="user in users" :key="user.id">
-      <UserCard :user="user" />
-    </div>
-    <div
-      class="col-12 col-md-6 col-lg-3"
-      v-for="skeletonCard in skeletonCards"
-      :key="skeletonCard"
-    >
-      <UserCardSkeleton />
-    </div>
-  </div>
+  <UserCards :users="users" :skeletons="skeletons" />
 
   <template v-if="Object.keys(meta).length">
     <LoadMoreButton
       v-if="meta.next"
-      :meta="meta"
       :isLoading="isLoading"
       :page="params.page"
       :fetchData="fetchData"
     />
     <MetaInformation
       v-if="meta.total > 0"
-      :meta="meta"
       :items="users"
-      :isLoading="isLoading"
+      :meta="meta"
     />
     <NoResults v-if="meta.count === 0" />
   </template>
@@ -34,8 +21,7 @@
 <script>
 import { fetchData } from "@/services/api.js";
 
-import UserCard from "@/components/user/UserCard.vue";
-import UserCardSkeleton from "@/components/user/UserCardSkeleton.vue";
+import UserCards from "@/components/user/UserCards.vue";
 
 import LoadMoreButton from "@/components/fragments/LoadMoreButton.vue";
 import MetaInformation from "@/components/fragments/MetaInformation.vue";
@@ -47,10 +33,10 @@ export default {
     return {
       url: "/users",
       users: [],
-      skeletonCards: [],
+      skeletons: [],
       meta: {},
       params: {
-        limit: 1,
+        limit: 4,
         page: 1,
       },
       isLoading: false,
@@ -62,19 +48,12 @@ export default {
       try {
         // show skeleton cards on load
         this.isLoading = true;
-        this.skeletonCards = Array.from(
-          { length: this.params.limit },
-          (_, i) => i
-        );
+        this.skeletons = Array.from({ length: this.params.limit });
         // merge params with current params
         this.params = { ...this.params, ...params };
-        // fetch data and set data and meta
+        // fetch data and set data and meta and check if response
         const response = await fetchData(this.url, this.params);
-        // check if response is not null and has data
-        if (!response || !response.data) {
-          this.isDown = true;
-          return;
-        }
+        !response ? (this.isDown = true) : null;
         // set data and meta
         this.meta = response.meta;
         this.users.push(...response.data);
@@ -82,9 +61,10 @@ export default {
         // set isDown to true if error
         this.isDown = true;
       } finally {
-        // hide skeleton cards
+        // reset skeletons
+        this.skeletons = [];
+        // no longer loading
         this.isLoading = false;
-        this.skeletonCards = [];
       }
     },
   },
@@ -92,8 +72,7 @@ export default {
     this.fetchData();
   },
   components: {
-    UserCard,
-    UserCardSkeleton,
+    UserCards,
     LoadMoreButton,
     MetaInformation,
     NoResults,

@@ -1,11 +1,16 @@
 <template>
-  <p v-if="items.length > 0">
-    {{ $t("app.showing", { end: meta.end, total: meta.total }) }}
-  </p>
+  <div class="row">
+    <div class="col text-end">
+      <p v-if="items.length > 0">
+        {{ $t("app.showing", { end: meta.end, total: meta.total }) }}
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
+  name: "MetaInformation",
   props: {
     items: {
       type: Array,
