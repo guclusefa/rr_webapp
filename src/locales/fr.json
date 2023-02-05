@@ -8,9 +8,24 @@
     "see_more": "Voir plus",
     "showing": "Affichage de {end} sur {total} résultats",
     "filter": "Filtrer",
+    "filters": {
+      "reset": "Réinitialiser les filtres"
+    },
     "search": "Rechercher",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+    "limit": "Limite",
+    "sort": "Trier",
+    "sorts": {
+      "id": "ID",
+      "created_at": "Date de création",
+      "updated_at": "Date de mise à jour"
+    },
+    "direction": "Direction",
+    "directions": {
+      "asc": "Ascendant",
+      "desc": "Descendant"
+    }
   },
   "home": {
     "page": "Accueil",
@@ -19,7 +34,26 @@
   "users": {
     "page": "Utilisateurs",
     "title": "Liste des utilisateurs",
-    "certified": "Certifié"
+    "certified": "Certifié",
+    "role": "Rôle",
+    "roles": {
+      "user": "Utilisateur",
+      "moderator": "Modérateur",
+      "admin": "Administrateur",
+      "super_admin": "Super administrateur"
+    },
+    "state": "Département",
+    "gender": "Sexe",
+    "genders" : {
+      "male" : "Masculin",
+      "female" : "Féminin",
+      "other" : "Autre"
+    },
+    "sorts": {
+      "username": "Nom d'utilisateur",
+      "first_name": "Prénom",
+      "last_name": "Nom"
+    }
   },
   "about": {
     "page": "A propos",

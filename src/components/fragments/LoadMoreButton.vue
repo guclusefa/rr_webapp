@@ -1,6 +1,6 @@
 <template>
-  <div class="row">
-    <div class="col text-center">
+  <div class="row mb-3">
+    <div class="col">
       <button class="btn btn-primary" @click="loadMore" :disabled="isLoading">
         <span v-if="isLoading"> {{ $t("app.loading") }} </span>
         <span v-else>{{ $t("app.see_more") }}</span>
