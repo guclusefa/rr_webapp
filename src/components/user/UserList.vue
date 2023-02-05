@@ -1,7 +1,7 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="fetchData({ page: 1 })">
+      <form @submit.prevent="getUsers({ page: 1 })">
         <div class="form-group mb-3">
           <label for="search">{{ $t("app.search") }}</label>
           <input
@@ -28,7 +28,6 @@
         <div class="form-group mb-3">
           <label for="role">{{ $t("users.role") }}</label>
           <select class="form-control" id="role" multiple v-model="params.role">
-            <option value=""></option>
             <option value="ROLE_USER">{{ $t("users.roles.user") }}</option>
             <option value="ROLE_MODERATOR">
               {{ $t("users.roles.moderator") }}
@@ -43,7 +42,6 @@
         <div class="form-group mb-3">
           <label for="gender">{{ $t("users.gender") }}</label>
           <select class="form-select" multiple v-model="params.gender">
-            <option value=""></option>
             <option value="M">{{ $t("users.genders.male") }}</option>
             <option value="F">{{ $t("users.genders.female") }}</option>
             <option value="O">{{ $t("users.genders.other") }}</option>
@@ -102,7 +100,7 @@
       v-if="meta.next"
       :isLoading="isLoading"
       :page="params.page"
-      :fetchData="fetchData"
+      :fetch="getUsers"
     />
     <MetaInformation v-if="meta.total > 0" :items="users" :meta="meta" />
     <NoResults v-if="meta.count === 0 && !isLoading" />
@@ -144,7 +142,7 @@ export default {
     };
   },
   methods: {
-    async fetchData(params = {}) {
+    async getUsers(params = {}) {
       try {
         // if filterd reset users
         if (params.page) {
@@ -172,7 +170,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchData();
+    this.getUsers();
   },
   components: {
     UserCards,

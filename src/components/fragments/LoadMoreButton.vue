@@ -21,14 +21,14 @@ export default {
       type: Number,
       required: true,
     },
-    fetchData: {
+    fetch: {
       type: Function,
       required: true,
     },
   },
   methods: {
     loadMore() {
-      this.fetchData({ page: this.page + 1 });
+      this.fetch({ page: this.page + 1 });
     },
   },
 };
