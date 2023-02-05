@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="container">
-      <div class="row mb-3">
+      <div class="row">
         <div class="col">
           <h1>{{ $t("about.title") }}</h1>
           <hr />

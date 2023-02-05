@@ -18,6 +18,9 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
+              <router-link to="/login" class="nav-link">{{ $t("login.page") }}</router-link>
+            </li>
+            <li class="nav-item">
               <router-link to="/users" class="nav-link">{{ $t("users.page") }}</router-link>
             </li>
             <li class="nav-item">

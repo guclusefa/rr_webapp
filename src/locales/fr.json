@@ -1,4 +1,5 @@
 {
+  "lang": "fr",
   "app": {
     "name_short": "R(RE)",
     "name": "RESSOURCES RELATIONNELLES",
@@ -31,6 +32,18 @@
     "page": "Accueil",
     "title": "Bienvenue sur le site des Ressources (Re)lationnelles"
   },
+  "login": {
+    "page": "Connexion",
+    "title": "Connexion",
+    "username": "Identification",
+    "username_placeholder": "Votre nom d'utilisateur ou votre adresse email",
+    "password": "Mot de passe",
+    "password_placeholder": "Votre mot de passe",
+    "remember_me": "Se souvenir de moi",
+    "forgot_password": "Mot de passe oublié ?",
+    "register": "Pas encore inscrit ?",
+    "submit": "Se connecter"
+  },
   "users": {
     "page": "Utilisateurs",
     "title": "Liste des utilisateurs",
@@ -56,8 +69,8 @@
     }
   },
   "about": {
-    "page": "A propos",
-    "title": "A propos de moi"
+    "page": "À propos",
+    "title": "À propos du site des Ressources (Re)lationnelles"
   },
   "footer": {
     "copyright": "© {year} Mon site"
