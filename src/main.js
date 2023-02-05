@@ -10,5 +10,8 @@ import "@/assets/scss/main.scss"
 
 const app = createApp(App)
 app.use(router)
+
 app.use(i18n)
+i18n.locale = localStorage.getItem('locale') || i18n.fallbackLocale;
+
 app.mount('#app')

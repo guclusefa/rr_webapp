@@ -1,5 +1,4 @@
 {
-  "lang": "fr",
   "app": {
     "name_short": "R(RE)",
     "name": "RESSOURCES RELATIONNELLES",
@@ -57,10 +56,10 @@
     },
     "state": "Département",
     "gender": "Sexe",
-    "genders" : {
-      "male" : "Masculin",
-      "female" : "Féminin",
-      "other" : "Autre"
+    "genders": {
+      "male": "Masculin",
+      "female": "Féminin",
+      "other": "Autre"
     },
     "sorts": {
       "username": "Nom d'utilisateur",

@@ -1,7 +1,7 @@
 <template>
   <select v-model="selectedLocale">
     <option v-for="(locale, i) in locales" :key="`locale-${i}`" :value="locale">
-      {{ locale }}
+      {{ localesLabels[locale] }}
     </option>
   </select>
 </template>
@@ -10,17 +10,24 @@
 export default {
   name: "LocaleSwitcher",
   data() {
-    return { locales: ["fr", "en"], selectedLocale: localStorage.getItem('locale') || 'fr' };
+    return {
+      localesLabels: {
+        fr: "Français",
+        en: "English",
+      },
+      locales: ["fr", "en"],
+      selectedLocale: localStorage.getItem("locale") || "fr",
+    };
   },
   watch: {
-    selectedLocale: function(newVal) {
+    selectedLocale: function (newVal) {
       this.$i18n.locale = newVal;
-      localStorage.setItem('locale', newVal);
-      document.querySelector('html').setAttribute('lang', newVal);
-    }
+      localStorage.setItem("locale", newVal);
+      document.querySelector("html").setAttribute("lang", newVal);
+    },
   },
-  mounted() {
-    document.querySelector('html').setAttribute('lang', this.selectedLocale);
-  }
+  created() {
+    this.$i18n.locale = this.selectedLocale;
+  },
 };
 </script>
