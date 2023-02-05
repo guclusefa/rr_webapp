@@ -1,9 +1,13 @@
 <template>
   <section>
     <div class="container">
-        <h1 class="mb-3">{{ $t("users.title") }}</h1>
-        <hr>
-        <UserList />
+      <div class="row mb-3">
+        <div class="col">
+          <h1>{{ $t("users.title") }}</h1>
+          <hr />
+        </div>
+      </div>
+      <UserList />
     </div>
   </section>
 </template>

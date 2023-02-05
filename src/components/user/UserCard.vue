@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-4">
+  <div class="card mb-3">
     <img v-if="user.photo" :src="user.photo" class="card-img-top" />
     <img v-else src="@/assets/images/user/default.jpg" class="card-img-top" />
     <div class="card-body">

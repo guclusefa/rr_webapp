@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-4">
+  <div class="card mb-3">
     <img src="@/assets/images/user/default.jpg" class="card-img-top" />
     <div class="card-body">
       <h5 class="card-title placeholder-glow">

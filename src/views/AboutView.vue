@@ -1,7 +1,12 @@
 <template>
   <section>
     <div class="container">
-      <h1>{{ $t("about.title") }}</h1>
+      <div class="row mb-3">
+        <div class="col">
+          <h1>{{ $t("about.title") }}</h1>
+          <hr />
+        </div>
+      </div>
     </div>
   </section>
 </template>

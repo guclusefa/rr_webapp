@@ -108,6 +108,7 @@
 
   <NoResponse v-if="isDown" />
 </template>
+
 <script>
 import { fetchData } from "@/services/api.js";
 
