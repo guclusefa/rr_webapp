@@ -1,7 +1,7 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="getUsers({ page: 1 })">
+      <form @submit.prevent="filterUsers">
         <div class="form-group mb-3">
           <label for="search">{{ $t("app.search") }}</label>
           <input
@@ -167,6 +167,9 @@ export default {
         this.skeletons = [];
         this.isLoading = false;
       }
+    },
+    async filterUsers() {
+      this.getUsers({ page: 1 });
     },
   },
   mounted() {
