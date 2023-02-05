@@ -1,17 +1,21 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="login">
+      <form @submit.prevent="login" class="needs-validation" novalidate>
         <div class="mb-3">
           <label for="username" class="form-label">{{
             $t("login.username")
           }}</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control form-control"
             id="username"
-            v-model="username"
+            v-model="body.username"
+            required
           />
+          <div class="invalid-feedback">
+            {{ $t("login.username_required") }}
+            </div>
         </div>
         <div class="mb-3">
           <label for="password">{{ $t("login.password") }}</label>
@@ -19,7 +23,8 @@
             type="password"
             class="form-control"
             id="password"
-            v-model="password"
+            v-model="body.password"
+            required
           />
         </div>
         <div class="mb-3 form-check">
@@ -27,7 +32,7 @@
             type="checkbox"
             class="form-check-input"
             id="remember_me"
-            v-model="remember_me"
+            v-model="body.remember_me"
           />
           <label class="form-check-label" for="remember_me">{{
             $t("login.remember_me")
@@ -41,10 +46,14 @@
         <div class="mb-3">
           <router-link to="/register">{{ $t("login.register") }}</router-link>
         </div>
-        <button type="submit" class="btn btn-primary">
-          <span v-if="isLoading">
+        <button type="submit" class="btn btn-primary" :disabled="isLoading">
+          <template v-if="isLoading">
+            <span
+              v-if="isLoading"
+              class="spinner-border spinner-border-sm"
+            ></span>
             {{ $t("app.loading") }}
-          </span>
+          </template>
           <span v-else>
             {{ $t("login.submit") }}
           </span>
@@ -62,9 +71,12 @@ export default {
   data() {
     return {
       url: "/login",
-      username: "",
-      password: "",
-      remember_me: false,
+      body: {
+        username: "",
+        password: "",
+        remember_me: false,
+      },
+      messages: [],
       isLoading: false,
       isDown: false,
     };
@@ -74,10 +86,7 @@ export default {
       this.isLoading = true;
       this.isDown = false;
 
-      postData(this.url, {
-        username: this.username,
-        password: this.password,
-      })
+      postData(this.url, this.body)
         .then((response) => {
           console.log(response.token);
           this.$store.commit("setToken", response.data.token);

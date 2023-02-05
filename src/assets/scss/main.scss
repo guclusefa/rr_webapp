@@ -1,17 +1,9 @@
 // All variables
-@import '_variables';
+@import '__variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 // Handling the different themes : TODO
-[data-bs-theme="dark"] {
-    color-scheme: dark;
-}
-[data-bs-theme="light"] {
-    color-scheme: light;
-}
-// Popping font import
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
-// Custom styles
-body {
-    font-family: 'Poppins', sans-serif;
-}
+// theme styles
+@import '__themes';
+// global styles
+@import '__global';

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import HeaderItem from './components/layout/HeaderItem.vue';
-import FooterItem from './components/layout/FooterItem.vue';
+import HeaderItem from '@/components/layout/HeaderItem.vue';
+import FooterItem from '@/components/layout/FooterItem.vue';
 
 export default {
   name: 'App',
@@ -18,14 +18,3 @@ export default {
   }
 }
 </script>
-
-<style>
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-footer{
-    margin-top: auto;
-}
-</style>
