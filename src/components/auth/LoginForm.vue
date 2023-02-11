@@ -1,14 +1,14 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="login">
+      <form @submit.prevent="submitForm" novalidate>
         <div class="mb-3">
           <label for="username" class="form-label">{{
             $t("login.username")
           }}</label>
           <input
             type="text"
-            class="form-control form-control"
+            class="form-control"
             id="username"
             v-model="body.username"
             required
@@ -45,58 +45,40 @@
         </div>
         <button type="submit" class="btn btn-primary" :disabled="isLoading">
           <template v-if="isLoading">
-            <span
-              v-if="isLoading"
-              class="spinner-border spinner-border-sm"
-            ></span>
+            <span class="spinner-border spinner-border-sm"></span>
             {{ $t("app.loading") }}
           </template>
-          <span v-else>
+          <template v-else>
             {{ $t("login.submit") }}
-          </span>
+          </template>
         </button>
       </form>
     </div>
   </div>
 </template>
-
 <script>
-import { login } from "@/services/auth";
- 
+import { login } from "@/services/modules/auth";
+
 export default {
   name: "LoginForm",
   data() {
     return {
-      url: "/login",
       body: {
         username: "",
         password: "",
         remember_me: false,
       },
-      noResponse: false,
-      isLoading: false,
     };
   },
   methods: {
-    login() {
-      this.isLoading = true;
-      login(
-        this.url,
-        this.body,
-        () => {
-          this.$router.push({ name: "home" });
-        },
-        (error) => {
-          this.$store.dispatch("setFlashMessage", {
-            type: "error",
-            message: error,
-          });
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
+    submitForm() {
+      login(this.body);
     },
   },
+  computed: {
+    isLoading() {
+      return this.$store.getters["isLoading"];
+    }
+  }
 };
 </script>
