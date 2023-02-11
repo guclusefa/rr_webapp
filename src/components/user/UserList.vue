@@ -1,5 +1,8 @@
 <template>
-  <div class="row mb-3">
+  <NoResponseMessage :noResponse="noResponse" />
+  <NoResultsMessage :noResults="noResults" />
+
+  <div class="row mb-3" v-if="!noResponse && !noResults">
     <div class="col">
       <form @submit.prevent="filterUsers">
         <div class="form-group mb-3">
@@ -103,10 +106,7 @@
       :fetch="getUsers"
     />
     <MetaInformation v-if="meta.total > 0" :items="users" :meta="meta" />
-    <NoResults v-if="meta.count === 0 && !isLoading" />
   </template>
-
-  <NoResponse v-if="isDown" />
 </template>
 
 <script>
@@ -116,8 +116,6 @@ import UserCards from "@/components/user/UserCards.vue";
 
 import LoadMoreButton from "@/components/fragments/LoadMoreButton.vue";
 import MetaInformation from "@/components/fragments/MetaInformation.vue";
-import NoResults from "@/components/fragments/NoResults.vue";
-import NoResponse from "@/components/fragments/NoResponse.vue";
 
 export default {
   data() {
@@ -138,8 +136,9 @@ export default {
         order: "id",
         direction: "asc",
       },
+      noResults: false,
+      noResponse: false,
       isLoading: false,
-      isDown: false,
     };
   },
   methods: {
@@ -156,13 +155,15 @@ export default {
         this.params = { ...this.params, ...params };
         // fetch data and set data and meta and check if response
         const response = await fetchData(this.url, this.params);
-        !response ? (this.isDown = true) : null;
+        !response ? (this.noResponse = true) : null;
         // set data and meta
         this.meta = response.meta;
         this.users.push(...response.data);
+        // check if no results
+        this.users.length === 0 ? (this.noResults = true) : null;
       } catch (error) {
-        // set isDown to true if error
-        this.isDown = true;
+        // set noResponse to true if error
+        this.noResponse = true;
       } finally {
         // reset skeletons and remove loading
         this.skeletons = [];
@@ -180,8 +181,6 @@ export default {
     UserCards,
     LoadMoreButton,
     MetaInformation,
-    NoResults,
-    NoResponse,
   },
 };
 </script>

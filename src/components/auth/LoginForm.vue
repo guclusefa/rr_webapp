@@ -1,7 +1,10 @@
 <template>
+  <FlashMessage :errorMessage="errorMessage" />
+  <NoResponseMessage :noResponse="noResponse" />
+
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="login" class="needs-validation" novalidate>
+      <form @submit.prevent="login">
         <div class="mb-3">
           <label for="username" class="form-label">{{
             $t("login.username")
@@ -13,9 +16,6 @@
             v-model="body.username"
             required
           />
-          <div class="invalid-feedback">
-            {{ $t("login.username_required") }}
-            </div>
         </div>
         <div class="mb-3">
           <label for="password">{{ $t("login.password") }}</label>
@@ -76,28 +76,27 @@ export default {
         password: "",
         remember_me: false,
       },
-      messages: [],
+      errorMessage: "",
+      noResponse: false,
       isLoading: false,
-      isDown: false,
     };
   },
   methods: {
     login() {
       this.isLoading = true;
-      this.isDown = false;
-
+      
       postData(this.url, this.body)
         .then((response) => {
-          console.log(response.token);
-          this.$store.commit("setToken", response.data.token);
-          this.$router.push({ name: "Home" });
+          if (response.status === 200) {
+            localStorage.setItem("token", response.token);
+            this.$router.push({ name: "home" });
+          } else {
+            this.errorMessage = response.data.errors.message;
+          }
         })
         .catch((error) => {
-          if (error.response) {
-            this.$store.commit("setErrors", error.response.data);
-          } else {
-            this.isDown = true;
-          }
+          console.log(error);
+          this.noResponse = true;
         })
         .finally(() => {
           this.isLoading = false;
