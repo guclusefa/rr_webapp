@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "@/store";
+import { constants } from "@/services/messages";
 
 const api = axios.create({
     baseURL: "http://localhost:8000/api",
@@ -9,36 +10,15 @@ const api = axios.create({
     },
 });
 
-// TODO : translate no server response message
-const SERVER_ERROR = "The server is not responding. Please try again later.";
-const TYPE_ERROR = "error";
-const TYPE_SUCCESS = "success";
-
-export const constants = {
-    SERVER_ERROR,
-    TYPE_ERROR,
-    TYPE_SUCCESS,
-};
-
-export const handleMessage = (type, errorMessage) => {
-    store.dispatch("setFlashMessage", {
-        type: type,
-        message: errorMessage,
-    });
-}
-
 export const fetchData = async (url, params) => {
     store.dispatch("setLoading", true);
     try {
         const response = await api.get(url, { params });
         return response;
     } catch (error) {
-        if (axios.isCancel()) {
-            store.dispatch("setLoading", false);
-        }
         if (error == null || error.response == null) {
             return Promise.reject(new Error(
-                SERVER_ERROR
+                constants.SERVER_ERROR
             ));
         }
         return error.response;
@@ -53,12 +33,9 @@ export const postData = async (url, body) => {
         const response = await api.post(url, body);
         return response;
     } catch (error) {
-        if (axios.isCancel()) {
-            store.dispatch("setLoading", false);
-        }
         if (error == null || error.response == null) {
             return Promise.reject(new Error(
-                SERVER_ERROR
+                constants.SERVER_ERROR
             ));
         }
         return error.response;

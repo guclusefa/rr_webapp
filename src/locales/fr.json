@@ -41,7 +41,8 @@
     "remember_me": "Se souvenir de moi",
     "forgot_password": "Mot de passe oublié ?",
     "register": "Pas encore inscrit ?",
-    "submit": "Se connecter"
+    "submit": "Se connecter",
+    "success": "Vous vous êtes connecté avec succès"
   },
   "users": {
     "page": "Utilisateurs",

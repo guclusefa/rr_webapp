@@ -14,11 +14,14 @@ export default {
       return this.$store.getters.flashMessage;
     },
   },
-  // clear on route change
-  created() {
-    this.$router.afterEach(() => {
-      this.$store.commit("clearFlashMessage");
-    });
+  watch: {
+    $route() {
+      if (!this.flashMessage.redirect) {
+        this.$store.commit("clearFlashMessage");
+      } else {
+        this.flashMessage.redirect = false;
+      }
+    },
   },
 };
 </script>
