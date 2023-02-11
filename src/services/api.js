@@ -2,18 +2,24 @@ import axios from "axios";
 import store from "@/store";
 import { constants, handleMessage } from "@/services/messages";
 
+/* API BASE SET */
+const baseURL = "http://localhost:8000/api";
+const authorization = localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : null;
+const headers = {
+    "Content-Type": "application/json",
+    "Accept-Language": localStorage.getItem("locale") || "fr",
+    "Authorization": authorization
+};
 const api = axios.create({
-    baseURL: "http://localhost:8000/api",
-    headers: {
-        "Content-Type": "application/json",
-        "Accept-Language": localStorage.getItem("locale") || "fr",
-    },
+    baseURL,
+    headers
 });
 
-export const fetchData = async (url, params) => {
+/* API REQUESTS */
+const makeRequest = async (method, url, data) => {
     store.dispatch("setLoading", true);
     try {
-        const response = await api.get(url, { params });
+        const response = await api[method](url, data);
         return response;
     } catch (error) {
         if (error == null || error.response == null) {
@@ -25,19 +31,7 @@ export const fetchData = async (url, params) => {
         store.dispatch("setLoading", false);
     }
 };
-
-export const postData = async (url, body) => {
-    store.dispatch("setLoading", true);
-    try {
-        const response = await api.post(url, body);
-        return response;
-    } catch (error) {
-        if (error == null || error.response == null) {
-            handleMessage(constants.TYPE_ERROR, constants.SERVER_ERROR);
-            return;
-        }
-        return error.response;
-    } finally {
-        store.dispatch("setLoading", false);
-    }
-};
+/* GET */
+export const fetchData = (url, params) => makeRequest("get", url, { params });
+/* POST */
+export const postData = (url, body) => makeRequest("post", url, body);
