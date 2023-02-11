@@ -23,7 +23,8 @@ export default {
     selectedLocale: function (newVal) {
       this.$i18n.locale = newVal;
       localStorage.setItem("locale", newVal);
-      document.querySelector("html").setAttribute("lang", newVal);
+      // reload the page to update the translations
+      location.reload();
     },
   },
   created() {
