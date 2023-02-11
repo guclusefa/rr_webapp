@@ -1,63 +1,51 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="submitForm" novalidate>
+      <form @submit.prevent="submitForm">
+        <!-- Username -->
         <div class="mb-3">
-          <label for="username" class="form-label">{{
-            $t("login.username")
-          }}</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            v-model="body.username"
-            required
+          <InputText
+            :type="'text'"
+            :field="'username'"
+            :label="$t('login.username')"
+            :placeholder="$t('login.username_placeholder')"
+            :required="true"
+            @input="body.username = $event"
           />
         </div>
+        <!-- Password -->
         <div class="mb-3">
-          <label for="password">{{ $t("login.password") }}</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            v-model="body.password"
-            required
+          <InputText
+            :type="'password'"
+            :field="'password'"
+            :label="$t('login.password')"
+            :placeholder="$t('login.password_placeholder')"
+            :required="true"
+            @input="body.password = $event"
           />
         </div>
-        <div class="mb-3 form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="remember_me"
-            v-model="body.remember_me"
+        <!-- Remember Me -->
+        <div class="mb-3">
+          <CheckBox
+            :field="'remember_me'"
+            :label="$t('login.remember_me')"
+            @update:modelValue="body.remember_me = $event"
           />
-          <label class="form-check-label" for="remember_me">{{
-            $t("login.remember_me")
-          }}</label>
         </div>
+        <!-- Submit -->
         <div class="mb-3">
-          <router-link to="/forgot-password">{{
-            $t("login.forgot_password")
-          }}</router-link>
+          <SubmitButton :label="$t('login.submit')" :isLoading="isLoading" />
         </div>
-        <div class="mb-3">
-          <router-link to="/register">{{ $t("login.register") }}</router-link>
-        </div>
-        <button type="submit" class="btn btn-primary" :disabled="isLoading">
-          <template v-if="isLoading">
-            <span class="spinner-border spinner-border-sm"></span>
-            {{ $t("app.loading") }}
-          </template>
-          <template v-else>
-            {{ $t("login.submit") }}
-          </template>
-        </button>
       </form>
     </div>
   </div>
 </template>
+
 <script>
 import { login } from "@/services/modules/auth";
+import InputText from "../form/InputText.vue";
+import CheckBox from "@/components/form/CheckBox.vue";
+import SubmitButton from "../form/SubmitButton.vue";
 
 export default {
   name: "LoginForm",
@@ -75,10 +63,10 @@ export default {
       login(this.body);
     },
   },
-  computed: {
-    isLoading() {
-      return this.$store.getters["isLoading"];
-    }
-  }
+  components: {
+    InputText,
+    CheckBox,
+    SubmitButton,
+  },
 };
 </script>
