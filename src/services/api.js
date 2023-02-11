@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "@/store";
-import { constants } from "@/services/messages";
+import { constants, handleMessage } from "@/services/messages";
 
 const api = axios.create({
     baseURL: "http://localhost:8000/api",
@@ -17,9 +17,8 @@ export const fetchData = async (url, params) => {
         return response;
     } catch (error) {
         if (error == null || error.response == null) {
-            return Promise.reject(new Error(
-                constants.SERVER_ERROR
-            ));
+            handleMessage(constants.TYPE_ERROR, constants.SERVER_ERROR);
+            return;
         }
         return error.response;
     } finally {
@@ -34,9 +33,8 @@ export const postData = async (url, body) => {
         return response;
     } catch (error) {
         if (error == null || error.response == null) {
-            return Promise.reject(new Error(
-                constants.SERVER_ERROR
-            ));
+            handleMessage(constants.TYPE_ERROR, constants.SERVER_ERROR);
+            return;
         }
         return error.response;
     } finally {

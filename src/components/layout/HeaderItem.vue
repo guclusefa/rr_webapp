@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import ThemeSwitcher from "@/components/fragments/ThemeSwitcher.vue";
-import LocaleSwitcher from "@/components/fragments/LocaleSwitcher.vue";
+import ThemeSwitcher from "@/components/layout/ThemeSwitcher.vue";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher.vue";
 
 export default {
   name: "HeaderItem",
