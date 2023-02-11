@@ -1,6 +1,7 @@
 <template>
   <HeaderItem />
   <main>
+    <FlashMessage />
     <router-view/>
   </main>
   <FooterItem />

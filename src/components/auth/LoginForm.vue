@@ -1,7 +1,4 @@
 <template>
-  <FlashMessage :errorMessage="errorMessage" />
-  <NoResponseMessage :noResponse="noResponse" />
-
   <div class="row mb-3">
     <div class="col">
       <form @submit.prevent="login">
@@ -64,8 +61,8 @@
 </template>
 
 <script>
-import { postData } from "@/services/api";
-
+import { login } from "@/services/auth";
+ 
 export default {
   name: "LoginForm",
   data() {
@@ -76,7 +73,6 @@ export default {
         password: "",
         remember_me: false,
       },
-      errorMessage: "",
       noResponse: false,
       isLoading: false,
     };
@@ -84,23 +80,22 @@ export default {
   methods: {
     login() {
       this.isLoading = true;
-      
-      postData(this.url, this.body)
-        .then((response) => {
-          if (response.status === 200) {
-            localStorage.setItem("token", response.token);
-            this.$router.push({ name: "home" });
-          } else {
-            this.errorMessage = response.data.errors.message;
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          this.noResponse = true;
-        })
-        .finally(() => {
+      login(
+        this.url,
+        this.body,
+        () => {
+          this.$router.push({ name: "home" });
+        },
+        (error) => {
+          this.$store.dispatch("setFlashMessage", {
+            type: "error",
+            message: error,
+          });
+        },
+        () => {
           this.isLoading = false;
-        });
+        }
+      );
     },
   },
 };

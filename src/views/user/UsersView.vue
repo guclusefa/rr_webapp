@@ -14,6 +14,7 @@
 
 <script>
 import UserList from "@/components/user/UserList.vue";
+
 export default {
   name: "UsersView",
   components: {
