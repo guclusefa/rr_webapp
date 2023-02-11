@@ -1,13 +1,15 @@
 <template>
-  <div class="form-check form-switch">
-    <input
-      class="form-check-input"
-      type="checkbox"
-      role="switch"
-      id="flexSwitchCheckChecked"
-      :checked="isDark"
-      @change="toggleDark()"
-    />
+  <div class="nav-link">
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckChecked"
+        :checked="isDark"
+        @change="toggleDark()"
+      />
+    </div>
   </div>
 </template>
 

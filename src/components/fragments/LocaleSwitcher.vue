@@ -1,9 +1,26 @@
 <template>
-  <select v-model="selectedLocale">
-    <option v-for="(locale, i) in locales" :key="`locale-${i}`" :value="locale">
-      {{ localesLabels[locale] }}
-    </option>
-  </select>
+  <li class="nav-item dropdown">
+    <a
+      class="nav-link dropdown-toggle"
+      href="#"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {{ localesLabels[selectedLocale] }}
+    </a>
+    <ul class="dropdown-menu">
+      <li v-for="(locale, i) in locales" :key="`locale-${i}`">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click.prevent="selectedLocale = locale"
+        >
+          {{ localesLabels[locale] }}
+        </a>
+      </li>
+    </ul>
+  </li>
 </template>
 
 <script>

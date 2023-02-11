@@ -18,18 +18,21 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <router-link to="/login" class="nav-link">{{ $t("login.page") }}</router-link>
-            </li>
-            <li class="nav-item">
               <router-link to="/users" class="nav-link">{{ $t("users.page") }}</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/about" class="nav-link">{{ $t("about.page") }}</router-link>
-            </li>
           </ul>
-          <div class=" d-inline-flex">
-              <ThemeSwitcher />
-              <LocaleSwitcher />
+          <div class="d-flex">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                  <ThemeSwitcher />
+                </li>
+                <li class="nav-item">
+                  <LocaleSwitcher />
+                </li>
+                <li class="nav-item">
+                  <router-link to="/login" class="nav-link">{{ $t("login.page") }}</router-link>
+                </li>
+              </ul>
           </div>
         </div>
       </div>

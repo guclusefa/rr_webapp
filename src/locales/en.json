@@ -3,6 +3,9 @@
         "name_short": "RR",
         "name": "RESSOURCES RELATIONNELLES"
     },
+    "login": {
+        "success": "You are now logged in"
+    },
     "home": {
         "page": "Home",
         "title": "Welcome to my website"
