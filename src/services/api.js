@@ -32,11 +32,16 @@ api.interceptors.response.use((response) => {
 });
 
 const handleApiError = (error) => {
+    let message = "";
     if (!error.response) {
-        console.log("NETWORK ERROR: ", error);
-        return;
+        message = "Network error";
+    } else {
+        message = error.response.data.errors.message;
     }
-    console.log("ERROR: ", error.response.data.errors);
+    store.dispatch("addToast", {
+        type: "error",
+        message: message,
+    });
 };
 
 export { api, handleApiError };

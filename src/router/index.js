@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import i18n from '@/services/i18n.js'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/auth/LoginView.vue'
 
@@ -22,7 +23,7 @@ const router = createRouter({
 })
 // Set document title
 router.beforeEach((to, from, next) => {
-  document.title = to.name + ' - ' + process.env.VUE_APP_TITLE;
+  document.title = i18n.global.t(to.name+".page") + ' - ' + process.env.VUE_APP_TITLE;
   next()
 })
 

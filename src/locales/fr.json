@@ -83,5 +83,11 @@
   },
   "footer": {
     "copyright": "© {year} Mon site"
+  },
+  "toast": {
+    "success": "Succès",
+    "error": "Erreur",
+    "warning": "Attention",
+    "info": "Information"
   }
 }
