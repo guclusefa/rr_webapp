@@ -1,7 +1,7 @@
 <template>
   <div class="row mb-3">
     <div class="col">
-      <form @submit.prevent="submitForm">
+      <form @submit.prevent="submitForm" novalidate>
         <!-- Username -->
         <div class="mb-3">
           <InputText
@@ -9,8 +9,13 @@
             :field="'username'"
             :label="$t('login.username')"
             :placeholder="$t('login.username_placeholder')"
-            :required="true"
             @input="body.username = $event"
+            :validation="{
+              required: {
+                value: true,
+                message: $t('login.username_required'),
+              },
+            }"
           />
         </div>
         <!-- Password -->
@@ -20,8 +25,13 @@
             :field="'password'"
             :label="$t('login.password')"
             :placeholder="$t('login.password_placeholder')"
-            :required="true"
             @input="body.password = $event"
+            :validation="{
+              required: {
+                value: true,
+                message: $t('login.password_required'),
+              },
+            }"
           />
         </div>
         <!-- Remember Me -->
@@ -60,7 +70,14 @@ export default {
   },
   methods: {
     submitForm() {
-      login(this.body);
+      // bootstrap validation
+      const form = document.querySelector("form");
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
+      } else {
+        login(this.body);
+      }
     },
   },
   components: {

@@ -6,10 +6,13 @@
     :id="field"
     :name="field"
     :placeholder="placeholder"
-    :required="required"
     :value="value"
     @input="$emit('input', $event.target.value)"
+    :required="validation.required.value"
   />
+  <div class="invalid-feedback">
+    {{ validation.required.message }}
+  </div>
 </template>
 
 <script>
@@ -32,12 +35,12 @@ export default {
       type: String,
       required: true,
     },
-    required: {
-      type: Boolean,
-      default: false,
-    },
     value: {
       type: String,
+      required: true,
+    },
+    validation: {
+      type: Object,
       required: true,
     },
   },

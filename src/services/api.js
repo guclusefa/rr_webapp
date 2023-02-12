@@ -17,6 +17,7 @@ const api = axios.create({
 
 /* API REQUESTS */
 const makeRequest = async (method, url, data) => {
+    store.dispatch("clearFlashMessage");
     store.dispatch("setLoading", true);
     try {
         const response = await api[method](url, data);
