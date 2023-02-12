@@ -4,7 +4,7 @@ import { constants, handleMessage } from "@/services/messages";
 
 /* API BASE SET */
 const baseURL = "http://localhost:8000/api";
-const authorization = localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : null;
+const authorization = store.getters.token ? `Bearer ${store.getters.token}` : null;
 const headers = {
     "Content-Type": "application/json",
     "Accept-Language": localStorage.getItem("locale") || "fr",

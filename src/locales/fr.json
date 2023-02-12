@@ -47,6 +47,12 @@
     "submit": "Se connecter",
     "success": "Vous vous êtes connecté avec succès"
   },
+  "logout": {
+    "page": "Déconnexion",
+    "title": "Déconnexion",
+    "submit": "Se déconnecter",
+    "success": "Vous vous êtes déconnecté avec succès"
+  },
   "users": {
     "page": "Utilisateurs",
     "title": "Liste des utilisateurs",

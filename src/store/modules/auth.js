@@ -16,6 +16,14 @@ const auth = {
             state.user = payload
             localStorage.setItem('user', JSON.stringify(payload))
         },
+        CLEAR_AUTH_DATA(state) {
+            state.token = null
+            state.tokenExpiration = null
+            state.user = null
+            localStorage.removeItem('token')
+            localStorage.removeItem('tokenExpiration')
+            localStorage.removeItem('user')
+        }
     },
     actions: {
         setToken({ commit }, payload) {
@@ -26,6 +34,9 @@ const auth = {
         },
         setUser({ commit }, payload) {
             commit('SET_USER', payload)
+        },
+        clearAuthData({ commit }) {
+            commit('CLEAR_AUTH_DATA')
         }
     },
     getters: {

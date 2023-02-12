@@ -29,7 +29,10 @@
                 <li class="nav-item">
                   <LocaleItem />
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="token && user">
+                  <ProfileItem />
+                </li>
+                <li class="nav-item" v-else>
                   <router-link to="/login" class="nav-link">{{ $t("login.page") }}</router-link>
                 </li>
               </ul>
@@ -38,9 +41,6 @@
       </div>
     </nav>
   </header>
-  {{ token  }}
-  {{ tokenExpiration }}
-  {{ user }}
 </template>
 
 <script>
@@ -48,6 +48,7 @@ import { mapGetters } from "vuex";
 
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "./LocaleItem.vue";
+import ProfileItem from "./ProfileItem.vue";
 
 export default {
   name: "HeaderItem",
@@ -59,6 +60,7 @@ export default {
   components: {
     ThemeItem,
     LocaleItem,
+    ProfileItem,
   },
 };
 </script>
