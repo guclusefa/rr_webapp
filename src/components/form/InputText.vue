@@ -1,5 +1,7 @@
 <template>
-  <label class="form-label" :for="field">{{ label }}</label>
+  <label :for="field" class="form-label" :class="{ 'required': required }">
+    {{ $t(label) }}
+  </label>
   <input
     @input="$emit('input', $event.target.value)"
     class="form-control"
@@ -7,7 +9,11 @@
     :id="field"
     :name="field"
     :placeholder="placeholder"
+    :class="{ 'is-invalid': validateInput() }"
   />
+  <div class="invalid-feedback">
+    {{ $t(validateInput()) }}
+  </div>
 </template>
 
 <script>
@@ -29,6 +35,24 @@ export default {
     placeholder: {
       type: String,
       required: true,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+    },
+    validate: {
+      type: Function,
+      required: false,
+    },
+  },
+  methods: {
+    validateInput() {
+      // if validate is empty string than is valid
+      if (!this.validate) {
+        return "";
+      }
+      // if validate is a function than call it
+      return this.validate();
     },
   },
 };

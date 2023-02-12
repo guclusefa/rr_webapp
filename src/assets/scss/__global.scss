@@ -8,3 +8,7 @@ body{
 footer{
     margin-top: auto;
 }
+label.required:after{
+    content: "*";
+    color: red;
+}

@@ -10,6 +10,8 @@
             :field="'username'"
             :label="$t('login.username')"
             :placeholder="$t('login.username_placeholder')"
+            :required="true"
+            :validate="validateUsername"
           />
         </div>
         <!-- Password -->
@@ -20,6 +22,8 @@
             :field="'password'"
             :label="$t('login.password')"
             :placeholder="$t('login.password_placeholder')"
+            :required="true"
+            :validate="validatePassword"
           />
         </div>
         <!-- Remember Me -->
@@ -53,42 +57,32 @@ export default {
         username: "",
         password: "",
         remember_me: false,
-      },
+      }
     };
   },
   methods: {
     validateUsername() {
-      // check if username is empty
-      if (!this.body.username) {
-        return false;
+      // check if username is empty (trim)
+      if (!this.body.username.trim()) {
+        return "login.username_required";
       }
-      // check if at least 20 characters
-      if (this.body.username.length < 20) {
-        return false;
-      }
-      return true;
+      return "";
     },
     validatePassword() {
-      // check if password is empty
-      if (!this.body.password) {
-        return false;
+      // check if password is empty (trim)
+      if (!this.body.password.trim()) {
+        return "login.password_required";
       }
-      // check if at least 20 characters
-      if (this.body.password.length < 20) {
-        return false;
-      }
-      return true;
+      return "";
     },
     validateForm() {
-      const form = document.querySelector("form");
-      if (!form.checkValidity()) {
-        form.classList.add("was-validated");
-        return false;
-      }
-      return true;
+        let invalids = document.querySelectorAll(".is-invalid");
+        if (invalids.length > 0) {
+          return false;
+        }
+        return true;
     },
     submitForm() {
-      console.log(this.body)
       if (!this.validateForm()) {
         return;
       }
@@ -99,6 +93,10 @@ export default {
     InputText,
     CheckBox,
     SubmitButton,
+  },
+  mounted() {
+    // set focus on username input
+    document.querySelector("#username").focus();
   },
 };
 </script>
