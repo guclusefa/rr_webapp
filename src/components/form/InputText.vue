@@ -1,18 +1,13 @@
 <template>
   <label class="form-label" :for="field">{{ label }}</label>
   <input
+    @input="$emit('input', $event.target.value)"
     class="form-control"
     :type="type"
     :id="field"
     :name="field"
     :placeholder="placeholder"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    :required="validation.required.value"
   />
-  <div class="invalid-feedback">
-    {{ validation.required.message }}
-  </div>
 </template>
 
 <script>
@@ -33,14 +28,6 @@ export default {
     },
     placeholder: {
       type: String,
-      required: true,
-    },
-    value: {
-      type: String,
-      required: true,
-    },
-    validation: {
-      type: Object,
       required: true,
     },
   },

@@ -5,41 +5,29 @@
         <!-- Username -->
         <div class="mb-3">
           <InputText
+            @input="body.username = $event"
             :type="'text'"
             :field="'username'"
             :label="$t('login.username')"
             :placeholder="$t('login.username_placeholder')"
-            @input="body.username = $event"
-            :validation="{
-              required: {
-                value: true,
-                message: $t('login.username_required'),
-              },
-            }"
           />
         </div>
         <!-- Password -->
         <div class="mb-3">
           <InputText
+            @input="body.password = $event"
             :type="'password'"
             :field="'password'"
             :label="$t('login.password')"
             :placeholder="$t('login.password_placeholder')"
-            @input="body.password = $event"
-            :validation="{
-              required: {
-                value: true,
-                message: $t('login.password_required'),
-              },
-            }"
           />
         </div>
         <!-- Remember Me -->
         <div class="mb-3">
           <CheckBox
+            @update:modelValue="body.remember_me = $event"
             :field="'remember_me'"
             :label="$t('login.remember_me')"
-            @update:modelValue="body.remember_me = $event"
           />
         </div>
         <!-- Submit -->
@@ -69,15 +57,42 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      // bootstrap validation
+    validateUsername() {
+      // check if username is empty
+      if (!this.body.username) {
+        return false;
+      }
+      // check if at least 20 characters
+      if (this.body.username.length < 20) {
+        return false;
+      }
+      return true;
+    },
+    validatePassword() {
+      // check if password is empty
+      if (!this.body.password) {
+        return false;
+      }
+      // check if at least 20 characters
+      if (this.body.password.length < 20) {
+        return false;
+      }
+      return true;
+    },
+    validateForm() {
       const form = document.querySelector("form");
       if (!form.checkValidity()) {
         form.classList.add("was-validated");
-        return;
-      } else {
-        login(this.body);
+        return false;
       }
+      return true;
+    },
+    submitForm() {
+      console.log(this.body)
+      if (!this.validateForm()) {
+        return;
+      }
+      login(this.body);
     },
   },
   components: {
