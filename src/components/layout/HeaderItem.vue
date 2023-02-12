@@ -38,14 +38,24 @@
       </div>
     </nav>
   </header>
+  {{ token  }}
+  {{ tokenExpiration }}
+  {{ user }}
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "./LocaleItem.vue";
 
 export default {
   name: "HeaderItem",
+  computed: {
+    ...mapGetters(["token"]),
+    ...mapGetters(["tokenExpiration"]),
+    ...mapGetters(["user"]),
+  },
   components: {
     ThemeItem,
     LocaleItem,

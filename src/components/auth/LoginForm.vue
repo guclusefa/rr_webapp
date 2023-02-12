@@ -5,7 +5,7 @@
         <!-- Username -->
         <div class="mb-3">
           <InputText
-            @input="$emit('input', body.username = $event)"
+            @input="$emit('input', (body.username = $event))"
             :type="'text'"
             :field="'username'"
             :label="'login.username'"
@@ -17,7 +17,7 @@
         <!-- Password -->
         <div class="mb-3">
           <InputText
-            @input="$emit('input', body.password = $event)"
+            @input="$emit('input', (body.password = $event))"
             :type="'password'"
             :field="'password'"
             :label="'login.password'"
@@ -73,6 +73,8 @@ export default {
   },
   methods: {
     ...mapActions(["setToken"]),
+    ...mapActions(["setTokenExpiration"]),
+    ...mapActions(["setUser"]),
     validateUsername() {
       // check if username is empty (trim)
       if (!this.body.username.trim()) {
@@ -98,6 +100,7 @@ export default {
       if (!this.validateForm()) {
         return;
       }
+      // Login and set token
       postData("/login", this.body).then((response) => {
         // No response or error
         if (response == null) return;
@@ -107,6 +110,10 @@ export default {
         }
         // Set token
         this.setToken(response.data.token);
+        // Set expiration
+        this.setTokenExpiration(response.data.expirationDate);
+        // Set user
+        this.setUser(response.data.data);
         // If all good, redirect to home with success message and refresh
         handleMessage(constants.TYPE_SUCCESS, "login.success", true);
         this.$router.push({ name: "home" });
