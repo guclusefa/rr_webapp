@@ -1,5 +1,5 @@
 <template>
-  <label :for="field" class="form-label" :class="{ 'required': required }">
+  <label :for="field" class="form-label" :class="{ required: required }">
     {{ $t(label) }}
   </label>
   <input
@@ -39,10 +39,12 @@ export default {
     required: {
       type: Boolean,
       required: false,
+      default: false,
     },
     validate: {
       type: Function,
       required: false,
+      default: () => "",
     },
   },
   emits: ["input"],

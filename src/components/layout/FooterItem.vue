@@ -5,11 +5,6 @@
       <span class="text-muted">{{
         $t("footer.copyright", { year: currentYear })
       }}</span>
-      <span class="text-muted float-end">
-        <router-link to="/about" class="nav-link">{{
-          $t("about.page")
-        }}</router-link>
-      </span>
     </div>
   </footer>
 </template>

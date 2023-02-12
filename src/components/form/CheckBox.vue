@@ -6,8 +6,18 @@
       type="checkbox"
       :id="field"
       :name="field"
+      :class="{ 'is-invalid': validateInput() }"
     />
-    <label class="form-check-label" :for="field">{{ label }}</label>
+    <label
+      :for="field"
+      class="form-check-label"
+      :class="{ required: required }"
+    >
+      {{ $t(label) }}
+    </label>
+    <div class="invalid-feedback" v-if="validateInput() !== ''">
+      {{ $t(validateInput()) }}
+    </div>
   </div>
 </template>
 
@@ -22,6 +32,27 @@ export default {
     label: {
       type: String,
       required: true,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    validate: {
+      type: Function,
+      required: false,
+      default: () => "",
+    },
+  },
+  emits: ["update:modelValue"],
+  methods: {
+    validateInput() {
+      // if validate is empty string than is valid
+      if (!this.validate) {
+        return "";
+      }
+      // if validate is a function than call it
+      return this.validate();
     },
   },
 };

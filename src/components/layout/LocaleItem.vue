@@ -40,7 +40,7 @@ export default {
     selectedLocale: function (newVal) {
       this.$i18n.locale = newVal;
       localStorage.setItem("locale", newVal);
-      // reload the page to update the translations
+      // reload the page to update the translations because of the way we get messages
       location.reload();
     },
   },

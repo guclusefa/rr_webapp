@@ -1,12 +1,10 @@
 import { createStore } from 'vuex'
-import auth from './modules/auth'
-import flashMessage from './modules/flashMessage'
-import loading from './modules/loading'
+import auth from '@/store/modules/auth'
+import loading from '@/store/modules/loading'
 
 export default createStore({
     modules: {
         auth,
-        flashMessage,
         loading
     }
 })

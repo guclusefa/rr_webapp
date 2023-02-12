@@ -31,12 +31,12 @@
           <CheckBox
             @update:modelValue="body.remember_me = $event"
             :field="'remember_me'"
-            :label="$t('login.remember_me')"
+            :label="'login.remember_me'"
           />
         </div>
         <!-- Submit -->
         <div class="mb-3">
-          <SubmitButton :label="$t('login.submit')" />
+          <SubmitButton :label="$t('login.submit')" :disabled="!validateForm()" />
         </div>
       </form>
     </div>
@@ -44,13 +44,11 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { postData } from "@/services/api";
-import { constants, handleMessage } from "@/services/messages";
+import { api, handleApiError } from "@/services/api.js";
 
-import InputText from "../form/InputText.vue";
+import InputText from "@/components/form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
-import SubmitButton from "../form/SubmitButton.vue";
+import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "LoginForm",
@@ -61,63 +59,55 @@ export default {
         password: "",
         remember_me: false,
       },
+      submitted: false,
     };
   },
-  watch: {
-    body: {
-      handler() {
-        this.validateForm();
-      },
-      deep: true,
-    },
-  },
   methods: {
-    ...mapActions(["setToken"]),
-    ...mapActions(["setTokenExpiration"]),
-    ...mapActions(["setUser"]),
+    // Username validation
     validateUsername() {
+      // check if not submitted
+      if (!this.submitted) {
+        return "";
+      }
       // check if username is empty (trim)
       if (!this.body.username.trim()) {
         return "login.username_required";
       }
       return "";
     },
+    // Password validation
     validatePassword() {
+      // check if not submitted
+      if (!this.submitted) {
+        return "";
+      }
       // check if password is empty (trim)
       if (!this.body.password.trim()) {
         return "login.password_required";
       }
       return "";
     },
+    // Form validation
     validateForm() {
-      let invalids = document.querySelectorAll(".is-invalid");
-      if (invalids.length > 0) {
-        return false;
-      }
-      return true;
+      return this.validateUsername() === "" && this.validatePassword() === "";
     },
+    // Form submit
     submitForm() {
+      // Set submitted to true
+      this.submitted = true;
+      // Check if form is valid
       if (!this.validateForm()) {
         return;
       }
-      // Login and set token
-      postData("/login", this.body).then((response) => {
-        // No response or error
-        if (response == null) return;
-        if (response.status !== 200) {
-          handleMessage(constants.TYPE_ERROR, response.data.errors.message);
-          return;
-        }
-        // Set token
-        this.setToken(response.data.token);
-        // Set expiration
-        this.setTokenExpiration(response.data.expirationDate);
-        // Set user
-        this.setUser(response.data.data);
-        // If all good, redirect to home with success message and refresh
-        handleMessage(constants.TYPE_SUCCESS, "login.success", true);
-        this.$router.push({ name: "home" });
-      });
+      // Submit form (TODO)
+      api
+        .post("/login", this.body)
+        .then((response) => {
+          console.log("SUCCESS: ", response);
+        })
+        .catch((error) => {
+          handleApiError(error);
+        });
     },
   },
   components: {

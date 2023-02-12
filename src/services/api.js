@@ -1,38 +1,42 @@
 import axios from "axios";
 import store from "@/store";
-import { constants, handleMessage } from "@/services/messages";
 
-/* API BASE SET */
-const baseURL = "http://localhost:8000/api";
-const authorization = store.getters.token ? `Bearer ${store.getters.token}` : null;
-const headers = {
-    "Content-Type": "application/json",
-    "Accept-Language": localStorage.getItem("locale") || "fr",
-    "Authorization": authorization
-};
+// Create axios instance with base url and headers
 const api = axios.create({
-    baseURL,
-    headers
+    baseURL: process.env.VUE_APP_API_URL,
+    headers: {
+        "Accept": "application/json",
+        "Accept-Language": localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE,
+        "Content-Type": "application/json",
+    },
 });
 
-/* API REQUESTS */
-const makeRequest = async (method, url, data) => {
-    store.dispatch("clearFlashMessage");
+// set loading to true when request is made and to false when request is finished or failed
+api.interceptors.request.use((config) => {
     store.dispatch("setLoading", true);
-    try {
-        const response = await api[method](url, data);
-        return response;
-    } catch (error) {
-        if (error == null || error.response == null) {
-            handleMessage(constants.TYPE_ERROR, constants.SERVER_ERROR);
-            return;
-        }
-        return error.response;
-    } finally {
-        store.dispatch("setLoading", false);
+    const token = store.getters.token;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
+    return config;
+}, (error) => {
+    store.dispatch("setLoading", false);
+    return Promise.reject(error);
+});
+api.interceptors.response.use((response) => {
+    store.dispatch("setLoading", false);
+    return response;
+}, (error) => {
+    store.dispatch("setLoading", false);
+    return Promise.reject(error);
+});
+
+const handleApiError = (error) => {
+    if (!error.response) {
+        console.log("NETWORK ERROR: ", error);
+        return;
+    }
+    console.log("ERROR: ", error.response.data.errors);
 };
-/* GET */
-export const fetchData = (url, params) => makeRequest("get", url, { params });
-/* POST */
-export const postData = (url, body) => makeRequest("post", url, body);
+
+export { api, handleApiError };
