@@ -1,6 +1,7 @@
 import { postData } from "@/services/api";
 import { constants, handleMessage } from "@/services/messages";
 import router from "@/router";
+import store from "@/store";
 
 export const login = (body) => {
     postData("/login", body).then((response) => {
@@ -12,6 +13,7 @@ export const login = (body) => {
         }
         // Set token
         localStorage.setItem("token", response.data.token);
+        store.dispatch("setToken", response.data.token);
         // If all good, redirect to home with success message
         handleMessage(constants.TYPE_SUCCESS, "login.success", true);
         router.push({ name: "home" });

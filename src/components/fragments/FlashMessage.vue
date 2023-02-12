@@ -7,17 +7,17 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "FlashMessage",
   computed: {
-    flashMessage() {
-      return this.$store.getters.flashMessage;
-    },
+    ...mapGetters(["flashMessage"]),
   },
   watch: {
     $route() {
       if (!this.flashMessage.redirect) {
-        this.$store.commit("clearFlashMessage");
+        mapActions(["clearFlashMessage"]);
       } else {
         this.flashMessage.redirect = false;
       }

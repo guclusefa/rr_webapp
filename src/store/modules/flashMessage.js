@@ -1,19 +1,21 @@
 const flashMessage = {
     state: {
-        type: "",
-        message: "",
-        redirect: false
+        flashMessage: {
+            type: "",
+            message: "",
+            redirect: false
+        }
     },
     mutations: {
         setFlashMessage(state, payload) {
-            state.type = payload.type
-            state.message = payload.message
-            state.redirect = payload.redirect
+            state.flashMessage.type = payload.type
+            state.flashMessage.message = payload.message
+            state.flashMessage.redirect = payload.redirect
         },
         clearFlashMessage(state) {
-            state.type = ""
-            state.message = ""
-            state.redirect = false
+            state.flashMessage.type = ""
+            state.flashMessage.message = ""
+            state.flashMessage.redirect = false
         }
     },
     actions: {
@@ -26,7 +28,7 @@ const flashMessage = {
     },
     getters: {
         flashMessage(state) {
-            return state
+            return state.flashMessage
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
-  <button type="submit" class="btn btn-primary" :disabled="isLoading">
-    <template v-if="isLoading">
+  <button type="submit" class="btn btn-primary" :disabled="loading">
+    <template v-if="loading">
       <span class="spinner-border spinner-border-sm"></span>
       {{ $t("app.loading") }}
     </template>
@@ -11,17 +11,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "SubmitButton",
+  computed: {
+    ...mapGetters(["loading"]),
+  },
   props: {
     label: {
       type: String,
       required: true,
-    },
-  },
-  computed: {
-    isLoading() {
-      return this.$store.getters["isLoading"];
     },
   },
 };

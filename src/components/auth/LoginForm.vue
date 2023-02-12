@@ -36,7 +36,7 @@
         </div>
         <!-- Submit -->
         <div class="mb-3">
-          <SubmitButton :label="$t('login.submit')" :isLoading="isLoading" />
+          <SubmitButton :label="$t('login.submit')" />
         </div>
       </form>
     </div>
@@ -93,10 +93,6 @@ export default {
     InputText,
     CheckBox,
     SubmitButton,
-  },
-  mounted() {
-    // set focus on username input
-    document.querySelector("#username").focus();
   },
 };
 </script>

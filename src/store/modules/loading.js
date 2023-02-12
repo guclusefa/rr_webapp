@@ -1,10 +1,10 @@
 const loading = {
     state: {
-        isLoading: false
+        loading: false
     },
     mutations: {
         setLoading(state, payload) {
-            state.isLoading = payload
+            state.loading = payload
         }
     },
     actions: {
@@ -13,8 +13,8 @@ const loading = {
         }
     },
     getters: {
-        isLoading(state) {
-            return state.isLoading
+        loading(state) {
+            return state.loading
         }
     }
 }
