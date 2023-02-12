@@ -7,12 +7,12 @@ const flashMessage = {
         }
     },
     mutations: {
-        setFlashMessage(state, payload) {
+        SET_FLASH_MESSAGE(state, payload) {
             state.flashMessage.type = payload.type
             state.flashMessage.message = payload.message
             state.flashMessage.redirect = payload.redirect
         },
-        clearFlashMessage(state) {
+        CLEAR_FLASH_MESSAGE(state) {
             state.flashMessage.type = ""
             state.flashMessage.message = ""
             state.flashMessage.redirect = false
@@ -20,10 +20,10 @@ const flashMessage = {
     },
     actions: {
         setFlashMessage({ commit }, payload) {
-            commit('setFlashMessage', payload)
+            commit('SET_FLASH_MESSAGE', payload)
         },
         clearFlashMessage({ commit }) {
-            commit('clearFlashMessage')
+            commit('CLEAR_FLASH_MESSAGE')
         }
     },
     getters: {

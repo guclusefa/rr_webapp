@@ -37,24 +37,15 @@
         </div>
       </div>
     </nav>
-
   </header>
-  <template v-if="token">
-      {{ token }}}
-    </template>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "./LocaleItem.vue";
 
 export default {
   name: "HeaderItem",
-  computed: {
-    ...mapGetters(["token"]),
-  },
   components: {
     ThemeItem,
     LocaleItem,

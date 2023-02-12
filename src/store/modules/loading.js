@@ -3,13 +3,13 @@ const loading = {
         loading: false
     },
     mutations: {
-        setLoading(state, payload) {
+        SET_LOADING(state, payload) {
             state.loading = payload
         }
     },
     actions: {
         setLoading({ commit }, payload) {
-            commit('setLoading', payload)
+            commit('SET_LOADING', payload)
         }
     },
     getters: {

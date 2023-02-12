@@ -5,11 +5,11 @@
         <!-- Username -->
         <div class="mb-3">
           <InputText
-            @input="body.username = $event"
+            @input="$emit('input', body.username = $event)"
             :type="'text'"
             :field="'username'"
-            :label="$t('login.username')"
-            :placeholder="$t('login.username_placeholder')"
+            :label="'login.username'"
+            :placeholder="'login.username_placeholder'"
             :required="true"
             :validate="validateUsername"
           />
@@ -17,11 +17,11 @@
         <!-- Password -->
         <div class="mb-3">
           <InputText
-            @input="body.password = $event"
+            @input="$emit('input', body.password = $event)"
             :type="'password'"
             :field="'password'"
-            :label="$t('login.password')"
-            :placeholder="$t('login.password_placeholder')"
+            :label="'login.password'"
+            :placeholder="'login.password_placeholder'"
             :required="true"
             :validate="validatePassword"
           />
@@ -44,7 +44,10 @@
 </template>
 
 <script>
-import { login } from "@/services/modules/auth";
+import { mapActions } from "vuex";
+import { postData } from "@/services/api";
+import { constants, handleMessage } from "@/services/messages";
+
 import InputText from "../form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
 import SubmitButton from "../form/SubmitButton.vue";
@@ -57,10 +60,19 @@ export default {
         username: "",
         password: "",
         remember_me: false,
-      }
+      },
     };
   },
+  watch: {
+    body: {
+      handler() {
+        this.validateForm();
+      },
+      deep: true,
+    },
+  },
   methods: {
+    ...mapActions(["setToken"]),
     validateUsername() {
       // check if username is empty (trim)
       if (!this.body.username.trim()) {
@@ -76,17 +88,29 @@ export default {
       return "";
     },
     validateForm() {
-        let invalids = document.querySelectorAll(".is-invalid");
-        if (invalids.length > 0) {
-          return false;
-        }
-        return true;
+      let invalids = document.querySelectorAll(".is-invalid");
+      if (invalids.length > 0) {
+        return false;
+      }
+      return true;
     },
     submitForm() {
       if (!this.validateForm()) {
         return;
       }
-      login(this.body);
+      postData("/login", this.body).then((response) => {
+        // No response or error
+        if (response == null) return;
+        if (response.status !== 200) {
+          handleMessage(constants.TYPE_ERROR, response.data.errors.message);
+          return;
+        }
+        // Set token
+        this.setToken(response.data.token);
+        // If all good, redirect to home with success message and refresh
+        handleMessage(constants.TYPE_SUCCESS, "login.success", true);
+        this.$router.push({ name: "home" });
+      });
     },
   },
   components: {

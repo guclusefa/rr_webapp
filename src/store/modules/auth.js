@@ -4,24 +4,25 @@ const auth = {
         user: null
     },
     mutations: {
-        setToken(state, payload) {
+        SET_TOKEN(state, payload) {
             state.token = payload
+            localStorage.setItem('token', payload)
         },
-        setUser(state, payload) {
+        SET_USER(state, payload) {
             state.user = payload
         }
     },
     actions: {
         setToken({ commit }, payload) {
-            commit('setToken', payload)
+            commit('SET_TOKEN', payload)
         },
         setUser({ commit }, payload) {
-            commit('setUser', payload)
+            commit('SET_USER', payload)
         }
     },
     getters: {
         token(state) {
-            return localStorage.getItem('token') || state.token
+            return state.token || localStorage.getItem('token')
         },
         user(state) {
             return state.user

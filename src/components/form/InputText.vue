@@ -8,10 +8,10 @@
     :type="type"
     :id="field"
     :name="field"
-    :placeholder="placeholder"
+    :placeholder="$t(placeholder)"
     :class="{ 'is-invalid': validateInput() }"
   />
-  <div class="invalid-feedback">
+  <div class="invalid-feedback" v-if="validateInput() !== ''">
     {{ $t(validateInput()) }}
   </div>
 </template>
@@ -45,6 +45,7 @@ export default {
       required: false,
     },
   },
+  emits: ["input"],
   methods: {
     validateInput() {
       // if validate is empty string than is valid
