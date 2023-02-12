@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "LocaleSwitcher",
+  name: "LocaleItem",
   data() {
     return {
       localesLabels: {

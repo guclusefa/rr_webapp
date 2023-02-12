@@ -24,10 +24,10 @@
           <div class="d-flex">
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                  <ThemeSwitcher />
+                  <ThemeItem />
                 </li>
                 <li class="nav-item">
-                  <LocaleSwitcher />
+                  <LocaleItem />
                 </li>
                 <li class="nav-item">
                   <router-link to="/login" class="nav-link">{{ $t("login.page") }}</router-link>
@@ -42,14 +42,14 @@
 </template>
 
 <script>
-import ThemeSwitcher from "@/components/layout/ThemeSwitcher.vue";
-import LocaleSwitcher from "@/components/layout/LocaleSwitcher.vue";
+import ThemeItem from "@/components/layout/ThemeItem.vue";
+import LocaleItem from "./LocaleItem.vue";
 
 export default {
   name: "HeaderItem",
   components: {
-    ThemeSwitcher,
-    LocaleSwitcher,
+    ThemeItem,
+    LocaleItem,
   },
 };
 </script>
