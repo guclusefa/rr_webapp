@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "@/store";
+import i18n from "@/services/i18n";
 
 // Create axios instance with base url and headers
 const api = axios.create({
@@ -34,7 +35,7 @@ api.interceptors.response.use((response) => {
 const handleApiError = (error) => {
     let message = "";
     if (!error.response) {
-        message = "Network error";
+        message = i18n.global.t("app.no_response");
     } else {
         message = error.response.data.errors.message;
     }
