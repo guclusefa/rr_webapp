@@ -1,17 +1,16 @@
-// User validations
+// User validators
 export function validateUsername(username, submitted) {
     if (submitted) {
         if (!username.trim()) {
-            return "login.username_required";
+            return "user.username_required";
         }
     }
     return "";
 }
-
 export function validatePassword(password, submitted) {
     if (submitted) {
         if (!password.trim()) {
-            return "login.password_required";
+            return "user.password_required";
         }
     }
     return "";

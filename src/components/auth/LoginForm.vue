@@ -8,8 +8,8 @@
             @input="$emit('input', (body.username = $event))"
             :type="'text'"
             :field="'username'"
-            :label="'login.username'"
-            :placeholder="'login.username_placeholder'"
+            :label="'user.username'"
+            :placeholder="'user.username_placeholder'"
             :required="true"
             :validate="validateUsername"
           />
@@ -20,8 +20,8 @@
             @input="$emit('input', (body.password = $event))"
             :type="'password'"
             :field="'password'"
-            :label="'login.password'"
-            :placeholder="'login.password_placeholder'"
+            :label="'user.password'"
+            :placeholder="'user.password_placeholder'"
             :required="true"
             :validate="validatePassword"
           />

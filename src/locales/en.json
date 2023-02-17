@@ -10,10 +10,6 @@
         "page": "Home",
         "title": "Welcome to my website"
     },
-    "about": {
-        "page": "About",
-        "title": "About me"
-    },
     "footer": {
         "copyright": "© {year} My Website"
     }
