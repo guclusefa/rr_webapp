@@ -5,7 +5,7 @@
       {{ $t("app.loading") }}
     </template>
     <template v-else>
-      {{ label }}
+      {{ $t(label) }}
     </template>
   </button>
 </template>

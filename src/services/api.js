@@ -32,7 +32,21 @@ api.interceptors.response.use((response) => {
     return Promise.reject(error);
 });
 
-const handleApiError = (error) => {
+const handleApiSuccessMessage = (response) => {
+    let message = "";
+    // Check if response is a string (custom message) or an object (response from api
+    if (typeof response === "string") {
+        message = message = i18n.global.t(response);
+    } else {
+        message = response.data.message;
+    }
+    store.dispatch("addToast", {
+        type: "success",
+        message: message,
+    });
+};
+
+const handleApiErrorMessage = (error) => {
     let message = "";
     if (!error.response) {
         message = i18n.global.t("app.no_response");
@@ -45,4 +59,4 @@ const handleApiError = (error) => {
     });
 };
 
-export { api, handleApiError };
+export { api, handleApiSuccessMessage, handleApiErrorMessage };

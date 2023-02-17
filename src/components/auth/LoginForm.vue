@@ -36,7 +36,7 @@
         </div>
         <!-- Submit -->
         <div class="mb-3">
-          <SubmitButton :label="$t('login.submit')" :disabled="!validateForm()" />
+          <SubmitButton :label="'login.submit'" :disabled="!validateForm()" />
         </div>
       </form>
     </div>
@@ -44,7 +44,12 @@
 </template>
 
 <script>
-import { api, handleApiError } from "@/services/api.js";
+import {
+  api,
+  handleApiSuccessMessage,
+  handleApiErrorMessage,
+} from "@/services/api.js";
+import { validateUsername, validatePassword } from "@/services/validators.js";
 
 import InputText from "@/components/form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
@@ -65,48 +70,38 @@ export default {
   methods: {
     // Username validation
     validateUsername() {
-      // check if not submitted
-      if (!this.submitted) {
-        return "";
-      }
-      // check if username is empty (trim)
-      if (!this.body.username.trim()) {
-        return "login.username_required";
-      }
-      return "";
+      return validateUsername(this.body.username, this.submitted);
     },
     // Password validation
     validatePassword() {
-      // check if not submitted
-      if (!this.submitted) {
-        return "";
-      }
-      // check if password is empty (trim)
-      if (!this.body.password.trim()) {
-        return "login.password_required";
-      }
-      return "";
+      return validatePassword(this.body.password, this.submitted);
     },
     // Form validation
     validateForm() {
-      return this.validateUsername() === "" && this.validatePassword() === "";
+      return !this.validateUsername() && !this.validatePassword();
     },
     // Form submit
     submitForm() {
       // Set submitted to true
       this.submitted = true;
-      // Check if form is valid
+      // Check if form is valid and submit
       if (!this.validateForm()) {
         return;
       }
-      // Submit form (TODO)
+      // Send request
       api
         .post("/login", this.body)
         .then((response) => {
-          console.log("SUCCESS: ", response);
+          // My code (TODO)
+          console.log(response);
+          // Send success message
+          handleApiSuccessMessage("login.success");
+          // Redirect
+          this.$router.push({ name: "home" });
         })
         .catch((error) => {
-          handleApiError(error);
+          // Send error message
+          handleApiErrorMessage(error);
         });
     },
   },

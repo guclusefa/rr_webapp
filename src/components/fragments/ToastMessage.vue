@@ -1,5 +1,8 @@
 <template>
-  <div ref="toastContainer" class="toast-container position-absolute bottom-0 end-0 p-3"></div>
+  <div
+    ref="toastContainer"
+    class="toast-container position-absolute bottom-0 end-0 p-3"
+  ></div>
 </template>
 
 <script>
@@ -14,17 +17,16 @@ export default {
   },
   methods: {
     showToast(toast) {
+      // Get toast container
       const toastContainer = this.$refs.toastContainer;
-      if (!toastContainer.querySelector(".toast")) {
-        // Create and append container element for first toast
-        const containerEl = document.createElement("div");
-        containerEl.classList.add("toast-container", "position-absolute", "bottom-0", "end-0", "p-3");
-        containerEl.appendChild(document.createElement("div"));
-        document.body.appendChild(containerEl);
-      }
       // Create and show new toast element
       const toastEl = document.createElement("div");
-      const type = toast.type == "error" ? "danger" : toast.type == "success" ? "success" : "info";
+      const type =
+        toast.type == "error"
+          ? "danger"
+          : toast.type == "success"
+          ? "success"
+          : "info";
       toastEl.classList.add("toast");
       toastEl.classList.add(`text-bg-${type}`);
       toastEl.setAttribute("role", "alert");

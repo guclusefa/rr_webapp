@@ -1,8 +1,24 @@
-// Bootstrap variables
+// Rounded corners variables
 $enable-rounded: false;
+$btn-border-radius: 0;
+$input-border-radius: 0;
+$dropdown-border-radius: 0;
+$nav-border-radius: 0;
+$pagination-border-radius: 0;
+$progress-border-radius: 0;
+$tooltip-border-radius: 0;
+$popover-border-radius: 0;
+$modal-content-border-radius: 0;
+$alert-border-radius: 0;
+$panel-border-radius: 0;
+$thumbnail-border-radius: 0;
+$badge-border-radius: 0;
+$jumbotron-border-radius: 0;
+$list-group-border-radius: 0;
+$card-border-radius: 0;
+$carousel-control-border-radius: 0;
+$close-font-size: 0;
+$toast-border-radius: 0;
+// Form variables
 $input-focus-box-shadow: none;
 $input-btn-focus-box-shadow: none;
-// Validation
-// disable validation icons and colors
-$form-feedback-valid-color: black;
-$form-feedback-valid-icon: none;

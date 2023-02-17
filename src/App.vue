@@ -2,8 +2,8 @@
   <HeaderItem />
   <main>
     <router-view />
-    <ToastMessage />
   </main>
+  <ToastMessage />
   <FooterItem />
 </template>
 
