@@ -26,12 +26,6 @@
             :validate="validatePassword"
           />
         </div>
-        <!-- Forgotten password -->
-        <div class="mb-3">
-          <router-link to="/forgot-password">
-            {{ $t("login.forgot_password") }}
-          </router-link>
-        </div>
         <!-- Remember Me -->
         <div class="mb-3">
           <CheckBox
@@ -39,6 +33,18 @@
             :field="'remember_me'"
             :label="'login.remember_me'"
           />
+        </div>
+        <!-- Register -->
+        <div class="mb-3">
+          <router-link to="/register">
+            {{ $t("login.register") }}
+          </router-link>
+        </div>
+        <!-- Forgotten password -->
+        <div class="mb-3">
+          <router-link to="/forgot-password">
+            {{ $t("login.forgot_password") }}
+          </router-link>
         </div>
         <!-- Submit -->
         <div class="mb-3">

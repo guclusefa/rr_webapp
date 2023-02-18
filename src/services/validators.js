@@ -19,6 +19,17 @@ export function validateEmail(email, submitted) {
     }
     return "";
 }
+export function validateEmailConfirmation(email, emailConfirm, submitted) {
+    if (submitted) {
+        if (!emailConfirm.trim()) {
+            return "user.email_confirmation_required";
+        }
+        if (email !== emailConfirm) {
+            return "user.email_confirmation_invalid";
+        }
+    }
+    return "";
+}
 export function validatePassword(password, submitted) {
     if (submitted) {
         if (!password.trim()) {
@@ -34,6 +45,14 @@ export function validatePasswordConfirmation(password, passwordConfirm, submitte
         }
         if (password !== passwordConfirm) {
             return "user.password_confirmation_invalid";
+        }
+    }
+    return "";
+}
+export function validateAcceptTerms(acceptTerms, submitted) {
+    if (submitted) {
+        if (!acceptTerms) {
+            return "register.accept_terms_required";
         }
     }
     return "";

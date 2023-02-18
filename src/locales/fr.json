@@ -27,6 +27,14 @@
     "success": "Vous vous êtes connecté avec succès",
     "error": "Vous êtes déjà connecté"
   },
+  "register": {
+    "page": "Inscription",
+    "title": "Inscription",
+    "accept_terms": "J'accepte les conditions d'utilisation",
+    "accept_terms_required": "Veuillez accepter les conditions d'utilisation",
+    "submit": "S'inscrire",
+    "login": "Déjà inscrit ?"
+  },
   "forgot-password": {
     "page": "Mot de passe oublié",
     "title": "Mot de passe oublié",
@@ -52,6 +60,14 @@
     "email_placeholder": "Votre adresse email",
     "email_required": "Veuillez entrer votre adresse email",
     "email_invalid": "Veuillez entrer une adresse email valide",
+    "email_confirmation": "Confirmation de l'email",
+    "email_confirmation_placeholder": "Confirmez votre adresse email",
+    "email_confirmation_required": "Veuillez confirmer votre adresse email",
+    "email_confirmation_invalid": "Vos adresses email ne correspondent pas",
+    "first_name": "Prénom",
+    "first_name_placeholder": "Votre prénom",
+    "last_name": "Nom",
+    "last_name_placeholder": "Votre nom",
     "password": "Mot de passe",
     "password_placeholder": "Votre mot de passe",
     "password_required": "Veuillez entrer votre mot de passe",
