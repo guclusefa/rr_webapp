@@ -11,5 +11,10 @@ export default createStore({
         loading,
         toasts
     },
-    plugins: [createPersistedState()]
+    plugins: [
+        createPersistedState({
+            key: 'auth',
+            paths: ['auth.token', 'auth.tokenExpiration', 'auth.user']
+        })
+    ]
 })

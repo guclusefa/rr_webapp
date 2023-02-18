@@ -1,6 +1,5 @@
 <template>
   <header class="mb-3">
-    <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container">
         <router-link to="/" class="navbar-brand">{{
@@ -63,6 +62,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>

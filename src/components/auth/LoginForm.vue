@@ -92,7 +92,7 @@ export default {
       api
         .post("/login", this.body)
         .then((response) => {
-          this.login(response);
+          this.login(response.data);
           addSuccessToast("login.success");
           this.$router.push({ name: "home" });
         })

@@ -16,15 +16,6 @@ const auth = {
         },
     },
     actions: {
-        setToken({ commit }, payload) {
-            commit('SET_TOKEN', payload)
-        },
-        setTokenExpiration({ commit }, payload) {
-            commit('SET_TOKEN_EXPIRATION', payload)
-        },
-        setUser({ commit }, payload) {
-            commit('SET_USER', payload)
-        },
         login({ commit }, payload) {
             commit('SET_TOKEN', payload.token)
             commit('SET_TOKEN_EXPIRATION', payload.expirationDate)
@@ -49,7 +40,7 @@ const auth = {
         user(state) {
             return state.user
         }
-    }
+    },
 }
 
 export default auth

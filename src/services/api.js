@@ -14,9 +14,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
     store.dispatch("setLoading", true);
     const token = store.getters.token;
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
+    if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
 }, (error) => {
     store.dispatch("setLoading", false);
