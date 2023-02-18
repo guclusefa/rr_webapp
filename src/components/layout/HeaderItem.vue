@@ -33,7 +33,7 @@
                 <LocaleItem />
               </li>
               <template v-if="isAuthenticated && user">
-                <ProfileItem :user="user" />
+                <ProfileItem />
               </template>
               <template v-else>
                 <li class="nav-item">
@@ -48,7 +48,7 @@
       </div>
     </nav>
   </header>
-
+  <!-- START TESTING -->
   <div class="test" v-if="isAuthenticated">
     <div class="container">
       <div class="row">
@@ -60,106 +60,24 @@
       </div>
     </div>
   </div>
+  <!-- END TESTING -->
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import api from "@/services/api";
-import { addErrorToast } from "@/services/toasts";
-
+import { mapGetters } from "vuex";
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "@/components/layout/LocaleItem.vue";
 import ProfileItem from "@/components/layout/ProfileItem.vue";
 
 export default {
   name: "HeaderItem",
+  computed: {
+    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user"]),
+  },
   components: {
     ThemeItem,
     LocaleItem,
     ProfileItem,
-  },
-  computed: {
-    ...mapGetters([
-      "isAuthenticated",
-      "token",
-      "tokenExpiration",
-      "user",
-      "rememberMe",
-    ]),
-    timeUntilTokenExpiration() {
-      return this.tokenExpiration - Date.now();
-    },
-  },
-  methods: {
-    ...mapActions(["updateUser"]),
-    ...mapActions(["logout"]),
-    refreshUser() {
-      return new Promise((resolve, reject) => {
-        api
-          .get("/users/me")
-          .then((response) => {
-            if (this.isAuthenticated) {
-              this.updateUser(response.data);
-            }
-            resolve();
-          })
-          .catch((error) => {
-            addErrorToast(error);
-            this.logout();
-            reject();
-          });
-      });
-    },
-    ...mapActions(["updateToken"]),
-    refreshToken() {
-      return new Promise((resolve, reject) => {
-        api
-          // post with remember_me in body
-          .post("/refresh-token", { remember_me: this.rememberMe })
-          .then((response) => {
-            if (this.isAuthenticated) {
-              this.updateToken(response.data);
-            }
-            resolve();
-          })
-          .catch((error) => {
-            addErrorToast(error);
-            this.logout();
-            reject();
-          });
-      });
-    },
-    alertIfTokenExpired() {
-      // check if token expires in less than 5 minutes
-      if (this.timeUntilTokenExpiration < 5 * 60 * 1000) {
-        const minutes = Math.floor(this.timeUntilTokenExpiration / 1000 / 60);
-        const seconds = Math.floor(this.timeUntilTokenExpiration / 1000) % 60;
-        // alert user (TODO: change to MODAL)
-        alert(this.$t("auth.token_expires_in", { minutes, seconds }));
-      }
-    },
-  },
-  created() {
-    if (this.isAuthenticated) {
-      this.refreshUser()
-        .then(() => {
-          this.refreshToken();
-        })
-        .catch(() => {});
-    }
-  },
-  // watch for change route (will see if i keep this)
-  watch: {
-    $route() {
-      if (this.isAuthenticated) {
-        this.refreshUser()
-          .then(() => {
-            this.refreshToken();
-          })
-          .catch(() => {});
-          this.alertIfTokenExpired();
-      }
-    },
   },
 };
 </script>
