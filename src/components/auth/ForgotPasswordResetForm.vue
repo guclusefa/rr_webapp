@@ -2,18 +2,6 @@
   <div class="row mb-3">
     <div class="col">
       <form @submit.prevent="submitForm" novalidate>
-        <!-- Username -->
-        <div class="mb-3">
-          <InputText
-            @input="$emit('input', (body.username = $event))"
-            :type="'text'"
-            :field="'username'"
-            :label="'user.username'"
-            :placeholder="'user.username_placeholder'"
-            :required="true"
-            :validate="validateUsername"
-          />
-        </div>
         <!-- Password -->
         <div class="mb-3">
           <InputText
@@ -26,23 +14,24 @@
             :validate="validatePassword"
           />
         </div>
-        <!-- Forgotten password -->
+        <!-- Password confirmation -->
         <div class="mb-3">
-          <router-link to="/forgot-password">
-            {{ $t("login.forgot_password") }}
-          </router-link>
-        </div>
-        <!-- Remember Me -->
-        <div class="mb-3">
-          <CheckBox
-            @update:modelValue="body.remember_me = $event"
-            :field="'remember_me'"
-            :label="'login.remember_me'"
+          <InputText
+            @input="$emit('input', (body.password_confirmation = $event))"
+            :type="'password'"
+            :field="'password_confirmation'"
+            :label="'user.password_confirmation'"
+            :placeholder="'user.password_confirmation_placeholder'"
+            :required="true"
+            :validate="validatePasswordConfirmation"
           />
         </div>
         <!-- Submit -->
         <div class="mb-3">
-          <SubmitButton :label="'login.submit'" :disabled="!validateForm()" />
+          <SubmitButton
+            :label="'forgot-password-reset.submit'"
+            :disabled="!validateForm()"
+          />
         </div>
       </form>
     </div>
@@ -52,41 +41,56 @@
 <script>
 import api from "@/services/api.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { mapActions, mapGetters } from "vuex";
-import { validateUsername, validatePassword } from "@/services/validators";
+import { mapGetters } from "vuex";
+import {
+  validatePassword,
+  validatePasswordConfirmation,
+} from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
-import CheckBox from "@/components/form/CheckBox.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
-  name: "LoginForm",
+  name: "ForgotPasswordForm",
   data() {
     return {
       body: {
-        username: "",
         password: "",
-        remember_me: false,
+        password_confirmation: "",
       },
       submitted: false,
     };
   },
   computed: {
     ...mapGetters(["isAuthenticated"]),
+    token() {
+      return this.$route.params.token;
+    },
   },
   methods: {
-    ...mapActions(["login"]),
-    // Username validation
-    validateUsername() {
-      return validateUsername(this.body.username, this.submitted);
-    },
     // Password validation
     validatePassword() {
       return validatePassword(this.body.password, this.submitted);
     },
+    validatePasswordConfirmation() {
+      return validatePasswordConfirmation(
+        this.body.password,
+        this.body.password_confirmation,
+        this.submitted
+      );
+    },
     // Form validation
     validateForm() {
-      return !this.validateUsername() && !this.validatePassword();
+      return !this.validatePassword() && !this.validatePasswordConfirmation();
+    },
+    checkToken() {
+      api
+        .get(`/check-token/${this.token}`)
+        .then(() => {})
+        .catch((error) => {
+          addErrorToast(error);
+          this.$router.push({ name: "login" });
+        });
     },
     // Login
     submitForm() {
@@ -95,12 +99,10 @@ export default {
       if (!this.validateForm()) return;
       // Make request if form is valid
       api
-        .post("/login", this.body)
+        .put(`/reset-password/${this.token}`, this.body)
         .then((response) => {
-          response.data.remember_me = this.body.remember_me;
-          this.login(response.data);
-          addSuccessToast("login.success");
-          this.$router.push({ name: "home" });
+          addSuccessToast(response);
+          this.$router.push({ name: "login" });
         })
         .catch((error) => {
           addErrorToast(error);
@@ -109,6 +111,7 @@ export default {
   },
   // Redirect to home if user is logged in
   beforeMount() {
+    this.checkToken();
     if (this.isAuthenticated) {
       addErrorToast("login.error");
       this.$router.push({ name: "home" });
@@ -116,7 +119,6 @@ export default {
   },
   components: {
     InputText,
-    CheckBox,
     SubmitButton,
   },
 };

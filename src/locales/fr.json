@@ -27,6 +27,16 @@
     "success": "Vous vous êtes connecté avec succès",
     "error": "Vous êtes déjà connecté"
   },
+  "forgot-password": {
+    "page": "Mot de passe oublié",
+    "title": "Mot de passe oublié",
+    "submit": "Envoyer le lien de réinitialisation"
+  },
+  "forgot-password-reset": {
+    "page": "Réinitialisation du mot de passe",
+    "title": "Réinitialisation du mot de passe",
+    "submit": "Réinitialiser mon mot de passe"
+  },
   "logout": {
     "page": "Déconnexion",
     "title": "Déconnexion de votre compte",
@@ -38,9 +48,17 @@
     "username": "Nom d'utilisateur",
     "username_placeholder": "Votre nom d'utilisateur",
     "username_required": "Veuillez entrer votre nom d'utilisateur",
+    "email": "Email",
+    "email_placeholder": "Votre adresse email",
+    "email_required": "Veuillez entrer votre adresse email",
+    "email_invalid": "Veuillez entrer une adresse email valide",
     "password": "Mot de passe",
     "password_placeholder": "Votre mot de passe",
-    "password_required": "Veuillez entrer votre mot de passe"
+    "password_required": "Veuillez entrer votre mot de passe",
+    "password_confirmation": "Confirmation du mot de passe",
+    "password_confirmation_placeholder": "Confirmez votre mot de passe",
+    "password_confirmation_required": "Veuillez confirmer votre mot de passe",
+    "password_confirmation_invalid": "Vos mots de passe ne correspondent pas"
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"

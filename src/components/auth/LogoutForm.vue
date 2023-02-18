@@ -14,6 +14,7 @@ export default {
   methods: {
     ...mapActions(["logout"]),
   },
+  // Check if user is authenticated and logout
   beforeMount() {
     if (this.isAuthenticated) {
       this.logout();

@@ -16,14 +16,19 @@ const addSuccessToast = (response) => {
 };
 
 const addErrorToast = (error) => {
-    console.log(error);
     let message = "";
     if (typeof error === "string") {
         message = i18n.global.t(error);
     } else if (!error.response) {
         message = i18n.global.t("app.no_response");
     } else {
-        message = error.response.data.errors.message;
+        if (Array.isArray(error.response.data.errors)) {
+            for (let i = 0; i < error.response.data.errors.length; i++) {
+                message += error.response.data.errors[i].message + " ";
+            }
+        } else {
+            message = error.response.data.errors.message;
+        }
     }
     store.dispatch("addToast", {
         type: "error",
