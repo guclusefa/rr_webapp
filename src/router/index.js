@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/services/i18n.js'
+
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/auth/LoginView.vue'
+import LogoutForm from '@/components/auth/LogoutForm.vue'
 
 // Routes
 const routes = [
@@ -14,11 +16,16 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
-  }
+  },
+  {
+    path: '/logout',
+    name: 'logout',
+    component: LogoutForm
+  },
 ]
 // Router
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.VUE_APP_BASE_URL),
   routes
 })
 // Set document title

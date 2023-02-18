@@ -11,14 +11,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "SubmitButton",
   computed: {
+    ...mapGetters(["loading"]),
     disabledButton() {
       return this.disabled || this.loading;
-    },
-    loading() {
-      return this.$store.getters["loading"];
     },
   },
   props: {

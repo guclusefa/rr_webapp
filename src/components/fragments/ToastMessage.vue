@@ -6,16 +6,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { Toast } from "bootstrap";
 
 export default {
   name: "ToastMessage",
   computed: {
-    toasts() {
-      return this.$store.getters["toasts"];
-    },
+    ...mapGetters(["toast"]),
   },
   methods: {
+    // Show toast message
     showToast(toast) {
       // Get toast container
       const toastContainer = this.$refs.toastContainer;

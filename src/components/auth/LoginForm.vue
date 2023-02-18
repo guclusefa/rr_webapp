@@ -44,12 +44,10 @@
 </template>
 
 <script>
-import {
-  api,
-  handleApiSuccessMessage,
-  handleApiErrorMessage,
-} from "@/services/api.js";
-import { validateUsername, validatePassword } from "@/services/validators.js";
+import api from "@/services/api.js";
+import { addSuccessToast, addErrorToast } from "@/services/toasts";
+import { mapActions, mapGetters } from "vuex";
+import { validateUsername, validatePassword } from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
@@ -67,7 +65,12 @@ export default {
       submitted: false,
     };
   },
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+  },
   methods: {
+    // Actions
+    ...mapActions(["login"]),
     // Username validation
     validateUsername() {
       return validateUsername(this.body.username, this.submitted);
@@ -80,30 +83,30 @@ export default {
     validateForm() {
       return !this.validateUsername() && !this.validatePassword();
     },
-    // Form submit
+    // Login
     submitForm() {
-      // Set submitted to true
+      // Set submitted to true and check if form is valid
       this.submitted = true;
-      // Check if form is valid and submit
-      if (!this.validateForm()) {
-        return;
-      }
-      // Send request
+      if(!this.validateForm()) return;
+      // Make request if form is valid
       api
         .post("/login", this.body)
         .then((response) => {
-          // My code (TODO)
-          console.log(response);
-          // Send success message
-          handleApiSuccessMessage("login.success");
-          // Redirect
+          this.login(response);
+          addSuccessToast("login.success");
           this.$router.push({ name: "home" });
         })
         .catch((error) => {
-          // Send error message
-          handleApiErrorMessage(error);
+          addErrorToast(error);
         });
     },
+  },
+  // Redirect to home if user is logged in
+  beforeMount() {
+    if (this.isAuthenticated) {
+      addErrorToast("login.error");
+      this.$router.push({ name: "home" });
+    }
   },
   components: {
     InputText,
