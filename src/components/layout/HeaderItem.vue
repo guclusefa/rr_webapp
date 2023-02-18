@@ -33,11 +33,7 @@
                 <LocaleItem />
               </li>
               <template v-if="isAuthenticated">
-                <li class="nav-item">
-                  <router-link to="/logout" class="nav-link">{{
-                    $t("logout.page")
-                  }}</router-link>
-                </li>
+                <ProfileItem :user="user" />
               </template>
               <template v-else>
                 <li class="nav-item">
@@ -57,28 +53,77 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
+          <p>{{ token }}</p>
+          <p>{{ tokenExpiration }}</p>
           <p>{{ user }}</p>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import api from "@/services/api";
+import { addErrorToast } from "@/services/toasts";
 
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "@/components/layout/LocaleItem.vue";
+import ProfileItem from "@/components/layout/ProfileItem.vue";
 
 export default {
   name: "HeaderItem",
   components: {
     ThemeItem,
     LocaleItem,
+    ProfileItem,
   },
   computed: {
-    ...mapGetters(["isAuthenticated", "user"]),
+    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user"]),
+  },
+  methods: {
+    ...mapActions(["updateUser"]),
+    ...mapActions(["logout"]),
+    refreshUser() {
+      return new Promise((resolve, reject) => {
+        api
+          .get("/users/me", this.body)
+          .then((response) => {
+            this.updateUser(response.data);
+            resolve();
+          })
+          .catch((error) => {
+            addErrorToast(error);
+            this.logout();
+            reject();
+          });
+      });
+    },
+    ...mapActions(["updateToken"]),
+    refreshToken() {
+      return new Promise((resolve, reject) => {
+        api
+          .get("/refresh-token", this.body)
+          .then((response) => {
+            this.updateToken(response.data);
+            resolve();
+          })
+          .catch((error) => {
+            addErrorToast(error);
+            this.logout();
+            reject();
+          });
+      });
+    },
+  },
+  created() {
+    if (this.isAuthenticated) {
+      this.refreshUser()
+        .then(() => {
+          this.refreshToken();
+        })
+        .catch(() => {});
+    }
   },
 };
 </script>

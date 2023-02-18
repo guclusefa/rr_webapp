@@ -14,6 +14,15 @@ const auth = {
         SET_USER(state, payload) {
             state.user = payload
         },
+        CLEAR_TOKEN(state) {
+            state.token = null
+        },
+        CLEAR_TOKEN_EXPIRATION(state) {
+            state.tokenExpiration = null
+        },
+        CLEAR_USER(state) {
+            state.user = null
+        }
     },
     actions: {
         login({ commit }, payload) {
@@ -22,9 +31,16 @@ const auth = {
             commit('SET_USER', payload.data)
         },
         logout({ commit }) {
-            commit('SET_TOKEN', null)
-            commit('SET_TOKEN_EXPIRATION', null)
-            commit('SET_USER', null)
+            commit('CLEAR_TOKEN')
+            commit('CLEAR_TOKEN_EXPIRATION')
+            commit('CLEAR_USER')
+        },
+        updateToken({ commit }, payload) {
+            commit('SET_TOKEN', payload.token)
+            commit('SET_TOKEN_EXPIRATION', payload.expirationDate)
+        },
+        updateUser({ commit }, payload) {
+            commit('SET_USER', payload.data)
         }
     },
     getters: {
@@ -35,7 +51,7 @@ const auth = {
             return state.token
         },
         tokenExpiration(state) {
-            return state.tokenExpiration
+            return new Date(state.tokenExpiration)
         },
         user(state) {
             return state.user
