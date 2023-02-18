@@ -79,7 +79,16 @@ export default {
     ProfileItem,
   },
   computed: {
-    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user", "rememberMe"]),
+    ...mapGetters([
+      "isAuthenticated",
+      "token",
+      "tokenExpiration",
+      "user",
+      "rememberMe",
+    ]),
+    timeUntilTokenExpiration() {
+      return this.tokenExpiration - Date.now();
+    },
   },
   methods: {
     ...mapActions(["updateUser"]),
@@ -105,7 +114,7 @@ export default {
     refreshToken() {
       return new Promise((resolve, reject) => {
         api
-        // post with remember_me in body
+          // post with remember_me in body
           .post("/refresh-token", { remember_me: this.rememberMe })
           .then((response) => {
             if (this.isAuthenticated) {
@@ -120,6 +129,15 @@ export default {
           });
       });
     },
+    alertIfTokenExpired() {
+      // check if token expires in less than 5 minutes
+      if (this.timeUntilTokenExpiration < 5 * 60 * 1000) {
+        const minutes = Math.floor(this.timeUntilTokenExpiration / 1000 / 60);
+        const seconds = Math.floor(this.timeUntilTokenExpiration / 1000) % 60;
+        // alert user (TODO: change to MODAL)
+        alert(this.$t("auth.token_expires_in", { minutes, seconds }));
+      }
+    },
   },
   created() {
     if (this.isAuthenticated) {
@@ -129,6 +147,19 @@ export default {
         })
         .catch(() => {});
     }
+  },
+  // watch for change route (will see if i keep this)
+  watch: {
+    $route() {
+      if (this.isAuthenticated) {
+        this.refreshUser()
+          .then(() => {
+            this.refreshToken();
+          })
+          .catch(() => {});
+          this.alertIfTokenExpired();
+      }
+    },
   },
 };
 </script>

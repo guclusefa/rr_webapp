@@ -10,6 +10,13 @@
     "page": "Accueil",
     "title": "Bienvenue sur le site des Ressources (Re)lationnelles"
   },
+  "about": {
+    "page": "À propos",
+    "title": "À propos des Ressources (Re)lationnelles"
+  },
+  "auth": {
+    "token_expires_in": "Attention votre session va expiré dans {minutes} minutes et {seconds} secondes"
+  },
   "login": {
     "page": "Connexion",
     "title": "Connexion à votre compte",

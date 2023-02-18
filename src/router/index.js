@@ -22,6 +22,11 @@ const routes = [
     name: 'logout',
     component: LogoutForm
   },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+  }
 ]
 // Router
 const router = createRouter({
