@@ -89,7 +89,9 @@ export default {
         api
           .get("/users/me")
           .then((response) => {
-            this.updateUser(response.data);
+            if (this.isAuthenticated) {
+              this.updateUser(response.data);
+            }
             resolve();
           })
           .catch((error) => {
@@ -106,7 +108,9 @@ export default {
         // post with remember_me in body
           .post("/refresh-token", { remember_me: this.rememberMe })
           .then((response) => {
-            this.updateToken(response.data);
+            if (this.isAuthenticated) {
+              this.updateToken(response.data);
+            }
             resolve();
           })
           .catch((error) => {
