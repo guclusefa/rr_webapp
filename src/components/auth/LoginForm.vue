@@ -58,7 +58,7 @@
 <script>
 import api from "@/services/api.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 import { validateUsername, validatePassword } from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
@@ -76,9 +76,6 @@ export default {
       },
       submitted: false,
     };
-  },
-  computed: {
-    ...mapGetters(["isAuthenticated"]),
   },
   methods: {
     ...mapActions(["login"]),
@@ -112,13 +109,6 @@ export default {
           addErrorToast(error);
         });
     },
-  },
-  // Redirect to home if user is logged in
-  beforeMount() {
-    if (this.isAuthenticated) {
-      addErrorToast("login.error");
-      this.$router.push({ name: "home" });
-    }
   },
   components: {
     InputText,

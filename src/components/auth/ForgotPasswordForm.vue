@@ -29,7 +29,6 @@
 <script>
 import api from "@/services/api.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { mapGetters } from "vuex";
 import { validateEmail } from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
@@ -44,9 +43,6 @@ export default {
       },
       submitted: false,
     };
-  },
-  computed: {
-    ...mapGetters(["isAuthenticated"]),
   },
   methods: {
     // Email validation
@@ -73,13 +69,6 @@ export default {
           addErrorToast(error);
         });
     },
-  },
-  // Redirect to home if user is logged in
-  beforeMount() {
-    if (this.isAuthenticated) {
-      addErrorToast("login.error");
-      this.$router.push({ name: "home" });
-    }
   },
   components: {
     InputText,

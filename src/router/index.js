@@ -2,11 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/services/i18n.js'
 
 import HomeView from '@/views/HomeView.vue'
+// Auth views
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'
 import ForgotPasswordView from '@/views/auth/ForgotPasswordView.vue'
 import ForgotPasswordResetView from '@/views/auth/ForgotPasswordResetView.vue'
 import LogoutForm from '@/components/auth/LogoutForm.vue'
+// Profile views
+import ProfileView from '@/views/profile/ProfileView.vue'
 
 // Routes
 const routes = [
@@ -14,6 +17,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/login',
@@ -41,10 +49,10 @@ const routes = [
     component: LogoutForm
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/profile/:id',
+    name: 'profile',
+    component: ProfileView
+  },
 ]
 // Router
 const router = createRouter({

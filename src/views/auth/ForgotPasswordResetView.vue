@@ -13,10 +13,23 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { addErrorToast } from "@/services/toasts";
 import ForgotPasswordResetForm from "@/components/auth/ForgotPasswordResetForm.vue";
 
 export default {
   name: "ForgotPasswordResetView",
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
+  },
+  // Redirect to home if user is logged in
+  beforeMount() {
+    this.checkToken();
+    if (this.isAuthenticated) {
+      addErrorToast("login.error");
+      this.$router.push({ name: "home" });
+    }
+  },
   components: {
     ForgotPasswordResetForm,
   },

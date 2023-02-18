@@ -11,6 +11,14 @@
     </a>
     <ul class="dropdown-menu">
       <li class="nav-item">
+        <router-link
+          :to="{ name: 'profile', params: { id: user.id } }"
+          class="dropdown-item"
+        >
+          {{ $t("profile.page") }}
+        </router-link>
+      </li>
+      <li class="nav-item">
         <router-link to="/logout" class="dropdown-item">{{
           $t("logout.page")
         }}</router-link>

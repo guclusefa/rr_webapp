@@ -41,7 +41,6 @@
 <script>
 import api from "@/services/api.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { mapGetters } from "vuex";
 import {
   validatePassword,
   validatePasswordConfirmation,
@@ -62,7 +61,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isAuthenticated"]),
     token() {
       return this.$route.params.token;
     },
@@ -108,14 +106,6 @@ export default {
           addErrorToast(error);
         });
     },
-  },
-  // Redirect to home if user is logged in
-  beforeMount() {
-    this.checkToken();
-    if (this.isAuthenticated) {
-      addErrorToast("login.error");
-      this.$router.push({ name: "home" });
-    }
   },
   components: {
     InputText,

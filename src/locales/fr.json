@@ -74,7 +74,17 @@
     "password_confirmation": "Confirmation du mot de passe",
     "password_confirmation_placeholder": "Confirmez votre mot de passe",
     "password_confirmation_required": "Veuillez confirmer votre mot de passe",
-    "password_confirmation_invalid": "Vos mots de passe ne correspondent pas"
+    "password_confirmation_invalid": "Vos mots de passe ne correspondent pas",
+    "not_found": "Utilisateur introuvable"
+  },
+  "profile": {
+    "page": "Profil",
+    "title": "Profil de {username}",
+    "edit": "Modifier mon profil",
+    "delete": "Supprimer mon compte",
+    "delete_confirm": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+    "delete_success": "Votre compte a été supprimé avec succès",
+    "delete_error": "Votre compte n'a pas pu être supprimé"
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"
