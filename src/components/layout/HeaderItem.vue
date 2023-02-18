@@ -32,7 +32,7 @@
               <li class="nav-item">
                 <LocaleItem />
               </li>
-              <template v-if="isAuthenticated">
+              <template v-if="isAuthenticated && user">
                 <ProfileItem :user="user" />
               </template>
               <template v-else>
@@ -79,7 +79,7 @@ export default {
     ProfileItem,
   },
   computed: {
-    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user"]),
+    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user", "rememberMe"]),
   },
   methods: {
     ...mapActions(["updateUser"]),
@@ -87,7 +87,7 @@ export default {
     refreshUser() {
       return new Promise((resolve, reject) => {
         api
-          .get("/users/me", this.body)
+          .get("/users/me")
           .then((response) => {
             this.updateUser(response.data);
             resolve();
@@ -103,7 +103,8 @@ export default {
     refreshToken() {
       return new Promise((resolve, reject) => {
         api
-          .get("/refresh-token", this.body)
+        // post with remember_me in body
+          .post("/refresh-token", { remember_me: this.rememberMe })
           .then((response) => {
             this.updateToken(response.data);
             resolve();

@@ -2,7 +2,8 @@ const auth = {
     state: {
         token: null,
         tokenExpiration: null,
-        user: null
+        user: null,
+        rememberMe: null
     },
     mutations: {
         SET_TOKEN(state, payload) {
@@ -14,6 +15,9 @@ const auth = {
         SET_USER(state, payload) {
             state.user = payload
         },
+        SET_REMEMBER_ME(state, payload) {
+            state.rememberMe = payload
+        },
         CLEAR_TOKEN(state) {
             state.token = null
         },
@@ -22,6 +26,9 @@ const auth = {
         },
         CLEAR_USER(state) {
             state.user = null
+        },
+        CLEAR_REMEMBER_ME(state) {
+            state.rememberMe = null
         }
     },
     actions: {
@@ -29,11 +36,13 @@ const auth = {
             commit('SET_TOKEN', payload.token)
             commit('SET_TOKEN_EXPIRATION', payload.expirationDate)
             commit('SET_USER', payload.data)
+            commit('SET_REMEMBER_ME', payload.remember_me)
         },
         logout({ commit }) {
             commit('CLEAR_TOKEN')
             commit('CLEAR_TOKEN_EXPIRATION')
             commit('CLEAR_USER')
+            commit('CLEAR_REMEMBER_ME')
         },
         updateToken({ commit }, payload) {
             commit('SET_TOKEN', payload.token)
@@ -55,6 +64,9 @@ const auth = {
         },
         user(state) {
             return state.user
+        },
+        rememberMe(state) {
+            return state.rememberMe
         }
     },
 }

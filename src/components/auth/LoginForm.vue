@@ -69,8 +69,6 @@ export default {
     ...mapGetters(["isAuthenticated"]),
   },
   methods: {
-    // Actions
-    ...mapActions(["login"]),
     // Username validation
     validateUsername() {
       return validateUsername(this.body.username, this.submitted);
@@ -84,14 +82,16 @@ export default {
       return !this.validateUsername() && !this.validatePassword();
     },
     // Login
+    ...mapActions(["login"]),
     submitForm() {
       // Set submitted to true and check if form is valid
       this.submitted = true;
-      if(!this.validateForm()) return;
+      if (!this.validateForm()) return;
       // Make request if form is valid
       api
         .post("/login", this.body)
         .then((response) => {
+          response.data.remember_me = this.body.remember_me;
           this.login(response.data);
           addSuccessToast("login.success");
           this.$router.push({ name: "home" });

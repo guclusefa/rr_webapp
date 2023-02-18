@@ -14,7 +14,7 @@ export default createStore({
     plugins: [
         createPersistedState({
             key: 'auth',
-            paths: ['auth.token', 'auth.tokenExpiration', 'auth.user']
+            paths: ['auth.token', 'auth.tokenExpiration', 'auth.user', 'auth.rememberMe']
         })
     ]
 })
