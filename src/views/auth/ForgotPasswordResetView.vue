@@ -3,22 +3,22 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1>{{ $t("forgot-password.title") }}</h1>
+          <h1>{{ $t("forgot-password-reset.title") }}</h1>
           <hr />
         </div>
       </div>
-      <ForgotPasswordForm />
+      <ForgotPasswordResetForm />
     </div>
   </section>
 </template>
 
 <script>
-import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm.vue";
+import ForgotPasswordResetForm from "@/components/auth/ForgotPasswordResetForm.vue";
 
 export default {
-  name: "ForgotPasswordView",
+  name: "ForgotPasswordResetView",
   components: {
-    ForgotPasswordForm
+    ForgotPasswordResetForm,
   },
 };
 </script>

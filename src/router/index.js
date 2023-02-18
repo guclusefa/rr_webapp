@@ -4,6 +4,7 @@ import i18n from '@/services/i18n.js'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/auth/LoginView.vue'
 import ForgotPasswordView from '@/views/auth/ForgotPasswordView.vue'
+import ForgotPasswordResetView from '@/views/auth/ForgotPasswordResetView.vue'
 import LogoutForm from '@/components/auth/LogoutForm.vue'
 
 // Routes
@@ -26,7 +27,7 @@ const routes = [
   {
     path: '/forgot-password/:token',
     name: 'forgot-password-reset',
-    component: ForgotPasswordView
+    component: ForgotPasswordResetView
   },
   {
     path: '/logout',
