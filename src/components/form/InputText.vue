@@ -46,6 +46,10 @@ export default {
       required: false,
       default: () => "",
     },
+    value: {
+      type: String,
+      required: false,
+    },
   },
   emits: ["input"],
   methods: {
@@ -57,6 +61,15 @@ export default {
       // if validate is a function than call it
       return this.validate();
     },
+    fillInput() {
+      const input = document.getElementById(this.field);
+      if (this.value) {
+        input.value = this.value;
+      }
+    },
+  },
+  mounted() {
+    this.fillInput();
   },
 };
 </script>

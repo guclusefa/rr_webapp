@@ -62,7 +62,7 @@
           v-if="profile.firstName || profile.lastName"
         >
           <template v-if="profile.firstName">{{ profile.firstName }}</template>
-          <template v-if="profile.lastName">{{ profile.lastName }}</template>
+          <template v-if="profile.lastName">{{ " " + profile.lastName }}</template>
         </div>
         <div class="text-muted pb-1" v-if="profile.bio">{{ profile.bio }}</div>
         <div class="text-muted pb-1" v-if="profile.birthDate">

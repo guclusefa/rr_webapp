@@ -10,6 +10,7 @@
           :placeholder="'user.username_placeholder'"
           :required="true"
           :validate="validateUsername"
+          :value="profile.username"
         />
       </div>
     </div>
@@ -22,6 +23,7 @@
           :field="'first_name'"
           :label="'user.first_name'"
           :placeholder="'user.first_name'"
+          :value="profile.firstName"
         />
       </div>
       <div class="col-12 col-md-6 mb-3">
@@ -32,6 +34,7 @@
           :field="'last_name'"
           :label="'user.last_name'"
           :placeholder="'user.last_name'"
+          :value="profile.lastName"
         />
       </div>
     </div>
@@ -75,6 +78,7 @@ export default {
         const response = await this.updateProfile(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
+          // If my profile
           if (this.profile.id === this.user.id) {
             await this.updateUser(this.body);
           }
