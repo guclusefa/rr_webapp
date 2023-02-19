@@ -75,16 +75,32 @@
     "password_confirmation_placeholder": "Confirmez votre mot de passe",
     "password_confirmation_required": "Veuillez confirmer votre mot de passe",
     "password_confirmation_invalid": "Vos mots de passe ne correspondent pas",
-    "not_found": "Utilisateur introuvable"
+    "not_found": "Utilisateur introuvable",
+    "gender": {
+      "M" : "Masculin",
+      "F" : "Féminin",
+      "O" : "Autre"
+    },
+    "roles": {
+      "ROLE_USER": "Utilisateur",
+      "ROLE_MODERATOR": "Modérateur",
+      "ROLE_ADMIN": "Administrateur",
+      "ROLE_SUPER_ADMIN": "Super Administrateur"
+    },
+    "age": "Née le {birthDate} ({age} ans)",
+    "member_since": "Membre depuis le {createdAt} ({days} jours)",
+    "certified": "Certifié",
+    "verified": "Vérifié"
   },
   "profile": {
     "page": "Profil",
     "title": "Profil de {username}",
+    "actions": "Actions",
     "edit": "Modifier mon profil",
-    "delete": "Supprimer mon compte",
-    "delete_confirm": "Êtes-vous sûr de vouloir supprimer votre compte ?",
-    "delete_success": "Votre compte a été supprimé avec succès",
-    "delete_error": "Votre compte n'a pas pu être supprimé"
+    "edit_password": "Modifier mon mot de passe",
+    "edit_email": "Modifier mon email",
+    "verify_email": "Vérifier mon email",
+    "delete": "Supprimer mon compte"
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"

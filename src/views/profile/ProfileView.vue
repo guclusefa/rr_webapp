@@ -7,7 +7,13 @@
           <hr />
         </div>
       </div>
+      <div class="row">
+        <div class="col">
+          <UserProfile :user="profileUser" :canEdit="canEdit" />
+        </div>
+      </div>
     </div>
+    <!-- Loading -->
     <div class="container" v-else>
       <div class="row">
         <div class="col">
@@ -19,6 +25,7 @@
         </div>
       </div>
     </div>
+    <!-- End loading -->
   </section>
 </template>
 
@@ -27,11 +34,28 @@ import api from "@/services/api.js";
 import { mapGetters } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import UserProfile from "@/components/user/UserProfile";
+
 export default {
   name: "ProfileView",
   data() {
     return {
-      profileUser: {},
+      profileUser: {
+        id: null,
+        username: null,
+        email: null,
+        firstName: null,
+        lastName: null,
+        bio: null,
+        photo: null,
+        roles: [],
+        createdAt: null,
+        gender: null,
+        birthDate: null,
+        isCertified: null,
+        isVerified: null,
+      },
+      canEdit: false,
     };
   },
   computed: {
@@ -42,7 +66,10 @@ export default {
   },
   methods: {
     getUser() {
-      if (this.id == this.user.id) return (this.profileUser = this.user);
+      if (this.id == this.user.id) {
+        this.canEdit = true;
+        return (this.profileUser = this.user);
+      } 
       api
         .get(`/users/${this.id}`)
         .then((response) => {
@@ -54,13 +81,16 @@ export default {
         });
     },
   },
-  created() {
+  beforeMount() {
     this.getUser();
   },
   watch: {
     id() {
       this.getUser();
     },
+  },
+  components: {
+    UserProfile,
   },
 };
 </script>
