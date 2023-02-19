@@ -6,11 +6,25 @@
         {{ $t("profile.actions") }}
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="#">{{ $t("profile.edit") }}</a></li>
-        <li><a class="dropdown-item" href="#">{{ $t("profile.edit_password") }}</a></li>
-        <li><a class="dropdown-item" href="#">{{ $t("profile.edit_email") }}</a></li>
-        <li v-if="!user.isVerified"><a class="dropdown-item" href="#">{{ $t("profile.verify_email") }}</a></li>
-        <li><a class="dropdown-item" href="#">{{ $t("profile.delete") }}</a></li>
+        <li>
+          <a class="dropdown-item" href="#" @click="editProfile">
+            {{ $t("profile.edit") }}
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">{{
+            $t("profile.edit_password")
+          }}</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">{{ $t("profile.edit_email") }}</a>
+        </li>
+        <li v-if="!user.isVerified">
+          <a class="dropdown-item" href="#">{{ $t("profile.verify_email") }}</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">{{ $t("profile.delete") }}</a>
+        </li>
       </ul>
     </div>
     <div class="row d-flex align-items-center">
@@ -65,10 +79,19 @@
       </div>
     </div>
   </div>
+  <ModalDialog
+    ref="editModal"
+    :title="$t('profile.edit_title', { username: user.username })"
+  >
+    <UserEdit :user="user" />
+  </ModalDialog>
 </template>
 
 <script>
 import dateFormatter from "@/services/dates";
+
+import ModalDialog from "@/components/fragments/ModalDialog";
+import UserEdit from "@/components/user/UserEdit";
 
 export default {
   name: "UserProfile",
@@ -92,6 +115,13 @@ export default {
     getDays(date) {
       return dateFormatter.getDays(date);
     },
+    editProfile() {
+      this.$refs.editModal.show();
+    },
+  },
+  components: {
+    ModalDialog,
+    UserEdit,
   },
 };
 </script>

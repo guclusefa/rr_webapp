@@ -4,7 +4,9 @@
     "name_short": "R(RE)",
     "no_results": "Aucun résultat",
     "no_response": "Il y a eu un problème avec la réponse du serveur veuillez réessayer",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "submit": "Valider",
+    "cancel": "Annuler"
   },
   "home": {
     "page": "Accueil",
@@ -96,11 +98,12 @@
     "page": "Profil",
     "title": "Profil de {username}",
     "actions": "Actions",
-    "edit": "Modifier mon profil",
-    "edit_password": "Modifier mon mot de passe",
-    "edit_email": "Modifier mon email",
-    "verify_email": "Vérifier mon email",
-    "delete": "Supprimer mon compte"
+    "edit": "Modifier profil",
+    "edit_title": "Modifier profil de {username}",
+    "edit_password": "Modifier mot de passe",
+    "edit_email": "Modifier email",
+    "verify_email": "Vérifier email",
+    "delete": "Supprimer compte"
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"

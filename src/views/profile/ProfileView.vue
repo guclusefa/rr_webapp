@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container" v-if="!loading">
+    <div class="container">
       <div class="row">
         <div class="col">
           <h1>{{ $t("profile.title", { username: profileUser.username }) }}</h1>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <!-- Loading -->
-    <div class="container" v-else>
+<!--     <div class="container" v-else>
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-center">
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- End loading -->
   </section>
 </template>
