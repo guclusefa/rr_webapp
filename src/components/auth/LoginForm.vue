@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import api from "@/services/api.js";
-import { addSuccessToast, addErrorToast } from "@/services/toasts";
 import { mapActions } from "vuex";
-import { validateUsername, validatePassword } from "@/services/validators";
+import formValidationMixin from "@/mixins/formValidationMixin.js";
+import { withSubmitValidation } from "@/services/validators.js";
+import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
@@ -67,6 +67,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "LoginForm",
+  mixins: [formValidationMixin],
   data() {
     return {
       body: {
@@ -74,40 +75,23 @@ export default {
         password: "",
         remember_me: false,
       },
-      submitted: false,
     };
   },
   methods: {
+    // Form submit
     ...mapActions(["login"]),
-    // Username validation
-    validateUsername() {
-      return validateUsername(this.body.username, this.submitted);
-    },
-    // Password validation
-    validatePassword() {
-      return validatePassword(this.body.password, this.submitted);
-    },
-    // Form validation
-    validateForm() {
-      return !this.validateUsername() && !this.validatePassword();
-    },
-    // Login
-    submitForm() {
-      // Set submitted to true and check if form is valid
-      this.submitted = true;
-      if (!this.validateForm()) return;
-      // Make request if form is valid
-      api
-        .post("/login", this.body)
-        .then((response) => {
-          response.data.remember_me = this.body.remember_me;
-          this.login(response.data);
-          addSuccessToast("login.success");
+    async submitForm() {
+      withSubmitValidation(async function () {
+        const response = await this.login(this.body);
+        // Success
+        if (response.status === 200) {
+          addSuccessToast(this.$t("login.success"));
           this.$router.push({ name: "home" });
-        })
-        .catch((error) => {
-          addErrorToast(error);
-        });
+          return;
+        }
+        // Error
+        addErrorToast(response);
+      }).apply(this);
     },
   },
   components: {

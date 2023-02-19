@@ -3,7 +3,9 @@
   <main>
     <router-view />
   </main>
-  <ToastMessage />
+  <aside>
+    <ToastMessage />
+  </aside>
   <FooterItem />
 </template>
 

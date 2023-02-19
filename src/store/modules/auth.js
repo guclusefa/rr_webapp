@@ -1,3 +1,5 @@
+import api from "@/services/api";
+
 const auth = {
     state: {
         token: null,
@@ -32,11 +34,17 @@ const auth = {
         }
     },
     actions: {
-        login({ commit }, payload) {
-            commit('SET_TOKEN', payload.token)
-            commit('SET_TOKEN_EXPIRATION', payload.expirationDate)
-            commit('SET_USER', payload.data)
-            commit('SET_REMEMBER_ME', payload.remember_me)
+        async login({ commit }, payload) {
+            try {
+                const response = await api.post('/login', payload)
+                commit('SET_TOKEN', response.data.token)
+                commit('SET_TOKEN_EXPIRATION', response.data.expirationDate)
+                commit('SET_USER', response.data.data)
+                commit('SET_REMEMBER_ME', payload.rememberMe)
+                return response;
+            } catch (error) {
+                return error;
+            }
         },
         logout({ commit }) {
             commit('CLEAR_TOKEN')

@@ -4,7 +4,6 @@
   </label>
   <input
     @input="$emit('input', $event.target.value)"
-    :value="value"
     class="form-control"
     :type="type"
     :id="field"
@@ -24,11 +23,6 @@ export default {
     type: {
       type: String,
       required: true,
-    },
-    value: {
-      type: String,
-      required: false,
-      default: "",
     },
     field: {
       type: String,

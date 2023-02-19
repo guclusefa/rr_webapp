@@ -1,3 +1,13 @@
+// Form submit validation
+export function withSubmitValidation(callback) {
+    return async function () {
+        // Set submitted to true and validate form
+        this.submitted = true;
+        if (!this.validateForm()) return;
+        // The logic of the form submit
+        await callback.apply(this, arguments);
+    };
+}
 // User validators
 export function validateUsername(username, submitted) {
     if (submitted) {
