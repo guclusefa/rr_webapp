@@ -6,13 +6,16 @@ const api = axios.create({
     baseURL: process.env.VUE_APP_API_URL,
     headers: {
         "Accept": "application/json",
-        "Accept-Language": localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE,
         "Content-Type": "application/json",
     },
 });
 // set loading to true when request is made and to false when request is finished or failed
 api.interceptors.request.use((config) => {
     store.dispatch("setLoading", true);
+    // Accept-Language header
+    const locale = localStorage.getItem("locale") || process.env.VUE_APP_I18N_LOCALE;
+    config.headers["Accept-Language"] = locale;
+    // Authorization header
     const token = store.getters.token;
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
