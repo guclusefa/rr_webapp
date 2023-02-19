@@ -40,7 +40,7 @@ const auth = {
                 commit('SET_TOKEN', response.data.token)
                 commit('SET_TOKEN_EXPIRATION', response.data.expirationDate)
                 commit('SET_USER', response.data.data)
-                commit('SET_REMEMBER_ME', payload.rememberMe)
+                commit('SET_REMEMBER_ME', payload.remember_me)
                 return response;
             } catch (error) {
                 return error;
@@ -60,7 +60,7 @@ const auth = {
                 return error;
             }
         },
-        async forgotPassword({}, payload) {
+        async forgotPassword({ }, payload) {
             try {
                 const response = await api.post('/forgot-password', payload)
                 return response;
@@ -68,7 +68,7 @@ const auth = {
                 return error;
             }
         },
-        async forgotPasswordReset({}, payload) {
+        async forgotPasswordReset({ }, payload) {
             try {
                 const response = await api.put(`/reset-password/${payload.token}`, payload)
                 return response;
@@ -76,9 +76,31 @@ const auth = {
                 return error;
             }
         },
-        async checkToken({}, token) {
+        async checkToken({ }, token) {
             try {
                 const response = await api.get(`/check-token/${token}`)
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
+        async updateUser({ commit }) {
+            try {
+                const response = await api.get('/users/me')
+                commit('SET_USER', response.data.data)
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
+        async updateToken({ commit, state }) {
+            try {
+                const payload = {
+                    remember_me: state.rememberMe
+                }
+                const response = await api.post('/refresh-token', payload)
+                commit('SET_TOKEN', response.data.token)
+                commit('SET_TOKEN_EXPIRATION', response.data.expirationDate)
                 return response;
             } catch (error) {
                 return error;
@@ -90,13 +112,6 @@ const auth = {
             commit('CLEAR_USER')
             commit('CLEAR_REMEMBER_ME')
         },
-        updateToken({ commit }, payload) {
-            commit('SET_TOKEN', payload.token)
-            commit('SET_TOKEN_EXPIRATION', payload.expirationDate)
-        },
-        updateUser({ commit }, payload) {
-            commit('SET_USER', payload.data)
-        }
     },
     getters: {
         isAuthenticated(state) {

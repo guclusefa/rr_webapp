@@ -28,79 +28,38 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import api from "@/services/api";
 import { addErrorToast } from "@/services/toasts";
 
 export default {
   name: "ProfileItem",
   computed: {
-    ...mapGetters([
-      "isAuthenticated",
-      "token",
-      "tokenExpiration",
-      "user",
-      "rememberMe",
-    ]),
+    ...mapGetters(["user"]),
   },
   methods: {
-    ...mapActions(["updateUser", "updateToken", "logout"]),
-    refreshUser() {
-      return new Promise((resolve, reject) => {
-        api
-          .get("/users/me")
-          .then((response) => {
-            if (this.isAuthenticated) {
-              this.updateUser(response.data);
-            }
-            resolve();
-          })
-          .catch((error) => {
-            addErrorToast(error);
-            this.logout();
-            reject();
-          });
-      });
+    ...mapActions(["updateUser", "updateToken"]),
+    async refreshUser() {
+      const response = await this.updateUser();
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast(response);
     },
-    refreshToken() {
-      return new Promise((resolve, reject) => {
-        api
-          // post with remember_me in body
-          .post("/refresh-token", { remember_me: this.rememberMe })
-          .then((response) => {
-            if (this.isAuthenticated) {
-              this.updateToken(response.data);
-            }
-            resolve();
-          })
-          .catch((error) => {
-            addErrorToast(error);
-            this.logout();
-            reject();
-          });
-      });
-    },
-    refreshTokenAndUser() {
-      return new Promise((resolve, reject) => {
-        this.refreshToken()
-          .then(() => {
-            this.refreshUser()
-              .then(() => {
-                resolve();
-              })
-              .catch(() => {
-                reject();
-              });
-          })
-          .catch(() => {
-            reject();
-          });
-      });
+    async refreshToken() {
+      const response = await this.updateToken();
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast(response);
     },
   },
   created() {
-    if (this.isAuthenticated) {
-      this.refreshTokenAndUser();
-    }
+    this.refreshToken().then(() => {
+      this.refreshUser();
+    });
   },
 };
 </script>

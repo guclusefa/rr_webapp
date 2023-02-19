@@ -49,7 +49,7 @@
     </nav>
   </header>
   <!-- START TESTING -->
-<!--   <div class="test" v-if="isAuthenticated">
+  <div class="test" v-if="isAuthenticated">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   <!-- END TESTING -->
 </template>
 
