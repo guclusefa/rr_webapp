@@ -46,6 +46,28 @@ const auth = {
                 return error;
             }
         },
+        async register({ dispatch }, payload) {
+            try {
+                const response = await api.post('/register', payload)
+                const loginPayload = {
+                    username: payload.email,
+                    password: payload.password,
+                    rememberMe: true
+                };
+                await dispatch('login', loginPayload);
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
+        async forgotPassword({}, payload) {
+            try {
+                const response = await api.post('/forgot-password', payload)
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
         logout({ commit }) {
             commit('CLEAR_TOKEN')
             commit('CLEAR_TOKEN_EXPIRATION')

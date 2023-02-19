@@ -27,47 +27,39 @@
 </template>
 
 <script>
-import api from "@/services/api.js";
+import { mapActions } from "vuex";
+import forgotPasswordValidation from "@/mixins/forgotPasswordValidation.js";
+import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { validateEmail } from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "ForgotPasswordForm",
+  mixins: [forgotPasswordValidation],
   data() {
     return {
       body: {
         email: "",
-      },
-      submitted: false,
+      }
     };
   },
   methods: {
-    // Email validation
-    validateEmail() {
-      return validateEmail(this.body.email, this.submitted);
-    },
-    // Form validation
-    validateForm() {
-      return !this.validateEmail();
-    },
-    // Login
-    submitForm() {
-      // Set submitted to true and check if form is valid
-      this.submitted = true;
-      if (!this.validateForm()) return;
-      // Make request if form is valid
-      api
-        .post("/forgot-password", this.body)
-        .then((response) => {
+    // Form submit
+    ...mapActions(["forgotPassword"]),
+    async submitForm() {
+      withSubmitValidation(async function () {
+        const response = await this.forgotPassword(this.body);
+        // Success
+        if (response.status >= 200 && response.status < 300) {
           addSuccessToast(response);
-          this.$router.push({ name: "login" });
-        })
-        .catch((error) => {
-          addErrorToast(error);
-        });
+          this.$router.push({ name: "home" });
+          return;
+        }
+        // Error
+        addErrorToast(response);
+      }).apply(this);
     },
   },
   components: {

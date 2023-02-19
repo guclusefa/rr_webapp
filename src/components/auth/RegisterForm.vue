@@ -131,16 +131,10 @@
 </template>
 
 <script>
-import api from "@/services/api.js";
+import { mapActions } from "vuex";
+import registerValidation from "@/mixins/registerValidation.js";
+import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import {
-  validateEmail,
-  validateEmailConfirmation,
-  validateUsername,
-  validatePassword,
-  validatePasswordConfirmation,
-  validateAcceptTerms,
-} from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
 import CheckBox from "@/components/form/CheckBox.vue";
@@ -148,6 +142,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "RegisterForm",
+  mixins: [registerValidation],
   data() {
     return {
       body: {
@@ -160,72 +155,23 @@ export default {
         password_confirmation: "",
         accept_terms: false,
       },
-      submitted: false,
     };
   },
   methods: {
-    // Email validation
-    validateEmail() {
-      return validateEmail(this.body.email, this.submitted);
-    },
-    // Email confirmation validation
-    validateEmailConfirmation() {
-      return validateEmailConfirmation(
-        this.body.email,
-        this.body.email_confirmation,
-        this.submitted
-      );
-    },
-    // Username validation
-    validateUsername() {
-      return validateUsername(this.body.username, this.submitted);
-    },
-    // Password validation
-    validatePassword() {
-      return validatePassword(this.body.password, this.submitted);
-    },
-    // Password confirmation validation
-    validatePasswordConfirmation() {
-      return validatePasswordConfirmation(
-        this.body.password,
-        this.body.password_confirmation,
-        this.submitted
-      );
-    },
-    // Accept terms validation
-    validateAcceptTerms() {
-      return validateAcceptTerms(this.body.accept_terms, this.submitted);
-    },
-    // Form validation
-    validateForm() {
-      return (
-        !this.validateEmail() &&
-        !this.validateEmailConfirmation() &&
-        !this.validateUsername() &&
-        !this.validatePassword() &&
-        !this.validatePasswordConfirmation() &&
-        !this.validateAcceptTerms()
-      );
-    },
     // Form submit
-    submitForm() {
-      // Set submitted to true and check if form is valid
-      this.submitted = true;
-      if (!this.validateForm()) return;
-      // for each field, if it's empty, remove it from the body
-      for (const [key, value] of Object.entries(this.body)) {
-        if (value === "") delete this.body[key];
-      }
-      // Make request if form is valid
-      api
-        .post("/register", this.body)
-        .then((response) => {
+    ...mapActions(["register"]),
+    async submitForm() {
+      withSubmitValidation(async function () {
+        const response = await this.register(this.body);
+        // Success
+        if (response.status >= 200 && response.status < 300) {
           addSuccessToast(response);
           this.$router.push({ name: "home" });
-        })
-        .catch((error) => {
-          addErrorToast(error);
-        });
+          return;
+        }
+        // Error
+        addErrorToast(response);
+      }).apply(this);
     },
   },
   components: {

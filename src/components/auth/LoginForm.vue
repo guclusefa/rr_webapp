@@ -57,7 +57,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import formValidationMixin from "@/mixins/formValidationMixin.js";
+import loginValidation from "@/mixins/loginValidation.js";
 import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
@@ -67,7 +67,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "LoginForm",
-  mixins: [formValidationMixin],
+  mixins: [loginValidation],
   data() {
     return {
       body: {
@@ -84,7 +84,7 @@ export default {
       withSubmitValidation(async function () {
         const response = await this.login(this.body);
         // Success
-        if (response.status === 200) {
+        if (response.status >= 200 && response.status < 300) {
           addSuccessToast(this.$t("login.success"));
           this.$router.push({ name: "home" });
           return;

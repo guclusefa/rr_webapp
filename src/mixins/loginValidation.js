@@ -1,4 +1,7 @@
-import { validateUsername, validatePassword } from "@/services/validators";
+import {
+    validateUsername,
+    validatePassword,
+} from "@/services/validators";
 
 export default {
     data() {
@@ -17,7 +20,8 @@ export default {
         },
         // Form validation
         validateForm() {
-            return !this.validateUsername() && !this.validatePassword();
+            return !this.validateUsername() &&
+                !this.validatePassword();
         },
     },
 };
