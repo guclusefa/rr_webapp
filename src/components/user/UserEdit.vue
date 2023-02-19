@@ -4,7 +4,6 @@
       <div class="col-12 mb-3">
         <InputText
           @input="$emit('input', (body.username = $event))"
-          :value="body.username"
           :type="'text'"
           :field="'username'"
           :label="'user.username'"
@@ -19,7 +18,6 @@
         <!-- First name -->
         <InputText
           @input="$emit('input', (body.firstName = $event))"
-          :value="body.firstName"
           :type="'text'"
           :field="'first_name'"
           :label="'user.first_name'"
@@ -30,7 +28,6 @@
         <!-- Last name -->
         <InputText
           @input="$emit('input', (body.lastName = $event))"
-          :value="body.lastName"
           :type="'text'"
           :field="'last_name'"
           :label="'user.last_name'"
@@ -48,58 +45,45 @@
 </template>
 
 <script>
-import api from "@/services/api.js";
+import { mapGetters, mapActions } from "vuex";
+import userEditValidation from "@/mixins/userEditValidation.js";
+import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import { validateUsername } from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "UserEdit",
-  props: {
-    user: {
-      type: Object,
-      required: true,
+  mixins: [userEditValidation],
+  computed: {
+    ...mapGetters(["profile", "user"]),
+    body() {
+      return {
+        id: this.profile.id,
+        username: this.profile.username,
+        first_name: this.profile.firstName,
+        last_name: this.profile.lastName,
+      };
     },
-  },
-  data() {
-    return {
-      body: {
-        username: this.user.username,
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
-      },
-      submitted: false,
-    };
   },
   methods: {
-    // Username validation
-    validateUsername() {
-      return validateUsername(this.body.username, this.submitted);
-    },
-    // Form validation
-    validateForm() {
-      return !this.validateUsername();
-    },
-    // Submit form
-    submitForm() {
-      // Set submitted to true and check if form is valid
-      this.submitted = true;
-      if (!this.validateForm()) return;
-      // for each field, if it's empty, remove it from the body
-      for (const [key, value] of Object.entries(this.body)) {
-        if (value === "") delete this.body[key];
-      }
-      // Make request if form is valid
-      api
-        .put(`/users/${this.user.id}`, this.body)
-        .then((response) => {
+    // Form submit
+    ...mapActions(["updateProfile", "updateUser"]),
+    async submitForm() {
+      withSubmitValidation(async function () {
+        const response = await this.updateProfile(this.body);
+        // Success
+        if (response.status >= 200 && response.status < 300) {
+          if (this.profile.id === this.user.id) {
+            await this.updateUser(this.body);
+          }
           addSuccessToast(response);
-        })
-        .catch((error) => {
-          addErrorToast(error);
-        });
+          return;
+        }
+        // Error
+        addErrorToast(response);
+      }).apply(this);
     },
   },
   components: {

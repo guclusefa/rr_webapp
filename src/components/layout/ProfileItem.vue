@@ -57,8 +57,11 @@ export default {
     },
   },
   created() {
-    this.refreshToken().then(() => {
-      this.refreshUser();
+    this.refreshToken().
+    then(() => {
+      if (this.user) {
+        this.refreshUser();
+      }
     });
   },
 };

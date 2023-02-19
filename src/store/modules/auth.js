@@ -93,7 +93,7 @@ const auth = {
                 return error;
             }
         },
-        async updateToken({ commit, state }) {
+        async updateToken({ commit, state, dispatch }) {
             try {
                 const payload = {
                     remember_me: state.rememberMe
@@ -103,6 +103,7 @@ const auth = {
                 commit('SET_TOKEN_EXPIRATION', response.data.expirationDate)
                 return response;
             } catch (error) {
+                dispatch('logout')
                 return error;
             }
         },

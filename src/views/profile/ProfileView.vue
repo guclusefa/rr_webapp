@@ -1,20 +1,20 @@
 <template>
   <section>
-    <div class="container">
+    <div class="container" v-if="this.profile.id">
       <div class="row">
         <div class="col">
-          <h1>{{ $t("profile.title", { username: profileUser.username }) }}</h1>
+          <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
           <hr />
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <UserProfile :user="profileUser" :canEdit="canEdit" />
+          <UserProfile />
         </div>
       </div>
     </div>
     <!-- Loading -->
-<!--     <div class="container" v-else>
+    <div class="container" v-else>
       <div class="row">
         <div class="col">
           <div class="d-flex justify-content-center">
@@ -24,69 +24,44 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
     <!-- End loading -->
   </section>
 </template>
 
 <script>
-import api from "@/services/api.js";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import UserProfile from "@/components/user/UserProfile";
 
 export default {
   name: "ProfileView",
-  data() {
-    return {
-      profileUser: {
-        id: null,
-        username: null,
-        email: null,
-        firstName: null,
-        lastName: null,
-        bio: null,
-        photo: null,
-        roles: [],
-        createdAt: null,
-        gender: null,
-        birthDate: null,
-        isCertified: null,
-        isVerified: null,
-      },
-      canEdit: false,
-    };
-  },
   computed: {
+    ...mapGetters(["user", "profile"]),
     id() {
       return this.$route.params.id;
     },
-    ...mapGetters(["user", "loading"]),
   },
   methods: {
-    getUser() {
-      if (this.id == this.user.id) {
-        this.canEdit = true;
-        return (this.profileUser = this.user);
-      } 
-      api
-        .get(`/users/${this.id}`)
-        .then((response) => {
-          this.profileUser = response.data.data;
-        })
-        .catch(() => {
-          addErrorToast("user.not_found");
-          this.$router.push({ name: "home" });
-        });
+    ...mapActions(["setProfile"]),
+    async setProfileUser() {
+      const response = await this.setProfile(this.id);
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast("user.not_found");
+      this.$router.push({ name: "home" });
     },
   },
   beforeMount() {
-    this.getUser();
+    this.setProfileUser();
   },
   watch: {
     id() {
-      this.getUser();
+      this.setProfileUser();
     },
   },
   components: {
