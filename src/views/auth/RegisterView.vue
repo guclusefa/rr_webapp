@@ -22,12 +22,17 @@ export default {
   computed: {
     ...mapGetters(["isAuthenticated"]),
   },
-  // Redirect to home if user is logged in
+  methods: {
+    async checkAuthorization() {
+      if (this.isAuthenticated) {
+        addErrorToast("login.error");
+        this.$router.push({ name: "home" });
+      }
+    },
+  },
+  // Check authorization
   beforeMount() {
-    if (this.isAuthenticated) {
-      addErrorToast("login.error");
-      this.$router.push({ name: "home" });
-    }
+    this.checkAuthorization();
   },
   components: {
     RegisterForm,

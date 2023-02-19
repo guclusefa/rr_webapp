@@ -68,6 +68,22 @@ const auth = {
                 return error;
             }
         },
+        async forgotPasswordReset({}, payload) {
+            try {
+                const response = await api.put(`/reset-password/${payload.token}`, payload)
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
+        async checkToken({}, token) {
+            try {
+                const response = await api.get(`/check-token/${token}`)
+                return response;
+            } catch (error) {
+                return error;
+            }
+        },
         logout({ commit }) {
             commit('CLEAR_TOKEN')
             commit('CLEAR_TOKEN_EXPIRATION')

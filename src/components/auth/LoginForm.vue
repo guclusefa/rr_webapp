@@ -73,7 +73,7 @@ export default {
       body: {
         username: "",
         password: "",
-        remember_me: false,
+        remember_me: false
       },
     };
   },

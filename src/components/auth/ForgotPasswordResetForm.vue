@@ -39,72 +39,47 @@
 </template>
 
 <script>
-import api from "@/services/api.js";
+import { mapActions } from "vuex";
+import forgotPasswordResetValidation from "@/mixins/forgotPasswordResetValidation.js";
+import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
-import {
-  validatePassword,
-  validatePasswordConfirmation,
-} from "@/services/validators";
 
 import InputText from "@/components/form/InputText.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "ForgotPasswordForm",
+  mixins: [forgotPasswordResetValidation],
   data() {
     return {
       body: {
         password: "",
-        password_confirmation: "",
-      },
-      submitted: false,
+        password_confirmation: ""
+      }
     };
   },
-  computed: {
-    token() {
-      return this.$route.params.token;
+  props: {
+    token: {
+      type: String,
+      required: true,
     },
   },
   methods: {
-    // Password validation
-    validatePassword() {
-      return validatePassword(this.body.password, this.submitted);
-    },
-    validatePasswordConfirmation() {
-      return validatePasswordConfirmation(
-        this.body.password,
-        this.body.password_confirmation,
-        this.submitted
-      );
-    },
-    // Form validation
-    validateForm() {
-      return !this.validatePassword() && !this.validatePasswordConfirmation();
-    },
-    checkToken() {
-      api
-        .get(`/check-token/${this.token}`)
-        .then(() => {})
-        .catch((error) => {
-          addErrorToast(error);
-          this.$router.push({ name: "login" });
-        });
-    },
-    // Login
-    submitForm() {
-      // Set submitted to true and check if form is valid
-      this.submitted = true;
-      if (!this.validateForm()) return;
-      // Make request if form is valid
-      api
-        .put(`/reset-password/${this.token}`, this.body)
-        .then((response) => {
+    // Form submit
+    ...mapActions(["forgotPasswordReset"]),
+    async submitForm() {
+      withSubmitValidation(async function () {
+        this.body.token = this.token;
+        const response = await this.forgotPasswordReset(this.body);
+        // Success
+        if (response.status >= 200 && response.status < 300) {
           addSuccessToast(response);
           this.$router.push({ name: "login" });
-        })
-        .catch((error) => {
-          addErrorToast(error);
-        });
+          return;
+        }
+        // Error
+        addErrorToast(response);
+      }).apply(this);
     },
   },
   components: {

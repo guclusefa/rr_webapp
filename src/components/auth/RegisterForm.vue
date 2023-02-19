@@ -153,7 +153,7 @@ export default {
         lastName: "",
         password: "",
         password_confirmation: "",
-        accept_terms: false,
+        accept_terms: false
       },
     };
   },
