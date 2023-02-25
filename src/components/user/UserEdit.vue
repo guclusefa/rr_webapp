@@ -39,6 +39,18 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-12 mb-3">
+        <!-- Bio -->
+        <InputTextarea
+          @input="$emit('input', (body.bio = $event))"
+          :field="'bio'"
+          :label="'user.bio'"
+          :placeholder="'user.bio_placeholder'"
+          :value="profile.bio"
+        />
+      </div>
+    </div>
+    <div class="row">
       <div class="col-6 ms-auto text-end">
         <!-- Submit -->
         <SubmitButton :label="'profile.edit'" :disabled="!validateForm()" />
@@ -54,6 +66,7 @@ import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
+import InputTextarea from "@/components/form/InputTextarea.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
@@ -67,6 +80,7 @@ export default {
         username: this.profile.username,
         first_name: this.profile.firstName,
         last_name: this.profile.lastName,
+        bio: this.profile.bio,
       };
     },
   },
@@ -92,6 +106,7 @@ export default {
   },
   components: {
     InputText,
+    InputTextarea,
     SubmitButton,
   },
 };
