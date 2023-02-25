@@ -3,7 +3,9 @@ export function withSubmitValidation(callback) {
     return async function () {
         // Set submitted to true and validate form
         this.submitted = true;
-        if (!this.validateForm()) return;
+        if (!this.validateForm()) {
+            return;
+        }
         // for each field, if it's empty, remove it from the body
         for (const [key, value] of Object.entries(this.body)) {
             if (value === "") delete this.body[key];

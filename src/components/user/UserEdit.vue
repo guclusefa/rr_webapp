@@ -1,4 +1,4 @@
-<template id="user-edit">
+<template>
   <form @submit.prevent="submitForm" novalidate>
     <div class="row">
       <div class="col-12 mb-3">
@@ -97,21 +97,32 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "UserEdit",
   mixins: [userEditValidation],
+  data() {
+    return {
+      body: {
+        id: null,
+        username: null,
+        firstName: null,
+        lastName: null,
+        bio: null,
+        gender: null,
+        birthDate: null,
+      },
+    };
+  },
   computed: {
     ...mapGetters(["profile", "user"]),
-    body() {
-      return {
-        id: this.profile.id,
-        username: this.profile.username,
-        first_name: this.profile.firstName,
-        last_name: this.profile.lastName,
-        bio: this.profile.bio,
-        gender: this.profile.gender,
-        birthDate: this.profile.birthDate,
-      };
-    },
   },
   methods: {
+    setBody() {
+      this.body.id = this.profile.id;
+      this.body.username = this.profile.username;
+      this.body.firstName = this.profile.firstName;
+      this.body.lastName = this.profile.lastName;
+      this.body.bio = this.profile.bio;
+      this.body.gender = this.profile.gender;
+      this.body.birthDate = this.profile.birthDate;
+    },
     // Form submit
     ...mapActions(["updateProfile", "updateUser"]),
     async submitForm() {
@@ -130,6 +141,10 @@ export default {
         addErrorToast(response);
       }).apply(this);
     },
+  },
+  created() {
+    this.setBody();
+    alert(this.body);
   },
   components: {
     InputText,
