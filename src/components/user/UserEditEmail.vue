@@ -5,9 +5,9 @@
         <InputText
           @input="$emit('input', (body.old = $event))"
           :type="'password'"
-          :field="'old_password'"
-          :label="'user.old_password'"
-          :placeholder="'user.old_password'"
+          :field="'password'"
+          :label="'user.password'"
+          :placeholder="'user.password'"
           :required="true"
           :validate="validateOldPassword"
         />
@@ -16,33 +16,33 @@
     <div class="row">
       <div class="col-12 mb-3">
         <InputText
-          @input="$emit('input', (body.password = $event))"
-          :type="'password'"
-          :field="'password'"
-          :label="'user.password'"
-          :placeholder="'user.password'"
+          @input="$emit('input', (body.email = $event))"
+          :type="'email'"
+          :field="'email'"
+          :label="'user.email'"
+          :placeholder="'user.email'"
           :required="true"
-          :validate="validatePassword"
+          :validate="validateEmail"
         />
       </div>
     </div>
     <div class="row">
       <div class="col-12 mb-3">
         <InputText
-          @input="$emit('input', (body.password_confirmation = $event))"
-          :type="'password'"
-          :field="'password_confirmation'"
-          :label="'user.password_confirmation'"
-          :placeholder="'user.password_confirmation'"
+          @input="$emit('input', (body.email_confirmation = $event))"
+          :type="'email'"
+          :field="'email_confirmation'"
+          :label="'user.email_confirmation'"
+          :placeholder="'user.email_confirmation'"
           :required="true"
-          :validate="validatePasswordConfirmation"
+          :validate="validateEmailConfirmation"
         />
       </div>
     </div>
     <div class="row">
       <div class="col-6 ms-auto text-end">
         <!-- Submit -->
-        <SubmitButton :label="'profile.edit_password'" :disabled="!validateForm()" />
+        <SubmitButton :label="'profile.edit_email'" :disabled="!validateForm()" />
       </div>
     </div>
   </form>
@@ -50,7 +50,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import userEditPasswordValidation from "@/mixins/userEditPasswordValidation.js";
+import userEditEmailValidation from "@/mixins/userEditEmailValidation.js";
 import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
@@ -58,15 +58,15 @@ import InputText from "@/components/form/InputText.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
-  name: "UserEditPassword",
-  mixins: [userEditPasswordValidation],
+  name: "UserEditEmail",
+  mixins: [userEditEmailValidation],
   data() {
     return {
       body: {
         id: null,
         old: "",
-        password: "",
-        password_confirmation: "",
+        email: "",
+        email_confirmation: "",
       },
     };
   },
@@ -78,19 +78,19 @@ export default {
       this.body.id = this.profile.id;
     },
     // Form submit
-    ...mapActions(["updateProfilePassword", "updateUser"]),
+    ...mapActions(["updateProfileEmail", "updateUser", "logout"]),
     async submitForm() {
       withSubmitValidation(async function () {
-        const response = await this.updateProfilePassword(this.body);
+        const response = await this.updateProfileEmail(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
-          // If my profile
-          if (this.profile.id === this.user.id) {
-            await this.updateUser(this.body);
-          }
-          addSuccessToast(response);
-          // Close modal (if any)
+          // logout and redirect to login
+          await this.logout();
+          this.$router.push({ name: "login" });
+          // close modal (if any)
           this.$emit("close");
+          // Show success toast
+          addSuccessToast(response);
           return;
         }
         // Error

@@ -92,6 +92,16 @@ const profile = {
             catch (error) {
                 return error;
             }
+        },
+        async updateProfileEmail({}, payload) {
+            try {
+                const response = await api.put(`/users/${payload.id}/email`, payload)
+                return response;
+            }
+            catch (error) {
+                console.log(error)
+                return error;
+            }
         }
     },
     getters: {

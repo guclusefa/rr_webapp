@@ -22,7 +22,9 @@
           >
         </li>
         <li>
-          <a class="dropdown-item" href="#">{{ $t("profile.edit_email") }}</a>
+          <a class="dropdown-item" href="#" @click="showEditModal('email')">
+            {{ $t("profile.edit_email") }}</a
+          >
         </li>
         <li v-if="!profile.isVerified">
           <a class="dropdown-item" href="#">{{ $t("profile.verify_email") }}</a>
@@ -110,6 +112,7 @@ import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
 import UserEditPhoto from "@/components/user/UserEditPhoto";
 import UserEditPassword from "@/components/user/UserEditPassword";
+import UserEditEmail from "@/components/user/UserEditEmail";
 
 export default {
   name: "UserProfile",
@@ -157,6 +160,8 @@ export default {
           return UserEditPhoto;
         case "password":
           return UserEditPassword;
+        case "email":
+          return UserEditEmail;
         default:
           return null;
       }
@@ -176,6 +181,7 @@ export default {
     UserEdit,
     UserEditPhoto,
     UserEditPassword,
+    UserEditEmail,
   },
 };
 </script>
