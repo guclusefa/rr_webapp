@@ -78,11 +78,17 @@
     "password_confirmation_required": "Veuillez confirmer votre mot de passe",
     "password_confirmation_invalid": "Vos mots de passe ne correspondent pas",
     "not_found": "Utilisateur introuvable",
-    "gender": {
+    "bio": "Biographie",
+    "bio_placeholder": "Votre biographie",
+    "gender": "Sexe",
+    "gender_placeholder": "Votre sexe",
+    "gender_placeholder_select": "Choisir un sexe",
+    "genders": {
       "M" : "Masculin",
       "F" : "Féminin",
       "O" : "Autre"
     },
+    "birthDate": "Date de naissance",
     "roles": {
       "ROLE_USER": "Utilisateur",
       "ROLE_MODERATOR": "Modérateur",

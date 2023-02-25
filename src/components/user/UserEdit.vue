@@ -51,13 +51,24 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 mb-3">
+      <div class="col-12 col-md-6 mb-3">
+        <!-- Gender -->
+        <SelectField
+          @input="$emit('input', (body.gender = $event))"
+          :field="'gender'"
+          :label="'user.gender'"
+          :placeholder="'user.gender_placeholder'"
+          :placeholderSelect="'user.gender_placeholder_select'"
+          :options="'genderOptions'"
+          :value="profile.gender"
+        />
+      </div>
+      <div class="col-12 col-md-6 mb-3">
         <!-- BirthDate -->
         <DatePicker
           @input="$emit('input', (body.birthDate = $event))"
           :field="'birthDate'"
           :label="'user.birthDate'"
-          :placeholder="'user.birthDate_placeholder'"
           :value="profile.birthDate"
         />
       </div>
@@ -79,6 +90,7 @@ import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
 import InputTextarea from "@/components/form/InputTextarea.vue";
+import SelectField from "@/components/form/SelectField.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -94,6 +106,7 @@ export default {
         first_name: this.profile.firstName,
         last_name: this.profile.lastName,
         bio: this.profile.bio,
+        gender: this.profile.gender,
         birthDate: this.profile.birthDate,
       };
     },
@@ -121,6 +134,7 @@ export default {
   components: {
     InputText,
     InputTextarea,
+    SelectField,
     DatePicker,
     SubmitButton,
   },

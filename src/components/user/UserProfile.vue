@@ -51,7 +51,7 @@
             {{ $t(`user.roles.${profile.roles[0]}`) }}
           </span>
           <span class="badge bg-secondary ms-1" v-if="profile.gender">
-            {{ $t(`user.gender.${profile.gender}`) }}
+            {{ $t(`user.genders.${profile.gender}`) }}
           </span>
         </div>
         <div class="text-muted pb-1" v-if="profile.email">

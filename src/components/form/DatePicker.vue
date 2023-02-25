@@ -8,7 +8,6 @@
     type="date"
     :id="field"
     :name="field"
-    :placeholder="$t(placeholder)"
     :class="{ 'is-invalid': validateInput() }"
   />
   <div class="invalid-feedback" v-if="validateInput() !== ''">
@@ -25,10 +24,6 @@ export default {
       required: true,
     },
     label: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
       type: String,
       required: true,
     },
