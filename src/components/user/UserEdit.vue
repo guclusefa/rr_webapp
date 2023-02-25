@@ -40,6 +40,20 @@
     </div>
     <div class="row">
       <div class="col-12 mb-3">
+        <!-- State -->
+        <Select2Field
+          @input="$emit('input', (body.state = $event))"
+          :field="'state'"
+          :label="'user.state'"
+          :placeholder="'user.state_placeholder'"
+          :placeholderSelect="'user.state_placeholder_select'"
+          :options="'states'"
+          :value="profile.state ? profile.state.id : ''"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
         <!-- Bio -->
         <InputTextarea
           @input="$emit('input', (body.bio = $event))"
@@ -90,6 +104,7 @@ import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
 import InputTextarea from "@/components/form/InputTextarea.vue";
+import Select2Field from "@/components/form/Select2Field.vue";
 import SelectField from "@/components/form/SelectField.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
@@ -104,6 +119,7 @@ export default {
         username: null,
         firstName: null,
         lastName: null,
+        state: null,
         bio: null,
         gender: null,
         birthDate: null,
@@ -119,6 +135,7 @@ export default {
       this.body.username = this.profile.username;
       this.body.firstName = this.profile.firstName;
       this.body.lastName = this.profile.lastName;
+      this.body.state = this.profile.state.id;
       this.body.bio = this.profile.bio;
       this.body.gender = this.profile.gender;
       this.body.birthDate = this.profile.birthDate;
@@ -150,6 +167,7 @@ export default {
   components: {
     InputText,
     InputTextarea,
+    Select2Field,
     SelectField,
     DatePicker,
     SubmitButton,

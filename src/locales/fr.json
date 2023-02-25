@@ -95,6 +95,9 @@
       "ROLE_ADMIN": "Administrateur",
       "ROLE_SUPER_ADMIN": "Super Administrateur"
     },
+    "state": "Département",
+    "state_placeholder": "Votre département",
+    "state_placeholder_select": "Choisir un département",
     "age": "Née le {birthDate} ({age} ans)",
     "member_since": "Membre depuis le {createdAt} ({days} jours)",
     "certified": "Certifié",

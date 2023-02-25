@@ -53,6 +53,9 @@
           <span class="badge bg-secondary ms-1" v-if="profile.gender">
             {{ $t(`user.genders.${profile.gender}`) }}
           </span>
+          <span class="badge bg-info ms-1" v-if="profile.state">
+            {{ profile.state.name }}
+          </span>
         </div>
         <div class="text-muted pb-1" v-if="profile.email">
           {{ profile.email }}

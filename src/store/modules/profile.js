@@ -4,19 +4,21 @@ const profile = {
     state: {
         profile: {
             id: null,
+            photo: null,
             username: null,
             email: null,
             firstName: null,
             lastName: null,
+            state: null,
             bio: null,
-            photo: null,
-            roles: [],
             gender: null,
             birthDate: null,
+            roles: [],
             isCertified: null,
             createdAt: null,
             updatedAt: null,
         },
+        states: []
     },
     mutations: {
         SET_PROFILE(state, payload) {
@@ -24,6 +26,12 @@ const profile = {
         },
         CLEAR_PROFILE(state) {
             state.profile = null
+        },
+        SET_STATES(state, payload) {
+            state.states = payload
+        },
+        CLEAR_STATE(state) {
+            state.states = null
         }
     },
     actions: {
@@ -46,10 +54,21 @@ const profile = {
             catch (error) {
                 return error;
             }
-        }
+        },
+        async setStates({ commit }) {
+            try {
+                const response = await api.get('/states')
+                commit('SET_STATES', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
     },
     getters: {
-        profile: state => state.profile
+        profile: state => state.profile,
+        states: state => state.states
     }
 }
 

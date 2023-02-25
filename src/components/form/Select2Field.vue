@@ -13,13 +13,8 @@
     <option value="" selected :disabled="required" v-if="placeholderSelect">
       {{ $t(placeholderSelect) }}
     </option>
-    <option
-      v-for="(value, key) in getOptions()"
-      :key="key"
-      :value="key"
-      :selected="this.value === key"
-    >
-      {{ $t(value) }}
+    <option v-for="option in getOptions" :value="option.id" :key="option.id" :selected="this.value === option.id">
+      {{ option.name }} ({{ option.code }})
     </option>
   </select>
 
@@ -30,7 +25,7 @@
 
 <script>
 export default {
-  name: "SelectField",
+  name: "Select2Field",
   props: {
     field: {
       type: String,
@@ -53,9 +48,9 @@ export default {
       required: true,
     },
     value: {
-      type: String,
+      // type integer
+      type: Number,
       required: false,
-      default: "",
     },
     required: {
       type: Boolean,
@@ -69,16 +64,17 @@ export default {
     },
   },
   emits: ["input"],
-  data() {
-    return {
-      genderOptions: {
-        M: "user.genders.M",
-        F: "user.genders.F",
-        O: "user.genders.O",
-      },
-    };
+  computed: {
+    getOptions() {
+      return this.$store.getters[this.options];
+    },
   },
   methods: {
+    // set options
+    setOptions() {
+      this.$store.dispatch("setStates");
+    },
+    // validate input
     validateInput() {
       // if validate is empty string than is valid
       if (!this.validate) {
@@ -87,9 +83,9 @@ export default {
       // if validate is a function than call it
       return this.validate();
     },
-    getOptions() {
-      return this[this.options];
-    },
+  },
+  mounted() {
+    this.setOptions();
   },
 };
 </script>
