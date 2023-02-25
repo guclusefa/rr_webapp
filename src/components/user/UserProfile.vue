@@ -7,14 +7,19 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
         <li>
-          <a class="dropdown-item" href="#" @click="editProfile">
+          <a class="dropdown-item" href="#" @click="showEditModal('edit')">
             {{ $t("profile.edit") }}
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="#">{{
-            $t("profile.edit_password")
-          }}</a>
+          <a class="dropdown-item" href="#" @click="showEditModal('photo')">
+            {{ $t("profile.edit_photo") }}
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">
+            {{ $t("profile.edit_password") }}</a
+          >
         </li>
         <li>
           <a class="dropdown-item" href="#">{{ $t("profile.edit_email") }}</a>
@@ -89,11 +94,11 @@
       </div>
     </div>
   </div>
-  <ModalDialog
-    ref="editModal"
-    :title="$t('profile.edit_title', { username: profile.username })"
-  >
-    <UserEdit @close="closeEditModal" />
+  <!-- Edit -->
+  <ModalDialog ref="editModal" :title="modalTitle">
+    <template #body>
+      <component :is="modalComponent" @close="closeEditModal" />
+    </template>
   </ModalDialog>
 </template>
 
@@ -103,14 +108,44 @@ import dateFormatter from "@/services/dates";
 
 import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
+import UserEditPhoto from "@/components/user/UserEditPhoto";
 
 export default {
   name: "UserProfile",
+  data() {
+    return {
+      modalType: null,
+    };
+  },
   // get profile
   computed: {
     ...mapGetters(["profile", "user"]),
     canEdit() {
       return this.profile.id === this.user.id;
+    },
+    modalTitle() {
+      switch (this.modalType) {
+        case "edit":
+          return this.$t("profile.edit_title", {
+            username: this.profile.username,
+          });
+        case "photo":
+          return this.$t("profile.edit_photo_title", {
+            username: this.profile.username,
+          });
+        default:
+          return "";
+      }
+    },
+    modalComponent() {
+      switch (this.modalType) {
+        case "edit":
+          return UserEdit;
+        case "photo":
+          return UserEditPhoto;
+        default:
+          return null;
+      }
     },
   },
   methods: {
@@ -123,7 +158,8 @@ export default {
     getDays(date) {
       return dateFormatter.getDays(date);
     },
-    editProfile() {
+    showEditModal(type) {
+      this.modalType = type;
       this.$refs.editModal.show();
     },
     closeEditModal() {
@@ -133,6 +169,7 @@ export default {
   components: {
     ModalDialog,
     UserEdit,
+    UserEditPhoto,
   },
 };
 </script>

@@ -13,7 +13,12 @@
     <option value="" selected :disabled="required" v-if="placeholderSelect">
       {{ $t(placeholderSelect) }}
     </option>
-    <option v-for="option in getOptions" :value="option.id" :key="option.id" :selected="this.value === option.id">
+    <option
+      v-for="option in getOptions"
+      :value="option.id"
+      :key="option.id"
+      :selected="this.value === option.id"
+    >
       {{ option.name }} ({{ option.code }})
     </option>
   </select>

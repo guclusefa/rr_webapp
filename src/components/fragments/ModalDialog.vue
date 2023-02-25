@@ -12,7 +12,7 @@
           ></button>
         </div>
         <div class="modal-body">
-            <slot></slot>
+            <slot name="body"></slot>
         </div>
       </div>
     </div>
@@ -31,11 +31,11 @@ export default {
     },
   },
   methods: {
-    show() {
+    async show() {
       const modal = new Modal(document.getElementById("bs-modal"));
       modal.show();
     },
-    close() {
+    async close() {
       // click on the close button
       document.querySelector("#bs-modal .btn-close").click();
     },

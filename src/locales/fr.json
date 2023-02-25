@@ -109,8 +109,12 @@
     "actions": "Actions",
     "edit": "Modifier profil",
     "edit_title": "Modifier profil de {username}",
+    "edit_photo": "Modifier photo",
+    "edit_photo_title": "Modifier photo de {username}",
     "edit_password": "Modifier mot de passe",
+    "edit_password_title": "Modifier mot de passe de {username}",
     "edit_email": "Modifier email",
+    "edit_email_title": "Modifier email de {username}",
     "verify_email": "Vérifier email",
     "delete": "Supprimer compte"
   },
