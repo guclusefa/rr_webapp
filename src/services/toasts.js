@@ -17,9 +17,10 @@ const addSuccessToast = (response) => {
 
 const addErrorToast = (error) => {
     let message = "";
+    // Check if error is a string (custom message) or an object (response from api)
     if (typeof error === "string") {
         message = i18n.global.t(error);
-    } else if (!error.response) {
+    } else if (!error.response || error.response.status === 500) {
         message = i18n.global.t("app.no_response");
     } else {
         // TODO This works for now, but will need to change
