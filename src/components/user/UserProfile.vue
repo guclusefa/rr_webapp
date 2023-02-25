@@ -27,7 +27,8 @@
           >
         </li>
         <li v-if="!profile.isVerified">
-          <a class="dropdown-item" href="#">{{ $t("profile.verify_email") }}</a>
+          <a class="dropdown-item" href="#" @click="sendEmailVerification">
+            {{ $t("profile.verify_email") }}</a>
         </li>
         <li>
           <a class="dropdown-item" href="#">{{ $t("profile.delete") }}</a>
@@ -51,6 +52,9 @@
           </span>
           <span class="badge bg-success ms-1" v-if="profile.isVerified">
             {{ $t("user.verified") }}
+          </span>
+          <span class="badge bg-warning ms-1" v-else>
+            {{ $t("user.unverified") }}
           </span>
         </div>
         <div class="text-muted pb-1" v-if="profile.roles[0] || profile.gender">
@@ -105,8 +109,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import dateFormatter from "@/mixins/dateFormatter";
+import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
@@ -174,6 +179,17 @@ export default {
     },
     closeEditModal() {
       this.$refs.editModal.close();
+    },
+    // send email verification
+    ...mapActions(["confirmEmail"]),
+    async sendEmailVerification() {
+      const response = await this.confirmEmail(this.profile.id);
+      if (response.status >= 200 && response.status < 300) {
+        addSuccessToast(response);
+        return;
+      }
+      // Error
+      addErrorToast(response);
     },
   },
   components: {

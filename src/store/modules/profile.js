@@ -102,6 +102,24 @@ const profile = {
                 console.log(error)
                 return error;
             }
+        },
+        async confirmEmail({}, id) {
+            try {
+                const response = await api.put(`/users/${id}/confirm-email`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async verifyEmail({}, token) {
+            try {
+                const response = await api.put(`/users/verify-email/${token}`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
         }
     },
     getters: {

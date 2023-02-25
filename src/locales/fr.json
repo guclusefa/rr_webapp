@@ -105,6 +105,7 @@
     "member_since": "Membre depuis le {createdAt} ({days} jours)",
     "certified": "Certifié",
     "verified": "Vérifié",
+    "unverified": "Non vérifié",
     "photo": "Photo",
     "photo_size": "La photo doit faire moins de 5 Mo",
     "photo_invalid": "La photo doit être au format jpg, jpeg gif, ou png"
