@@ -35,6 +35,10 @@ export default {
       const modal = new Modal(document.getElementById("bs-modal"));
       modal.show();
     },
+    close() {
+      // click on the close button
+      document.querySelector("#bs-modal .btn-close").click();
+    },
   },
 };
 </script>

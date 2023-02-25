@@ -135,6 +135,8 @@ export default {
             await this.updateUser(this.body);
           }
           addSuccessToast(response);
+          // Close modal (if any)
+          this.$emit("close");
           return;
         }
         // Error
@@ -144,7 +146,6 @@ export default {
   },
   created() {
     this.setBody();
-    alert(this.body);
   },
   components: {
     InputText,

@@ -90,7 +90,7 @@
     ref="editModal"
     :title="$t('profile.edit_title', { username: profile.username })"
   >
-    <UserEdit />
+    <UserEdit @close="closeEditModal" />
   </ModalDialog>
 </template>
 
@@ -122,6 +122,9 @@ export default {
     },
     editProfile() {
       this.$refs.editModal.show();
+    },
+    closeEditModal() {
+      this.$refs.editModal.close();
     },
   },
   components: {
