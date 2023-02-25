@@ -73,3 +73,17 @@ export function validateAcceptTerms(acceptTerms, submitted) {
     }
     return "";
 }
+export function validatePhoto(photo, submitted) {
+    if (submitted) {
+        if (photo.size) {
+            // 5 MB
+            if (photo.size > 5242880) {
+                return "user.photo_size";
+            }
+            if (!photo.type.includes("image")) {
+                return "user.photo_invalid";
+            }
+        }
+    }
+    return "";
+}

@@ -101,7 +101,10 @@
     "age": "Née le {birthDate} ({age} ans)",
     "member_since": "Membre depuis le {createdAt} ({days} jours)",
     "certified": "Certifié",
-    "verified": "Vérifié"
+    "verified": "Vérifié",
+    "photo": "Photo",
+    "photo_size": "La photo doit faire moins de 5 Mo",
+    "photo_invalid": "La photo doit être au format jpg, jpeg gif, ou png"
   },
   "profile": {
     "page": "Profil",
@@ -109,8 +112,8 @@
     "actions": "Actions",
     "edit": "Modifier profil",
     "edit_title": "Modifier profil de {username}",
-    "edit_photo": "Modifier photo",
-    "edit_photo_title": "Modifier photo de {username}",
+    "edit_photo": "Modifier photo de profil",
+    "edit_photo_title": "Modifier photo de profil de {username}",
     "edit_password": "Modifier mot de passe",
     "edit_password_title": "Modifier mot de passe de {username}",
     "edit_email": "Modifier email",

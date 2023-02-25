@@ -45,6 +45,16 @@ const profile = {
                 return error;
             }
         },
+        async setStates({ commit }) {
+            try {
+                const response = await api.get('/states')
+                commit('SET_STATES', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
         async updateProfile({ dispatch }, payload) {
             try {
                 const response = await api.put(`/users/${payload.id}`, payload)
@@ -55,10 +65,19 @@ const profile = {
                 return error;
             }
         },
-        async setStates({ commit }) {
+        async updateProfilePhoto({}, payload) {
             try {
-                const response = await api.get('/states')
-                commit('SET_STATES', response.data.data)
+                // new FormData() is required to send files
+                const formData = new FormData();
+                formData.append('photo', payload.photo);
+                // set headers to multipart/form-data
+                const config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                const response = await api.post(`/users/${payload.id}/photo`, formData, config)
+                // Updating the profile is useless for now because the photo url is the same, needs to be fixed : TODO
                 return response;
             }
             catch (error) {
