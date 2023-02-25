@@ -104,7 +104,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import dateFormatter from "@/services/dates";
+import dateFormatter from "@/mixins/dateFormatter";
 
 import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
@@ -112,17 +112,19 @@ import UserEditPhoto from "@/components/user/UserEditPhoto";
 
 export default {
   name: "UserProfile",
+  mixins: [dateFormatter],
   data() {
     return {
       modalType: null,
     };
   },
-  // get profile
   computed: {
+    // get profile
     ...mapGetters(["profile", "user"]),
     canEdit() {
       return this.profile.id === this.user.id;
     },
+    // modal title
     modalTitle() {
       switch (this.modalType) {
         case "edit":
@@ -137,6 +139,7 @@ export default {
           return "";
       }
     },
+    // modal component
     modalComponent() {
       switch (this.modalType) {
         case "edit":
@@ -149,15 +152,6 @@ export default {
     },
   },
   methods: {
-    formatDate(date) {
-      return dateFormatter.formatDate(date);
-    },
-    getAge(date) {
-      return dateFormatter.getAge(date);
-    },
-    getDays(date) {
-      return dateFormatter.getDays(date);
-    },
     showEditModal(type) {
       this.modalType = type;
       this.$refs.editModal.show();
