@@ -17,7 +17,7 @@
           </a>
         </li>
         <li>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="#" @click="showEditModal('password')">
             {{ $t("profile.edit_password") }}</a
           >
         </li>
@@ -109,6 +109,7 @@ import dateFormatter from "@/mixins/dateFormatter";
 import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
 import UserEditPhoto from "@/components/user/UserEditPhoto";
+import UserEditPassword from "@/components/user/UserEditPassword";
 
 export default {
   name: "UserProfile",
@@ -135,6 +136,14 @@ export default {
           return this.$t("profile.edit_photo_title", {
             username: this.profile.username,
           });
+        case "password":
+          return this.$t("profile.edit_password_title", {
+            username: this.profile.username,
+          });
+        case "email":
+          return this.$t("profile.edit_email_title", {
+            username: this.profile.username,
+          });
         default:
           return "";
       }
@@ -146,6 +155,8 @@ export default {
           return UserEdit;
         case "photo":
           return UserEditPhoto;
+        case "password":
+          return UserEditPassword;
         default:
           return null;
       }
@@ -164,6 +175,7 @@ export default {
     ModalDialog,
     UserEdit,
     UserEditPhoto,
+    UserEditPassword,
   },
 };
 </script>

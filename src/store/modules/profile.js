@@ -84,6 +84,15 @@ const profile = {
                 return error;
             }
         },
+        async updateProfilePassword({}, payload) {
+            try {
+                const response = await api.put(`/users/${payload.id}/password`, payload)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        }
     },
     getters: {
         profile: state => state.profile,

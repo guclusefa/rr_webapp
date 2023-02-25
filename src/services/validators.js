@@ -51,6 +51,9 @@ export function validatePassword(password, submitted) {
         if (!password.trim()) {
             return "user.password_required";
         }
+        if (password.length < 6) {
+            return "user.password_length";
+        }
     }
     return "";
 }
