@@ -125,7 +125,9 @@
     "verify_email": "Vérifier email",
     "verify_email_description": "Un email de vérification sera envoyé à votre adresse email.",
     "verify_email_title": "Vérifier email de {username}",
-    "delete": "Supprimer compte"
+    "delete": "Supprimer compte",
+    "delete_title": "Supprimer compte de {username}",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce compte ? Toutes les données associées seront perdues. Cette action est irréversible."
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"

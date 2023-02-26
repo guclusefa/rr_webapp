@@ -120,6 +120,15 @@ const profile = {
             catch (error) {
                 return error;
             }
+        },
+        async deleteProfile({}, id) {
+            try {
+                const response = await api.delete(`/users/${id}`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
         }
     },
     getters: {

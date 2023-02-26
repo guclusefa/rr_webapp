@@ -28,10 +28,13 @@
         </li>
         <li v-if="!profile.isVerified">
           <a class="dropdown-item" href="#" @click="showEditModal('confirm')">
-            {{ $t("profile.verify_email") }}</a>
+            {{ $t("profile.verify_email") }}</a
+          >
         </li>
         <li>
-          <a class="dropdown-item" href="#">{{ $t("profile.delete") }}</a>
+          <a class="dropdown-item" href="#" @click="showEditModal('delete')">
+            {{ $t("profile.delete") }}</a
+          >
         </li>
       </ul>
     </div>
@@ -80,7 +83,7 @@
             " " + profile.lastName
           }}</template>
         </div>
-        <div class="text-muted pb-1" v-if="profile.bio">{{ profile.bio }}</div>
+        <div class="text-muted pb-1 pre-line" v-if="profile.bio">{{ profile.bio }}</div>
         <div class="text-muted pb-1" v-if="profile.birthDate">
           {{
             $t(`user.age`, {
@@ -109,9 +112,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import dateFormatter from "@/mixins/dateFormatter";
-import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/UserEdit";
@@ -119,6 +121,7 @@ import UserEditPhoto from "@/components/user/UserEditPhoto";
 import UserEditPassword from "@/components/user/UserEditPassword";
 import UserEditEmail from "@/components/user/UserEditEmail";
 import UserConfirm from "@/components/user/UserConfirm";
+import UserDelete from "@/components/user/UserDelete";
 
 export default {
   name: "UserProfile",
@@ -157,6 +160,10 @@ export default {
           return this.$t("profile.verify_email_title", {
             username: this.profile.username,
           });
+        case "delete":
+          return this.$t("profile.delete_title", {
+            username: this.profile.username,
+          });
         default:
           return "";
       }
@@ -174,6 +181,8 @@ export default {
           return UserEditEmail;
         case "confirm":
           return UserConfirm;
+        case "delete":
+          return UserDelete;
         default:
           return null;
       }
@@ -187,17 +196,6 @@ export default {
     closeEditModal() {
       this.$refs.editModal.close();
     },
-    // send email verification
-    ...mapActions(["confirmEmail"]),
-    async sendEmailVerification() {
-      const response = await this.confirmEmail(this.profile.id);
-      if (response.status >= 200 && response.status < 300) {
-        addSuccessToast(response);
-        return;
-      }
-      // Error
-      addErrorToast(response);
-    },
   },
   components: {
     ModalDialog,
@@ -206,6 +204,13 @@ export default {
     UserEditPassword,
     UserEditEmail,
     UserConfirm,
+    UserDelete,
   },
 };
 </script>
+
+<style>
+.pre-line {
+  white-space: pre-line;
+}
+</style>
