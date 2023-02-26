@@ -48,7 +48,7 @@
           :placeholder="'user.state_placeholder'"
           :placeholderSelect="'user.state_placeholder_select'"
           :options="'states'"
-          :value="profile.state ? profile.state.id : ''"
+          :value="profile.state ? profile.state.id : 0"
         />
       </div>
     </div>
@@ -135,7 +135,7 @@ export default {
       this.body.username = this.profile.username;
       this.body.firstName = this.profile.firstName;
       this.body.lastName = this.profile.lastName;
-      this.body.state = this.profile.state.id;
+      this.body.state = this.profile.state ? this.profile.state.id : null;
       this.body.bio = this.profile.bio;
       this.body.gender = this.profile.gender;
       this.body.birthDate = this.profile.birthDate;

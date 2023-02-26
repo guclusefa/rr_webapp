@@ -18,37 +18,39 @@ const profile = {
             createdAt: null,
             updatedAt: null,
         },
+        profiles: [],
+        profilesMeta: {
+            total: 0,
+            count: 0,
+            page: 0,
+            pages: 0,
+            limit: 0,
+            start: 0,
+            end: 0,
+            next: false,
+            prev: false,
+        },
         states: []
     },
     mutations: {
         SET_PROFILE(state, payload) {
             state.profile = payload
         },
-        CLEAR_PROFILE(state) {
-            state.profile = null
+        ADD_PROFILE(state, payload) {
+            state.profiles.push(payload)
+        },
+        SET_PROFILES_META(state, payload) {
+            state.profilesMeta = payload
         },
         SET_STATES(state, payload) {
             state.states = payload
         },
-        CLEAR_STATE(state) {
-            state.states = null
-        }
     },
     actions: {
         async setProfile({ commit }, id) {
             try {
                 const response = await api.get(`/users/${id}`)
                 commit('SET_PROFILE', response.data.data)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-        async setStates({ commit }) {
-            try {
-                const response = await api.get('/states')
-                commit('SET_STATES', response.data.data)
                 return response;
             }
             catch (error) {
@@ -65,7 +67,7 @@ const profile = {
                 return error;
             }
         },
-        async updateProfilePhoto({}, payload) {
+        async updateProfilePhoto({ }, payload) {
             try {
                 // new FormData() is required to send files
                 const formData = new FormData();
@@ -84,7 +86,7 @@ const profile = {
                 return error;
             }
         },
-        async updateProfilePassword({}, payload) {
+        async updateProfilePassword({ }, payload) {
             try {
                 const response = await api.put(`/users/${payload.id}/password`, payload)
                 return response;
@@ -93,7 +95,7 @@ const profile = {
                 return error;
             }
         },
-        async updateProfileEmail({}, payload) {
+        async updateProfileEmail({ }, payload) {
             try {
                 const response = await api.put(`/users/${payload.id}/email`, payload)
                 return response;
@@ -103,7 +105,7 @@ const profile = {
                 return error;
             }
         },
-        async confirmEmail({}, id) {
+        async confirmEmail({ }, id) {
             try {
                 const response = await api.put(`/users/${id}/confirm-email`)
                 return response;
@@ -112,7 +114,7 @@ const profile = {
                 return error;
             }
         },
-        async verifyEmail({}, token) {
+        async verifyEmail({ }, token) {
             try {
                 const response = await api.put(`/users/verify-email/${token}`)
                 return response;
@@ -121,7 +123,7 @@ const profile = {
                 return error;
             }
         },
-        async deleteProfile({}, id) {
+        async deleteProfile({ }, id) {
             try {
                 const response = await api.delete(`/users/${id}`)
                 return response;
@@ -129,10 +131,38 @@ const profile = {
             catch (error) {
                 return error;
             }
-        }
+        },
+
+        async setProfiles({ commit }, params) {
+            try {
+                const response = await api.get('/users', { params })
+                for (let i = 0; i < response.data.data.length; i++) {
+                    commit('ADD_PROFILE', response.data.data[i])
+                }
+                commit('SET_PROFILES_META', response.data.meta)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
+
+        async setStates({ commit }) {
+            try {
+                const response = await api.get('/states')
+                commit('SET_STATES', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
     },
     getters: {
         profile: state => state.profile,
+        profiles: state => state.profiles,
+        profilesMeta: state => state.profilesMeta,
         states: state => state.states
     }
 }

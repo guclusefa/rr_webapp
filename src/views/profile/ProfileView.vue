@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container" v-if="this.profile.id">
+    <div class="container" v-if="this.profile.id == this.id">
       <div class="row">
         <div class="col">
           <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
@@ -13,19 +13,7 @@
         </div>
       </div>
     </div>
-    <!-- Loading -->
-    <div class="container" v-else>
-      <div class="row">
-        <div class="col">
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">{{ $t("app.loading") }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End loading -->
+    <LoadingSpinner v-else />
   </section>
 </template>
 
@@ -34,6 +22,7 @@ import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import UserProfile from "@/components/user/UserProfile";
+import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
 export default {
   name: "ProfileView",
@@ -66,6 +55,7 @@ export default {
   },
   components: {
     UserProfile,
+    LoadingSpinner,
   },
 };
 </script>

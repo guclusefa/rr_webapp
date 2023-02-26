@@ -8,7 +8,15 @@
       aria-expanded="false"
     >
       {{ user.username }}
-      <img :src="user.photo" class="img-fluid rounded ms-1 avatar"/>
+      <template v-if="user.photo">
+        <img :src="user.photo" class="img-fluid rounded ms-1 avatar" />
+      </template>
+      <template v-else>
+        <img
+          src="@/assets/images/user/default.jpg"
+          class="img-fluid rounded ms-1 avatar"
+        />
+      </template>
     </a>
     <ul class="dropdown-menu">
       <li class="nav-item">
@@ -58,8 +66,7 @@ export default {
     },
   },
   created() {
-    this.refreshToken().
-    then(() => {
+    this.refreshToken().then(() => {
       if (this.user) {
         this.refreshUser();
       }

@@ -12,6 +12,7 @@ import RegisterView from '@/views/auth/RegisterView.vue'
 import ForgotPasswordView from '@/views/auth/ForgotPasswordView.vue'
 import ForgotPasswordResetView from '@/views/auth/ForgotPasswordResetView.vue'
 // Profile views
+import ProfilesView from '@/views/profile/ProfilesView.vue'
 import ProfileView from '@/views/profile/ProfileView.vue'
 
 // Routes
@@ -50,6 +51,11 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: LogoutForm
+  },
+  {
+    path: '/profiles',
+    name: 'profiles',
+    component: ProfilesView
   },
   {
     path: '/profile/:id',

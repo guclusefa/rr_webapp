@@ -23,6 +23,11 @@
                 $t("home.page")
               }}</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/profiles" class="nav-link">{{
+                $t("profiles.page")
+              }}</router-link>
+            </li>
           </ul>
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">

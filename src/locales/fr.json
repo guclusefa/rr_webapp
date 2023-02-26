@@ -129,6 +129,13 @@
     "delete_title": "Supprimer compte de {username}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce compte ? Toutes les données associées seront perdues. Cette action est irréversible."
   },
+  "profiles": {
+    "page": "Les profils",
+    "title": "Les profils",
+    "see_profile": "Voir le profil",
+    "load_more": "Charger plus de profils",
+    "meta": "Affichage de {end} profils sur un total de {total} profils"
+  },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"
   },
