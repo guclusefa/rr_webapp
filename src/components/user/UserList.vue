@@ -10,7 +10,6 @@
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasScrolling"
-          aria-controls="offcanvasScrolling"
         >
           {{ $t("profiles.filter") }}
         </button>
@@ -19,30 +18,28 @@
     </div>
   </div>
 
-  <div
+  <aside
     class="offcanvas offcanvas-start"
     data-bs-scroll="true"
     data-bs-backdrop="false"
     tabindex="-1"
     id="offcanvasScrolling"
-    aria-labelledby="offcanvasScrollingLabel"
   >
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
-        Offcanvas with body scrolling
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title">
+        {{ $t("profiles.filter") }}
       </h5>
       <button
         type="button"
         class="btn-close"
         data-bs-dismiss="offcanvas"
-        aria-label="Close"
       ></button>
     </div>
     <div class="offcanvas-body">
       <!-- Filters -->
       <UserFilters />
     </div>
-  </div>
+  </aside>
 
   <template v-if="profilesMeta.total > 0">
     <!-- Meta -->
@@ -73,13 +70,7 @@
 
   <template v-else>
     <template v-if="profilesMeta.total === 0">
-      <div class="row mb-4">
-        <div class="col">
-          <h5>
-            {{ $t("profiles.no_results") }}
-          </h5>
-        </div>
-      </div>
+      <NoResultMessage />
     </template>
     <template v-else>
       <LoadingSpinner />
@@ -94,6 +85,7 @@ import { addErrorToast } from "@/services/toasts";
 import UserFilters from "@/components/user/UserFilters.vue";
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
+import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
 import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 
 export default {
@@ -123,6 +115,7 @@ export default {
     UserFilters,
     UserCard,
     SubmitButton,
+    NoResultMessage,
     LoadingSpinner,
   },
 };

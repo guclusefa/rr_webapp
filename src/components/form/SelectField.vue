@@ -149,7 +149,6 @@ export default {
         case "stateOptions":
           this.isApiOptions = true;
           this.setStates().then(() => {
-            console.log(this.states);
             for (const state of this.states) {
               this.stateOptions[state.id] = state.name + " (" + state.code + ")";
             }
