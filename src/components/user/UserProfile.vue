@@ -39,15 +39,18 @@
       </ul>
     </div>
     <div class="row d-flex align-items-center">
-      <div class="col-4">
+      <div class="col-sm-4 col-md-3 col-lg-4">
         <template v-if="profile.photo">
-          <img :src="profile.photo" class="img-fluid" />
+          <img :src="profile.photo" class="img-fluid rounded" />
         </template>
         <template v-else>
-          <img src="@/assets/images/user/default.jpg" class="img-fluid" />
+          <img
+            src="@/assets/images/user/default.jpg"
+            class="img-fluid rounded"
+          />
         </template>
       </div>
-      <div class="col-8 p-2">
+      <div class="col-sm-8 col-md-9 col-lg-8 p-2">
         <div class="text-strong pb-1" v-if="profile.username">
           @{{ profile.username }}
           <span class="badge bg-primary ms-1" v-if="profile.isCertified">
@@ -83,7 +86,9 @@
             " " + profile.lastName
           }}</template>
         </div>
-        <div class="text-muted pb-1 pre-line" v-if="profile.bio">{{ profile.bio }}</div>
+        <div class="text-muted pb-1 pre-line" v-if="profile.bio">
+          {{ profile.bio }}
+        </div>
         <div class="text-muted pb-1" v-if="profile.birthDate">
           {{
             $t(`user.age`, {
@@ -209,7 +214,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .pre-line {
   white-space: pre-line;
 }

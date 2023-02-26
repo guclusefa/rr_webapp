@@ -8,6 +8,7 @@
       aria-expanded="false"
     >
       {{ user.username }}
+      <img :src="user.photo" class="img-fluid rounded ms-1 avatar"/>
     </a>
     <ul class="dropdown-menu">
       <li class="nav-item">
@@ -66,3 +67,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.avatar {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+</style>
