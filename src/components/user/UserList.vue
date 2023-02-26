@@ -5,41 +5,21 @@
         <h1>
           {{ $t("profiles.title") }}
         </h1>
-        <button
-          class="btn btn-primary float-end"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasScrolling"
-        >
-          {{ $t("profiles.filter") }}
-        </button>
+        <OffCanvasButton
+          :label="'profiles.filter'"
+          :classes="'btn btn-primary float-end'"
+        />
       </div>
       <hr />
     </div>
   </div>
 
-  <aside
-    class="offcanvas offcanvas-start"
-    data-bs-scroll="true"
-    data-bs-backdrop="false"
-    tabindex="-1"
-    id="offcanvasScrolling"
-  >
-    <div class="offcanvas-header border-bottom">
-      <h5 class="offcanvas-title">
-        {{ $t("profiles.filter") }}
-      </h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="offcanvas"
-      ></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- Filters -->
+  <!-- Filters -->
+  <OffCanvas title="profiles.filter">
+    <template #body>
       <UserFilters />
-    </div>
-  </aside>
+    </template>
+  </OffCanvas>
 
   <template v-if="profilesMeta.total > 0">
     <!-- Meta -->
@@ -69,9 +49,11 @@
   </template>
 
   <template v-else>
+    <!-- No results -->
     <template v-if="profilesMeta.total === 0">
       <NoResultMessage />
     </template>
+    <!-- Loading -->
     <template v-else>
       <LoadingSpinner />
     </template>
@@ -83,6 +65,9 @@ import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import UserFilters from "@/components/user/UserFilters.vue";
+import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
+import OffCanvas from "@/components/fragments/OffCanvas.vue";
+
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
@@ -113,6 +98,8 @@ export default {
   },
   components: {
     UserFilters,
+    OffCanvasButton,
+    OffCanvas,
     UserCard,
     SubmitButton,
     NoResultMessage,
