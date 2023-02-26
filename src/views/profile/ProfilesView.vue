@@ -3,12 +3,6 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <h1>{{ $t("profiles.title") }}</h1>
-          <hr />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
           <UserList />
         </div>
       </div>

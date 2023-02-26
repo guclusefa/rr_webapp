@@ -1,5 +1,51 @@
 <template>
-  <template v-if="profiles.length > 0">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex justify-content-between mb-3">
+        <h1>
+          {{ $t("profiles.title") }}
+        </h1>
+        <button
+          class="btn btn-primary float-end"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+          aria-controls="offcanvasScrolling"
+        >
+          {{ $t("profiles.filter") }}
+        </button>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <div
+    class="offcanvas offcanvas-start"
+    data-bs-scroll="true"
+    data-bs-backdrop="false"
+    tabindex="-1"
+    id="offcanvasScrolling"
+    aria-labelledby="offcanvasScrollingLabel"
+  >
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasScrollingLabel">
+        Offcanvas with body scrolling
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="offcanvas-body">
+      <!-- Filters -->
+      <UserFilters />
+    </div>
+  </div>
+
+  <template v-if="profilesMeta.total > 0">
+    <!-- Meta -->
     <div class="row mb-4">
       <div class="col">
         <h5>
@@ -7,6 +53,7 @@
         </h5>
       </div>
     </div>
+    <!-- Cards -->
     <div
       class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-5 g-4 mb-4"
     >
@@ -14,18 +61,29 @@
         <UserCard :profile="profile" />
       </div>
     </div>
+    <!-- Load more -->
     <div class="row" v-if="profilesMeta.next">
       <div class="col">
-  
-          <form @submit.prevent="fetchProfiles">
-            <SubmitButton :label="'profiles.load_more'" />
-          </form>
-     
+        <form @submit.prevent="fetchProfiles">
+          <SubmitButton :label="'profiles.load_more'" />
+        </form>
       </div>
     </div>
   </template>
+
   <template v-else>
-    <LoadingSpinner />
+    <template v-if="profilesMeta.total === 0">
+      <div class="row mb-4">
+        <div class="col">
+          <h5>
+            {{ $t("profiles.no_results") }}
+          </h5>
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <LoadingSpinner />
+    </template>
   </template>
 </template>
 
@@ -33,31 +91,22 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import UserFilters from "@/components/user/UserFilters.vue";
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 
 export default {
   name: "UserList",
-  data() {
-    return {
-      params: {
-        page: 1,
-        limit: 20,
-      },
-    };
-  },
   computed: {
-    ...mapGetters(["profiles", "profilesMeta"]),
+    ...mapGetters(["profiles", "profilesParams", "profilesMeta", "loading"]),
   },
   methods: {
     ...mapActions(["setProfiles"]),
     async fetchProfiles() {
-      const response = await this.setProfiles(this.params);
+      const response = await this.setProfiles(this.profilesParams);
       // Success
       if (response.status >= 200 && response.status < 300) {
-        // Update params
-        this.params.page++;
         return;
       }
       // Error
@@ -71,6 +120,7 @@ export default {
     this.fetchProfiles();
   },
   components: {
+    UserFilters,
     UserCard,
     SubmitButton,
     LoadingSpinner,

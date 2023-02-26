@@ -140,7 +140,10 @@ export default {
     // get profile
     ...mapGetters(["profile", "user"]),
     canEdit() {
-      return this.profile.id === this.user.id;
+      if(this.user && this.profile) {
+        return this.user.id === this.profile.id;
+      }
+      return false;
     },
     // modal title
     modalTitle() {

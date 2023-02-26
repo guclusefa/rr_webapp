@@ -41,13 +41,12 @@
     <div class="row">
       <div class="col-12 mb-3">
         <!-- State -->
-        <Select2Field
+        <SelectField
           @input="$emit('input', (body.state = $event))"
           :field="'state'"
           :label="'user.state'"
-          :placeholder="'user.state_placeholder'"
           :placeholderSelect="'user.state_placeholder_select'"
-          :options="'states'"
+          :options="'stateOptions'"
           :value="profile.state ? profile.state.id : 0"
         />
       </div>
@@ -71,7 +70,6 @@
           @input="$emit('input', (body.gender = $event))"
           :field="'gender'"
           :label="'user.gender'"
-          :placeholder="'user.gender_placeholder'"
           :placeholderSelect="'user.gender_placeholder_select'"
           :options="'genderOptions'"
           :value="profile.gender"
@@ -104,7 +102,6 @@ import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
 import InputTextarea from "@/components/form/InputTextarea.vue";
-import Select2Field from "@/components/form/Select2Field.vue";
 import SelectField from "@/components/form/SelectField.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
@@ -167,7 +164,6 @@ export default {
   components: {
     InputText,
     InputTextarea,
-    Select2Field,
     SelectField,
     DatePicker,
     SubmitButton,

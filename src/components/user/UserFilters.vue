@@ -1,0 +1,147 @@
+<template>
+  <form @submit.prevent="filter()">
+    <div class="row mb-3">
+      <div class="col">
+        <InputText
+          @input="$emit('input', (params.search = $event))"
+          :type="'search'"
+          :field="'search'"
+          :label="'profiles.search'"
+          :placeholder="'profiles.search_placeholder'"
+          :value="profilesParams.search"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.certified = $event))"
+          :field="'certified'"
+          :label="'profiles.certified'"
+          :placeholderSelect="'profiles.certified_placeholder_select'"
+          :options="'booleanOptions'"
+          :value="profilesParams.certified"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.role = $event))"
+          :field="'roles'"
+          :label="'profiles.roles'"
+          :options="'rolesOptions'"
+          :multiple="true"
+          :values="profilesParams.role"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.state = $event))"
+          :field="'states'"
+          :label="'profiles.states'"
+          :options="'stateOptions'"
+          :multiple="true"
+          :values="profilesParams.state"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.gender = $event))"
+          :field="'genders'"
+          :label="'profiles.genders'"
+          :options="'genderOptions'"
+          :multiple="true"
+          :values="profilesParams.gender"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.order = $event))"
+          :field="'order'"
+          :label="'profiles.order'"
+          :options="'profilesOrderOptions'"
+          :value="profilesParams.order"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.direction = $event))"
+          :field="'direction'"
+          :label="'profiles.direction'"
+          :options="'directionOptions'"
+          :value="profilesParams.direction"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.limit = $event))"
+          :field="'limit'"
+          :label="'profiles.limit'"
+          :options="'limitOptions'"
+          :value="profilesParams.limit"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SubmitButton :label="'profiles.filter'" />
+      </div>
+    </div>
+  </form>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+
+import InputText from "@/components/form/InputText.vue";
+import SelectField from "@/components/form/SelectField.vue";
+import SubmitButton from "@/components/form/SubmitButton.vue";
+
+export default {
+  name: "UserFilters",
+  data() {
+    return {
+      params: {
+        search: "",
+        certified: 0,
+        role: [],
+        state: [],
+        gender: [],
+        order: "createdAt",
+        direction: "desc",
+        limit: 10,
+        page: 1,
+      },
+    };
+  },
+  computed: {
+    ...mapGetters(["profilesParams"]),
+  },
+  methods: {
+    ...mapActions(["filterProfiles"]),
+    filter() {
+      this.filterProfiles(this.params);
+    },
+  },
+  created() {
+    this.params = this.profilesParams;
+  },
+  components: {
+    InputText,
+    SelectField,
+    SubmitButton,
+  },
+};
+</script>

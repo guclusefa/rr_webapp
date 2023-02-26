@@ -6,7 +6,17 @@
     "no_response": "Il y a eu un problème avec la réponse du serveur veuillez réessayer",
     "loading": "Chargement...",
     "submit": "Valider",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "yes": "Oui",
+    "no": "Non",
+    "asc": "Croissant",
+    "desc": "Décroissant",
+    "limits": {
+      "10": "10 par page",
+      "25": "25 par page",
+      "50": "50 par page",
+      "100": "100 par page"
+    }
   },
   "home": {
     "page": "Accueil",
@@ -84,7 +94,6 @@
     "bio": "Biographie",
     "bio_placeholder": "Votre biographie",
     "gender": "Sexe",
-    "gender_placeholder": "Votre sexe",
     "gender_placeholder_select": "Choisir un sexe",
     "genders": {
       "M" : "Masculin",
@@ -99,7 +108,6 @@
       "ROLE_SUPER_ADMIN": "Super Administrateur"
     },
     "state": "Département",
-    "state_placeholder": "Votre département",
     "state_placeholder_select": "Choisir un département",
     "age": "Née le {birthDate} ({age} ans)",
     "member_since": "Membre depuis le {createdAt} ({days} jours)",
@@ -130,11 +138,30 @@
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce compte ? Toutes les données associées seront perdues. Cette action est irréversible."
   },
   "profiles": {
-    "page": "Les profils",
+    "page": "Profils",
     "title": "Les profils",
     "see_profile": "Voir le profil",
     "load_more": "Charger plus de profils",
-    "meta": "Affichage de {end} profils sur un total de {total} profils"
+    "meta": "Affichage de {end} profils sur un total de {total} profils",
+    "search": "Rechercher un profil",
+    "search_placeholder": "Recherche par nom d'utilisateur, prénom, ou nom",
+    "certified": "Certification des profils",
+    "certified_placeholder_select": "Tous les statuts de certification",
+    "roles": "Rôles des profils",
+    "states": "Départements des profils",
+    "genders": "Sexes des profils",
+    "genders_placeholder_select": "Tous les sexes",
+    "order": "Ordre d'affichage des profils",
+    "orders" : {
+      "createdAt": "Date d'inscription",
+      "username": "Nom d'utilisateur",
+      "firstName": "Prénom",
+      "lastName": "Nom"
+    },
+    "direction": "Direction d'affichage des profils",
+    "limit": "Nombre de profils par page",
+    "filter": "Filtrer les profils",
+    "no_results": "Aucun profil n'a été trouvé"
   },
   "footer": {
     "copyright": "© {year} Ressources (Re)lationnelles"
