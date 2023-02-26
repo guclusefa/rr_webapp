@@ -7,8 +7,8 @@ import i18n from '@/services/i18n'
 // Bootstrap
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap-icons/font/bootstrap-icons.css"
 import "@/assets/scss/main.scss"
-
 // Create app
 const app = createApp(App)
 app.use(router)

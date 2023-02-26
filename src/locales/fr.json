@@ -181,13 +181,18 @@
     "orders": {
       "createdAt": "Date de création",
       "title": "Titre",
-      "description": "Description",
-      "tags": "Tags"
+      "likes": "Nombre de likes",
+      "comments": "Nombre de commentaires",
+      "shares": "Nombre de partages",
+      "exploits": "Nombre d'exploitations",
+      "saves": "Nombre de sauvegardes",
+      "consults": "Nombre de consultations"
     },
     "direction": "Direction d'affichage des ressources",
     "limit": "Nombre de ressources par page",
     "filter": "Filtrer les ressources",
     "no_results": "Aucune ressource n'a été trouvée",
-    "created_at_by": "Créée le {createdAt} (il y a {days} jours) par {author}"
+    "published_days_ago": "Publiée il y a {days} jours",
+    "verified": "Vérifié"
   }
 }

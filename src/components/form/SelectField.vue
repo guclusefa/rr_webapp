@@ -103,6 +103,16 @@ export default {
         firstName: "profiles.orders.firstName",
         lastName: "profiles.orders.lastName",
       },
+      resourcesOrderOptions: {
+        createdAt: "resources.orders.createdAt",
+        title: "resources.orders.title",
+        likes: "resources.orders.likes",
+        comments: "resources.orders.comments",
+        shares: "resources.orders.shares",
+        exploits: "resources.orders.exploits",
+        saves: "resources.orders.saves",
+        consults: "resources.orders.consults",
+      },
       directionOptions: {
         DESC: "app.desc",
         ASC: "app.asc",
