@@ -123,6 +123,8 @@
     "edit_email": "Modifier email",
     "edit_email_title": "Modifier email de {username}",
     "verify_email": "Vérifier email",
+    "verify_email_description": "Un email de vérification sera envoyé à votre adresse email.",
+    "verify_email_title": "Vérifier email de {username}",
     "delete": "Supprimer compte"
   },
   "footer": {

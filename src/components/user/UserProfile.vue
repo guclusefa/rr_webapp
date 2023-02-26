@@ -27,7 +27,7 @@
           >
         </li>
         <li v-if="!profile.isVerified">
-          <a class="dropdown-item" href="#" @click="sendEmailVerification">
+          <a class="dropdown-item" href="#" @click="showEditModal('confirm')">
             {{ $t("profile.verify_email") }}</a>
         </li>
         <li>
@@ -118,6 +118,7 @@ import UserEdit from "@/components/user/UserEdit";
 import UserEditPhoto from "@/components/user/UserEditPhoto";
 import UserEditPassword from "@/components/user/UserEditPassword";
 import UserEditEmail from "@/components/user/UserEditEmail";
+import UserConfirm from "@/components/user/UserConfirm";
 
 export default {
   name: "UserProfile",
@@ -152,6 +153,10 @@ export default {
           return this.$t("profile.edit_email_title", {
             username: this.profile.username,
           });
+        case "confirm":
+          return this.$t("profile.verify_email_title", {
+            username: this.profile.username,
+          });
         default:
           return "";
       }
@@ -167,6 +172,8 @@ export default {
           return UserEditPassword;
         case "email":
           return UserEditEmail;
+        case "confirm":
+          return UserConfirm;
         default:
           return null;
       }
@@ -198,6 +205,7 @@ export default {
     UserEditPhoto,
     UserEditPassword,
     UserEditEmail,
+    UserConfirm,
   },
 };
 </script>
