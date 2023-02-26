@@ -14,6 +14,8 @@ import ForgotPasswordResetView from '@/views/auth/ForgotPasswordResetView.vue'
 // Profile views
 import ProfilesView from '@/views/profile/ProfilesView.vue'
 import ProfileView from '@/views/profile/ProfileView.vue'
+// Resource views
+import ResourcesView from '@/views/resource/ResourcesView.vue'
 
 // Routes
 const routes = [
@@ -66,6 +68,11 @@ const routes = [
     path: '/profile/verify/:token',
     name: 'profile-verify',
     component: UserVerify
+  },
+  {
+    path: '/resources',
+    name: 'resources',
+    component: ResourcesView
   },
 ]
 // Router

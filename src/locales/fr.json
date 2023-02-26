@@ -18,6 +18,15 @@
       "100": "100 par page"
     }
   },
+  "toast": {
+    "success": "Succès",
+    "error": "Erreur",
+    "warning": "Attention",
+    "info": "Information"
+  },
+  "footer": {
+    "copyright": "© {year} Ressources (Re)lationnelles"
+  },
   "home": {
     "page": "Accueil",
     "title": "Bienvenue sur le site des Ressources (Re)lationnelles"
@@ -25,9 +34,6 @@
   "about": {
     "page": "À propos",
     "title": "À propos des Ressources (Re)lationnelles"
-  },
-  "auth": {
-    "token_expires_in": "Attention votre session va expiré dans {minutes} minutes et {seconds} secondes"
   },
   "login": {
     "page": "Connexion",
@@ -96,9 +102,9 @@
     "gender": "Sexe",
     "gender_placeholder_select": "Choisir un sexe",
     "genders": {
-      "M" : "Masculin",
-      "F" : "Féminin",
-      "O" : "Autre"
+      "M": "Masculin",
+      "F": "Féminin",
+      "O": "Autre"
     },
     "birthDate": "Date de naissance",
     "roles": {
@@ -152,7 +158,7 @@
     "genders": "Sexes des profils",
     "genders_placeholder_select": "Tous les sexes",
     "order": "Ordre d'affichage des profils",
-    "orders" : {
+    "orders": {
       "createdAt": "Date d'inscription",
       "username": "Nom d'utilisateur",
       "firstName": "Prénom",
@@ -163,13 +169,25 @@
     "filter": "Filtrer les profils",
     "no_results": "Aucun profil n'a été trouvé"
   },
-  "footer": {
-    "copyright": "© {year} Ressources (Re)lationnelles"
-  },
-  "toast": {
-    "success": "Succès",
-    "error": "Erreur",
-    "warning": "Attention",
-    "info": "Information"
+  "resources": {
+    "page": "Ressources",
+    "title": "Les ressources",
+    "see_resource": "Voir la ressource",
+    "load_more": "Charger plus de ressources",
+    "meta": "Affichage de {end} ressources sur un total de {total} ressources",
+    "search": "Rechercher une ressource",
+    "search_placeholder": "Recherche par titre, description, ou tags",
+    "order": "Ordre d'affichage des ressources",
+    "orders": {
+      "createdAt": "Date de création",
+      "title": "Titre",
+      "description": "Description",
+      "tags": "Tags"
+    },
+    "direction": "Direction d'affichage des ressources",
+    "limit": "Nombre de ressources par page",
+    "filter": "Filtrer les ressources",
+    "no_results": "Aucune ressource n'a été trouvée",
+    "created_at_by": "Créée le {createdAt} (il y a {days} jours) par {author}"
   }
 }
