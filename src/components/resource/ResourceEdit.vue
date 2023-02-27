@@ -10,7 +10,7 @@
           :placeholder="'resource.title_field_placeholder'"
           :required="true"
           :validate="validateTitle"
-          :value="resource.title"
+          :value="this.edit ? resource.title : body.title"
         />
       </div>
     </div>
@@ -23,7 +23,7 @@
           :placeholder="'resource.content_placeholder'"
           :required="true"
           :validate="validateContent"
-          :value="resource.content"
+          :value="this.edit ? resource.content : body.content"
         />
       </div>
     </div>
@@ -36,7 +36,7 @@
           :label="'resource.link'"
           :placeholder="'resource.link_placeholder'"
           :validate="validateLink"
-          :value="resource.link"
+          :value="this.edit ? resource.link : body.link"
         />
       </div>
     </div>
@@ -48,7 +48,7 @@
           :label="'resources.visibility'"
           :options="'resourcesVisibilityOptions'"
           :required="true"
-          :value="resource.visibility"
+          :value="this.edit ? resource.visibility : body.visibility"
         />
       </div>
     </div>
@@ -60,7 +60,7 @@
           :label="'resource.is_published'"
           :options="'booleanOptions'"
           :required="true"
-          :value="resource.isPublished"
+          :value="this.edit ? resource.isPublished : body.isPublished"
         />
       </div>
     </div>
@@ -73,7 +73,8 @@
           :placeholderSelect="'resource.relation_placeholder_select'"
           :options="'relationOptions'"
           :required="true"
-          :value="resource.relation ? resource.relation.id : null"
+          :validate="validateRelation"
+          :value="this.edit ? resource.relation.id : body.relation"
         />
       </div>
     </div>
@@ -85,14 +86,21 @@
           :label="'resource.categories'"
           :options="'categoryOptions'"
           :multiple="true"
-          :values="resource.categories.map((category) => category.id)"
+          :values="
+            this.edit && resource.categories
+              ? resource.categories.map((category) => category.id)
+              : body.categories
+          "
         />
       </div>
     </div>
     <div class="row">
       <div class="col-6 ms-auto text-end">
         <!-- Submit -->
-        <SubmitButton :label="'resource.edit'" :disabled="!validateForm()" />
+        <SubmitButton
+          :label="this.edit ? 'resource.edit' : 'resource.create'"
+          :disabled="!validateForm()"
+        />
       </div>
     </div>
   </form>
@@ -115,15 +123,21 @@ export default {
     return {
       body: {
         id: null,
-        title: null,
-        content: null,
-        link: null,
-        visibility: null,
-        isPublished: null,
-        relation: null,
-        categories: {},
+        title: "",
+        content: "",
+        link: "",
+        visibility: 1,
+        isPublished: 1,
+        relation: "",
+        categories: [],
       },
     };
+  },
+  props: {
+    edit: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     ...mapGetters(["resource"]),
@@ -139,17 +153,22 @@ export default {
       this.body.relation = this.resource.relation
         ? this.resource.relation.id
         : null;
-      this.body.categories = this.resource.categories.map(
-        (category) => category.id
-      );
+      this.body.categories = this.resource.categories
+        ? this.resource.categories.map((category) => category.id)
+        : [];
     },
     // Form submit
-    ...mapActions(["updateResource"]),
+    ...mapActions(["updateResource", "createResource", "reloadResources"]),
     async submitForm() {
       withSubmitValidation(async function () {
-        const response = await this.updateResource(this.body);
+        const response = this.edit
+          ? await this.updateResource(this.body)
+          : await this.createResource(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
+          if (!this.edit) {
+            this.reloadResources();
+          }
           addSuccessToast(response);
           // Close modal (if any)
           this.$emit("close");
@@ -160,8 +179,10 @@ export default {
       }).apply(this);
     },
   },
-  beforeMount() {
-    this.setBody();
+  mounted() {
+    if (this.edit) {
+      this.setBody();
+    }
   },
   components: {
     InputText,

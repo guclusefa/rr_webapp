@@ -14,11 +14,24 @@ const profile = {
             isSuspeded: null,
             author: {},
             relation: {},
-            categories:{},
+            categories: {},
             createdAt: null,
             updatedAt: null,
         },
+
         resources: [],
+        resourcesParamsDefault: {
+            search: "",
+            verified: 0,
+            visibility: 0,
+            author: [],
+            relation: [],
+            category: [],
+            order: "createdAt",
+            direction: "DESC",
+            limit: 10,
+            page: 1,
+        },
         resourcesParams: {
             search: "",
             verified: 0,
@@ -42,6 +55,7 @@ const profile = {
             next: false,
             prev: false,
         },
+
         authors: [],
         relations: [],
         categories: []
@@ -113,6 +127,14 @@ const profile = {
             commit('SET_RESOURCES_PARAMS', params)
             dispatch('setResources')
         },
+        async reloadResources({ commit, dispatch, state }) {
+            // Reset resources
+            commit('SET_RESOURCES', [])
+            commit('SET_RESOURCES_META', [])
+            // Make new request
+            commit('SET_RESOURCES_PARAMS', state.resourcesParamsDefault)
+            dispatch('setResources')
+        },
 
         async setAuthors({ commit }) {
             try {
@@ -145,6 +167,16 @@ const profile = {
             }
         },
 
+        async createResource({ }, payload) {
+            try {
+                const response = await api.post('/resources', payload)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
         async updateResource({ dispatch }, payload) {
             try {
                 const response = await api.put(`/resources/${payload.id}`, payload)
@@ -155,7 +187,6 @@ const profile = {
                 return error;
             }
         },
-
 
         async updateResourceMedia({ }, payload) {
             try {

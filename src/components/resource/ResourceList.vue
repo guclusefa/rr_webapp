@@ -6,7 +6,7 @@
           {{ $t("resources.title") }}
         </h1>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-outline-primary me-3" v-if="user">
+          <button class="btn btn-outline-primary me-3" @click="showCreateModal" v-if="user">
             {{ $t("resources.create") }}
           </button>
           <OffCanvasButton
@@ -17,6 +17,12 @@
       </div>
       <hr />
     </div>
+    <!-- Edit -->
+    <ModalDialog ref="createModal" :title="$t('resources.create')">
+      <template #body>
+        <ResourceEdit :edit="false" @close="closeEditModal"/>
+      </template>
+    </ModalDialog>
   </div>
 
   <!-- Filters -->
@@ -69,6 +75,9 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import ModalDialog from "@/components/fragments/ModalDialog.vue";
+import ResourceEdit from "@/components/resource/ResourceEdit.vue";
+
 import ResourceFilters from "@/components/resource/ResourceFilters.vue";
 import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
 import OffCanvas from "@/components/fragments/OffCanvas.vue";
@@ -81,9 +90,21 @@ import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 export default {
   name: "ResourceList",
   computed: {
-    ...mapGetters(["user","resources", "resourcesParams", "resourcesMeta", "loading"]),
+    ...mapGetters([
+      "user",
+      "resources",
+      "resourcesParams",
+      "resourcesMeta",
+      "loading",
+    ]),
   },
   methods: {
+    showCreateModal() {
+      this.$refs.createModal.show();
+    },
+    closeEditModal() {
+      this.$refs.createModal.close();
+    },
     ...mapActions(["setResources"]),
     async fetchResources() {
       const response = await this.setResources(this.resourcesParams);
@@ -102,6 +123,8 @@ export default {
     this.fetchResources();
   },
   components: {
+    ModalDialog,
+    ResourceEdit,
     ResourceFilters,
     OffCanvasButton,
     OffCanvas,

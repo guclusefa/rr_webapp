@@ -2,6 +2,7 @@ import {
     validateTitle,
     validateContent,
     validateLink,
+    validateRelation,
 } from "@/services/validators";
 
 export default {
@@ -20,9 +21,12 @@ export default {
         validateLink() {
             return validateLink(this.body.link, this.submitted);
         },
+        validateRelation() {
+            return validateRelation(this.body.relation, this.submitted);
+        },
         // Form validation
         validateForm() {
-            return !this.validateTitle() && !this.validateContent() && !this.validateLink();
+            return !this.validateTitle() && !this.validateContent() && !this.validateLink() && !this.validateRelation();
         },
     },
 };

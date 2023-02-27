@@ -120,6 +120,16 @@ export function validateLink(link, submitted) {
     return "";
 }
 
+// relation
+export function validateRelation(relation, submitted) {
+    if (submitted) {
+        if (!relation) {
+            return "resource.relation_required";
+        }
+    }
+    return "";
+}
+
 export function validateMedia(media, submitted) {
     if (submitted) {
         if (media.size) {

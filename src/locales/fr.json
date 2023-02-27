@@ -195,8 +195,10 @@
     "is_published": "Publiée",
     "relation": "Relation",
     "relation_placeholder_select": "Choisir une relation",
+    "relation_required": "Veuillez choisir une relation",
     "categories": "Catégories de la ressource",
-    "verified": "Vérifiée"
+    "verified": "Vérifiée",
+    "create": "Créer"
   },
   "resources": {
     "page": "Ressources",
