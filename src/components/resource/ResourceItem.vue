@@ -50,6 +50,9 @@
           <span class="badge bg-success ms-1" v-if="resource.isVerified">
             {{ $t("resources.verified") }}
           </span>
+          <span class="badge bg-secondary ms-1" v-if="resource.visibility">
+            {{ $t(`resources.visibilities.${resource.visibility}`) }}
+          </span>
         </div>
         <div class="text-muted pb-1" v-if="resource.relation">
           <span class="badge bg-primary">

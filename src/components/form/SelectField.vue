@@ -17,7 +17,7 @@
       v-for="(value, key) in getOptions()"
       :key="key"
       :value="key"
-      :selected="this.value == key || this.values.includes(key)"
+      :selected="this.value == key || this.values.includes(key) || this.values.includes(parseInt(key))"
     >
       <template v-if="isApiOptions">
         {{ value }}

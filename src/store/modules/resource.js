@@ -145,6 +145,18 @@ const profile = {
             }
         },
 
+        async updateResource({ dispatch }, payload) {
+            try {
+                const response = await api.put(`/resources/${payload.id}`, payload)
+                dispatch('setResource', payload.id)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
+
         async updateResourceMedia({ }, payload) {
             try {
                 // new FormData() is required to send files

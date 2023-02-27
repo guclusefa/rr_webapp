@@ -182,7 +182,20 @@
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette ressource ? Toutes les données associées seront perdues. Cette action est irréversible.",
     "media": "Média",
     "media_size": "Le média doit faire moins de 10 Mo",
-    "media_invalid": "Le média doit être au format mp4, jpg, jpeg gif, ou png"
+    "media_invalid": "Le média doit être au format mp4, jpg, jpeg gif, ou png",
+    "title_field": "Titre",
+    "title_field_placeholder": "Titre de la ressource",
+    "title_field_required": "Veuillez entrer un titre",
+    "content": "Contenu",
+    "content_placeholder": "Contenu de la ressource",
+    "content_required": "Veuillez entrer un contenu",
+    "link": "Lien",
+    "link_placeholder": "Lien de la ressource (https://...)",
+    "link_invalid": "Le lien n'est pas valide, il doit commencer par https://",
+    "is_published": "Publiée",
+    "relation": "Relation",
+    "relation_placeholder_select": "Choisir une relation",
+    "categories": "Catégories de la ressource"
   },
   "resources": {
     "page": "Ressources",

@@ -91,6 +91,35 @@ export function validatePhoto(photo, submitted) {
     return "";
 }
 
+export function validateTitle(title, submitted) {
+    if (submitted) {
+        if (!title.trim()) {
+            return "resource.title_field_required";
+        }
+    }
+    return "";
+}
+
+// content
+export function validateContent(content, submitted) {
+    if (submitted) {
+        if (!content.trim()) {
+            return "resource.content_required";
+        }
+    }
+    return "";
+}
+
+// link, must be https
+export function validateLink(link, submitted) {
+    if (submitted && link) {
+        if (!link.startsWith("https://")) {
+            return "resource.link_invalid";
+        }
+    }
+    return "";
+}
+
 export function validateMedia(media, submitted) {
     if (submitted) {
         if (media.size) {
