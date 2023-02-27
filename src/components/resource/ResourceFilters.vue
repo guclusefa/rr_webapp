@@ -15,6 +15,18 @@
     <div class="row mb-3">
       <div class="col">
         <SelectField
+          @input="$emit('input', (params.verified = $event))"
+          :field="'verified'"
+          :label="'resources.verified'"
+          :placeholder-select="'resources.verified_placeholder_select'"
+          :options="'resourcesVerifiedOptions'"
+          :value="resourcesParams.verified"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
           @input="$emit('input', (params.visibility = $event))"
           :field="'visibility'"
           :label="'resources.visibility'"
@@ -105,7 +117,7 @@ export default {
     return {
       params: {
         search: "",
-        verified: 0,
+        verified: "",
         visibility: 0,
         author: [],
         relation: [],

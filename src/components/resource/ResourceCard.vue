@@ -24,7 +24,7 @@
       </h5>
       <p class="card-text" v-if="resource.isVerified">
         <span class="badge bg-success">
-          {{ $t("resources.verified") }}
+          {{ $t("resource.verified") }}
         </span>
       </p>
       <p class="card-text" v-if="resource.visibility">

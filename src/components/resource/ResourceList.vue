@@ -5,10 +5,15 @@
         <h1>
           {{ $t("resources.title") }}
         </h1>
-        <OffCanvasButton
-          :label="'resources.filter'"
-          :classes="'btn btn-primary float-end'"
-        />
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-primary me-3" v-if="user">
+            {{ $t("resources.create") }}
+          </button>
+          <OffCanvasButton
+            :label="'resources.filter'"
+            :classes="'btn btn-primary'"
+          />
+        </div>
       </div>
       <hr />
     </div>
@@ -76,7 +81,7 @@ import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 export default {
   name: "ResourceList",
   computed: {
-    ...mapGetters(["resources", "resourcesParams", "resourcesMeta", "loading"]),
+    ...mapGetters(["user","resources", "resourcesParams", "resourcesMeta", "loading"]),
   },
   methods: {
     ...mapActions(["setResources"]),

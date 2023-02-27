@@ -10,7 +10,7 @@
     :multiple="multiple"
     :class="{ 'is-invalid': validateInput() }"
   >
-    <option value="" :disabled="required" v-if="placeholderSelect">
+    <option value="" :disabled="required" v-if="placeholderSelect" :selected="!this.value || !this.values || this.value == '' || this.values.includes('')">
       {{ $t(placeholderSelect) }}
     </option>
     <option
@@ -112,6 +112,10 @@ export default {
         exploits: "resources.orders.exploits",
         saves: "resources.orders.saves",
         consults: "resources.orders.consults",
+      },
+      resourcesVerifiedOptions: {
+        0: "resources.verifies.0",
+        1: "resources.verifies.1",
       },
       resourcesVisibilityOptions: {
         1: "resources.visibilities.1",

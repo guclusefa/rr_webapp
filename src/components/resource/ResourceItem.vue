@@ -48,7 +48,7 @@
         <div class="text-strong" v-if="resource.title">
           {{ resource.title }}
           <span class="badge bg-success ms-1" v-if="resource.isVerified">
-            {{ $t("resources.verified") }}
+            {{ $t("resource.verified") }}
           </span>
           <span class="badge bg-secondary ms-1" v-if="resource.visibility">
             {{ $t(`resources.visibilities.${resource.visibility}`) }}

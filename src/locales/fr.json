@@ -195,7 +195,8 @@
     "is_published": "Publiée",
     "relation": "Relation",
     "relation_placeholder_select": "Choisir une relation",
-    "categories": "Catégories de la ressource"
+    "categories": "Catégories de la ressource",
+    "verified": "Vérifiée"
   },
   "resources": {
     "page": "Ressources",
@@ -205,6 +206,8 @@
     "meta": "Affichage de {end} ressources sur un total de {total} ressources",
     "search": "Rechercher une ressource",
     "search_placeholder": "Recherche par titre, description, ou tags",
+    "verified": "Vérification des ressources",
+    "verified_placeholder_select": "Tous les statuts de vérification",
     "order": "Ordre d'affichage des ressources",
     "orders": {
       "createdAt": "Date de création",
@@ -221,7 +224,6 @@
     "filter": "Filtrer les ressources",
     "no_results": "Aucune ressource n'a été trouvée",
     "published_days_ago": "Publiée il y a {days} jours",
-    "verified": "Vérifié",
     "visibility": "Visibilité",
     "visibility_placeholder_select": "Toutes les visibilités",
     "visibilities": {
@@ -229,8 +231,13 @@
       "2": "Protégée",
       "3": "Privée"
     },
+    "verifies": {
+      "0": "Non vérifiée",
+      "1": "Vérifiée"
+    },
     "authors": "Auteurs des ressources",
     "relations": "Relations des ressources",
-    "categories": "Catégories des ressources"
+    "categories": "Catégories des ressources",
+    "create": "Créer une ressource"
   }
 }
