@@ -179,7 +179,10 @@
     "edit_media_title": "Modifier le média de la ressource : {title}",
     "delete": "Supprimer la ressource",
     "delete_title": "Supprimer la ressource : {title}",
-    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette ressource ? Toutes les données associées seront perdues. Cette action est irréversible."
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette ressource ? Toutes les données associées seront perdues. Cette action est irréversible.",
+    "media": "Média",
+    "media_size": "Le média doit faire moins de 10 Mo",
+    "media_invalid": "Le média doit être au format mp4, jpg, jpeg gif, ou png"
   },
   "resources": {
     "page": "Ressources",

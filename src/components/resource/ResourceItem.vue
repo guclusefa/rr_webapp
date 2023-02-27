@@ -1,6 +1,6 @@
 <template>
   <!-- Side -->
-  <div class="col-lg-12 col-xl-6 border position-relative">
+  <div class="col-12 border position-relative">
     <div class="dropdown position-absolute top-0 end-0 m-2" v-if="canEdit">
       <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
         {{ $t("resource.actions") }}
@@ -23,10 +23,19 @@
         </li>
       </ul>
     </div>
-    <div class="row d-flex align-items-center">
-      <div class="col-sm-4 col-md-3 col-lg-4">
+
+    <div class="row">
+      <div class="col-sm-6 col-12">
         <template v-if="resource.media">
-          <img :src="resource.media" class="img-fluid rounded" />
+          <div
+            class="embed-responsive embed-responsive-16by9"
+            v-if="resource.media.includes('.mp4')"
+          >
+            <video controls>
+              <source :src="resource.media" type="video/mp4" />
+            </video>
+          </div>
+          <img :src="resource.media" class="img-fluid rounded" v-else />
         </template>
         <template v-else>
           <img
@@ -35,8 +44,8 @@
           />
         </template>
       </div>
-      <div class="col-sm-8 col-md-9 col-lg-8 p-2">
-        <div class="text-strong pb-1" v-if="resource.title">
+      <div class="col-sm-6 col-12 pt-3">
+        <div class="text-strong" v-if="resource.title">
           {{ resource.title }}
           <span class="badge bg-success ms-1" v-if="resource.isVerified">
             {{ $t("resources.verified") }}
@@ -56,7 +65,7 @@
             {{ category.name }}
           </span>
         </div>
-        <div class="text-muted pb-1" v-if="resource.content">
+        <div class="text-muted pb-1 pre-line" v-if="resource.content">
           {{ resource.content }}
         </div>
         <div class="text-muted pb-1" v-if="resource.link">

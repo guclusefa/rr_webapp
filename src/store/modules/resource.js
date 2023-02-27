@@ -145,6 +145,26 @@ const profile = {
             }
         },
 
+        async updateResourceMedia({ }, payload) {
+            try {
+                // new FormData() is required to send files
+                const formData = new FormData();
+                formData.append('media', payload.media);
+                // set headers to multipart/form-data
+                const config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                const response = await api.post(`/resources/${payload.id}/media`, formData, config)
+                // Updating the profile is useless for now because the photo url is the same, needs to be fixed : TODO
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
         async deleteResource({ }, id) {
             try {
                 const response = await api.delete(`/resources/${id}`)

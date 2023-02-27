@@ -90,3 +90,18 @@ export function validatePhoto(photo, submitted) {
     }
     return "";
 }
+
+export function validateMedia(media, submitted) {
+    if (submitted) {
+        if (media.size) {
+            // 10 MB
+            if (media.size > 10485760) {
+                return "resource.media_size";
+            }
+            if (!media.type.includes("image") && !media.type.includes("video")) {
+                return "resource.media_invalid";
+            }
+        }
+    }
+    return "";
+}

@@ -1,7 +1,17 @@
 <template>
   <div class="card">
     <template v-if="resource.media">
-      <img :src="resource.media" class="card-img-top" />
+      <div
+        class="embed-responsive embed-responsive-1by1"
+        v-if="resource.media.includes('.mp4')"
+      >
+        <iframe
+          class="embed-responsive-item img-fluid"
+          :src="resource.media"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <img :src="resource.media" class="card-img-top" v-else />
     </template>
     <template v-else>
       <img src="@/assets/images/resource/default.png" class="card-img-top" />

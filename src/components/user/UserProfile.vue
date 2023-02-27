@@ -216,9 +216,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.pre-line {
-  white-space: pre-line;
-}
-</style>

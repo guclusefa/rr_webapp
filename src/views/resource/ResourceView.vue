@@ -35,9 +35,6 @@ export default {
   methods: {
     ...mapActions(["setResource"]),
     async setResourceItem() {
-      console.log("setResourceItem");
-      console.log(this.id);
-
       const response = await this.setResource(this.id);
       // Success
       if (response.status >= 200 && response.status < 300) {
