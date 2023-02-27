@@ -113,6 +113,11 @@ export default {
         saves: "resources.orders.saves",
         consults: "resources.orders.consults",
       },
+      resourcesVisibilityOptions: {
+        1: "resources.visibilities.1",
+        2: "resources.visibilities.2",
+        3: "resources.visibilities.3",
+      },
       directionOptions: {
         DESC: "app.desc",
         ASC: "app.asc",
@@ -124,11 +129,14 @@ export default {
         100: "app.limits.100",
       },
       stateOptions: {},
+      authorOptions:{}, 
+      relationOptions:{},
+      categoryOptions:{},
       isApiOptions: false,
     };
   },
   computed: {
-    ...mapGetters(["states"]),
+    ...mapGetters(["states", "authors", "relations", "categories"]),
   },
   methods: {
     // handle input if multiple or not
@@ -153,7 +161,7 @@ export default {
       return this[this.options];
     },
     // fill api options
-    ...mapActions(["setStates"]),
+    ...mapActions(["setStates", "setAuthors", "setRelations", "setCategories"]),
     fillOptions() {
       switch (this.options) {
         case "stateOptions":
@@ -161,6 +169,30 @@ export default {
           this.setStates().then(() => {
             for (const state of this.states) {
               this.stateOptions[state.id] = state.name + " (" + state.code + ")";
+            }
+          });
+          break;
+        case "authorOptions":
+          this.isApiOptions = true;
+          this.setAuthors().then(() => {
+            for (const author of this.authors) {
+              this.authorOptions[author.id] = author.username;
+            }
+          });
+          break;
+        case "relationOptions":
+          this.isApiOptions = true;
+          this.setRelations().then(() => {
+            for (const relation of this.relations) {
+              this.relationOptions[relation.id] = relation.name;
+            }
+          });
+          break;
+        case "categoryOptions":
+          this.isApiOptions = true;
+          this.setCategories().then(() => {
+            for (const category of this.categories) {
+              this.categoryOptions[category.id] = category.name;
             }
           });
           break;

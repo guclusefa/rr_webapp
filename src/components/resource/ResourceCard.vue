@@ -15,6 +15,11 @@
           {{ $t("resources.verified") }}
         </span>
       </p>
+      <p class="card-text" v-if="resource.visibility">
+        <span class="badge bg-secondary">
+          {{ $t(`resources.visibilities.${resource.visibility}`) }}
+        </span>
+      </p>
       <p class="card-text" v-if="resource.relation">
         <span class="badge bg-primary">
           {{ resource.relation.name }}

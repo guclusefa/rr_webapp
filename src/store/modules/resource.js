@@ -42,6 +42,7 @@ const profile = {
             next: false,
             prev: false,
         },
+        authors: [],
         relations: [],
         categories: []
     },
@@ -63,6 +64,9 @@ const profile = {
             state.resources.push(payload)
         },
 
+        SET_AUTHORS(state, payload) {
+            state.authors = payload
+        },
         SET_RELATIONS(state, payload) {
             state.relations = payload
         },
@@ -99,12 +103,44 @@ const profile = {
             commit('SET_RESOURCES_PARAMS', params)
             dispatch('setResources')
         },
+
+        async setAuthors({ commit }) {
+            try {
+                const response = await api.get('/users')
+                commit('SET_AUTHORS', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async setRelations({ commit }) {
+            try {
+                const response = await api.get('/relations')
+                commit('SET_RELATIONS', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async setCategories({ commit }) {
+            try {
+                const response = await api.get('/categories')
+                commit('SET_CATEGORIES', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
     },
     getters: {
         resource: state => state.resource,
         resources: state => state.resources,
         resourcesParams: state => state.resourcesParams,
         resourcesMeta: state => state.resourcesMeta,
+        authors: state => state.authors,
         relations: state => state.relations,
         categories: state => state.categories,
     }

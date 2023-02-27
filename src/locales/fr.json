@@ -193,6 +193,16 @@
     "filter": "Filtrer les ressources",
     "no_results": "Aucune ressource n'a été trouvée",
     "published_days_ago": "Publiée il y a {days} jours",
-    "verified": "Vérifié"
+    "verified": "Vérifié",
+    "visibility": "Visibilité",
+    "visibility_placeholder_select": "Toutes les visibilités",
+    "visibilities": {
+      "1": "Publique",
+      "2": "Protégée",
+      "3": "Privée"
+    },
+    "authors": "Auteurs des ressources",
+    "relations": "Relations des ressources",
+    "categories": "Catégories des ressources"
   }
 }

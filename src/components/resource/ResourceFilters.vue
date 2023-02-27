@@ -15,6 +15,56 @@
     <div class="row mb-3">
       <div class="col">
         <SelectField
+          @input="$emit('input', (params.visibility = $event))"
+          :field="'visibility'"
+          :label="'resources.visibility'"
+          :placeholder-select="'resources.visibility_placeholder_select'"
+          :options="'resourcesVisibilityOptions'"
+          :value="resourcesParams.visibility"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.author = $event))"
+          :field="'author'"
+          :label="'resources.authors'"
+          :options="'authorOptions'"
+          :multiple="true"
+          :values="resourcesParams.author"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
+          @input="$emit('input', (params.relation = $event))"
+          :field="'relation'"
+          :label="'resources.relations'"
+          :options="'relationOptions'"
+          :multiple="true"
+          :values="resourcesParams.relation"
+        />
+      </div>
+    </div>
+
+    <div class="col">
+      <SelectField
+        @input="$emit('input', (params.category = $event))"
+        :field="'category'"
+        :label="'resources.categories'"
+        :options="'categoryOptions'"
+        :multiple="true"
+        :values="resourcesParams.category"
+      />
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <SelectField
           @input="$emit('input', (params.order = $event))"
           :field="'order'"
           :label="'resources.order'"
