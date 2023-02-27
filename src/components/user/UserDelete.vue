@@ -26,7 +26,6 @@ export default {
     ...mapGetters(["profile", "user"]),
   },
   methods: {
-    // send email verification
     ...mapActions(["deleteProfile", "logout"]),
     async deleteUserProfile() {
       const response = await this.deleteProfile(this.profile.id);

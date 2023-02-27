@@ -144,6 +144,16 @@ const profile = {
                 return error;
             }
         },
+
+        async deleteResource({ }, id) {
+            try {
+                const response = await api.delete(`/resources/${id}`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
     },
     getters: {
         resource: state => state.resource,
