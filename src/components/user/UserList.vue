@@ -1,30 +1,23 @@
 <template>
-  <div class="row">
+  <!-- Filters -->
+  <div class="row mb-4" v-if="canFilter">
     <div class="col">
-      <div class="d-flex justify-content-between mb-3">
-        <h1>
-          {{ $t("profiles.title") }}
-        </h1>
-        <OffCanvasButton
-          :label="'profiles.filter'"
-          :classes="'btn btn-primary float-end'"
-        />
-      </div>
-      <hr />
+      <OffCanvasButton
+        :label="'profiles.filter'"
+        :classes="'btn btn-primary'"
+      />
+      <OffCanvas title="profiles.filter">
+        <template #body>
+          <UserFilters />
+        </template>
+      </OffCanvas>
     </div>
   </div>
 
-  <!-- Filters -->
-  <OffCanvas title="profiles.filter">
-    <template #body>
-      <UserFilters />
-    </template>
-  </OffCanvas>
-
-  <template v-if="profilesMeta.total > 0">
+  <template v-if="profiles.length > 0 && profilesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="col">
+      <div class="d-flex justify-content-between align-items-center col">
         <h5>
           {{ $t("profiles.meta", profilesMeta) }}
         </h5>
@@ -41,7 +34,7 @@
     <!-- Load more -->
     <div class="row" v-if="profilesMeta.next">
       <div class="col">
-        <form @submit.prevent="fetchProfiles">
+        <form @submit.prevent="fetchMoreProfiles">
           <SubmitButton :label="'profiles.load_more'" />
         </form>
       </div>
@@ -49,39 +42,45 @@
   </template>
 
   <template v-else>
-    <!-- No results -->
-    <template v-if="profilesMeta.total === 0">
-      <NoResultMessage />
-    </template>
-    <!-- Loading -->
-    <template v-else>
-      <LoadingSpinner />
-    </template>
+    <NoResultMessage v-if="profilesMeta.total === 0" />
+    <LoadingSpinner v-else />
   </template>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { addErrorToast } from "@/services/toasts";
+import { addErrorToast } from "@/services/toasts.js";
 
-import UserFilters from "@/components/user/UserFilters.vue";
-import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
 import OffCanvas from "@/components/fragments/OffCanvas.vue";
+import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
+import UserFilters from "@/components/user/UserFilters.vue";
 
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
-import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
+
 import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
+import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
 
 export default {
   name: "UserList",
+  props: {
+    canFilter: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+  },
   computed: {
-    ...mapGetters(["profiles", "profilesParams", "profilesMeta", "loading"]),
+    ...mapGetters(["profiles", "profilesParams", "profilesMeta"]),
   },
   methods: {
     ...mapActions(["setProfiles"]),
-    async fetchProfiles() {
-      const response = await this.setProfiles(this.profilesParams);
+    async fetchMoreProfiles() {
+      // Request
+      const response = await this.setProfiles({
+        ...this.profilesParams,
+        page: this.profilesMeta.page + 1,
+      });
       // Success
       if (response.status >= 200 && response.status < 300) {
         return;
@@ -90,16 +89,10 @@ export default {
       addErrorToast(response);
     },
   },
-  created() {
-    if (this.profiles.length > 0) {
-      return;
-    }
-    this.fetchProfiles();
-  },
   components: {
-    UserFilters,
-    OffCanvasButton,
     OffCanvas,
+    OffCanvasButton,
+    UserFilters,
     UserCard,
     SubmitButton,
     NoResultMessage,

@@ -140,7 +140,7 @@ export default {
     // get profile
     ...mapGetters(["profile", "user"]),
     canEdit() {
-      if(this.user && this.profile) {
+      if (this.user && this.profile) {
         return this.user.id === this.profile.id;
       }
       return false;

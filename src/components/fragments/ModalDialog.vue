@@ -12,7 +12,7 @@
           ></button>
         </div>
         <div class="modal-body">
-            <slot name="body"></slot>
+          <slot name="body"></slot>
         </div>
       </div>
     </div>

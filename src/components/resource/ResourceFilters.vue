@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-3" v-if="!isProfile">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.author = $event))"
@@ -113,6 +113,13 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "UserFilters",
+  props: {
+    isProfile: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       params: {
@@ -134,8 +141,8 @@ export default {
   },
   methods: {
     ...mapActions(["filterResources"]),
-    filter() {
-      this.filterResources(this.params);
+    async filter() {
+      await this.filterResources(this.params);
     },
   },
   created() {

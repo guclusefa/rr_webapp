@@ -14,8 +14,8 @@
     {{ $t(validateInput()) }}
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   name: "DatePicker",
   props: {

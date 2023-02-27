@@ -42,7 +42,7 @@
               <li class="nav-item">
                 <LocaleItem />
               </li>
-              <template v-if="isAuthenticated && user">
+              <template v-if="isAuthenticated">
                 <ProfileItem />
               </template>
               <template v-else>
@@ -58,19 +58,6 @@
       </div>
     </nav>
   </header>
-  <!-- START TESTING -->
-<!--   <div class="test" v-if="isAuthenticated">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <p>{{ token }}</p>
-          <p>{{ tokenExpiration }}</p>
-          <p>{{ user }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- END TESTING -->
 </template>
 
 <script>
@@ -82,7 +69,7 @@ import ProfileItem from "@/components/layout/ProfileItem.vue";
 export default {
   name: "HeaderItem",
   computed: {
-    ...mapGetters(["isAuthenticated", "token", "tokenExpiration", "user"]),
+    ...mapGetters(["isAuthenticated"]),
   },
   components: {
     ThemeItem,

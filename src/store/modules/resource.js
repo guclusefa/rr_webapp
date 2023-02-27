@@ -2,36 +2,9 @@ import api from "@/services/api";
 
 const profile = {
     state: {
-        resource: {
-            id: null,
-            media: null,
-            title: null,
-            content: null,
-            link: null,
-            visible: null,
-            isPublished: null,
-            isVerified: null,
-            isSuspeded: null,
-            author: {},
-            relation: {},
-            categories: {},
-            createdAt: null,
-            updatedAt: null,
-        },
+        resource: {},
 
         resources: [],
-        resourcesParamsDefault: {
-            search: "",
-            verified: 0,
-            visibility: 0,
-            author: [],
-            relation: [],
-            category: [],
-            order: "createdAt",
-            direction: "DESC",
-            limit: 10,
-            page: 1,
-        },
         resourcesParams: {
             search: "",
             verified: 0,
@@ -44,17 +17,19 @@ const profile = {
             limit: 10,
             page: 1,
         },
-        resourcesMeta: {
-            total: null,
-            count: null,
-            page: null,
-            pages: null,
-            limit: null,
-            start: null,
-            end: null,
-            next: false,
-            prev: false,
+        resourcesParamsDefault: {
+            search: "",
+            verified: 0,
+            visibility: 0,
+            author: [],
+            relation: [],
+            category: [],
+            order: "createdAt",
+            direction: "DESC",
+            limit: 10,
+            page: 1,
         },
+        resourcesMeta: {},
 
         authors: [],
         relations: [],
@@ -89,6 +64,15 @@ const profile = {
         }
     },
     actions: {
+        async createResource({ }, payload) {
+            try {
+                const response = await api.post('/resources', payload)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
         async setResource({ commit }, id) {
             try {
                 const response = await api.get(`/resources/${id}`)
@@ -99,20 +83,55 @@ const profile = {
                 return error;
             }
         },
-
-        async setResources({ commit, state }) {
+        async updateResource({ dispatch }, payload) {
             try {
-                const response = await api.get('/resources', { params: state.resourcesParams })
+                const response = await api.put(`/resources/${payload.id}`, payload)
+                dispatch('setResource', payload.id)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async updateResourceMedia({ }, payload) {
+            try {
+                // new FormData() is required to send files
+                const formData = new FormData();
+                formData.append('media', payload.media);
+                // set headers to multipart/form-data
+                const config = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                const response = await api.post(`/resources/${payload.id}/media`, formData, config)
+                // Updating the profile is useless for now because the photo url is the same, needs to be fixed : TODO
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async deleteResource({ }, id) {
+            try {
+                const response = await api.delete(`/resources/${id}`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
+        async setResources({ commit }, params) {
+            try {
+                // Make request
+                const response = await api.get('/resources', { params })
                 // resources
                 for (let i = 0; i < response.data.data.length; i++) {
                     commit('ADD_RESOURCE', response.data.data[i])
                 }
                 // Meta
                 commit('SET_RESOURCES_META', response.data.meta)
-                // Next page for next request
-                if (response.data.meta.next) {
-                    commit('SET_RESOURCES_PARAMS', { ...state.resourcesParams, page: state.resourcesParams.page + 1 })
-                }
                 return response;
             }
             catch (error) {
@@ -122,18 +141,22 @@ const profile = {
         async filterResources({ commit, dispatch }, params) {
             // Reset resources
             commit('SET_RESOURCES', [])
-            commit('SET_RESOURCES_META', [])
+            commit('SET_RESOURCES_META', {})
             // Make new request
             commit('SET_RESOURCES_PARAMS', params)
-            dispatch('setResources')
+            dispatch('setResources', params)
         },
         async reloadResources({ commit, dispatch, state }) {
             // Reset resources
             commit('SET_RESOURCES', [])
-            commit('SET_RESOURCES_META', [])
+            commit('SET_RESOURCES_META', {})
             // Make new request
-            commit('SET_RESOURCES_PARAMS', state.resourcesParamsDefault)
-            dispatch('setResources')
+            dispatch('setResources', state.resourcesParamsDefault)
+        },
+        async clearResources({ commit }) {
+            commit('SET_RESOURCES', [])
+            commit('SET_RESOURCES_META', {})
+            commit('SET_RESOURCES_PARAMS', {})
         },
 
         async setAuthors({ commit }) {
@@ -165,64 +188,14 @@ const profile = {
             catch (error) {
                 return error;
             }
-        },
-
-        async createResource({ }, payload) {
-            try {
-                const response = await api.post('/resources', payload)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-
-        async updateResource({ dispatch }, payload) {
-            try {
-                const response = await api.put(`/resources/${payload.id}`, payload)
-                dispatch('setResource', payload.id)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-
-        async updateResourceMedia({ }, payload) {
-            try {
-                // new FormData() is required to send files
-                const formData = new FormData();
-                formData.append('media', payload.media);
-                // set headers to multipart/form-data
-                const config = {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-                const response = await api.post(`/resources/${payload.id}/media`, formData, config)
-                // Updating the profile is useless for now because the photo url is the same, needs to be fixed : TODO
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-
-        async deleteResource({ }, id) {
-            try {
-                const response = await api.delete(`/resources/${id}`)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
+        }
     },
     getters: {
         resource: state => state.resource,
 
         resources: state => state.resources,
         resourcesParams: state => state.resourcesParams,
+        resourcesParamsDefault: state => state.resourcesParamsDefault,
         resourcesMeta: state => state.resourcesMeta,
 
         authors: state => state.authors,

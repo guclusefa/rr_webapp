@@ -131,8 +131,8 @@ export default {
   },
   methods: {
     ...mapActions(["filterProfiles"]),
-    filter() {
-      this.filterProfiles(this.params);
+    async filter() {
+      await this.filterProfiles(this.params);
     },
   },
   created() {

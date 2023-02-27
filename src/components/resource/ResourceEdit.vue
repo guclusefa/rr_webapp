@@ -136,6 +136,7 @@ export default {
   props: {
     edit: {
       type: Boolean,
+      required: false,
       default: true,
     },
   },

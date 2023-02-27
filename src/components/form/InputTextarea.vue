@@ -14,8 +14,8 @@
     {{ $t(validateInput()) }}
   </div>
 </template>
-  
-  <script>
+
+<script>
 export default {
   name: "InputTextarea",
   props: {
@@ -58,7 +58,7 @@ export default {
     },
     fillInput() {
       const input = document.getElementById(this.field);
-      if (this.value || this.value == '') {
+      if (this.value || this.value == "") {
         input.value = this.value;
       }
     },

@@ -50,6 +50,12 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "ForgotPasswordForm",
   mixins: [forgotPasswordResetValidation],
+  props: {
+    token: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       body: {
@@ -57,12 +63,6 @@ export default {
         password_confirmation: ""
       }
     };
-  },
-  props: {
-    token: {
-      type: String,
-      required: true,
-    },
   },
   methods: {
     // Form submit

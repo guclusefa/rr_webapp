@@ -2,22 +2,8 @@ import api from "@/services/api";
 
 const profile = {
     state: {
-        profile: {
-            id: null,
-            photo: null,
-            username: null,
-            email: null,
-            firstName: null,
-            lastName: null,
-            state: null,
-            bio: null,
-            gender: null,
-            birthDate: null,
-            roles: [],
-            isCertified: null,
-            createdAt: null,
-            updatedAt: null,
-        },
+        profile: {},
+
         profiles: [],
         profilesParams: {
             search: "",
@@ -30,17 +16,19 @@ const profile = {
             limit: 10,
             page: 1,
         },
-        profilesMeta: {
-            total: null,
-            count: null,
-            page: null,
-            pages: null,
-            limit: null,
-            start: null,
-            end: null,
-            next: false,
-            prev: false,
+        profilesParamsDefault: {
+            search: "",
+            certified: 0,
+            role: [],
+            state: [],
+            gender: [],
+            order: "createdAt",
+            direction: "DESC",
+            limit: 10,
+            page: 1,
         },
+        profilesMeta: {},
+
         states: []
     },
     mutations: {
@@ -152,33 +140,34 @@ const profile = {
             }
         },
 
-        async setProfiles({ commit, state }) {
+        async setProfiles({ commit }, params) {
             try {
-                const response = await api.get('/users', { params: state.profilesParams })
+                // Make request
+                const response = await api.get('/users', { params })
                 // Profiles
                 for (let i = 0; i < response.data.data.length; i++) {
                     commit('ADD_PROFILE', response.data.data[i])
                 }
                 // Meta
                 commit('SET_PROFILES_META', response.data.meta)
-                // Next page for next request
-                if (response.data.meta.next) {
-                    commit('SET_PROFILES_PARAMS', { ...state.profilesParams, page: state.profilesParams.page + 1 })
-                }
                 return response;
             }
             catch (error) {
                 return error;
             }
         },
-
         async filterProfiles({ commit, dispatch }, params) {
             // Reset profiles
             commit('SET_PROFILES', [])
-            commit('SET_PROFILES_META', [])
+            commit('SET_PROFILES_META', {})
             // Make new request
             commit('SET_PROFILES_PARAMS', params)
-            dispatch('setProfiles')
+            dispatch('setProfiles', params)
+        },
+        async clearProfiles({ commit }) {
+            commit('SET_PROFILES', [])
+            commit('SET_PROFILES_META', {})
+            commit('SET_PROFILES_PARAMS', {})
         },
 
         async setStates({ commit }) {
@@ -194,9 +183,12 @@ const profile = {
     },
     getters: {
         profile: state => state.profile,
+
         profiles: state => state.profiles,
         profilesParams: state => state.profilesParams,
+        profilesParamsDefault: state => state.profilesParamsDefault,
         profilesMeta: state => state.profilesMeta,
+
         states: state => state.states
     }
 }

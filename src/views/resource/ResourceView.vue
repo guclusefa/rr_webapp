@@ -32,6 +32,11 @@ export default {
       return this.$route.params.id;
     },
   },
+  watch: {
+    id() {
+      this.setResourceItem();
+    },
+  },
   methods: {
     ...mapActions(["setResource"]),
     async setResourceItem() {
@@ -41,7 +46,7 @@ export default {
         return;
       }
       // Error
-      if(response.status === 404) {
+      if (response.status === 404) {
         addErrorToast("resource.not_found");
       } else {
         addErrorToast(response);
@@ -49,13 +54,8 @@ export default {
       this.$router.push({ name: "home" });
     },
   },
-  beforeMount() {
+  mounted() {
     this.setResourceItem();
-  },
-  watch: {
-    id() {
-      this.setResourceItem();
-    },
   },
   components: {
     ResourceItem,

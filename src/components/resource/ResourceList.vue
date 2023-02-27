@@ -1,38 +1,20 @@
 <template>
-  <div class="row">
+  <!-- Filters -->
+  <div class="row mb-4" v-if="canFilter">
     <div class="col">
-      <div class="d-flex justify-content-between mb-3">
-        <h1>
-          {{ $t("resources.title") }}
-        </h1>
-        <div class="d-flex justify-content-end">
-          <button class="btn btn-outline-primary me-3" @click="showCreateModal" v-if="user">
-            {{ $t("resources.create") }}
-          </button>
-          <OffCanvasButton
-            :label="'resources.filter'"
-            :classes="'btn btn-primary'"
-          />
-        </div>
-      </div>
-      <hr />
+      <OffCanvasButton
+        :label="'resources.filter'"
+        :classes="'btn btn-primary'"
+      />
+      <OffCanvas title="resources.filter">
+        <template #body>
+          <ResourceFilters :isProfile="isProfile" />
+        </template>
+      </OffCanvas>
     </div>
-    <!-- Edit -->
-    <ModalDialog ref="createModal" :title="$t('resources.create')">
-      <template #body>
-        <ResourceEdit :edit="false" @close="closeEditModal"/>
-      </template>
-    </ModalDialog>
   </div>
 
-  <!-- Filters -->
-  <OffCanvas title="resources.filter">
-    <template #body>
-      <ResourceFilters />
-    </template>
-  </OffCanvas>
-
-  <template v-if="resourcesMeta.total > 0">
+  <template v-if="resources.length > 0 && resourcesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
       <div class="col">
@@ -52,7 +34,7 @@
     <!-- Load more -->
     <div class="row" v-if="resourcesMeta.next">
       <div class="col">
-        <form @submit.prevent="fetchResources">
+        <form @submit.prevent="fetchMoreResources">
           <SubmitButton :label="'resources.load_more'" />
         </form>
       </div>
@@ -60,14 +42,8 @@
   </template>
 
   <template v-else>
-    <!-- No results -->
-    <template v-if="resourcesMeta.total === 0">
-      <NoResultMessage />
-    </template>
-    <!-- Loading -->
-    <template v-else>
-      <LoadingSpinner />
-    </template>
+    <NoResultMessage v-if="resourcesMeta.total === 0" />
+    <LoadingSpinner v-else />
   </template>
 </template>
 
@@ -75,39 +51,41 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import ModalDialog from "@/components/fragments/ModalDialog.vue";
-import ResourceEdit from "@/components/resource/ResourceEdit.vue";
-
-import ResourceFilters from "@/components/resource/ResourceFilters.vue";
 import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
 import OffCanvas from "@/components/fragments/OffCanvas.vue";
+import ResourceFilters from "@/components/resource/ResourceFilters.vue";
 
 import ResourceCard from "@/components/resource/ResourceCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
+
 import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
 import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 
 export default {
   name: "ResourceList",
+  props: {
+    canFilter: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    isProfile: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   computed: {
-    ...mapGetters([
-      "user",
-      "resources",
-      "resourcesParams",
-      "resourcesMeta",
-      "loading",
-    ]),
+    ...mapGetters(["resources", "resourcesParams", "resourcesMeta"]),
   },
   methods: {
-    showCreateModal() {
-      this.$refs.createModal.show();
-    },
-    closeEditModal() {
-      this.$refs.createModal.close();
-    },
     ...mapActions(["setResources"]),
-    async fetchResources() {
-      const response = await this.setResources(this.resourcesParams);
+    async fetchMoreResources() {
+      // Request
+      const response = await this.setResources({
+        ...this.resourcesParams,
+        page: this.resourcesMeta.page + 1,
+      });
       // Success
       if (response.status >= 200 && response.status < 300) {
         return;
@@ -116,18 +94,10 @@ export default {
       addErrorToast(response);
     },
   },
-  created() {
-    if (this.resources.length > 0) {
-      return;
-    }
-    this.fetchResources();
-  },
   components: {
-    ModalDialog,
-    ResourceEdit,
-    ResourceFilters,
     OffCanvasButton,
     OffCanvas,
+    ResourceFilters,
     ResourceCard,
     SubmitButton,
     NoResultMessage,
