@@ -16,6 +16,7 @@ import ProfilesView from '@/views/profile/ProfilesView.vue'
 import ProfileView from '@/views/profile/ProfileView.vue'
 // Resource views
 import ResourcesView from '@/views/resource/ResourcesView.vue'
+import ResourceView from '@/views/resource/ResourceView.vue'
 
 // Routes
 const routes = [
@@ -73,6 +74,11 @@ const routes = [
     path: '/resources',
     name: 'resources',
     component: ResourcesView
+  },
+  {
+    path: '/resource/:id',
+    name: 'resource',
+    component: ResourceView
   },
 ]
 // Router

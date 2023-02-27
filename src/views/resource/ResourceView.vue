@@ -1,15 +1,15 @@
 <template>
   <section>
-    <div class="container" v-if="this.profile.id == this.id">
+    <div class="container" v-if="this.resource.id == this.id">
       <div class="row">
         <div class="col">
-          <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
+          <h1>{{ $t("resource.title", { title: resource.title }) }}</h1>
           <hr />
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <UserProfile />
+          <ResourceItem />
         </div>
       </div>
     </div>
@@ -21,28 +21,31 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import UserProfile from "@/components/user/UserProfile";
+import ResourceItem from "@/components/resource/ResourceItem";
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
 export default {
-  name: "ProfileView",
+  name: "ResourceView",
   computed: {
-    ...mapGetters(["user", "profile"]),
+    ...mapGetters(["resource"]),
     id() {
       return this.$route.params.id;
     },
   },
   methods: {
-    ...mapActions(["setProfile"]),
-    async setProfileUser() {
-      const response = await this.setProfile(this.id);
+    ...mapActions(["setResource"]),
+    async setResourceItem() {
+      console.log("setResourceItem");
+      console.log(this.id);
+
+      const response = await this.setResource(this.id);
       // Success
       if (response.status >= 200 && response.status < 300) {
         return;
       }
       // Error
-      if (response.status === 404) {
-        addErrorToast("user.not_found");
+      if(response.status === 404) {
+        addErrorToast("resource.not_found");
       } else {
         addErrorToast(response);
       }
@@ -50,15 +53,15 @@ export default {
     },
   },
   beforeMount() {
-    this.setProfileUser();
+    this.setResourceItem();
   },
   watch: {
     id() {
-      this.setProfileUser();
+      this.setResourceItem();
     },
   },
   components: {
-    UserProfile,
+    ResourceItem,
     LoadingSpinner,
   },
 };

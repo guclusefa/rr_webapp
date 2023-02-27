@@ -75,6 +75,17 @@ const profile = {
         }
     },
     actions: {
+        async setResource({ commit }, id) {
+            try {
+                const response = await api.get(`/resources/${id}`)
+                commit('SET_RESOURCE', response.data.data)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
         async setResources({ commit, state }) {
             try {
                 const response = await api.get('/resources', { params: state.resourcesParams })
@@ -94,7 +105,6 @@ const profile = {
                 return error;
             }
         },
-
         async filterResources({ commit, dispatch }, params) {
             // Reset resources
             commit('SET_RESOURCES', [])
@@ -137,9 +147,11 @@ const profile = {
     },
     getters: {
         resource: state => state.resource,
+
         resources: state => state.resources,
         resourcesParams: state => state.resourcesParams,
         resourcesMeta: state => state.resourcesMeta,
+
         authors: state => state.authors,
         relations: state => state.relations,
         categories: state => state.categories,

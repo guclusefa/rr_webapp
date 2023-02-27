@@ -8,7 +8,9 @@
     </template>
     <div class="card-body">
       <h5 class="card-title" v-if="resource.title">
-        {{ resource.title }}
+        <router-link :to="{ name: 'resource', params: { id: resource.id } }"
+          >{{ resource.title }}
+        </router-link>
       </h5>
       <p class="card-text" v-if="resource.isVerified">
         <span class="badge bg-success">
@@ -40,7 +42,7 @@
       <p class="card-text" v-if="resource.author">
         <UserIdentifier :user="resource.author" />
       </p>
-      <p class="card-text" v-if="resource.createdAt && resource.author">
+      <p class="card-text" v-if="resource.createdAt">
         <span class="text-muted pb-1">
           {{
             $t(`resources.published_days_ago`, {
@@ -52,28 +54,16 @@
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-between">
-        <div>
-          <i class="bi bi-chat me-1"></i>{{ resource.comments }}
-        </div>
-        <div>
-          <i class="bi bi-repeat me-1"></i>{{ resource.shares }}
-        </div>
-        <div>
-          <i class="bi bi-heart me-1"></i>{{ resource.likes }}
-        </div>
-        <div>
-          <i class="bi bi-bar-chart me-1"></i>{{ resource.consults }}
-        </div>
+        <div><i class="bi bi-chat me-1"></i>{{ resource.comments }}</div>
+        <div><i class="bi bi-repeat me-1"></i>{{ resource.shares }}</div>
+        <div><i class="bi bi-heart me-1"></i>{{ resource.likes }}</div>
+        <div><i class="bi bi-bar-chart me-1"></i>{{ resource.consults }}</div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-end gap-2">
-        <div>
-          <i class="bi bi-award me-1"></i>{{ resource.exploits }}
-        </div>
-        <div>
-          <i class="bi bi-bookmark me-1"></i>{{ resource.saves }}
-        </div>
+        <div><i class="bi bi-award me-1"></i>{{ resource.exploits }}</div>
+        <div><i class="bi bi-bookmark me-1"></i>{{ resource.saves }}</div>
       </div>
     </div>
   </div>
