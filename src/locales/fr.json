@@ -199,6 +199,7 @@
     "relation_required": "Veuillez choisir une relation",
     "categories": "Catégories de la ressource",
     "verified": "Vérifiée",
+    "unverified": "Non vérifiée",
     "create": "Créer"
   },
   "resources": {

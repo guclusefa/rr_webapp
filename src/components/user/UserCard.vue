@@ -11,8 +11,8 @@
         <router-link :to="{ name: 'profile', params: { id: profile.id } }">
           @{{ profile.username }}
         </router-link>
-        <span class="badge bg-primary ms-1" v-if="profile.isCertified">
-          {{ $t("user.certified") }}
+        <span v-if="profile.isCertified">
+          <i class="bi bi-patch-check-fill ms-1"></i>
         </span>
       </h5>
       <p class="card-text" v-if="profile.firstName || profile.lastName">
@@ -21,13 +21,13 @@
         </span>
       </p>
       <p class="card-text" v-if="profile.gender">
-        <span class="badge bg-dark" v-if="profile.roles[0]">
+        <span class="badge bg-dark me-1" v-if="profile.roles[0]">
           {{ $t(`user.roles.${profile.roles[0]}`) }}
         </span>
-        <span class="badge bg-secondary" v-if="profile.gender">
+        <span class="badge bg-secondary me-1" v-if="profile.gender">
           {{ $t(`user.genders.${profile.gender}`) }}
         </span>
-        <span class="badge bg-info">
+        <span class="badge bg-info me-1">
           {{ profile.state.name }}
         </span>
       </p>
