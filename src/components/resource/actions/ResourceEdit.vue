@@ -141,7 +141,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["resource"]),
+    ...mapGetters(["resource", "resourceParamsDefault"]),
   },
   methods: {
     setBody() {

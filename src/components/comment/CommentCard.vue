@@ -1,0 +1,34 @@
+<template>
+  <div class="card">
+    <div class="card-header">
+      <UserIdentifier :user="comment.author" />
+      <span class="text-muted ms-2">
+        {{ formatDate(comment.createdAt) }}
+      </span>
+    </div>
+    <div class="card-body">
+      <p class="card-text pre-line">{{ comment.content }}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import dateFormatter from "@/mixins/dateFormatter";
+
+import UserIdentifier from "../user/UserIdentifier.vue";
+
+export default {
+  name: "CommentCard",
+  mixins: [dateFormatter],
+
+  props: {
+    comment: {
+      type: Object,
+      required: true,
+    },
+  },
+  components: {
+    UserIdentifier,
+  },
+};
+</script>

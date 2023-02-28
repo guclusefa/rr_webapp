@@ -1,6 +1,6 @@
 <template>
   <section class="container" v-if="this.resource.id == this.id">
-    <!-- Resource -->
+    <!-- Resource section -->
     <section class="mb-5">
       <div class="row mb-3">
         <div class="col">
@@ -20,7 +20,33 @@
         </div>
       </div>
     </section>
+
+    <!-- Comments section -->
+    <section class="mb-5">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("comments.title") }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Comment edit (add)-->
+      <div class="row mb-4">
+        <div class="col">
+          <CommentEdit :resource="resource" />
+        </div>
+      </div>
+      <!-- Comments -->
+      <div class="row">
+        <div class="col">
+          <CommentList />
+        </div>
+      </div>
+    </section>
   </section>
+  
   <LoadingSpinner v-else />
 </template>
 
@@ -31,12 +57,15 @@ import { addErrorToast } from "@/services/toasts";
 import ResourceActions from "@/components/resource/ResourceActions";
 import ResourceItem from "@/components/resource/ResourceItem";
 
+import CommentEdit from "@/components/comment/actions/CommentEdit";
+import CommentList from "@/components/comment/CommentList";
+
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
 export default {
   name: "ResourceView",
   computed: {
-    ...mapGetters(["user", "resource", "resourceParamsDefault"]),
+    ...mapGetters(["user", "resource", "commentsParamsDefault"]),
     id() {
       return this.$route.params.id;
     },
@@ -51,7 +80,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setResource"]),
+    ...mapActions(["setResource", "filterComments", "clearComments"]),
     async setResourceItem() {
       const response = await this.setResource(this.id);
       // Success
@@ -66,8 +95,20 @@ export default {
       }
       this.$router.push({ name: "home" });
     },
+    async setResourceComments() {
+      const params = {
+        ...this.commentsParamsDefault,
+        resource: [this.id],
+      };
+      await this.filterComments(params);
+    },
     loadResource() {
-      this.setResourceItem();
+      // Clear
+      this.clearComments();
+      // Set
+      this.setResourceItem().then(() => {
+        this.setResourceComments();
+      });
     },
   },
   mounted() {
@@ -81,6 +122,9 @@ export default {
   components: {
     ResourceActions,
     ResourceItem,
+
+    CommentEdit,
+    CommentList,
 
     LoadingSpinner,
   },

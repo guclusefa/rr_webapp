@@ -243,5 +243,39 @@
     "relations": "Relations des ressources",
     "categories": "Catégories des ressources",
     "create": "Créer une ressource"
+  },
+  "comments": {
+    "page": "Commentaires",
+    "title": "Les commentaires",
+    "see_comment": "Voir le commentaire",
+    "load_more": "Charger plus de commentaires",
+    "meta": "Affichage de {end} commentaires sur un total de {total} commentaires",
+    "search": "Rechercher un commentaire",
+    "search_placeholder": "Recherche par contenu",
+    "order": "Ordre d'affichage des commentaires",
+    "orders": {
+      "createdAt": "Date de création",
+      "content": "Contenu"
+    },
+    "direction": "Direction d'affichage des commentaires",
+    "limit": "Nombre de commentaires par page",
+    "filter": "Filtrer les commentaires",
+    "no_results": "Aucun commentaire n'a été trouvé",
+    "authors": "Auteurs des commentaires",
+    "resources": "Ressources des commentaires"
+  },
+  "comment": {
+    "page": "Commentaire",
+    "title": "Commentaire : {content}",
+    "actions": "Actions",
+    "edit": "Modifier le commentaire",
+    "edit_title": "Modifier le commentaire : {content}",
+    "delete": "Supprimer le commentaire",
+    "delete_title": "Supprimer le commentaire : {content}",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce commentaire ? Toutes les données associées seront perdues. Cette action est irréversible.",
+    "content": "Contenu",
+    "content_placeholder": "Contenu du commentaire",
+    "content_required": "Veuillez entrer un contenu",
+    "create": "Ajouter un commentaire"
   }
 }

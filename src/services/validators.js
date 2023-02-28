@@ -144,3 +144,13 @@ export function validateMedia(media, submitted) {
     }
     return "";
 }
+
+// comment
+export function validateComment(comment, submitted) {
+    if (submitted) {
+        if (!comment.trim()) {
+            return "comment.comment_required";
+        }
+    }
+    return "";
+}

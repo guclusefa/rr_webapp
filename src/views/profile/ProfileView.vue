@@ -37,7 +37,7 @@
               <AddResourceButton />
             </span>
             <span class="ms-2">
-              <FilterResourceButton />
+              <FilterResourceButton :isProfile="true" />
             </span>
           </div>
         </div>
@@ -45,7 +45,7 @@
       <!-- Resources -->
       <div class="row">
         <div class="col">
-          <ResourceList :isProfile="true" :showCreate="isOwner" />
+          <ResourceList />
         </div>
       </div>
     </section>
