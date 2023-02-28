@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer py-3 bg-light" style="margin-top: 30px">
+  <footer class="footer py-3 bg-light">
     <div class="container">
       <span class="text-muted">{{
         $t("footer.copyright", { year: currentYear })

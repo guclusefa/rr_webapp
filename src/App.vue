@@ -2,10 +2,10 @@
   <HeaderItem />
   <main>
     <router-view />
+    <aside>
+      <ToastMessage />
+    </aside>
   </main>
-  <aside>
-    <ToastMessage />
-  </aside>
   <FooterItem />
 </template>
 
