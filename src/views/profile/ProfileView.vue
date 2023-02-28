@@ -55,7 +55,7 @@ import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 export default {
   name: "ProfileView",
   computed: {
-    ...mapGetters(["user", "profile"]),
+    ...mapGetters(["user", "profile", "resourcesParamsDefault"]),
     id() {
       return this.$route.params.id;
     },
@@ -84,6 +84,7 @@ export default {
     },
     async setProfileResources() {
       const params = {
+        ...this.resourcesParamsDefault,
         author: [this.id],
       };
       await this.filterResources(params);
