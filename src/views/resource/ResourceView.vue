@@ -32,11 +32,6 @@ export default {
       return this.$route.params.id;
     },
   },
-  watch: {
-    id() {
-      this.setResourceItem();
-    },
-  },
   methods: {
     ...mapActions(["setResource"]),
     async setResourceItem() {
@@ -53,12 +48,21 @@ export default {
       }
       this.$router.push({ name: "home" });
     },
+    loadResource() {
+      this.setResourceItem();
+    },
   },
   mounted() {
-    this.setResourceItem();
+    this.loadResource();
+  },
+  watch: {
+    id() {
+      this.loadResource();
+    },
   },
   components: {
     ResourceItem,
+    
     LoadingSpinner,
   },
 };

@@ -9,25 +9,12 @@
         </div>
       </div>
 
-      <template v-if="isAuthenticated">
-        <!-- Add resource -->
-        <div class="row mb-4">
-          <div class="col">
-            <button
-              type="button"
-              class="btn btn-primary"
-              @click="$refs.addModal.show()"
-            >
-              {{ $t("resources.create") }}
-            </button>
-          </div>
+      <!-- Add resource -->
+      <div class="row mb-4" v-if="isAuthenticated">
+        <div class="col">
+          <AddResource />
         </div>
-        <ModalDialog ref="addModal" :title="'ressources.create'">
-          <template #body>
-            <ResourceEdit :edit="false" @close="$refs.addModal.close()" />
-          </template>
-        </ModalDialog>
-      </template>
+      </div>
 
       <!-- Resources -->
       <div class="row mb-4">
@@ -43,8 +30,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import ModalDialog from "@/components/fragments/ModalDialog";
-import ResourceEdit from "@/components/resource/ResourceEdit";
+import AddResource from "@/components/resource/AddResource";
 
 import ResourceList from "@/components/resource/ResourceList";
 
@@ -72,9 +58,7 @@ export default {
     this.fetchResources();
   },
   components: {
-    ModalDialog,
-    ResourceEdit,
-
+    AddResource,
     ResourceList,
   },
 };

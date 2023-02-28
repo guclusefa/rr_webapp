@@ -1,6 +1,7 @@
 <template>
   <section>
     <div class="container" v-if="this.profile.id == this.id">
+      <!-- User profile -->
       <div class="row">
         <div class="col">
           <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
@@ -12,6 +13,8 @@
           <UserProfile />
         </div>
       </div>
+
+      <!-- Resources -->
       <div class="row">
         <div class="col">
           <h1>
@@ -20,12 +23,20 @@
           <hr />
         </div>
       </div>
+      <!-- Add resource -->
+      <div class="row mb-4" v-if="isOwner">
+        <div class="col">
+          <AddResource />
+        </div>
+      </div>
+      <!-- Resources -->
       <div class="row mb-5">
         <div class="col">
           <ResourceList :isProfile="true" />
         </div>
       </div>
     </div>
+
     <LoadingSpinner v-else />
   </section>
 </template>
@@ -35,6 +46,8 @@ import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import UserProfile from "@/components/user/UserProfile";
+
+import AddResource from "@/components/resource/AddResource";
 import ResourceList from "@/components/resource/ResourceList";
 
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
@@ -46,10 +59,11 @@ export default {
     id() {
       return this.$route.params.id;
     },
-  },
-  watch: {
-    id() {
-      this.setProfileUser();
+    isOwner() {
+      if (!this.user) {
+        return false;
+      }
+      return this.user.id == this.id;
     },
   },
   methods: {
@@ -74,18 +88,29 @@ export default {
       };
       await this.filterResources(params);
     },
+    loadProfile() {
+      // Clear
+      this.clearResources();
+      // Set
+      this.setProfileUser().then(() => {
+        this.setProfileResources();
+      });
+    },
   },
   mounted() {
-    // Clear
-    this.clearResources();
-    // Set
-    this.setProfileUser().then(() => {
-      this.setProfileResources();
-    });
+    this.loadProfile();
+  },
+  watch: {
+    id() {
+      this.loadProfile();
+    },
   },
   components: {
     UserProfile,
+
+    AddResource,
     ResourceList,
+
     LoadingSpinner,
   },
 };
