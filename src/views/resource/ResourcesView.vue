@@ -1,28 +1,28 @@
 <template>
-  <section>
-    <div class="container">
-      <!-- Title -->
+  <!-- Resources -->
+  <section class="container">
+    <section class="mb-5">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("resources.title") }}</h1>
+            </div>
+            <span class="ms-2" v-if="isAuthenticated">
+              <AddResourceButton />
+            </span>
+            <span class="ms-2">
+              <FilterResourceButton />
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="row">
-        <div class="col">
-          <h1>{{ $t("resources.title") }}</h1>
-          <hr />
-        </div>
-      </div>
-
-      <!-- Add resource -->
-      <div class="row mb-4" v-if="isAuthenticated">
-        <div class="col">
-          <AddResource />
-        </div>
-      </div>
-
-      <!-- Resources -->
-      <div class="row mb-4">
         <div class="col">
           <ResourceList />
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 
@@ -30,8 +30,8 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import AddResource from "@/components/resource/AddResource";
-
+import AddResourceButton from "@/components/resource/AddResourceButton.vue";
+import FilterResourceButton from "@/components/resource/FilterResourceButton.vue";
 import ResourceList from "@/components/resource/ResourceList";
 
 export default {
@@ -40,7 +40,7 @@ export default {
     ...mapGetters(["resourcesParamsDefault", "isAuthenticated"]),
   },
   methods: {
-    ...mapActions(["clearResources", "setResources"]),
+    ...mapActions(["setResources", "clearResources"]),
     async fetchResources() {
       // Clear resources
       this.clearResources();
@@ -58,7 +58,8 @@ export default {
     this.fetchResources();
   },
   components: {
-    AddResource,
+    AddResourceButton,
+    FilterResourceButton,
     ResourceList,
   },
 };

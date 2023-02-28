@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/services/i18n.js'
 
+// Base views
 import HomeView from '@/views/HomeView.vue'
-
+// Components
+import UserVerify from '@/components/user/actions/UserVerify.vue'
 import LogoutForm from '@/components/auth/LogoutForm.vue'
-import UserVerify from '@/components/user/UserVerify.vue'
-
 // Auth views
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'

@@ -1,13 +1,16 @@
 <template>
-  <section>
-    <div class="container">
-      <div class="row">
+  <section class="container">
+    <section class="mb-5">
+      <div class="row mb-3">
         <div class="col">
-          <h1>{{ $t("home.title") }}</h1>
-          <hr />
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("home.title") }}</h1>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 

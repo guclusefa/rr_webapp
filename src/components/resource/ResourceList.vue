@@ -1,19 +1,4 @@
 <template>
-  <!-- Filters -->
-  <div class="row mb-4" v-if="canFilter">
-    <div class="col">
-      <OffCanvasButton
-        :label="'resources.filter'"
-        :classes="'btn btn-primary'"
-      />
-      <OffCanvas title="resources.filter">
-        <template #body>
-          <ResourceFilters :isProfile="isProfile" />
-        </template>
-      </OffCanvas>
-    </div>
-  </div>
-
   <template v-if="resources.length > 0 && resourcesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
@@ -51,10 +36,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
-import OffCanvas from "@/components/fragments/OffCanvas.vue";
-import ResourceFilters from "@/components/resource/ResourceFilters.vue";
-
 import ResourceCard from "@/components/resource/ResourceCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -63,18 +44,6 @@ import LoadingSpinner from "@/components/fragments/LoadingSpinner.vue";
 
 export default {
   name: "ResourceList",
-  props: {
-    canFilter: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    isProfile: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
   computed: {
     ...mapGetters(["resources", "resourcesParams", "resourcesMeta"]),
   },
@@ -95,11 +64,9 @@ export default {
     },
   },
   components: {
-    OffCanvasButton,
-    OffCanvas,
-    ResourceFilters,
     ResourceCard,
     SubmitButton,
+    
     NoResultMessage,
     LoadingSpinner,
   },

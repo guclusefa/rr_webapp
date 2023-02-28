@@ -1,23 +1,8 @@
 <template>
-  <!-- Filters -->
-  <div class="row mb-4" v-if="canFilter">
-    <div class="col">
-      <OffCanvasButton
-        :label="'profiles.filter'"
-        :classes="'btn btn-primary'"
-      />
-      <OffCanvas title="profiles.filter">
-        <template #body>
-          <UserFilters />
-        </template>
-      </OffCanvas>
-    </div>
-  </div>
-
   <template v-if="profiles.length > 0 && profilesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="d-flex justify-content-between align-items-center col">
+      <div class="col">
         <h5>
           {{ $t("profiles.meta", profilesMeta) }}
         </h5>
@@ -51,10 +36,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts.js";
 
-import OffCanvas from "@/components/fragments/OffCanvas.vue";
-import OffCanvasButton from "@/components/fragments/OffCanvasButton.vue";
-import UserFilters from "@/components/user/UserFilters.vue";
-
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -63,13 +44,6 @@ import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
 
 export default {
   name: "UserList",
-  props: {
-    canFilter: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-  },
   computed: {
     ...mapGetters(["profiles", "profilesParams", "profilesMeta"]),
   },
@@ -90,11 +64,9 @@ export default {
     },
   },
   components: {
-    OffCanvas,
-    OffCanvasButton,
-    UserFilters,
     UserCard,
     SubmitButton,
+    
     NoResultMessage,
     LoadingSpinner,
   },

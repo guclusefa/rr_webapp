@@ -1,35 +1,53 @@
 <template>
-  <section>
-    <div class="container" v-if="this.resource.id == this.id">
-      <div class="row">
+  <section class="container" v-if="this.resource.id == this.id">
+    <!-- Resource -->
+    <section class="mb-5">
+      <div class="row mb-3">
         <div class="col">
-          <h1>{{ $t("resource.title", { title: resource.title }) }}</h1>
-          <hr />
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("resource.title", { title: resource.title }) }}</h1>
+            </div>
+            <span class="ms-2" v-if="canEdit">
+              <ResourceActions :resource="resource" />
+            </span>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <ResourceItem />
+          <ResourceItem :resource="resource" />
         </div>
       </div>
-    </div>
-    <LoadingSpinner v-else />
+    </section>
   </section>
+  <LoadingSpinner v-else />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import ResourceActions from "@/components/resource/ResourceActions";
 import ResourceItem from "@/components/resource/ResourceItem";
+
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
 export default {
   name: "ResourceView",
   computed: {
-    ...mapGetters(["resource"]),
+    ...mapGetters(["user", "resource", "resourceParamsDefault"]),
     id() {
       return this.$route.params.id;
+    },
+    isOwner() {
+      if (!this.user) {
+        return false;
+      }
+      return this.resource.author.id == this.user.id;
+    },
+    canEdit() {
+      return this.isOwner;
     },
   },
   methods: {
@@ -61,8 +79,9 @@ export default {
     },
   },
   components: {
+    ResourceActions,
     ResourceItem,
-    
+
     LoadingSpinner,
   },
 };

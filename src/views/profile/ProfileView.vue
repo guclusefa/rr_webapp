@@ -1,53 +1,68 @@
 <template>
-  <section>
-    <div class="container" v-if="this.profile.id == this.id">
-      <!-- User profile -->
+  <section class="container" v-if="this.profile.id == this.id">
+    <!-- User profile -->
+    <section class="mb-5">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
+            </div>
+            <span class="ms-2" v-if="canEdit">
+              <UserActions :profile="profile" />
+            </span>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
-          <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
-          <hr />
+          <UserItem :profile="profile" />
         </div>
       </div>
-      <div class="row mb-5">
-        <div class="col">
-          <UserProfile />
-        </div>
-      </div>
+    </section>
 
+    <!-- Resources -->
+    <section class="mb-5">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>
+                {{
+                  $t("profile.resources_title", { username: profile.username })
+                }}
+              </h1>
+            </div>
+            <span class="ms-2" v-if="isOwner">
+              <AddResourceButton />
+            </span>
+            <span class="ms-2">
+              <FilterResourceButton />
+            </span>
+          </div>
+        </div>
+      </div>
       <!-- Resources -->
       <div class="row">
         <div class="col">
-          <h1>
-            {{ $t("profile.resources_title", { username: profile.username }) }}
-          </h1>
-          <hr />
+          <ResourceList :isProfile="true" :showCreate="isOwner" />
         </div>
       </div>
-      <!-- Add resource -->
-      <div class="row mb-4" v-if="isOwner">
-        <div class="col">
-          <AddResource />
-        </div>
-      </div>
-      <!-- Resources -->
-      <div class="row mb-5">
-        <div class="col">
-          <ResourceList :isProfile="true" />
-        </div>
-      </div>
-    </div>
-
-    <LoadingSpinner v-else />
+    </section>
   </section>
+
+  <LoadingSpinner v-else />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import UserProfile from "@/components/user/UserProfile";
+import UserActions from "@/components/user/UserActions";
+import UserItem from "@/components/user/UserItem";
 
-import AddResource from "@/components/resource/AddResource";
+import AddResourceButton from "@/components/resource/AddResourceButton";
+import FilterResourceButton from "@/components/resource/FilterResourceButton";
 import ResourceList from "@/components/resource/ResourceList";
 
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
@@ -64,6 +79,9 @@ export default {
         return false;
       }
       return this.user.id == this.id;
+    },
+    canEdit() {
+      return this.isOwner;
     },
   },
   methods: {
@@ -107,9 +125,11 @@ export default {
     },
   },
   components: {
-    UserProfile,
+    UserActions,
+    UserItem,
 
-    AddResource,
+    AddResourceButton,
+    FilterResourceButton,
     ResourceList,
 
     LoadingSpinner,

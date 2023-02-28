@@ -1,14 +1,22 @@
 <template>
-  <!-- Modal -->
-  <div class="modal fade" id="bs-modal" tabindex="-1">
+  <div
+    class="modal fade"
+    :id="modalId"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title fs-5">{{ title }}</h5>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            {{ modalTitle }}
+          </h1>
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
+            aria-label="Close"
           ></button>
         </div>
         <div class="modal-body">
@@ -18,26 +26,18 @@
     </div>
   </div>
 </template>
- 
-<script>
-import { Modal } from "bootstrap";
 
+<script>
 export default {
   name: "ModalDialog",
   props: {
-    title: {
+    modalId: {
       type: String,
       required: true,
     },
-  },
-  methods: {
-    async show() {
-      const modal = new Modal(document.getElementById("bs-modal"));
-      modal.show();
-    },
-    async close() {
-      // click on the close button
-      document.querySelector("#bs-modal .btn-close").click();
+    modalTitle: {
+      type: String,
+      required: true,
     },
   },
 };

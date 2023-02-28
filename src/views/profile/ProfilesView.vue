@@ -1,20 +1,25 @@
 <template>
-  <section>
-    <div class="container">
-      <!-- Title -->
-      <div class="row">
+  <!-- User profiles -->
+  <section class="container">
+    <section class="mb-5">
+      <div class="row mb-3">
         <div class="col">
-          <h1>{{ $t("profiles.title") }}</h1>
-          <hr />
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("profiles.title") }}</h1>
+            </div>
+            <span class="ms-2">
+              <FilterUserButton />
+            </span>
+          </div>
         </div>
       </div>
-      <!-- Users -->
-      <div class="row mb-4">
+      <div class="row">
         <div class="col">
           <UserList />
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 
@@ -22,6 +27,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import FilterUserButton from "@/components/user/FilterUserButton";
 import UserList from "@/components/user/UserList";
 
 export default {
@@ -30,7 +36,7 @@ export default {
     ...mapGetters(["profilesParamsDefault"]),
   },
   methods: {
-    ...mapActions(["clearProfiles", "setProfiles"]),
+    ...mapActions(["setProfiles", "clearProfiles"]),
     async fetchProfiles() {
       // Clear profiles
       this.clearProfiles();
@@ -48,6 +54,7 @@ export default {
     this.fetchProfiles();
   },
   components: {
+    FilterUserButton,
     UserList,
   },
 };

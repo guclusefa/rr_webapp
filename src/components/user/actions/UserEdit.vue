@@ -149,7 +149,7 @@ export default {
             await this.updateUser(this.body);
           }
           addSuccessToast(response);
-          // Close modal (if any)
+          // close modal (if any)
           this.$emit("close");
           return;
         }
