@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <UserIdentifier :user="comment.author" />
-      <span class="text-muted ms-2">
+      <span class="text-muted float-end">
         {{ formatDate(comment.createdAt) }}
       </span>
     </div>
