@@ -10,6 +10,11 @@
     <div class="card-body">
       <p class="card-text pre-line">{{ comment.content }}</p>
     </div>
+    <div class="card-footer">
+      <router-link :to="`/resource/${comment.resource.id}`">
+        {{ comment.resource.title }}
+      </router-link>
+    </div>
   </div>
 </template>
 

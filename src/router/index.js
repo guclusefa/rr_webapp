@@ -17,6 +17,9 @@ import ProfileView from '@/views/profile/ProfileView.vue'
 // Resource views
 import ResourcesView from '@/views/resource/ResourcesView.vue'
 import ResourceView from '@/views/resource/ResourceView.vue'
+// Comment views
+import CommentsView from '@/views/comment/CommentsView.vue'
+import CommentView from '@/views/comment/CommentView.vue'
 
 // Routes
 const routes = [
@@ -79,6 +82,16 @@ const routes = [
     path: '/resource/:id',
     name: 'resource',
     component: ResourceView
+  },
+  {
+    path: '/comments',
+    name: 'comments',
+    component: CommentsView
+  },
+  {
+    path: '/comment/:id',
+    name: 'comment',
+    component: CommentView
   },
 ]
 // Router

@@ -29,6 +29,9 @@
             <div class="me-auto">
               <h1>{{ $t("comments.title") }}</h1>
             </div>
+            <span class="ms-2">
+              <FilterCommentButton :isResource="true" />
+            </span>
           </div>
         </div>
       </div>
@@ -57,6 +60,7 @@ import { addErrorToast } from "@/services/toasts";
 import ResourceActions from "@/components/resource/ResourceActions";
 import ResourceItem from "@/components/resource/ResourceItem";
 
+import FilterCommentButton from "@/components/comment/FilterCommentButton";
 import CommentEdit from "@/components/comment/actions/CommentEdit";
 import CommentList from "@/components/comment/CommentList";
 
@@ -123,6 +127,7 @@ export default {
     ResourceActions,
     ResourceItem,
 
+    FilterCommentButton,
     CommentEdit,
     CommentList,
 

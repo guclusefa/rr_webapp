@@ -33,6 +33,11 @@
                 $t("resources.page")
               }}</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/comments" class="nav-link">{{
+                $t("comments.page")
+              }}</router-link>
+            </li>
           </ul>
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">

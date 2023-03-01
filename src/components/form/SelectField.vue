@@ -113,6 +113,10 @@ export default {
         saves: "resources.orders.saves",
         consults: "resources.orders.consults",
       },
+      commentsOrderOptions: {
+        createdAt: "comments.orders.createdAt",
+        content: "comments.orders.content",
+      },
       resourcesVerifiedOptions: {
         0: "resources.verifies.0",
         1: "resources.verifies.1",
@@ -165,7 +169,7 @@ export default {
       return this[this.options];
     },
     // fill api options
-    ...mapActions(["setStates", "setAuthors", "setRelations", "setCategories"]),
+    ...mapActions(["setStates", "setAuthors", "setResources", "setRelations", "setCategories"]),
     fillOptions() {
       switch (this.options) {
         case "stateOptions":
