@@ -5,17 +5,7 @@ const profile = {
         profile: {},
 
         profiles: [],
-        profilesParams: {
-            search: "",
-            certified: 0,
-            role: [],
-            state: [],
-            gender: [],
-            order: "createdAt",
-            direction: "DESC",
-            limit: 10,
-            page: 1,
-        },
+        profilesParams: {},
         profilesParamsDefault: {
             search: "",
             certified: 0,
