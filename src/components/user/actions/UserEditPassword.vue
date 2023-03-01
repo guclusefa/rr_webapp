@@ -42,7 +42,10 @@
     <div class="row">
       <div class="col-6 ms-auto text-end">
         <!-- Submit -->
-        <SubmitButton :label="'profile.edit_password'" :disabled="!validateForm()" />
+        <SubmitButton
+          :label="'profile.edit_password'"
+          :disabled="!validateForm()"
+        />
       </div>
     </div>
   </form>
