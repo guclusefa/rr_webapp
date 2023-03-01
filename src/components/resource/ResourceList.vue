@@ -9,9 +9,7 @@
       </div>
     </div>
     <!-- Cards -->
-    <div
-      class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-5 g-4 mb-4"
-    >
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
       <div class="col" v-for="resource in resources" :key="resource.id">
         <ResourceCard :resource="resource" />
       </div>
@@ -66,7 +64,7 @@ export default {
   components: {
     ResourceCard,
     SubmitButton,
-    
+
     NoResultMessage,
     LoadingSpinner,
   },

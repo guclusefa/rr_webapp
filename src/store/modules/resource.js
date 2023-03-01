@@ -111,6 +111,44 @@ const profile = {
             }
         },
 
+
+        async shareResource({ }, id) {
+            try {
+                const response = await api.post(`/resources/${id}/share`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async likeResource({ }, id) {
+            try {
+                const response = await api.post(`/resources/${id}/like`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async exploitResource({ }, id) {
+            try {
+                const response = await api.post(`/resources/${id}/exploit`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async saveResource({ }, id) {
+            try {
+                const response = await api.post(`/resources/${id}/save`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+
         async setResources({ commit }, params) {
             try {
                 // Set params

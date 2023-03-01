@@ -73,16 +73,23 @@
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-between">
-        <div><i class="bi bi-chat me-1"></i>{{ resource.comments }}</div>
-        <div><i class="bi bi-repeat me-1"></i>{{ resource.shares }}</div>
-        <div><i class="bi bi-heart me-1"></i>{{ resource.likes }}</div>
-        <div><i class="bi bi-bar-chart me-1"></i>{{ resource.consults }}</div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <div class="d-flex justify-content-end gap-2">
-        <div><i class="bi bi-award me-1"></i>{{ resource.exploits }}</div>
-        <div><i class="bi bi-bookmark me-1"></i>{{ resource.saves }}</div>
+        <button class="btn btn-sm">
+          <i
+            class="bi bi-chat-fill text-primary me-1"
+            v-if="resource.isCommented"
+          ></i>
+          <i class="bi bi-chat me-1" v-else></i>
+          {{ resource.comments }}
+        </button>
+        <ShareResourceButton :resource="resource" />
+        <LikeResourceButton :resource="resource" />
+        <ExploitResourceButton :resource="resource" />
+        <SaveResourceButton :resource="resource" />
+        <button class="btn btn-sm">
+          <i class="bi bi-bar-chart-fill me-1" v-if="resource.isConsulted"></i>
+          <i class="bi bi-bar-chart me-1" v-else></i>
+          {{ resource.consults }}
+        </button>
       </div>
     </div>
   </div>
@@ -92,6 +99,11 @@
 import dateFormatter from "@/mixins/dateFormatter";
 
 import UserIdentifier from "../user/UserIdentifier.vue";
+
+import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
+import LikeResourceButton from "@/components/resource/LikeResourceButton.vue";
+import ExploitResourceButton from "@/components/resource/ExploitResourceButton.vue";
+import SaveResourceButton from "@/components/resource/SaveResourceButton.vue";
 
 export default {
   name: "ResourceCard",
@@ -104,6 +116,11 @@ export default {
   },
   components: {
     UserIdentifier,
+    
+    ShareResourceButton,
+    LikeResourceButton,
+    ExploitResourceButton,
+    SaveResourceButton,
   },
 };
 </script>

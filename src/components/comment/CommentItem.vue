@@ -11,9 +11,7 @@
         </div>
         <div class="card-body">
           <p class="card-text pre-line">
-            <router-link :to="`/comment/${comment.id}`">
-              {{ comment.content }}
-            </router-link>
+            {{ comment.content }}
           </p>
         </div>
         <div class="card-footer">
