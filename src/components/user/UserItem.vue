@@ -11,13 +11,25 @@
     <div class="col-12 col-md-8 col-lg-9">
       <div class="row pt-3 pt-md-0">
         <div class="col">
-          <div class="text-strong pb-1" v-if="profile.username">
-            @{{ profile.username }}
-            <span v-if="profile.isCertified">
-              <i class="bi bi-patch-check-fill ms-1"></i>
-            </span>
+          <div class="row">
+            <div class="col">
+              <div class="text-strong pb-1" v-if="profile.username">
+                @{{ profile.username }}
+                <span v-if="profile.isCertified">
+                  <i class="bi bi-patch-check-fill ms-1"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col" v-if="canEdit">
+              <div class="float-end">
+                <UserActions :profile="profile" />
+              </div>
+            </div>
           </div>
-          <div class="text-muted pb-1" v-if="profile.roles[0] || profile.gender || profile.state">
+          <div
+            class="text-muted pb-1"
+            v-if="profile.roles[0] || profile.gender || profile.state"
+          >
             <span class="badge bg-dark me-1" v-if="profile.roles[0]">
               {{ $t(`user.roles.${profile.roles[0]}`) }}
             </span>
@@ -76,6 +88,8 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
+import UserActions from "@/components/user/UserActions";
+
 export default {
   name: "UserItem",
   mixins: [dateFormatter],
@@ -84,6 +98,14 @@ export default {
       type: Object,
       required: true,
     },
+    canEdit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  components: {
+    UserActions,
   },
 };
 </script>

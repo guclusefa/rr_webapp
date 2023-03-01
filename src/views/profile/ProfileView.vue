@@ -2,98 +2,110 @@
   <section class="container" v-if="this.profile.id == this.id">
     <!-- User profile -->
     <section class="mb-5">
+      <!-- Title -->
       <div class="row mb-3">
         <div class="col">
           <div class="d-flex align-items-center border-bottom">
             <div class="me-auto">
               <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
             </div>
-            <span class="ms-2" v-if="canEdit">
-              <UserActions :profile="profile" />
-            </span>
           </div>
         </div>
       </div>
+      <!-- User -->
       <div class="row">
         <div class="col">
-          <UserItem :profile="profile" />
+          <UserItem :profile="profile" :canEdit="canEdit" />
         </div>
       </div>
     </section>
 
+    <!-- User Resources -->
     <section class="mb-5">
-      <ul class="nav nav-tabs" id="myTab">
-        <li class="nav-item">
-          <button
-            class="nav-link active"
-            data-bs-toggle="tab"
-            @click="setProfileResources"
-          >
-            {{ $t("profile.resources_title") }}
-          </button>
-        </li>
-        <li class="nav-item">
-          <button
-            class="nav-link"
-            data-bs-toggle="tab"
-            @click="setProfileSharedByResources"
-          >
-            {{ $t("profile.resources_sharedby_title") }}
-          </button>
-        </li>
-        <li class="nav-item">
-          <button
-            class="nav-link"
-            data-bs-toggle="tab"
-            @click="setProfileLikedByResources"
-          >
-            {{ $t("profile.resources_likeby_title") }}
-          </button>
-        </li>
-        <li class="nav-item">
-          <button
-            class="nav-link"
-            data-bs-toggle="tab"
-            @click="setProfileExploitedByResources"
-          >
-            {{ $t("profile.resources_exploitedby_title") }}
-          </button>
-        </li>
-        <li class="nav-item" v-if="isOwner">
-          <button
-            class="nav-link"
-            data-bs-toggle="tab"
-            @click="setProfileSavedByResources"
-          >
-            {{ $t("profile.resources_savedby_title") }}
-          </button>
-        </li>
-        <li class="nav-item" v-if="isOwner">
-          <button
-            class="nav-link"
-            data-bs-toggle="tab"
-            @click="setProfileDraftedByResources"
-          >
-            {{ $t("profile.resources_draftedby_title") }}
-          </button>
-        </li>
-      </ul>
-      <div class="tab-content mt-4">
-        <div class="row mb-4">
-          <div class="col">
-            <span class="me-2" v-if="isOwner">
+      <!-- Title -->
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>
+                {{
+                  $t("profile.resources_of_title", {
+                    username: profile.username,
+                  })
+                }}
+              </h1>
+            </div>
+            <span class="ms-2" v-if="isOwner">
               <AddResourceButton />
-            </span>
-            <span class="me-2">
-              <FilterResourceButton :isProfile="true" />
             </span>
           </div>
         </div>
-        <!-- Resources List -->
-        <div class="row">
-          <div class="col">
-            <ResourceList />
-          </div>
+      </div>
+      <!-- Resources Tabs -->
+      <div class="row mb-3">
+        <div class="col">
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="nav-item">
+              <button
+                class="nav-link active"
+                data-bs-toggle="tab"
+                @click="setProfileResources"
+              >
+                {{ $t("profile.resources_title") }}
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                @click="setProfileSharedByResources"
+              >
+                {{ $t("profile.resources_sharedby_title") }}
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                @click="setProfileLikedByResources"
+              >
+                {{ $t("profile.resources_likeby_title") }}
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                @click="setProfileExploitedByResources"
+              >
+                {{ $t("profile.resources_exploitedby_title") }}
+              </button>
+            </li>
+            <li class="nav-item" v-if="isOwner">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                @click="setProfileSavedByResources"
+              >
+                {{ $t("profile.resources_savedby_title") }}
+              </button>
+            </li>
+            <li class="nav-item" v-if="isOwner">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
+                @click="setProfileDraftedByResources"
+              >
+                {{ $t("profile.resources_draftedby_title") }}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Resources List -->
+      <div class="row mb-3">
+        <div class="col">
+          <ResourceList />
         </div>
       </div>
     </section>
@@ -106,11 +118,9 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import UserActions from "@/components/user/UserActions";
 import UserItem from "@/components/user/UserItem";
 
 import AddResourceButton from "@/components/resource/AddResourceButton";
-import FilterResourceButton from "@/components/resource/FilterResourceButton";
 import ResourceList from "@/components/resource/ResourceList";
 
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
@@ -209,11 +219,9 @@ export default {
     },
   },
   components: {
-    UserActions,
     UserItem,
 
     AddResourceButton,
-    FilterResourceButton,
     ResourceList,
 
     LoadingSpinner,

@@ -7,6 +7,11 @@
           {{ $t("comments.meta", commentsMeta) }}
         </h5>
       </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterCommentButton />
+        </div>
+      </div>
     </div>
     <!-- Cards -->
     <div class="row mb-3" v-for="comment in comments" :key="comment.id">
@@ -25,7 +30,18 @@
   </template>
 
   <template v-else>
-    <NoResultMessage v-if="commentsMeta.total === 0" />
+    <!-- Meta -->
+    <div class="row mb-4" v-if="commentsMeta.total === 0">
+      <div class="col">
+        <NoResultMessage />
+      </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterCommentButton />
+        </div>
+      </div>
+    </div>
+    <!-- Loading -->
     <LoadingSpinner v-else />
   </template>
 </template>
@@ -34,6 +50,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import FilterCommentButton from "@/components/comment/FilterCommentButton.vue";
 import CommentCard from "@/components/comment/CommentCard";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -62,6 +79,7 @@ export default {
     },
   },
   components: {
+    FilterCommentButton,
     CommentCard,
     SubmitButton,
 

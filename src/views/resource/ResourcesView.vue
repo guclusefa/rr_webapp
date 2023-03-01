@@ -11,9 +11,6 @@
             <span class="ms-2" v-if="isAuthenticated">
               <AddResourceButton />
             </span>
-            <span class="ms-2">
-              <FilterResourceButton />
-            </span>
           </div>
         </div>
       </div>
@@ -31,7 +28,6 @@ import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import AddResourceButton from "@/components/resource/AddResourceButton.vue";
-import FilterResourceButton from "@/components/resource/FilterResourceButton.vue";
 import ResourceList from "@/components/resource/ResourceList";
 
 export default {
@@ -60,7 +56,6 @@ export default {
   },
   components: {
     AddResourceButton,
-    FilterResourceButton,
     ResourceList,
   },
 };

@@ -8,9 +8,6 @@
             <div class="me-auto">
               <h1>{{ $t("comments.title") }}</h1>
             </div>
-            <span class="ms-2">
-              <FilterCommentButton />
-            </span>
           </div>
         </div>
       </div>
@@ -27,7 +24,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import FilterCommentButton from "@/components/comment/FilterCommentButton";
 import CommentList from "@/components/comment/CommentList";
 
 export default {
@@ -55,7 +51,6 @@ export default {
     });
   },
   components: {
-    FilterCommentButton,
     CommentList,
   },
 };

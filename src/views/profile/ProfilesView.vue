@@ -8,9 +8,6 @@
             <div class="me-auto">
               <h1>{{ $t("profiles.title") }}</h1>
             </div>
-            <span class="ms-2">
-              <FilterUserButton />
-            </span>
           </div>
         </div>
       </div>
@@ -27,7 +24,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import FilterUserButton from "@/components/user/FilterUserButton";
 import UserList from "@/components/user/UserList";
 
 export default {
@@ -55,7 +51,6 @@ export default {
     });
   },
   components: {
-    FilterUserButton,
     UserList,
   },
 };

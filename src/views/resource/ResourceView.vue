@@ -8,15 +8,12 @@
             <div class="me-auto">
               <h1>{{ $t("resource.title", { title: resource.title }) }}</h1>
             </div>
-            <span class="ms-2" v-if="canEdit">
-              <ResourceActions :resource="resource" />
-            </span>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <ResourceItem :resource="resource" />
+          <ResourceItem :resource="resource" :canEdit="canEdit" />
         </div>
       </div>
     </section>
@@ -29,9 +26,6 @@
             <div class="me-auto">
               <h1>{{ $t("comments.title") }}</h1>
             </div>
-            <span class="ms-2">
-              <FilterCommentButton :isResource="true" />
-            </span>
           </div>
         </div>
       </div>
@@ -57,10 +51,8 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import ResourceActions from "@/components/resource/ResourceActions";
 import ResourceItem from "@/components/resource/ResourceItem";
 
-import FilterCommentButton from "@/components/comment/FilterCommentButton";
 import CommentEdit from "@/components/comment/actions/CommentEdit";
 import CommentList from "@/components/comment/CommentList";
 
@@ -124,10 +116,8 @@ export default {
     },
   },
   components: {
-    ResourceActions,
     ResourceItem,
 
-    FilterCommentButton,
     CommentEdit,
     CommentList,
 

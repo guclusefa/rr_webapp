@@ -18,6 +18,9 @@
           <router-link :to="`/resource/${comment.resource.id}`">
             {{ comment.resource.title }}
           </router-link>
+          <span class="float-end" v-if="canEdit">
+            <CommentActions :comment="comment" />
+          </span>
         </div>
       </div>
     </div>
@@ -27,6 +30,7 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
+import CommentActions from "./CommentActions.vue";
 import UserIdentifier from "../user/UserIdentifier.vue";
 
 export default {
@@ -37,8 +41,14 @@ export default {
       type: Object,
       required: true,
     },
+    canEdit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   components: {
+    CommentActions,
     UserIdentifier,
   },
 };

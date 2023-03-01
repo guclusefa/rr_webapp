@@ -7,6 +7,11 @@
           {{ $t("resources.meta", resourcesMeta) }}
         </h5>
       </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterResourceButton />
+        </div>
+      </div>
     </div>
     <!-- Cards -->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
@@ -25,7 +30,18 @@
   </template>
 
   <template v-else>
-    <NoResultMessage v-if="resourcesMeta.total === 0" />
+    <!-- Meta -->
+    <div class="row mb-4" v-if="resourcesMeta.total === 0">
+      <div class="col">
+        <NoResultMessage />
+      </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterResourceButton />
+        </div>
+      </div>
+    </div>
+    <!-- Loading -->
     <LoadingSpinner v-else />
   </template>
 </template>
@@ -34,6 +50,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
+import FilterResourceButton from "@/components/resource/FilterResourceButton.vue";
 import ResourceCard from "@/components/resource/ResourceCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -62,6 +79,7 @@ export default {
     },
   },
   components: {
+    FilterResourceButton,
     ResourceCard,
     SubmitButton,
 

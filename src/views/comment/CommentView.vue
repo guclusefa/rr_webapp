@@ -8,15 +8,12 @@
             <div class="me-auto">
               <h1>{{ $t("comment.title", { content: comment.content }) }}</h1>
             </div>
-            <span class="ms-2" v-if="canEdit">
-              <CommentActions :comment="comment" />
-            </span>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <CommentItem :comment="comment" />
+          <CommentItem :comment="comment" :canEdit="canEdit" />
         </div>
       </div>
     </section>
@@ -29,7 +26,6 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import CommentActions from "@/components/comment/CommentActions";
 import CommentItem from "@/components/comment/CommentItem";
 
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
@@ -84,7 +80,6 @@ export default {
     },
   },
   components: {
-    CommentActions,
     CommentItem,
 
     LoadingSpinner,

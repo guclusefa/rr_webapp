@@ -7,6 +7,11 @@
           {{ $t("profiles.meta", profilesMeta) }}
         </h5>
       </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterUserButton />
+        </div>
+      </div>
     </div>
     <!-- Cards -->
     <div
@@ -27,7 +32,18 @@
   </template>
 
   <template v-else>
-    <NoResultMessage v-if="profilesMeta.total === 0" />
+    <!-- Meta -->
+    <div class="row mb-4" v-if="profilesMeta.total === 0">
+      <div class="col">
+        <NoResultMessage />
+      </div>
+      <div class="col">
+        <div class="float-end">
+          <FilterUserButton />
+        </div>
+      </div>
+    </div>
+    <!-- Loading -->
     <LoadingSpinner v-else />
   </template>
 </template>
@@ -36,6 +52,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts.js";
 
+import FilterUserButton from "@/components/user/FilterUserButton.vue";
 import UserCard from "@/components/user/UserCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -64,9 +81,10 @@ export default {
     },
   },
   components: {
+    FilterUserButton,
     UserCard,
     SubmitButton,
-    
+
     NoResultMessage,
     LoadingSpinner,
   },

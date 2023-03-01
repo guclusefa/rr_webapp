@@ -24,24 +24,42 @@
     <div class="col-12 col-md-8 col-lg-9">
       <div class="row pt-3 pt-md-0">
         <div class="col">
-          <div class="text-strong pb-1" v-if="resource.title">
-            <div>
-              {{ resource.title }}
-              <span class="badge bg-danger me-1" v-if="!resource.isPublished">
-                {{ $t(`resource.draft`) }}
-              </span>
-              <span class="badge bg-success me-1" v-if="resource.isVerified">
-                {{ $t("resource.verified") }}
-              </span>
-              <span class="badge bg-warning me-1" v-else>
-                {{ $t("resource.unverified") }}
-              </span>
-              <span class="badge bg-secondary me-1" v-if="resource.visibility">
-                {{ $t(`resources.visibilities.${resource.visibility}`) }}
-              </span>
-              <span class="badge bg-primary me-1" v-if="resource.relation">
-                {{ resource.relation.name }}
-              </span>
+          <div class="row">
+            <div class="col">
+              <div class="text-strong pb-1" v-if="resource.title">
+                <div>
+                  {{ resource.title }}
+                  <span
+                    class="badge bg-danger me-1"
+                    v-if="!resource.isPublished"
+                  >
+                    {{ $t(`resource.draft`) }}
+                  </span>
+                  <span
+                    class="badge bg-success me-1"
+                    v-if="resource.isVerified"
+                  >
+                    {{ $t("resource.verified") }}
+                  </span>
+                  <span class="badge bg-warning me-1" v-else>
+                    {{ $t("resource.unverified") }}
+                  </span>
+                  <span
+                    class="badge bg-secondary me-1"
+                    v-if="resource.visibility"
+                  >
+                    {{ $t(`resources.visibilities.${resource.visibility}`) }}
+                  </span>
+                  <span class="badge bg-primary me-1" v-if="resource.relation">
+                    {{ resource.relation.name }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col" v-if="canEdit">
+              <div class="float-end">
+                <ResourceActions :resource="resource" />
+              </div>
             </div>
           </div>
           <div class="text-muted pb-1" v-if="resource.categories">
@@ -108,6 +126,7 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
+import ResourceActions from "@/components/resource/ResourceActions.vue";
 import UserIdentifier from "@/components/user/UserIdentifier";
 
 import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
@@ -123,8 +142,14 @@ export default {
       type: Object,
       required: true,
     },
+    canEdit: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   components: {
+    ResourceActions,
     UserIdentifier,
 
     ShareResourceButton,
