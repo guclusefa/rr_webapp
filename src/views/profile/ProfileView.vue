@@ -21,31 +21,79 @@
       </div>
     </section>
 
-    <!-- Resources -->
     <section class="mb-5">
-      <div class="row mb-3">
-        <div class="col">
-          <div class="d-flex align-items-center border-bottom">
-            <div class="me-auto">
-              <h1>
-                {{
-                  $t("profile.resources_title", { username: profile.username })
-                }}
-              </h1>
-            </div>
-            <span class="ms-2" v-if="isOwner">
+      <ul class="nav nav-tabs" id="myTab">
+        <li class="nav-item">
+          <button
+            class="nav-link active"
+            data-bs-toggle="tab"
+            @click="setProfileResources"
+          >
+            {{ $t("profile.resources_title") }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            @click="setProfileSharedByResources"
+          >
+            {{ $t("profile.resources_sharedby_title") }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            @click="setProfileLikedByResources"
+          >
+            {{ $t("profile.resources_likeby_title") }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            @click="setProfileExploitedByResources"
+          >
+            {{ $t("profile.resources_exploitedby_title") }}
+          </button>
+        </li>
+        <li class="nav-item" v-if="isOwner">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            @click="setProfileSavedByResources"
+          >
+            {{ $t("profile.resources_savedby_title") }}
+          </button>
+        </li>
+        <li class="nav-item" v-if="isOwner">
+          <button
+            class="nav-link"
+            data-bs-toggle="tab"
+            @click="setProfileDraftedByResources"
+          >
+            {{ $t("profile.resources_draftedby_title") }}
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content mt-4">
+        <div class="row mb-4">
+          <div class="col">
+            <span class="me-2" v-if="isOwner">
               <AddResourceButton />
             </span>
-            <span class="ms-2">
+            <span class="me-2">
               <FilterResourceButton :isProfile="true" />
             </span>
           </div>
         </div>
-      </div>
-      <!-- Resources -->
-      <div class="row">
-        <div class="col">
-          <ResourceList />
+        <!-- Resources List -->
+        <div class="row">
+          <div class="col">
+            <ResourceList />
+          </div>
         </div>
       </div>
     </section>
@@ -104,6 +152,42 @@ export default {
       const params = {
         ...this.resourcesParamsDefault,
         author: [this.id],
+      };
+      await this.filterResources(params);
+    },
+    async setProfileSharedByResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        sharedBy: this.id,
+      };
+      await this.filterResources(params);
+    },
+    async setProfileLikedByResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        likedBy: this.id,
+      };
+      await this.filterResources(params);
+    },
+    async setProfileExploitedByResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        exploitedBy: this.id,
+      };
+      await this.filterResources(params);
+    },
+    async setProfileSavedByResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        savedBy: this.id,
+      };
+      await this.filterResources(params);
+    },
+    async setProfileDraftedByResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        author: [this.id],
+        isPublished: false,
       };
       await this.filterResources(params);
     },

@@ -25,22 +25,24 @@
       <div class="row pt-3 pt-md-0">
         <div class="col">
           <div class="text-strong pb-1" v-if="resource.title">
-            {{ resource.title }}
-            <span class="badge bg-danger me-1" v-if="!resource.isPublished">
-              {{ $t(`resource.draft`) }}
-            </span>
-            <span class="badge bg-success me-1" v-if="resource.isVerified">
-              {{ $t("resource.verified") }}
-            </span>
-            <span class="badge bg-warning me-1" v-else>
-              {{ $t("resource.unverified") }}
-            </span>
-            <span class="badge bg-secondary me-1" v-if="resource.visibility">
-              {{ $t(`resources.visibilities.${resource.visibility}`) }}
-            </span>
-            <span class="badge bg-primary me-1" v-if="resource.relation">
-              {{ resource.relation.name }}
-            </span>
+            <div>
+              {{ resource.title }}
+              <span class="badge bg-danger me-1" v-if="!resource.isPublished">
+                {{ $t(`resource.draft`) }}
+              </span>
+              <span class="badge bg-success me-1" v-if="resource.isVerified">
+                {{ $t("resource.verified") }}
+              </span>
+              <span class="badge bg-warning me-1" v-else>
+                {{ $t("resource.unverified") }}
+              </span>
+              <span class="badge bg-secondary me-1" v-if="resource.visibility">
+                {{ $t(`resources.visibilities.${resource.visibility}`) }}
+              </span>
+              <span class="badge bg-primary me-1" v-if="resource.relation">
+                {{ resource.relation.name }}
+              </span>
+            </div>
           </div>
           <div class="text-muted pb-1" v-if="resource.categories">
             <span

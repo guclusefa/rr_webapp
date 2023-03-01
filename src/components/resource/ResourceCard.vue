@@ -17,11 +17,22 @@
       <img src="@/assets/images/resource/default.png" class="card-img-top" />
     </template>
     <div class="card-body">
-      <h5 class="card-title" v-if="resource.title">
-        <router-link :to="{ name: 'resource', params: { id: resource.id } }"
-          >{{ resource.title }}
-        </router-link>
-      </h5>
+      <div class="row">
+        <div class="col">
+          <h5 class="card-title" v-if="resource.title">
+            <router-link :to="{ name: 'resource', params: { id: resource.id } }"
+              >{{ resource.title }}
+            </router-link>
+          </h5>
+        </div>
+        <div class="col">
+          <div class="float-end">
+     
+              <i class="bi bi-three-dots"></i>
+        
+          </div>
+        </div>
+      </div>
       <p class="card-text" v-if="resource.isVerified">
         <span class="badge bg-success">
           {{ $t("resource.verified") }}
@@ -116,7 +127,7 @@ export default {
   },
   components: {
     UserIdentifier,
-    
+
     ShareResourceButton,
     LikeResourceButton,
     ExploitResourceButton,

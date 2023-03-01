@@ -142,7 +142,12 @@
     "delete": "Supprimer compte",
     "delete_title": "Supprimer compte de {username}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce compte ? Toutes les données associées seront perdues. Cette action est irréversible.",
-    "resources_title": "Ressources de {username}"
+    "resources_title": "Ressources",
+    "resources_likeby_title": "Ressources aimées",
+    "resources_sharedby_title": "Ressources partagées",
+    "resources_exploitedby_title": "Ressources exploitées",
+    "resources_savedby_title": "Ressources sauvegardées",
+    "resources_draftedby_title": "Ressources brouillonnées"
   },
   "profiles": {
     "page": "Profils",
