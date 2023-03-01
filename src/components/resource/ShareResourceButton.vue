@@ -16,7 +16,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "LikeButton",
+  name: "ShareButton",
   data() {
     return {
       shares: this.resource.shares,

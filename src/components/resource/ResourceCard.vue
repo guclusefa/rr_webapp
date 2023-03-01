@@ -27,9 +27,7 @@
         </div>
         <div class="col">
           <div class="float-end">
-     
-              <i class="bi bi-three-dots"></i>
-        
+            <i class="bi bi-three-dots"></i>
           </div>
         </div>
       </div>

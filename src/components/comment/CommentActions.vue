@@ -30,7 +30,10 @@
     :modal-title="$t('comment.edit_title', { content: comment.content })"
   >
     <template #body>
-      <CommentEdit :resource="comment.resource" @close="closeModal('editCommentModal')" />
+      <CommentEdit
+        :resource="comment.resource"
+        @close="closeModal('editCommentModal')"
+      />
     </template>
   </ModalDialog>
 

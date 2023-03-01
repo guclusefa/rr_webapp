@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="row mb-3" v-if="!isProfile">
+    <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.author = $event))"
@@ -112,14 +112,7 @@ import SelectField from "@/components/form/SelectField.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
-  name: "UserFilters",
-  props: {
-    isProfile: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
+  name: "ResourceFilters",
   data() {
     return {
       params: {
@@ -142,10 +135,6 @@ export default {
   methods: {
     ...mapActions(["filterResources"]),
     async filter() {
-      // If the component is used in the profile page, the author is set to the profile id
-      if (this.isProfile) {
-        this.params.author = [this.$route.params.id];
-      }
       await this.filterResources(this.params);
     },
   },

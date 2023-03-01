@@ -1,11 +1,7 @@
 <template>
-  <div class="row mb-4">
-    <div class="col">
-      <h5>
-        {{ $t(message) }}
-      </h5>
-    </div>
-  </div>
+  <h5>
+    {{ $t(message) }}
+  </h5>
 </template>
 
 <script>

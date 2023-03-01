@@ -15,7 +15,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "LikeButton",
+  name: "SaveButton",
   data() {
     return {
       saves: this.resource.saves,

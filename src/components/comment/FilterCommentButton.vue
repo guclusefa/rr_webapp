@@ -2,7 +2,7 @@
     <OffCanvasButton :label="'comments.filter'" :classes="'btn btn-primary'" />
     <OffCanvas title="comments.filter">
       <template #body>
-        <CommentFilters :isResource="isResource" />
+        <CommentFilters />
       </template>
     </OffCanvas>
   </template>
@@ -14,12 +14,6 @@
   
   export default {
     name: "FilterCommentButton",
-    props: {
-      isResource: {
-        type: Boolean,
-        default: false,
-      },
-    },
     components: {
       OffCanvasButton,
       OffCanvas,

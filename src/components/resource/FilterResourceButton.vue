@@ -2,7 +2,7 @@
   <OffCanvasButton :label="'resources.filter'" :classes="'btn btn-primary'" />
   <OffCanvas title="resources.filter">
     <template #body>
-      <ResourceFilters :isProfile="isProfile" />
+      <ResourceFilters />
     </template>
   </OffCanvas>
 </template>
@@ -14,12 +14,6 @@ import ResourceFilters from "@/components/resource/ResourceFilters.vue";
 
 export default {
   name: "FilterResourceButton",
-  props: {
-    isProfile: {
-      type: Boolean,
-      default: false,
-    },
-  },
   components: {
     OffCanvasButton,
     OffCanvas,

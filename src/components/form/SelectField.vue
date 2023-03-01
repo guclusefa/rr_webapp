@@ -10,14 +10,28 @@
     :multiple="multiple"
     :class="{ 'is-invalid': validateInput() }"
   >
-    <option value="" :disabled="required" v-if="placeholderSelect" :selected="!this.value || !this.values || this.value == '' || this.values.includes('')">
+    <option
+      value=""
+      :disabled="required"
+      v-if="placeholderSelect"
+      :selected="
+        !this.value ||
+        !this.values ||
+        this.value == '' ||
+        this.values.includes('')
+      "
+    >
       {{ $t(placeholderSelect) }}
     </option>
     <option
       v-for="(value, key) in getOptions()"
       :key="key"
       :value="key"
-      :selected="this.value == key || this.values.includes(key) || this.values.includes(parseInt(key))"
+      :selected="
+        this.value == key ||
+        this.values.includes(key) ||
+        this.values.includes(parseInt(key))
+      "
     >
       <template v-if="isApiOptions">
         {{ value }}
@@ -137,9 +151,9 @@ export default {
         100: "app.limits.100",
       },
       stateOptions: {},
-      authorOptions:{}, 
-      relationOptions:{},
-      categoryOptions:{},
+      authorOptions: {},
+      relationOptions: {},
+      categoryOptions: {},
       isApiOptions: false,
     };
   },
@@ -169,14 +183,21 @@ export default {
       return this[this.options];
     },
     // fill api options
-    ...mapActions(["setStates", "setAuthors", "setResources", "setRelations", "setCategories"]),
+    ...mapActions([
+      "setStates",
+      "setAuthors",
+      "setResources",
+      "setRelations",
+      "setCategories",
+    ]),
     fillOptions() {
       switch (this.options) {
         case "stateOptions":
           this.isApiOptions = true;
           this.setStates().then(() => {
             for (const state of this.states) {
-              this.stateOptions[state.id] = state.name + " (" + state.code + ")";
+              this.stateOptions[state.id] =
+                state.name + " (" + state.code + ")";
             }
           });
           break;

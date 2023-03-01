@@ -64,14 +64,7 @@ import SelectField from "@/components/form/SelectField.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
-  name: "UserFilters",
-  props: {
-    isResource: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-  },
+  name: "CommentFilters",
   data() {
     return {
       params: {
@@ -91,10 +84,6 @@ export default {
   methods: {
     ...mapActions(["filterComments"]),
     async filter() {
-      // If the component is used in the resource page, the resource is set to the resource id
-      if (this.isResource) {
-        this.params.resource = [this.$route.params.id];
-      }
       await this.filterComments(this.params);
     },
   },

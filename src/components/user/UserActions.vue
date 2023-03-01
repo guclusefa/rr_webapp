@@ -10,22 +10,38 @@
         </a>
       </li>
       <li>
-        <a class="dropdown-item" href="#" @click="showModal('editUserPhotoModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showModal('editUserPhotoModal')"
+        >
           {{ $t("profile.edit_photo") }}
         </a>
       </li>
       <li>
-        <a class="dropdown-item" href="#" @click="showModal('editUserPasswordModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showModal('editUserPasswordModal')"
+        >
           {{ $t("profile.edit_password") }}</a
         >
       </li>
       <li>
-        <a class="dropdown-item" href="#" @click="showModal('editUserEmailModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showModal('editUserEmailModal')"
+        >
           {{ $t("profile.edit_email") }}</a
         >
       </li>
       <li v-if="!profile.isVerified">
-        <a class="dropdown-item" href="#" @click="showModal('confirmUserModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showModal('confirmUserModal')"
+        >
           {{ $t("profile.verify_email") }}</a
         >
       </li>
