@@ -71,7 +71,7 @@ import ResourceEditMedia from "@/components/resource/actions/ResourceEditMedia";
 import ResourceDelete from "@/components/resource/actions/ResourceDelete";
 
 export default {
-  name: "UserActions",
+  name: "ResourceActions",
   props: {
     resource: {
       type: Object,

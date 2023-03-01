@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       body: {
+        id: 0,
         content: "",
         resource: 0,
       },
@@ -49,7 +50,7 @@ export default {
     edit: {
       type: Boolean,
       required: false,
-      default: false,
+      default: true,
     },
     resource: {
       type: Object,
@@ -61,6 +62,7 @@ export default {
   },
   methods: {
     setBody() {
+      this.body.id = this.comment.id;
       this.body.content = this.comment.content;
     },
     ...mapActions(["updateComment", "createComment", "reloadComments"]),
@@ -78,6 +80,8 @@ export default {
             this.reloadComments();
           }
           addSuccessToast(response);
+          // Close modal (if any)
+          this.$emit("close");
           return;
         }
         // Error

@@ -37,10 +37,10 @@ const comment = {
         },
     },
     actions: {
-        async setComment({ commit }, params) {
+        async setComment({ commit }, id) {
             try {
                 // Make request
-                const response = await api.get('/comments/' + params.id)
+                const response = await api.get(`/comments/${id}`)
                 // Set comment
                 commit('SET_COMMENT', response.data.data)
                 return response;
@@ -58,18 +58,19 @@ const comment = {
                 return error;
             }
         },
-        async updateComment({ }, payload) {
+        async updateComment({ dispatch }, payload) {
             try {
-                const response = await api.put('/moderator/comments/' + payload.id, payload)
+                const response = await api.put(`/moderator/comments/${payload.id}`, payload)
+                dispatch('setComment', payload.id)
                 return response;
             }
             catch (error) {
                 return error;
             }
         },
-        async deleteComment({ }, payload) {
+        async deleteComment({ }, id) {
             try {
-                const response = await api.delete('/comments/' + payload.id)
+                const response = await api.delete(`/comments/${id}`)
                 return response;
             }
             catch (error) {

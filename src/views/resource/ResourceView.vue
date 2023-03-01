@@ -38,7 +38,7 @@
       <!-- Comment edit (add)-->
       <div class="row mb-4">
         <div class="col">
-          <CommentEdit :resource="resource" />
+          <CommentEdit :edit="false" :resource="resource" />
         </div>
       </div>
       <!-- Comments -->

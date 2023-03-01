@@ -8,7 +8,11 @@
       </span>
     </div>
     <div class="card-body">
-      <p class="card-text pre-line">{{ comment.content }}</p>
+      <p class="card-text pre-line">
+        <router-link :to="`/comment/${comment.id}`">
+          {{ comment.content }}
+        </router-link>
+      </p>
     </div>
     <div class="card-footer">
       <router-link :to="`/resource/${comment.resource.id}`">
