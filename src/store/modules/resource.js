@@ -5,21 +5,10 @@ const profile = {
         resource: {},
 
         resources: [],
-        resourcesParams: {
-            search: "",
-            verified: 0,
-            visibility: 0,
-            author: [],
-            relation: [],
-            category: [],
-            order: "createdAt",
-            direction: "DESC",
-            limit: 10,
-            page: 1,
-        },
+        resourcesParams: {},
         resourcesParamsDefault: {
             search: "",
-            verified: 0,
+            verified: "",
             visibility: 0,
             author: [],
             relation: [],
@@ -124,6 +113,8 @@ const profile = {
 
         async setResources({ commit }, params) {
             try {
+                // Set params
+                commit('SET_RESOURCES_PARAMS', params)
                 // Make request
                 const response = await api.get('/resources', { params })
                 // resources
@@ -143,15 +134,16 @@ const profile = {
             commit('SET_RESOURCES', [])
             commit('SET_RESOURCES_META', {})
             // Make new request
-            commit('SET_RESOURCES_PARAMS', params)
             dispatch('setResources', params)
         },
         async reloadResources({ commit, dispatch, state }) {
             // Reset resources
             commit('SET_RESOURCES', [])
             commit('SET_RESOURCES_META', {})
+            // Update params at page 1
+            const params = { ...state.resourcesParams, page: 1 }
             // Make new request
-            dispatch('setResources', state.resourcesParamsDefault)
+            dispatch('setResources', params)
         },
         async clearResources({ commit }) {
             commit('SET_RESOURCES', [])

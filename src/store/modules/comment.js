@@ -5,16 +5,7 @@ const comment = {
         comment: {},
 
         comments: [],
-        commentsParams: {
-            search: "",
-            author: [],
-            resource: [],
-            replyto: [],
-            order: "createdAt",
-            direction: "DESC",
-            limit: 10,
-            page: 1,
-        },
+        commentsParams: {},
         commentsParamsDefault: {
             search: "",
             author: [],
@@ -88,6 +79,8 @@ const comment = {
 
         async setComments({ commit }, params) {
             try {
+                // Set params
+                commit('SET_COMMENTS_PARAMS', params)
                 // Make request
                 const response = await api.get('/comments', { params })
                 // comments
@@ -107,15 +100,16 @@ const comment = {
             commit('SET_COMMENTS', [])
             commit('SET_COMMENTS_META', {})
             // Make new request
-            commit('SET_COMMENTS_PARAMS', params)
             dispatch('setComments', params)
         },
         async reloadComments({ commit, dispatch, state }) {
             // Reset comments
             commit('SET_COMMENTS', [])
             commit('SET_COMMENTS_META', {})
+            // Update params at page 1
+            const params = { ...state.commentsParams, page: 1 }
             // Make new request
-            dispatch('setComments', state.commentsParamsDefault)
+            dispatch('setComments', params)
         },
         async clearComments({ commit }) {
             commit('SET_COMMENTS', [])

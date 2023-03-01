@@ -142,6 +142,8 @@ const profile = {
 
         async setProfiles({ commit }, params) {
             try {
+                // Set params
+                commit('SET_PROFILES_PARAMS', params)
                 // Make request
                 const response = await api.get('/users', { params })
                 // Profiles
@@ -161,7 +163,15 @@ const profile = {
             commit('SET_PROFILES', [])
             commit('SET_PROFILES_META', {})
             // Make new request
-            commit('SET_PROFILES_PARAMS', params)
+            dispatch('setProfiles', params)
+        },
+        async reloadProfiles({ commit, dispatch, state }) {
+            // Reset profiles
+            commit('SET_PROFILES', [])
+            commit('SET_PROFILES_META', {})
+            // Update params at page 1
+            const params = { ...state.profilesParams, page: 1 }
+            // Make new request
             dispatch('setProfiles', params)
         },
         async clearProfiles({ commit }) {

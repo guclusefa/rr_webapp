@@ -54,7 +54,7 @@ export default {
       addErrorToast(response);
     },
   },
-  created() {
+  mounted() {
     this.fetchResources();
   },
   components: {

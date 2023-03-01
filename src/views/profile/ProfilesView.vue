@@ -50,7 +50,7 @@ export default {
       addErrorToast(response);
     },
   },
-  created() {
+  mounted() {
     this.fetchProfiles();
   },
   components: {
