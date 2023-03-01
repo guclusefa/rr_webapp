@@ -142,6 +142,10 @@ export default {
   methods: {
     ...mapActions(["filterResources"]),
     async filter() {
+      // If the component is used in the profile page, the author is set to the profile id
+      if (this.isProfile) {
+        this.params.author = [this.$route.params.id];
+      }
       await this.filterResources(this.params);
     },
   },

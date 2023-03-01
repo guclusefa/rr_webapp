@@ -28,8 +28,17 @@
         </span>
       </p>
       <p class="card-text" v-if="resource.visibility">
-        <span class="badge bg-secondary">
+        <span class="badge bg-danger me-2" v-if="!resource.isPublished">
+          {{ $t(`resource.draft`) }}
+        </span>
+        <span class="badge bg-secondary me-2">
           {{ $t(`resources.visibilities.${resource.visibility}`) }}
+        </span>
+        <span class="badge bg-success me-1" v-if="resource.isVerified">
+          {{ $t("resource.verified") }}
+        </span>
+        <span class="badge bg-warning me-1" v-else>
+          {{ $t("resource.unverified") }}
         </span>
       </p>
       <p class="card-text" v-if="resource.relation">

@@ -6,6 +6,11 @@ const formatDate = (date) => {
     return new Date(date).toLocaleDateString(locale, options);
 }
 
+const formatDateTime = (date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    return new Date(date).toLocaleDateString(locale, options);
+}
+
 const getAge = (date) => {
     const today = new Date();
     const birthDate = new Date(date);
@@ -27,6 +32,7 @@ const getDays = (date) => {
 
 export default {
     formatDate,
+    formatDateTime,
     getAge,
     getDays
 }

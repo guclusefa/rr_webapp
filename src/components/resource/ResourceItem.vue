@@ -26,6 +26,9 @@
         <div class="col">
           <div class="text-strong pb-1" v-if="resource.title">
             {{ resource.title }}
+            <span class="badge bg-danger me-1" v-if="!resource.isPublished">
+              {{ $t(`resource.draft`) }}
+            </span>
             <span class="badge bg-success me-1" v-if="resource.isVerified">
               {{ $t("resource.verified") }}
             </span>

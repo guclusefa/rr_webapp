@@ -200,7 +200,8 @@
     "categories": "Catégories de la ressource",
     "verified": "Vérifiée",
     "unverified": "Non vérifiée",
-    "create": "Créer"
+    "create": "Créer",
+    "draft": "Brouillon"
   },
   "resources": {
     "page": "Ressources",
@@ -276,6 +277,7 @@
     "content": "Contenu",
     "content_placeholder": "Contenu du commentaire",
     "content_required": "Veuillez entrer un contenu",
-    "create": "Ajouter un commentaire"
+    "create": "Ajouter un commentaire",
+    "anonymous": "Anonyme"
   }
 }

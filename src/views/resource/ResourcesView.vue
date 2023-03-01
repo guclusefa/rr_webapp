@@ -42,8 +42,6 @@ export default {
   methods: {
     ...mapActions(["setResources", "clearResources"]),
     async fetchResources() {
-      // Clear resources
-      this.clearResources();
       // Request
       const response = await this.setResources(this.resourcesParamsDefault);
       // Success
@@ -55,7 +53,10 @@ export default {
     },
   },
   mounted() {
-    this.fetchResources();
+    // Clear resources and fetch resources
+    this.clearResources().then(() => {
+      this.fetchResources();
+    });
   },
   components: {
     AddResourceButton,

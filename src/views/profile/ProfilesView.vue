@@ -38,8 +38,6 @@ export default {
   methods: {
     ...mapActions(["setProfiles", "clearProfiles"]),
     async fetchProfiles() {
-      // Clear profiles
-      this.clearProfiles();
       // Request
       const response = await this.setProfiles(this.profilesParamsDefault);
       // Success
@@ -51,7 +49,10 @@ export default {
     },
   },
   mounted() {
-    this.fetchProfiles();
+    // Clear profiles and fetch profiles
+    this.clearProfiles().then(() => {
+      this.fetchProfiles();
+    });
   },
   components: {
     FilterUserButton,

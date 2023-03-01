@@ -1,9 +1,10 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <UserIdentifier :user="comment.author" />
+      <UserIdentifier :user="comment.author" v-if="comment.author" />
+      <span v-else>{{ $t("comment.anonymous") }}</span>
       <span class="text-muted float-end">
-        {{ formatDate(comment.createdAt) }}
+        {{ formatDateTime(comment.createdAt) }}
       </span>
     </div>
     <div class="card-body">

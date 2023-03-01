@@ -5,6 +5,9 @@ export default {
         formatDate(date) {
             return dateFormatter.formatDate(date);
         },
+        formatDateTime(date) {
+            return dateFormatter.formatDateTime(date);
+        },
         getAge(date) {
             return dateFormatter.getAge(date);
         },
