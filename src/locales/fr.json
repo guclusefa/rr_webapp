@@ -162,6 +162,7 @@
     "certified_placeholder_select": "Tous les statuts de certification",
     "roles": "Rôles des profils",
     "states": "Départements des profils",
+    "states_placeholder_select": "Tous les départements",
     "genders": "Sexes des profils",
     "genders_placeholder_select": "Tous les sexes",
     "order": "Ordre d'affichage des profils",

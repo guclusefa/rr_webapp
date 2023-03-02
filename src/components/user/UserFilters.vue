@@ -39,12 +39,14 @@
     </div>
     <div class="row mb-3">
       <div class="col">
-        <SelectField
+        <Select2Field
           @input="$emit('input', (params.state = $event))"
           :field="'states'"
           :label="'profiles.states'"
-          :options="'stateOptions'"
+          :placeholder="'profiles.states_placeholder_select'"
           :multiple="true"
+          :uri="'/states'"
+          :text="'name'"
           :values="profilesParams.state"
         />
       </div>
@@ -107,6 +109,7 @@ import { mapGetters, mapActions } from "vuex";
 
 import InputText from "@/components/form/InputText.vue";
 import SelectField from "@/components/form/SelectField.vue";
+import Select2Field from "@/components/form/Select2Field.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
@@ -141,6 +144,7 @@ export default {
   components: {
     InputText,
     SelectField,
+    Select2Field,
     SubmitButton,
   },
 };
