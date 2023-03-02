@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
 
+// Layout
 body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
@@ -11,11 +12,31 @@ footer {
     margin-top: auto;
 }
 
+// Form
 label.required:after {
     content: "*";
     color: red;
 }
 
+// Text
 .pre-line {
     white-space: pre-line;
+}
+
+// Select2
+.select2-container--bootstrap-5.select2-container--focus .select2-selection,
+.select2-container--bootstrap-5.select2-container--open .select2-selection {
+    box-shadow: none;
+}
+
+.select2-container--bootstrap-5 .select2-selection {
+    border-radius: 0;
+}
+
+.select2-container--bootstrap-5 .select2-dropdown {
+    border-radius: 0;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
+    border-radius: 0;
 }

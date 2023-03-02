@@ -11,6 +11,7 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 import "@/assets/scss/main.scss"
 // Create app
 const app = createApp(App)
+// Use plugins
 app.use(router)
 app.use(store)
 app.use(i18n)

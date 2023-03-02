@@ -50,9 +50,9 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import $ from "jquery";
 import "select2/dist/css/select2.css";
 import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
-import $ from "jquery";
 import "select2";
 
 export default {
@@ -251,6 +251,7 @@ export default {
         theme: "bootstrap-5",
         width: "100%",
         allowClear: true,
+        language: this.$i18n.locale,
 
         placeholder: this.$t(this.placeholder),
       });
