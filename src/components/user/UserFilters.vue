@@ -31,8 +31,10 @@
           @input="$emit('input', (params.role = $event))"
           :field="'roles'"
           :label="'profiles.roles'"
+          :placeholder="'profiles.roles_placeholder_select'"
           :options="'rolesOptions'"
           :multiple="true"
+          :select2="true"
           :values="profilesParams.role"
         />
       </div>
@@ -57,8 +59,10 @@
           @input="$emit('input', (params.gender = $event))"
           :field="'genders'"
           :label="'profiles.genders'"
+          :placeholder="'profiles.genders_placeholder_select'"
           :options="'genderOptions'"
           :multiple="true"
+          :select2="true"
           :values="profilesParams.gender"
         />
       </div>

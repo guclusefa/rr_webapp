@@ -63,20 +63,6 @@ export default {
       required: false,
       default: () => "",
     },
-    options: {
-      type: String,
-      required: false,
-      default: () => "",
-    },
-  },
-  data() {
-    return {
-      genderOptions: {
-        M: "user.genders.M",
-        F: "user.genders.F",
-        O: "user.genders.O",
-      },
-    };
   },
   methods: {
     // validate input
@@ -88,10 +74,7 @@ export default {
       // if validate is a function than call it
       return this.validate();
     },
-    // get options
-    getOptions() {
-      return this[this.options];
-    },
+
     createSelect2(field, placeholder, multiple, uri, text, values) {
       var select2 = $("#" + field);
       // Fill select2 with values

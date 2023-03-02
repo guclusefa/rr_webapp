@@ -161,6 +161,7 @@
     "certified": "Certification des profils",
     "certified_placeholder_select": "Tous les statuts de certification",
     "roles": "Rôles des profils",
+    "roles_placeholder_select": "Tous les rôles",
     "states": "Départements des profils",
     "states_placeholder_select": "Tous les départements",
     "genders": "Sexes des profils",

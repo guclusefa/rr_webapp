@@ -50,6 +50,11 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import "select2/dist/css/select2.css";
+import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
+import $ from "jquery";
+import "select2";
+
 export default {
   name: "SelectField",
   emits: ["input"],
@@ -61,6 +66,10 @@ export default {
     label: {
       type: String,
       required: true,
+    },
+    placeholder: {
+      type: String,
+      required: false,
     },
     placeholderSelect: {
       type: String,
@@ -92,6 +101,11 @@ export default {
       type: Array,
       required: false,
       default: () => [],
+    },
+    select2: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data() {
@@ -231,6 +245,19 @@ export default {
     },
   },
   mounted() {
+    if (this.select2) {
+      var select2 = $("#" + this.field);
+      select2.select2({
+        theme: "bootstrap-5",
+        width: "100%",
+        allowClear: true,
+        placeholder: this.$t(this.placeholder),
+      });
+      // every time the input changes of the select2 field
+      select2.on("change", () => {
+        this.$emit("input", select2.val());
+      });
+    }
     this.fillOptions();
   },
 };
