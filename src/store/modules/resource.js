@@ -110,6 +110,15 @@ const profile = {
                 return error;
             }
         },
+        async shareResourceTo({ }, payload) {
+            try {
+                const response = await api.post(`/resources/${payload.id}/shareto`, payload)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
 
 
         async shareResource({ }, id) {

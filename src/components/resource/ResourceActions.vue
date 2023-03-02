@@ -26,6 +26,15 @@
         <a
           class="dropdown-item"
           href="#"
+          @click="showModal('editShareToResourceModal')"
+        >
+          {{ $t("resource.edit_shareto") }}
+        </a>
+      </li>
+      <li>
+        <a
+          class="dropdown-item"
+          href="#"
           @click="showModal('deleteResourceModal')"
         >
           {{ $t("resource.delete") }}</a
@@ -53,6 +62,17 @@
   </ModalDialog>
 
   <ModalDialog
+    :modal-id="'editShareToResourceModal'"
+    :modal-title="$t('resource.edit_shareto_title', { title: resource.title })"
+  >
+    <template #body>
+      <ResourceEditShareTo
+        @close="closeModal('editShareToResourceModal')"
+      />
+    </template>
+  </ModalDialog>
+
+  <ModalDialog
     :modal-id="'deleteResourceModal'"
     :modal-title="$t('resource.delete_title', { title: resource.title })"
   >
@@ -68,6 +88,7 @@ import { Modal } from "bootstrap";
 import ModalDialog from "@/components/fragments/ModalDialog";
 import ResourceEdit from "@/components/resource/actions/ResourceEdit";
 import ResourceEditMedia from "@/components/resource/actions/ResourceEditMedia";
+import ResourceEditShareTo from "@/components/resource/actions/ResourceEditShareTo";
 import ResourceDelete from "@/components/resource/actions/ResourceDelete";
 
 export default {
@@ -91,6 +112,7 @@ export default {
     ModalDialog,
     ResourceEdit,
     ResourceEditMedia,
+    ResourceEditShareTo,
     ResourceDelete,
   },
 };

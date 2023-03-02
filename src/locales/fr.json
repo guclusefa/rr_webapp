@@ -186,6 +186,8 @@
     "edit_title": "Modifier la ressource : {title}",
     "edit_media": "Modifier le média de la ressource",
     "edit_media_title": "Modifier le média de la ressource : {title}",
+    "edit_shareto": "Modifier avec qui partager la ressource",
+    "edit_shareto_title": "Modifier avec qui partager la ressource : {title}",
     "delete": "Supprimer la ressource",
     "delete_title": "Supprimer la ressource : {title}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette ressource ? Toutes les données associées seront perdues. Cette action est irréversible.",
