@@ -4,7 +4,7 @@
       <div class="col-12 mb-3">
         <InputTextarea
           @input="$emit('input', (body.content = $event))"
-          :field="'commentContent'"
+          :field="'commentEditContent'"
           :label="'comment.content'"
           :placeholder="'comment.content_placeholder'"
           :required="true"

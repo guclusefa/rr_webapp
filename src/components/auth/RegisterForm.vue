@@ -9,7 +9,7 @@
               <InputText
                 @input="$emit('input', (body.email = $event))"
                 :type="'email'"
-                :field="'email'"
+                :field="'registerEmail'"
                 :label="'user.email'"
                 :placeholder="'user.email'"
                 :required="true"
@@ -23,7 +23,7 @@
               <InputText
                 @input="$emit('input', (body.email_confirmation = $event))"
                 :type="'email'"
-                :field="'email_confirmation'"
+                :field="'registerEmailConfirmation'"
                 :label="'user.email_confirmation'"
                 :placeholder="'user.email_confirmation'"
                 :required="true"
@@ -39,7 +39,7 @@
               <InputText
                 @input="$emit('input', (body.username = $event))"
                 :type="'text'"
-                :field="'username'"
+                :field="'registerUsername'"
                 :label="'user.username'"
                 :placeholder="'user.username_placeholder'"
                 :required="true"
@@ -53,7 +53,7 @@
               <InputText
                 @input="$emit('input', (body.firstName = $event))"
                 :type="'text'"
-                :field="'first_name'"
+                :field="'registerFirstName'"
                 :label="'user.first_name'"
                 :placeholder="'user.first_name'"
               />
@@ -65,7 +65,7 @@
               <InputText
                 @input="$emit('input', (body.lastName = $event))"
                 :type="'text'"
-                :field="'last_name'"
+                :field="'registerLastName'"
                 :label="'user.last_name'"
                 :placeholder="'user.last_name'"
               />
@@ -79,7 +79,7 @@
               <InputText
                 @input="$emit('input', (body.password = $event))"
                 :type="'password'"
-                :field="'password'"
+                :field="'registerPassword'"
                 :label="'user.password'"
                 :placeholder="'user.password_placeholder'"
                 :required="true"
@@ -93,7 +93,7 @@
               <InputText
                 @input="$emit('input', (body.password_confirmation = $event))"
                 :type="'password'"
-                :field="'password_confirmation'"
+                :field="'registerPasswordConfirmation'"
                 :label="'user.password_confirmation'"
                 :placeholder="'user.password_confirmation_placeholder'"
                 :required="true"
@@ -106,7 +106,7 @@
         <div class="mb-3">
           <CheckBox
             @update:modelValue="body.accept_terms = $event"
-            :field="'accept_terms'"
+            :field="'registerAcceptTerms'"
             :label="'register.accept_terms'"
             :required="true"
             :validate="validateAcceptTerms"

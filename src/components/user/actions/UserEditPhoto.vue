@@ -4,7 +4,7 @@
       <div class="col-12 mb-3">
         <InputFile
           @file-updated="captureFile($event)"
-          :field="'photo'"
+          :field="'userEditPhotoPhoto'"
           :label="'user.photo'"
           :validate="validatePhoto"
         />

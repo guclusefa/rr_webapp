@@ -7,7 +7,7 @@
           <InputText
             @input="$emit('input', (body.password = $event))"
             :type="'password'"
-            :field="'password'"
+            :field="'resetPassword'"
             :label="'user.password'"
             :placeholder="'user.password_placeholder'"
             :required="true"
@@ -19,7 +19,7 @@
           <InputText
             @input="$emit('input', (body.password_confirmation = $event))"
             :type="'password'"
-            :field="'password_confirmation'"
+            :field="'resetPasswordConfirmation'"
             :label="'user.password_confirmation'"
             :placeholder="'user.password_confirmation_placeholder'"
             :required="true"

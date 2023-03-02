@@ -5,7 +5,7 @@
         <InputText
           @input="$emit('input', (body.old = $event))"
           :type="'password'"
-          :field="'password'"
+          :field="'userEditEmailPassword'"
           :label="'user.password'"
           :placeholder="'user.password'"
           :required="true"
@@ -18,7 +18,7 @@
         <InputText
           @input="$emit('input', (body.email = $event))"
           :type="'email'"
-          :field="'email'"
+          :field="'userEditEmailEmail'"
           :label="'user.email'"
           :placeholder="'user.email'"
           :required="true"
@@ -31,7 +31,7 @@
         <InputText
           @input="$emit('input', (body.email_confirmation = $event))"
           :type="'email'"
-          :field="'email_confirmation'"
+          :field="'userEditEmailEmailConfirmation'"
           :label="'user.email_confirmation'"
           :placeholder="'user.email_confirmation'"
           :required="true"

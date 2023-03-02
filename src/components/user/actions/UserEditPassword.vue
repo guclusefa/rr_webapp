@@ -5,7 +5,7 @@
         <InputText
           @input="$emit('input', (body.old = $event))"
           :type="'password'"
-          :field="'old_password'"
+          :field="'userEditPasswordOldPassword'"
           :label="'user.old_password'"
           :placeholder="'user.old_password'"
           :required="true"
@@ -18,7 +18,7 @@
         <InputText
           @input="$emit('input', (body.password = $event))"
           :type="'password'"
-          :field="'password'"
+          :field="'userEditPasswordPassword'"
           :label="'user.password'"
           :placeholder="'user.password'"
           :required="true"
@@ -31,7 +31,7 @@
         <InputText
           @input="$emit('input', (body.password_confirmation = $event))"
           :type="'password'"
-          :field="'password_confirmation'"
+          :field="'userEditPasswordPasswordConfirmation'"
           :label="'user.password_confirmation'"
           :placeholder="'user.password_confirmation'"
           :required="true"

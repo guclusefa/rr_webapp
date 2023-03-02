@@ -7,7 +7,7 @@
           <InputText
             @input="$emit('input', (body.username = $event))"
             :type="'text'"
-            :field="'username'"
+            :field="'loginUsername'"
             :label="'user.username'"
             :placeholder="'user.username_placeholder'"
             :required="true"
@@ -19,7 +19,7 @@
           <InputText
             @input="$emit('input', (body.password = $event))"
             :type="'password'"
-            :field="'password'"
+            :field="'loginPassword'"
             :label="'user.password'"
             :placeholder="'user.password_placeholder'"
             :required="true"
@@ -30,7 +30,7 @@
         <div class="mb-3">
           <CheckBox
             @update:modelValue="body.remember_me = $event"
-            :field="'remember_me'"
+            :field="'loginRememberMe'"
             :label="'login.remember_me'"
           />
         </div>

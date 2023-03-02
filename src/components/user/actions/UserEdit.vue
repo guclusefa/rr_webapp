@@ -5,7 +5,7 @@
         <InputText
           @input="$emit('input', (body.username = $event))"
           :type="'text'"
-          :field="'username'"
+          :field="'userEditUsername'"
           :label="'user.username'"
           :placeholder="'user.username_placeholder'"
           :required="true"
@@ -20,7 +20,7 @@
         <InputText
           @input="$emit('input', (body.firstName = $event))"
           :type="'text'"
-          :field="'first_name'"
+          :field="'userEditFirstName'"
           :label="'user.first_name'"
           :placeholder="'user.first_name'"
           :value="profile.firstName"
@@ -31,7 +31,7 @@
         <InputText
           @input="$emit('input', (body.lastName = $event))"
           :type="'text'"
-          :field="'last_name'"
+          :field="'userEditLastName'"
           :label="'user.last_name'"
           :placeholder="'user.last_name'"
           :value="profile.lastName"
@@ -43,7 +43,7 @@
         <!-- State -->
         <Select2Field
           @input="$emit('input', (body.state = $event))"
-          :field="'state'"
+          :field="'userEditState'"
           :label="'user.state'"
           :placeholder="'user.state_placeholder_select'"
           :uri="'/states'"
@@ -57,7 +57,7 @@
         <!-- Bio -->
         <InputTextarea
           @input="$emit('input', (body.bio = $event))"
-          :field="'bio'"
+          :field="'userEditBio'"
           :label="'user.bio'"
           :placeholder="'user.bio_placeholder'"
           :value="profile.bio"
@@ -69,7 +69,7 @@
         <!-- Gender -->
         <SelectField
           @input="$emit('input', (body.gender = $event))"
-          :field="'gender'"
+          :field="'userEditGender'"
           :label="'user.gender'"
           :placeholderSelect="'user.gender_placeholder_select'"
           :options="'genderOptions'"
@@ -80,7 +80,7 @@
         <!-- BirthDate -->
         <DatePicker
           @input="$emit('input', (body.birthDate = $event))"
-          :field="'birthDate'"
+          :field="'userEditBirthDate'"
           :label="'user.birthDate'"
           :value="profile.birthDate"
         />

@@ -5,7 +5,7 @@
         <InputText
           @input="$emit('input', (body.title = $event))"
           :type="'text'"
-          :field="'title'"
+          :field="'resourceEditTitle'"
           :label="'resource.title_field'"
           :placeholder="'resource.title_field_placeholder'"
           :required="true"
@@ -19,7 +19,7 @@
       <div class="col-12 mb-3">
         <InputTextarea
           @input="$emit('input', (body.content = $event))"
-          :field="'content'"
+          :field="'resourceEditContent'"
           :label="'resource.content'"
           :placeholder="'resource.content_placeholder'"
           :required="true"
@@ -34,7 +34,7 @@
         <InputText
           @input="$emit('input', (body.link = $event))"
           :type="'url'"
-          :field="'link'"
+          :field="'resourceEditLink'"
           :label="'resource.link'"
           :placeholder="'resource.link_placeholder'"
           :validate="validateLink"
@@ -47,7 +47,7 @@
       <div class="col-12 mb-3">
         <SelectField
           @input="$emit('input', (body.visibility = $event))"
-          :field="'visibility'"
+          :field="'resourceEditVisibility'"
           :label="'resources.visibility'"
           :options="'resourcesVisibilityOptions'"
           :required="true"
@@ -60,7 +60,7 @@
       <div class="col-12 mb-3">
         <SelectField
           @input="$emit('input', (body.isPublished = $event))"
-          :field="'isPublished'"
+          :field="'resourceEditIsPublished'"
           :label="'resource.is_published'"
           :options="'booleanOptions'"
           :required="true"
@@ -73,7 +73,7 @@
       <div class="col-12 mb-3">
         <Select2Field
           @input="$emit('input', (body.relation = $event))"
-          :field="'relation'"
+          :field="'resourceEditRelation'"
           :label="'resource.relation'"
           :placeholder="'resource.relation_placeholder_select'"
           :required="true"
@@ -89,7 +89,7 @@
       <div class="col-12 mb-3">
         <Select2Field
           @input="$emit('input', (body.categories = $event))"
-          :field="'categories'"
+          :field="'resourceEditCategories'"
           :label="'resource.categories'"
           :placeholder="'resource.categories_placeholder_select'"
           :multiple="true"

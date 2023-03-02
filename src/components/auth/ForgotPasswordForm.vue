@@ -7,7 +7,7 @@
           <InputText
             @input="$emit('input', (body.email = $event))"
             :type="'email'"
-            :field="'email'"
+            :field="'forgotPasswordEmail'"
             :label="'user.email'"
             :placeholder="'user.email'"
             :required="true"
