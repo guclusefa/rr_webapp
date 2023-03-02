@@ -41,13 +41,14 @@
     <div class="row">
       <div class="col-12 mb-3">
         <!-- State -->
-        <SelectField
+        <Select2Field
           @input="$emit('input', (body.state = $event))"
           :field="'state'"
           :label="'user.state'"
-          :placeholderSelect="'user.state_placeholder_select'"
-          :options="'stateOptions'"
-          :value="profile.state ? profile.state.id : 0"
+          :placeholder="'user.state_placeholder_select'"
+          :uri="'/states'"
+          :text="'name'"
+          :values="body.state"
         />
       </div>
     </div>
@@ -103,6 +104,7 @@ import { addSuccessToast, addErrorToast } from "@/services/toasts";
 import InputText from "@/components/form/InputText.vue";
 import InputTextarea from "@/components/form/InputTextarea.vue";
 import SelectField from "@/components/form/SelectField.vue";
+import Select2Field from "@/components/form/Select2Field.vue";
 import DatePicker from "@/components/form/DatePicker.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -165,6 +167,7 @@ export default {
     InputText,
     InputTextarea,
     SelectField,
+    Select2Field,
     DatePicker,
     SubmitButton,
   },

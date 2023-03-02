@@ -43,7 +43,8 @@ export default {
     },
     multiple: {
       type: Boolean,
-      required: true,
+      required: false,
+      default: false,
     },
     uri: {
       type: String,
@@ -54,7 +55,7 @@ export default {
       required: true,
     },
     values: {
-      type: Array,
+      type: [String, Number, Array],
       required: false,
       default: () => [],
     },
@@ -81,6 +82,9 @@ export default {
       this.setSelect2Values(select2, placeholder, multiple, uri, text);
       // Fill select2 with selected values
       if (values) {
+        if (!multiple) {
+          values = [values];
+        }
         values = values.map((value) => parseInt(value));
         values.forEach((value) => {
           this.fillSelectedValues(select2, uri, value, text);
