@@ -202,6 +202,8 @@
     "link_placeholder": "Lien de la ressource (https://...)",
     "link_invalid": "Le lien n'est pas valide, il doit commencer par https://",
     "is_published": "Publiée",
+    "sharetousers": "Partager avec des utilisateurs",
+    "sharetousers_placeholder_select": "Choisir des utilisateurs",
     "relation": "Relation",
     "relation_placeholder_select": "Choisir une relation",
     "relation_required": "Veuillez choisir une relation",

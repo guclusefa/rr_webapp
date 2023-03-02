@@ -1,5 +1,5 @@
 <template>
-  <div class="modal fade" :id="modalId" tabindex="-1">
+  <div class="modal fade" :id="modalId">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

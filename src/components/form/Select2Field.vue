@@ -3,14 +3,14 @@
     {{ $t(label) }}
   </label>
   <select
-    class="form-control"
+    class="form-control d-none"
     :id="field"
     :name="field"
     :multiple="multiple"
-    :class="{ 'is-invalid hide': validateInput() }"
+    :class="{ 'is-invalid': validateInput() }"
   ></select>
   <div class="invalid-feedback" v-if="validateInput() !== ''">
-    {{ $t(validateInput()) }}
+    {{ $t(validateInput()) }} 
   </div>
 </template>
 
@@ -97,7 +97,6 @@ export default {
         theme: "bootstrap-5",
         width: "100%",
         allowClear: true,
-        dropdownParent: $('.modal-body'), // bug fix for modal
         // Dynamic options
         placeholder: this.$t(placeholder),
         multiple: multiple,
@@ -154,7 +153,6 @@ export default {
     select2.on("change", () => {
       this.$emit("input", select2.val());
     });
-
     this.createSelect2(
       this.field,
       this.placeholder,

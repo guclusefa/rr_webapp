@@ -56,6 +56,20 @@
       </div>
     </div>
 
+    <div class="row" v-if="body.visibility == 2">
+      <div class="col-12 mb-3">
+        <Select2Field
+          @input="$emit('input', (shareToBody.users = $event))"
+          :field="'resourceEditUsers'"
+          :label="'resource.sharetousers'"
+          :placeholder="'resource.sharetousers_placeholder_select'"
+          :multiple="true"
+          :uri="'/users'"
+          :text="'username'"
+        />
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <SelectField
@@ -95,9 +109,11 @@
           :multiple="true"
           :uri="'/categories'"
           :text="'name'"
-          :values="this.edit && resource.categories
+          :values="
+            this.edit && resource.categories
               ? resource.categories.map((category) => category.id)
-              : body.categories"
+              : body.categories
+          "
         />
       </div>
     </div>
@@ -139,6 +155,9 @@ export default {
         isPublished: 1,
         relation: "",
         categories: [],
+      },
+      shareToBody: {
+        users: [],
       },
     };
   },
