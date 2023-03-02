@@ -14,6 +14,7 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <InputTextarea
@@ -27,6 +28,7 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <InputText
@@ -40,6 +42,7 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <SelectField
@@ -52,6 +55,7 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
         <SelectField
@@ -64,36 +68,40 @@
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
-        <SelectField
+        <Select2Field
           @input="$emit('input', (body.relation = $event))"
           :field="'relation'"
           :label="'resource.relation'"
-          :placeholderSelect="'resource.relation_placeholder_select'"
-          :options="'relationOptions'"
+          :placeholder="'resource.relation_placeholder_select'"
           :required="true"
+          :uri="'/relations'"
+          :text="'name'"
           :validate="validateRelation"
-          :value="this.edit ? resource.relation.id : body.relation"
+          :values="this.edit ? resource.relation.id : body.relation"
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-12 mb-3">
-        <SelectField
+        <Select2Field
           @input="$emit('input', (body.categories = $event))"
           :field="'categories'"
           :label="'resource.categories'"
-          :options="'categoryOptions'"
+          :placeholder="'resource.categories_placeholder_select'"
           :multiple="true"
-          :values="
-            this.edit && resource.categories
+          :uri="'/categories'"
+          :text="'name'"
+          :values="this.edit && resource.categories
               ? resource.categories.map((category) => category.id)
-              : body.categories
-          "
+              : body.categories"
         />
       </div>
     </div>
+
     <div class="row">
       <div class="col-6 ms-auto text-end">
         <!-- Submit -->
@@ -115,6 +123,7 @@ import { addSuccessToast, addErrorToast } from "@/services/toasts";
 import InputText from "@/components/form/InputText.vue";
 import InputTextarea from "@/components/form/InputTextarea.vue";
 import SelectField from "@/components/form/SelectField.vue";
+import Select2Field from "@/components/form/Select2Field.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "ResourceEdit",
@@ -189,6 +198,7 @@ export default {
     InputText,
     InputTextarea,
     SelectField,
+    Select2Field,
     SubmitButton,
   },
 };

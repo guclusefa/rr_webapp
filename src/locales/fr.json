@@ -206,6 +206,7 @@
     "relation_placeholder_select": "Choisir une relation",
     "relation_required": "Veuillez choisir une relation",
     "categories": "Catégories de la ressource",
+    "categories_placeholder_select": "Choisir des catégories",
     "verified": "Vérifiée",
     "unverified": "Non vérifiée",
     "create": "Créer",
@@ -249,8 +250,11 @@
       "1": "Vérifiée"
     },
     "authors": "Auteurs des ressources",
+    "authors_placeholder_select": "Tous les auteurs",
     "relations": "Relations des ressources",
+    "relations_placeholder_select": "Toutes les relations",
     "categories": "Catégories des ressources",
+    "categories_placeholder_select": "Toutes les catégories",
     "create": "Créer une ressource"
   },
   "comments": {
@@ -271,7 +275,9 @@
     "filter": "Filtrer les commentaires",
     "no_results": "Aucun commentaire n'a été trouvé",
     "authors": "Auteurs des commentaires",
-    "resources": "Ressources des commentaires"
+    "authors_placeholder_select": "Tous les auteurs",
+    "resources": "Ressources des commentaires",
+    "resources_placeholder_select": "Toutes les ressources"
   },
   "comment": {
     "page": "Commentaire",

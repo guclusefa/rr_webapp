@@ -5,18 +5,19 @@
         <InputText
           @input="$emit('input', (params.search = $event))"
           :type="'search'"
-          :field="'search'"
+          :field="'filterProfileSearch'"
           :label="'profiles.search'"
           :placeholder="'profiles.search_placeholder'"
           :value="profilesParams.search"
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.certified = $event))"
-          :field="'certified'"
+          :field="'filterProfileCertified'"
           :label="'profiles.certified'"
           :placeholderSelect="'profiles.certified_placeholder_select'"
           :options="'booleanOptions'"
@@ -29,7 +30,7 @@
       <div class="col">
         <SelectField
           @input="$emit('input', (params.role = $event))"
-          :field="'roles'"
+          :field="'filterProfileRoles'"
           :label="'profiles.roles'"
           :placeholder="'profiles.roles_placeholder_select'"
           :options="'rolesOptions'"
@@ -39,11 +40,12 @@
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <Select2Field
           @input="$emit('input', (params.state = $event))"
-          :field="'states'"
+          :field="'filterProfileStates'"
           :label="'profiles.states'"
           :placeholder="'profiles.states_placeholder_select'"
           :multiple="true"
@@ -53,11 +55,12 @@
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.gender = $event))"
-          :field="'genders'"
+          :field="'filterProfileGenders'"
           :label="'profiles.genders'"
           :placeholder="'profiles.genders_placeholder_select'"
           :options="'genderOptions'"
@@ -67,39 +70,43 @@
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.order = $event))"
-          :field="'order'"
+          :field="'filterProfileOrder'"
           :label="'profiles.order'"
           :options="'profilesOrderOptions'"
           :value="profilesParams.order"
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.direction = $event))"
-          :field="'direction'"
+          :field="'filterProfileDirection'"
           :label="'profiles.direction'"
           :options="'directionOptions'"
           :value="profilesParams.direction"
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SelectField
           @input="$emit('input', (params.limit = $event))"
-          :field="'limit'"
+          :field="'filterProfileLimit'"
           :label="'profiles.limit'"
           :options="'limitOptions'"
           :value="profilesParams.limit"
         />
       </div>
     </div>
+
     <div class="row mb-3">
       <div class="col">
         <SubmitButton :label="'profiles.filter'" />

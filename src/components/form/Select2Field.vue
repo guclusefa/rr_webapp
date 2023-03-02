@@ -7,7 +7,7 @@
     :id="field"
     :name="field"
     :multiple="multiple"
-    :class="{ 'is-invalid': validateInput() }"
+    :class="{ 'is-invalid hide': validateInput() }"
   ></select>
   <div class="invalid-feedback" v-if="validateInput() !== ''">
     {{ $t(validateInput()) }}
@@ -134,6 +134,10 @@ export default {
         url: process.env.VUE_APP_API_URL + uri + "/" + id,
         dataType: "json",
         success: function (data) {
+          // if data.data (idk why)
+          if (data.data) {
+            data = data.data;
+          }
           // create the option and append to Select2
           var option = new Option(data[text], data.id, true, true);
           select2.append(option).trigger("change");
