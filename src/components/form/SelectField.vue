@@ -8,7 +8,7 @@
     :id="field"
     :name="field"
     :multiple="multiple"
-    :class="{ 'is-invalid': validateInput() }"
+    :class="{ 'is-invalid': validateInput(), 'd-none': select2 }"
   >
     <option
       value=""
@@ -251,8 +251,7 @@ export default {
         theme: "bootstrap-5",
         width: "100%",
         allowClear: true,
-        dropdownParent: $('.modal-body'), // bug fix for modal
-        
+
         placeholder: this.$t(this.placeholder),
       });
       // every time the input changes of the select2 field
