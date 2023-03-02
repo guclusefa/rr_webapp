@@ -5,8 +5,8 @@
         <div class="card-header">
           <UserIdentifier :user="comment.author" v-if="comment.author" />
           <span v-else>{{ $t("comment.anonymous") }}</span>
-          <span class="text-muted float-end">
-            {{ formatDateTime(comment.createdAt) }}
+          <span class="float-end" v-if="canEdit">
+            <CommentActions :comment="comment" />
           </span>
         </div>
         <div class="card-body">
@@ -18,8 +18,13 @@
           <router-link :to="`/resource/${comment.resource.id}`">
             {{ comment.resource.title }}
           </router-link>
-          <span class="float-end" v-if="canEdit">
-            <CommentActions :comment="comment" />
+          <span class="text-muted float-end">
+            {{ formatDateTime(comment.createdAt) }}
+          </span>
+          <span class="text-muted float-end me-2">
+            <router-link :to="`/comment/${comment.id}`">
+              {{ $t("comment.replies", { count: comment.replies }) }}
+            </router-link>
           </span>
         </div>
       </div>

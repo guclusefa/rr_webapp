@@ -284,6 +284,7 @@
     "content_placeholder": "Contenu du commentaire",
     "content_required": "Veuillez entrer un contenu",
     "create": "Ajouter un commentaire",
-    "anonymous": "Anonyme"
+    "anonymous": "Anonyme",
+    "replies": "{count} réponses"
   }
 }
