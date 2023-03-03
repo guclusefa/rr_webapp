@@ -85,11 +85,11 @@ export default {
         const response = await this.updateProfilePhoto(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
+          addSuccessToast(response);
           // If my profile
           if (this.profile.id === this.user.id) {
             await this.updateUser(this.body);
           }
-          addSuccessToast(response);
           // refresh page (because of bug exaplined in profile.js)
           window.location.reload();
           return;
