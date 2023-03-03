@@ -4,7 +4,7 @@
       <div class="col-12 mb-3">
         <InputTextarea
           @input="$emit('input', (body.content = $event))"
-          :field="'commentEditContent'"
+          :field="this.edit ? 'commentEditContent' : 'commentAddContent'"
           :label="'comment.content'"
           :placeholder="'comment.content_placeholder'"
           :required="true"
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import commentEditValidation from "@/mixins/commentEditValidation.js";
 import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
@@ -37,6 +37,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "CommentEdit",
   mixins: [commentEditValidation],
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -47,6 +48,11 @@ export default {
     };
   },
   props: {
+    comment: {
+      type: Object,
+      required: false,
+      default: null,
+    },
     edit: {
       type: Boolean,
       required: false,
@@ -57,10 +63,6 @@ export default {
       required: true,
     },
   },
-  computed: {
-    ...mapGetters(["comment", "commentsParamsDefault"]),
-  },
-  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.comment.id;
@@ -77,9 +79,8 @@ export default {
           : await this.createComment(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
-          if (!this.edit) {
-            this.reloadComments();
-          }
+          this.reloadComments();
+
           addSuccessToast(response);
           // Close modal (if any)
           this.$emit("close");

@@ -15,25 +15,33 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "CommentDelete",
-  computed: {
-    ...mapGetters(["comment"]),
-  },
   emits: ["input", "close"],
+  props: {
+    comment: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
-    ...mapActions(["deleteComment"]),
+    ...mapActions(["deleteComment", "reloadComments"]),
     async deleteCommentItem() {
       const response = await this.deleteComment(this.comment.id);
       if (response.status >= 200 && response.status < 300) {
         // close modal
         this.$emit("close");
         // redirect to home
+        if (this.$route.name == "comment") {
+          this.$router.push({ name: "comments" });
+        } else {
+          this.reloadComments();
+        }
         this.$router.push({ name: "comments" });
         // Success
         addSuccessToast(response);

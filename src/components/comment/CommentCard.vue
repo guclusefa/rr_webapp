@@ -1,8 +1,17 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <UserIdentifier :user="comment.author" v-if="comment.author" />
-      <span v-else>{{ $t("comment.anonymous") }}</span>
+      <div class="row">
+        <div class="col">
+          <UserIdentifier :user="comment.author" v-if="comment.author" />
+          <span v-else>{{ $t("comment.anonymous") }}</span>
+        </div>
+        <div class="col" v-if="canEdit()">
+          <div class="float-end">
+            <CommentActionsButton :comment="comment" />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="card-body">
       <p class="card-text pre-line">
@@ -28,26 +37,39 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import dateFormatter from "@/mixins/dateFormatter";
+
+import CommentActionsButton from "@/components/comment/CommentActionsButton.vue";
 
 import UserIdentifier from "../user/UserIdentifier.vue";
 
 export default {
   name: "CommentCard",
   mixins: [dateFormatter],
-
   props: {
     comment: {
       type: Object,
       required: true,
     },
-    canEdit: {
-      type: Boolean,
-      required: false,
-      default: true,
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+  methods: {
+    isOwner() {
+      if (!this.comment.author) {
+        return false;
+      }
+      return this.comment.author.id === this.user.id;
+    },
+    canEdit() {
+      return this.isOwner();
     },
   },
   components: {
+    CommentActionsButton,
     UserIdentifier,
   },
 };

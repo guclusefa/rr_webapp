@@ -7,14 +7,23 @@
       <img src="@/assets/images/user/default.jpg" class="card-img-top" />
     </template>
     <div class="card-body">
-      <h5 class="card-title">
-        <router-link :to="{ name: 'profile', params: { id: profile.id } }">
-          @{{ profile.username }}
-        </router-link>
-        <span v-if="profile.isCertified">
-          <i class="bi bi-patch-check-fill ms-1"></i>
-        </span>
-      </h5>
+      <div class="row">
+        <div class="col">
+          <h5 class="card-title">
+            <router-link :to="{ name: 'profile', params: { id: profile.id } }">
+              @{{ profile.username }}
+            </router-link>
+            <span v-if="profile.isCertified">
+              <i class="bi bi-patch-check-fill ms-1"></i>
+            </span>
+          </h5>
+        </div>
+        <div class="col" v-if="canEdit()">
+          <div class="float-end">
+            <UserActionsButton :profile="profile" />
+          </div>
+        </div>
+      </div>
       <p class="card-text" v-if="profile.firstName || profile.lastName">
         <span class="text-muted pb-1">
           {{ profile.firstName }} {{ profile.lastName }}
@@ -46,7 +55,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import dateFormatter from "@/mixins/dateFormatter";
+
+import UserActionsButton from "@/components/user/UserActionsButton";
 
 export default {
   name: "UserCard",
@@ -56,6 +69,20 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+  methods: {
+    isOwner() {
+      return this.profile.id === this.user.id;
+    },
+    canEdit() {
+      return this.isOwner();
+    },
+  },
+  components: {
+    UserActionsButton,
   },
 };
 </script>

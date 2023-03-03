@@ -98,7 +98,8 @@ export default {
         case "editUserModal":
           showModal(
             this.$t("profile.edit_title", { username: this.profile.username }),
-            UserEdit
+            UserEdit,
+            { profile: this.profile }
           );
           break;
         case "editUserPhotoModal":
@@ -106,7 +107,8 @@ export default {
             this.$t("profile.edit_photo_title", {
               username: this.profile.username,
             }),
-            UserEditPhoto
+            UserEditPhoto,
+            { profile: this.profile }
           );
           break;
         case "editUserPasswordModal":
@@ -114,7 +116,8 @@ export default {
             this.$t("profile.edit_password_title", {
               username: this.profile.username,
             }),
-            UserEditPassword
+            UserEditPassword,
+            { profile: this.profile }
           );
           break;
         case "editUserEmailModal":
@@ -122,7 +125,8 @@ export default {
             this.$t("profile.edit_email_title", {
               username: this.profile.username,
             }),
-            UserEditEmail
+            UserEditEmail,
+            { profile: this.profile }
           );
           break;
         case "confirmUserModal":
@@ -130,7 +134,8 @@ export default {
             this.$t("profile.verify_email_title", {
               username: this.profile.username,
             }),
-            UserConfirm
+            UserConfirm,
+            { profile: this.profile }
           );
           break;
         case "deleteUserModal":
@@ -138,7 +143,8 @@ export default {
             this.$t("profile.delete_title", {
               username: this.profile.username,
             }),
-            UserDelete
+            UserDelete,
+            { profile: this.profile }
           );
           break;
         default:

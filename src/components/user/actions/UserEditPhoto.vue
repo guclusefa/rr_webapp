@@ -12,11 +12,7 @@
     </div>
     <div class="row">
       <div class="col-12 mb-3">
-        <img
-          v-if="photoPreview"
-          :src="photoPreview"
-          class="img-fluid"
-        />
+        <img v-if="photoPreview" :src="photoPreview" class="img-fluid" />
       </div>
     </div>
     <div class="row">
@@ -43,6 +39,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "UserEdit",
   mixins: [userEditPhotoValidation],
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -52,9 +49,14 @@ export default {
       photoPreview: null,
     };
   },
-  emits: ["input", "close"],
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
-    ...mapGetters(["profile", "user"]),
+    ...mapGetters(["user"]),
   },
   methods: {
     // Capture file

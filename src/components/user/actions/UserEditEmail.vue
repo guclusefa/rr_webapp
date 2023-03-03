@@ -63,6 +63,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "UserEditEmail",
   mixins: [userEditEmailValidation],
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -73,10 +74,15 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters(["profile", "user"]),
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
   },
-  emits: ["input", "close"],
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
     setBody() {
       this.body.id = this.profile.id;

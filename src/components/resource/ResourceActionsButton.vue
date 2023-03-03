@@ -74,7 +74,8 @@ export default {
         case "editResourceModal":
           showModal(
             this.$t("resource.edit_title", { title: this.resource.title }),
-            ResourceEdit
+            ResourceEdit,
+            { resource: this.resource }
           );
           break;
         case "editMediaResourceModal":
@@ -82,7 +83,8 @@ export default {
             this.$t("resource.edit_media_title", {
               title: this.resource.title,
             }),
-            ResourceEditMedia
+            ResourceEditMedia,
+            { resource: this.resource }
           );
           break;
         case "editShareToResourceModal":
@@ -90,13 +92,15 @@ export default {
             this.$t("resource.edit_shareto_title", {
               title: this.resource.title,
             }),
-            ResourceEditShareTo
+            ResourceEditShareTo,
+            { resource: this.resource }
           );
           break;
         case "deleteResourceModal":
           showModal(
             this.$t("resource.delete_title", { title: this.resource.title }),
-            ResourceDelete
+            ResourceDelete,
+            { resource: this.resource }
           );
           break;
       }

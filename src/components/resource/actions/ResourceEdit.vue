@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import resourceEditValidation from "@/mixins/resourceEditValidation.js";
 import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
@@ -130,6 +130,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "ResourceEdit",
   mixins: [resourceEditValidation],
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -145,15 +146,16 @@ export default {
     };
   },
   props: {
+    resource: {
+      type: Object,
+      required: false,
+      default: null,
+    },
     edit: {
       type: Boolean,
       required: false,
       default: true,
     },
-  },
-  emits: ["input", "close"],
-  computed: {
-    ...mapGetters(["resource", "resourceParamsDefault"]),
   },
   methods: {
     setBody() {
@@ -179,9 +181,8 @@ export default {
           : await this.createResource(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
-          if (!this.edit) {
-            this.reloadResources();
-          }
+          await this.reloadResources();
+
           addSuccessToast(response);
           // Close modal (if any)
           this.$emit("close");

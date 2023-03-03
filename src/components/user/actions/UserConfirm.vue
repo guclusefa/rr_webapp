@@ -15,17 +15,20 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "UserConfirm",
-  computed: {
-    ...mapGetters(["profile"]),
-  },
   emits: ["input", "close"],
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
     // send email verification
     ...mapActions(["confirmEmail"]),

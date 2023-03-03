@@ -52,6 +52,7 @@ export default {
             this.$t("comment.edit_title", { content: this.comment.content }),
             CommentEdit,
             {
+              comment: this.comment,
               resource: this.comment.resource,
             }
           );

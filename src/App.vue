@@ -4,11 +4,7 @@
     <router-view />
     <aside>
       <ModalDialog />
-    </aside>
-    <aside>
       <OffCanvas />
-    </aside>
-    <aside>
       <ToastMessage />
     </aside>
   </main>

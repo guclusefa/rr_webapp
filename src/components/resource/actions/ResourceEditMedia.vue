@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import resourceEditMediaValidation from "@/mixins/resourceEditMediaValidation.js";
 import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
@@ -40,6 +40,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "ResourceEditMedia",
   mixins: [resourceEditMediaValidation],
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -49,10 +50,12 @@ export default {
       mediaPreview: null,
     };
   },
-  computed: {
-    ...mapGetters(["resource"]),
+  props: {
+    resource: {
+      type: Object,
+      required: true,
+    },
   },
-  emits: ["input", "close"],
   methods: {
     // Capture file
     captureFile($event) {
@@ -66,20 +69,20 @@ export default {
         const reader = new FileReader();
         reader.onload = (event) => {
           // if video file take the middle frame and converti it to base64 : (TODO not working)
-            if (file.type.includes("video")) {
-                const video = document.createElement("video");
-                video.src = event.target.result;
-                video.onloadedmetadata = () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                this.mediaPreview = canvas.toDataURL("image/jpeg");
-                };
-            } else {
-                this.mediaPreview = event.target.result;
-            }
+          if (file.type.includes("video")) {
+            const video = document.createElement("video");
+            video.src = event.target.result;
+            video.onloadedmetadata = () => {
+              const canvas = document.createElement("canvas");
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+              this.mediaPreview = canvas.toDataURL("image/jpeg");
+            };
+          } else {
+            this.mediaPreview = event.target.result;
+          }
         };
         reader.readAsDataURL(file);
       }

@@ -93,7 +93,6 @@
       </div>
     </div>
   </form>
-  {{ test }}
 </template>
 
 <script>
@@ -112,11 +111,7 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "UserEdit",
   mixins: [userEditValidation],
-  props: {
-    test: {
-      type: String,
-    },
-  },
+  emits: ["input", "close"],
   data() {
     return {
       body: {
@@ -131,10 +126,15 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapGetters(["profile", "user"]),
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+    },
   },
-  emits: ["input", "close"],
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
     setBody() {
       this.body.id = this.profile.id;
@@ -147,7 +147,7 @@ export default {
       this.body.birthDate = this.profile.birthDate;
     },
     // Form submit
-    ...mapActions(["updateProfile", "updateUser"]),
+    ...mapActions(["updateProfile", "updateUser", "reloadProfiles"]),
     async submitForm() {
       withSubmitValidation(async function () {
         const response = await this.updateProfile(this.body);
@@ -157,6 +157,8 @@ export default {
           if (this.profile.id === this.user.id) {
             await this.updateUser(this.body);
           }
+          // Reload profiles
+          await this.reloadProfiles();
           // close modal (if any)
           this.$emit("close");
           addSuccessToast(response);

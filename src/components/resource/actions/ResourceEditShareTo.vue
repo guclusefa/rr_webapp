@@ -10,7 +10,7 @@
           :multiple="true"
           :uri="'/users'"
           :text="'username'"
-          :values="[ 5, 6, 4, 10, 7, 8, 3 ]"
+          :values="body.users"
         />
       </div>
     </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import Select2Field from "@/components/form/Select2Field.vue";
@@ -33,18 +33,22 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "ResourceEditShareTo",
+  emits: ["input", "close"],
   data() {
     return {
       body: {
         id: null,
         users: [],
       },
+      ids: [],
     };
   },
-  computed: {
-    ...mapGetters(["resource"]),
+  props: {
+    resource: {
+      type: Object,
+      required: true,
+    },
   },
-  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.resource.id;

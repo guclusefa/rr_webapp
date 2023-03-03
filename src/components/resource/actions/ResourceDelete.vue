@@ -15,26 +15,33 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "ResourceDelete",
-  computed: {
-    ...mapGetters(["resource", "user"]),
-  },
   emits: ["input", "close"],
+  props: {
+    resource: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
-    ...mapActions(["deleteResource"]),
+    ...mapActions(["deleteResource", "reloadResources"]),
     async deleteResourceItem() {
       const response = await this.deleteResource(this.resource.id);
       if (response.status >= 200 && response.status < 300) {
-        // close modal
+        // close modal (if any)
         this.$emit("close");
         // redirect to home
-        this.$router.push({ name: "resources" });
+        if (this.$route.name == "resource") {
+          this.$router.push({ name: "resources" });
+        } else {
+          this.reloadResources();
+        }
         // Success
         addSuccessToast(response);
         return;

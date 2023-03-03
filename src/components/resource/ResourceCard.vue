@@ -1,16 +1,11 @@
 <template>
   <div class="card">
     <template v-if="resource.media">
-      <div
-        class="embed-responsive embed-responsive-1by1"
+      <video
+        :src="resource.media"
+        controls
         v-if="resource.media.includes('.mp4')"
-      >
-        <iframe
-          class="embed-responsive-item img-fluid"
-          :src="resource.media"
-          allowfullscreen
-        ></iframe>
-      </div>
+      />
       <img :src="resource.media" class="card-img-top" v-else />
     </template>
     <template v-else>
@@ -25,9 +20,9 @@
             </router-link>
           </h5>
         </div>
-        <div class="col">
+        <div class="col" v-if="canEdit()">
           <div class="float-end">
-            <i class="bi bi-three-dots"></i>
+            <ResourceActionsButton :resource="resource" />
           </div>
         </div>
       </div>
@@ -105,10 +100,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import dateFormatter from "@/mixins/dateFormatter";
 
 import UserIdentifier from "../user/UserIdentifier.vue";
 
+import ResourceActionsButton from "@/components/resource/ResourceActionsButton.vue";
 import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
 import LikeResourceButton from "@/components/resource/LikeResourceButton.vue";
 import ExploitResourceButton from "@/components/resource/ExploitResourceButton.vue";
@@ -123,9 +121,21 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+  methods: {
+    isOwner() {
+      return this.resource.author.id === this.user.id;
+    },
+    canEdit() {
+      return this.isOwner();
+    },
+  },
   components: {
     UserIdentifier,
 
+    ResourceActionsButton,
     ShareResourceButton,
     LikeResourceButton,
     ExploitResourceButton,
