@@ -9,7 +9,7 @@
       </div>
       <div class="col">
         <div class="float-end">
-          <FilterCommentButton />
+          <CommentFilterButton />
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       </div>
       <div class="col">
         <div class="float-end">
-          <FilterCommentButton />
+          <CommentFilterButton />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import FilterCommentButton from "@/components/comment/FilterCommentButton.vue";
+import CommentFilterButton from "@/components/comment/CommentFilterButton.vue";
 import CommentCard from "@/components/comment/CommentCard";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -79,7 +79,7 @@ export default {
     },
   },
   components: {
-    FilterCommentButton,
+    CommentFilterButton,
     CommentCard,
     SubmitButton,
 

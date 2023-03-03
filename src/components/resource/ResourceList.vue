@@ -9,7 +9,7 @@
       </div>
       <div class="col">
         <div class="float-end">
-          <FilterResourceButton />
+          <ResourceFilterButton />
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
       </div>
       <div class="col">
         <div class="float-end">
-          <FilterResourceButton />
+          <ResourceFilterButton />
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
-import FilterResourceButton from "@/components/resource/FilterResourceButton.vue";
+import ResourceFilterButton from "@/components/resource/ResourceFilterButton.vue";
 import ResourceCard from "@/components/resource/ResourceCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
@@ -79,7 +79,7 @@ export default {
     },
   },
   components: {
-    FilterResourceButton,
+    ResourceFilterButton,
     ResourceCard,
     SubmitButton,
 

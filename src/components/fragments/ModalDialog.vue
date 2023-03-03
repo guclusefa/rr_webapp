@@ -42,5 +42,15 @@ export default {
       document.getElementById("modalDialog").classList.remove("show");
     },
   },
+  // watch change route, reload modal
+  watch: {
+    $route() {
+      this.setModal({
+        title: "",
+        body: null,
+        props: {},
+      });
+    },
+  },
 };
 </script>

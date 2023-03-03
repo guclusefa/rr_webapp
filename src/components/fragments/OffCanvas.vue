@@ -8,7 +8,7 @@
   >
     <div class="offcanvas-header border-bottom">
       <h5 class="offcanvas-title">
-        {{ $t(title) }}
+        {{ offCanvas.title }}
       </h5>
       <button
         type="button"
@@ -17,18 +17,30 @@
       ></button>
     </div>
     <div class="offcanvas-body">
-      <slot name="body"></slot>
+      <component :is="offCanvas.body" v-bind="offCanvas.props" />
     </div>
   </aside>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   name: "OffCanvas",
-  props: {
-    title: {
-      type: String,
-      required: true,
+  computed: {
+    ...mapGetters(["offCanvas"]),
+  },
+  methods: {
+    ...mapActions(["setOffCanvas"]),
+  },
+  // watch change route, reload offcanvas
+  watch: {
+    $route() {
+      this.setOffCanvas({
+        title: "",
+        body: null,
+        props: {},
+      });
     },
   },
 };
