@@ -6,7 +6,7 @@
           <UserIdentifier :user="comment.author" v-if="comment.author" />
           <span v-else>{{ $t("comment.anonymous") }}</span>
           <span class="float-end" v-if="canEdit">
-            <CommentActions :comment="comment" />
+            <CommentActionsButton :comment="comment" />
           </span>
         </div>
         <div class="card-body">
@@ -35,7 +35,7 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
-import CommentActions from "./CommentActions.vue";
+import CommentActionsButton from "./CommentActionsButton.vue";
 import UserIdentifier from "../user/UserIdentifier.vue";
 
 export default {
@@ -53,7 +53,7 @@ export default {
     },
   },
   components: {
-    CommentActions,
+    CommentActionsButton,
     UserIdentifier,
   },
 };

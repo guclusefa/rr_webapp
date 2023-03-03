@@ -22,7 +22,7 @@
             </div>
             <div class="col" v-if="canEdit">
               <div class="float-end">
-                <UserActions :profile="profile" />
+                <UserActionsButton :profile="profile" />
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
-import UserActions from "@/components/user/UserActions";
+import UserActionsButton from "@/components/user/UserActionsButton";
 
 export default {
   name: "UserItem",
@@ -105,7 +105,7 @@ export default {
     },
   },
   components: {
-    UserActions,
+    UserActionsButton,
   },
 };
 </script>

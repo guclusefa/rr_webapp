@@ -58,7 +58,7 @@
             </div>
             <div class="col" v-if="canEdit">
               <div class="float-end">
-                <ResourceActions :resource="resource" />
+                <ResourceActionsButton :resource="resource" />
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@
 <script>
 import dateFormatter from "@/mixins/dateFormatter";
 
-import ResourceActions from "@/components/resource/ResourceActions.vue";
+import ResourceActionsButton from "@/components/resource/ResourceActionsButton.vue";
 import UserIdentifier from "@/components/user/UserIdentifier";
 
 import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
@@ -149,7 +149,7 @@ export default {
     },
   },
   components: {
-    ResourceActions,
+    ResourceActionsButton,
     UserIdentifier,
 
     ShareResourceButton,
