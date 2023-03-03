@@ -25,15 +25,16 @@ export default {
   computed: {
     ...mapGetters(["profile"]),
   },
+  emits: ["input", "close"],
   methods: {
     // send email verification
     ...mapActions(["confirmEmail"]),
     async sendEmailVerification() {
       const response = await this.confirmEmail(this.profile.id);
       if (response.status >= 200 && response.status < 300) {
-        addSuccessToast(response);
         // close modal
         this.$emit("close");
+        addSuccessToast(response);
         return;
       }
       // Error

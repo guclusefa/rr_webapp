@@ -60,6 +60,7 @@ export default {
   computed: {
     ...mapGetters(["comment", "commentsParamsDefault"]),
   },
+  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.comment.id;

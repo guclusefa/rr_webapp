@@ -52,6 +52,7 @@ export default {
   computed: {
     ...mapGetters(["resource"]),
   },
+  emits: ["input", "close"],
   methods: {
     // Capture file
     captureFile($event) {

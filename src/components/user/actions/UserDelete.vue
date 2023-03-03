@@ -25,6 +25,7 @@ export default {
   computed: {
     ...mapGetters(["profile", "user"]),
   },
+  emits: ["input", "close"],
   methods: {
     ...mapActions(["deleteProfile", "logout"]),
     async deleteUserProfile() {

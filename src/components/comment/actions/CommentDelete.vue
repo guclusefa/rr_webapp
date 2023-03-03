@@ -25,6 +25,7 @@ export default {
   computed: {
     ...mapGetters(["comment"]),
   },
+  emits: ["input", "close"],
   methods: {
     ...mapActions(["deleteComment"]),
     async deleteCommentItem() {

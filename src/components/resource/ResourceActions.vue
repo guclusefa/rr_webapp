@@ -8,7 +8,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editResourceModal')"
+          @click="showRessourceActionModal('editResourceModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("resource.edit") }}
         </a>
@@ -17,7 +19,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editMediaResourceModal')"
+          @click="showRessourceActionModal('editMediaResourceModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("resource.edit_media") }}
         </a>
@@ -26,7 +30,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editShareToResourceModal')"
+          @click="showRessourceActionModal('editShareToResourceModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("resource.edit_shareto") }}
         </a>
@@ -35,57 +41,20 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('deleteResourceModal')"
+          @click="showRessourceActionModal('deleteResourceModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("resource.delete") }}</a
         >
       </li>
     </ul>
   </div>
-
-  <ModalDialog
-    :modal-id="'editResourceModal'"
-    :modal-title="$t('resource.edit_title', { title: resource.title })"
-  >
-    <template #body>
-      <ResourceEdit @close="closeModal('editResourceModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'editMediaResourceModal'"
-    :modal-title="$t('resource.edit_media_title', { title: resource.title })"
-  >
-    <template #body>
-      <ResourceEditMedia @close="closeModal('editMediaResourceModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'editShareToResourceModal'"
-    :modal-title="$t('resource.edit_shareto_title', { title: resource.title })"
-  >
-    <template #body>
-      <ResourceEditShareTo
-        @close="closeModal('editShareToResourceModal')"
-      />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'deleteResourceModal'"
-    :modal-title="$t('resource.delete_title', { title: resource.title })"
-  >
-    <template #body>
-      <ResourceDelete @close="closeModal('deleteResourceModal')" />
-    </template>
-  </ModalDialog>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
+import { showModal } from "@/services/modals";
 
-import ModalDialog from "@/components/fragments/ModalDialog";
 import ResourceEdit from "@/components/resource/actions/ResourceEdit";
 import ResourceEditMedia from "@/components/resource/actions/ResourceEditMedia";
 import ResourceEditShareTo from "@/components/resource/actions/ResourceEditShareTo";
@@ -100,20 +69,38 @@ export default {
     },
   },
   methods: {
-    showModal(id) {
-      const modal = new Modal(document.getElementById(id));
-      modal.show();
+    showRessourceActionModal(type) {
+      switch (type) {
+        case "editResourceModal":
+          showModal(
+            this.$t("resource.edit_title", { title: this.resource.title }),
+            ResourceEdit
+          );
+          break;
+        case "editMediaResourceModal":
+          showModal(
+            this.$t("resource.edit_media_title", {
+              title: this.resource.title,
+            }),
+            ResourceEditMedia
+          );
+          break;
+        case "editShareToResourceModal":
+          showModal(
+            this.$t("resource.edit_shareto_title", {
+              title: this.resource.title,
+            }),
+            ResourceEditShareTo
+          );
+          break;
+        case "deleteResourceModal":
+          showModal(
+            this.$t("resource.delete_title", { title: this.resource.title }),
+            ResourceDelete
+          );
+          break;
+      }
     },
-    closeModal(id) {
-      document.getElementById(id).querySelector(".btn-close").click();
-    },
-  },
-  components: {
-    ModalDialog,
-    ResourceEdit,
-    ResourceEditMedia,
-    ResourceEditShareTo,
-    ResourceDelete,
   },
 };
 </script>

@@ -151,6 +151,7 @@ export default {
       default: true,
     },
   },
+  emits: ["input", "close"],
   computed: {
     ...mapGetters(["resource", "resourceParamsDefault"]),
   },

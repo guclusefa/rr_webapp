@@ -76,6 +76,7 @@ export default {
   computed: {
     ...mapGetters(["profile", "user"]),
   },
+  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.profile.id;

@@ -8,7 +8,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editCommentModal')"
+          @click="showCommentActionsModal('editCommentModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("comment.edit") }}
         </a>
@@ -17,40 +19,20 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('deleteCommentModal')"
+          @click="showCommentActionsModal('deleteCommentModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("comment.delete") }}</a
         >
       </li>
     </ul>
   </div>
-
-  <ModalDialog
-    :modal-id="'editCommentModal'"
-    :modal-title="$t('comment.edit_title', { content: comment.content })"
-  >
-    <template #body>
-      <CommentEdit
-        :resource="comment.resource"
-        @close="closeModal('editCommentModal')"
-      />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'deleteCommentModal'"
-    :modal-title="$t('comment.delete_title', { content: comment.content })"
-  >
-    <template #body>
-      <CommentDelete @close="closeModal('deleteCommentModal')" />
-    </template>
-  </ModalDialog>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
+import { showModal } from "@/services/modals";
 
-import ModalDialog from "@/components/fragments/ModalDialog";
 import CommentEdit from "@/components/comment/actions/CommentEdit";
 import CommentDelete from "@/components/comment/actions/CommentDelete";
 
@@ -63,18 +45,28 @@ export default {
     },
   },
   methods: {
-    showModal(id) {
-      const modal = new Modal(document.getElementById(id));
-      modal.show();
+    showCommentActionsModal(type) {
+      switch (type) {
+        case "editCommentModal":
+          showModal(
+            this.$t("comment.edit_title", { content: this.comment.content }),
+            CommentEdit,
+            {
+              resource: this.comment.resource,
+            }
+          );
+          break;
+        case "deleteCommentModal":
+          showModal(
+            this.$t("comment.delete_title", { content: this.comment.content }),
+            CommentDelete,
+            {
+              comment: this.comment,
+            }
+          );
+          break;
+      }
     },
-    closeModal(id) {
-      document.getElementById(id).querySelector(".btn-close").click();
-    },
-  },
-  components: {
-    ModalDialog,
-    CommentEdit,
-    CommentDelete,
   },
 };
 </script>

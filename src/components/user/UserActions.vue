@@ -5,7 +5,13 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
       <li>
-        <a class="dropdown-item" href="#" @click="showModal('editUserModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showUserActionModal('editUserModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
+        >
           {{ $t("profile.edit") }}
         </a>
       </li>
@@ -13,7 +19,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editUserPhotoModal')"
+          @click="showUserActionModal('editUserPhotoModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("profile.edit_photo") }}
         </a>
@@ -22,7 +30,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editUserPasswordModal')"
+          @click="showUserActionModal('editUserPasswordModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("profile.edit_password") }}</a
         >
@@ -31,7 +41,9 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('editUserEmailModal')"
+          @click="showUserActionModal('editUserEmailModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("profile.edit_email") }}</a
         >
@@ -40,87 +52,31 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showModal('confirmUserModal')"
+          @click="showUserActionModal('confirmUserModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
         >
           {{ $t("profile.verify_email") }}</a
         >
       </li>
       <li>
-        <a class="dropdown-item" href="#" @click="showModal('deleteUserModal')">
+        <a
+          class="dropdown-item"
+          href="#"
+          @click="showUserActionModal('deleteUserModal')"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
+        >
           {{ $t("profile.delete") }}</a
         >
       </li>
     </ul>
   </div>
-
-  <!-- Modals -->
-  <ModalDialog
-    :modal-id="'editUserModal'"
-    :modal-title="$t('profile.edit_title', { username: profile.username })"
-  >
-    <template #body>
-      <UserEdit @close="closeModal('editUserModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'editUserPhotoModal'"
-    :modal-title="
-      $t('profile.edit_photo_title', { username: profile.username })
-    "
-  >
-    <template #body>
-      <UserEditPhoto @close="closeModal('editUserPhotoModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'editUserPasswordModal'"
-    :modal-title="
-      $t('profile.edit_password_title', { username: profile.username })
-    "
-  >
-    <template #body>
-      <UserEditPassword @close="closeModal('editUserPasswordModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'editUserEmailModal'"
-    :modal-title="
-      $t('profile.edit_email_title', { username: profile.username })
-    "
-  >
-    <template #body>
-      <UserEditEmail @close="closeModal('editUserEmailModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'confirmUserModal'"
-    :modal-title="
-      $t('profile.verify_email_title', { username: profile.username })
-    "
-  >
-    <template #body>
-      <UserConfirm @close="closeModal('confirmUserModal')" />
-    </template>
-  </ModalDialog>
-
-  <ModalDialog
-    :modal-id="'deleteUserModal'"
-    :modal-title="$t('profile.delete_title', { username: profile.username })"
-  >
-    <template #body>
-      <UserDelete @close="closeModal('deleteUserModal')" />
-    </template>
-  </ModalDialog>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
+import { showModal } from "@/services/modals";
 
-import ModalDialog from "@/components/fragments/ModalDialog";
 import UserEdit from "@/components/user/actions/UserEdit";
 import UserEditPhoto from "@/components/user/actions/UserEditPhoto";
 import UserEditPassword from "@/components/user/actions/UserEditPassword";
@@ -137,22 +93,58 @@ export default {
     },
   },
   methods: {
-    showModal(id) {
-      const modal = new Modal(document.getElementById(id));
-      modal.show();
+    showUserActionModal(type) {
+      switch (type) {
+        case "editUserModal":
+          showModal(
+            this.$t("profile.edit_title", { username: this.profile.username }),
+            UserEdit
+          );
+          break;
+        case "editUserPhotoModal":
+          showModal(
+            this.$t("profile.edit_photo_title", {
+              username: this.profile.username,
+            }),
+            UserEditPhoto
+          );
+          break;
+        case "editUserPasswordModal":
+          showModal(
+            this.$t("profile.edit_password_title", {
+              username: this.profile.username,
+            }),
+            UserEditPassword
+          );
+          break;
+        case "editUserEmailModal":
+          showModal(
+            this.$t("profile.edit_email_title", {
+              username: this.profile.username,
+            }),
+            UserEditEmail
+          );
+          break;
+        case "confirmUserModal":
+          showModal(
+            this.$t("profile.verify_email_title", {
+              username: this.profile.username,
+            }),
+            UserConfirm
+          );
+          break;
+        case "deleteUserModal":
+          showModal(
+            this.$t("profile.delete_title", {
+              username: this.profile.username,
+            }),
+            UserDelete
+          );
+          break;
+        default:
+          break;
+      }
     },
-    closeModal(id) {
-      document.getElementById(id).querySelector(".btn-close").click();
-    },
-  },
-  components: {
-    ModalDialog,
-    UserEdit,
-    UserEditPhoto,
-    UserEditPassword,
-    UserEditEmail,
-    UserConfirm,
-    UserDelete,
   },
 };
 </script>

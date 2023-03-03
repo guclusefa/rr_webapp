@@ -25,6 +25,7 @@ export default {
   computed: {
     ...mapGetters(["resource", "user"]),
   },
+  emits: ["input", "close"],
   methods: {
     ...mapActions(["deleteResource"]),
     async deleteResourceItem() {

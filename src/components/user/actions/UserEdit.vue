@@ -93,6 +93,7 @@
       </div>
     </div>
   </form>
+  {{ test }}
 </template>
 
 <script>
@@ -111,6 +112,11 @@ import SubmitButton from "@/components/form/SubmitButton.vue";
 export default {
   name: "UserEdit",
   mixins: [userEditValidation],
+  props: {
+    test: {
+      type: String,
+    },
+  },
   data() {
     return {
       body: {
@@ -128,6 +134,7 @@ export default {
   computed: {
     ...mapGetters(["profile", "user"]),
   },
+  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.profile.id;
@@ -150,9 +157,9 @@ export default {
           if (this.profile.id === this.user.id) {
             await this.updateUser(this.body);
           }
-          addSuccessToast(response);
           // close modal (if any)
           this.$emit("close");
+          addSuccessToast(response);
           return;
         }
         // Error

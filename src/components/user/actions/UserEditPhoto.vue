@@ -52,6 +52,7 @@ export default {
       photoPreview: null,
     };
   },
+  emits: ["input", "close"],
   computed: {
     ...mapGetters(["profile", "user"]),
   },

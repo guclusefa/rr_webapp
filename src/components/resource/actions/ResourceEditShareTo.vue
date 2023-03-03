@@ -44,6 +44,7 @@ export default {
   computed: {
     ...mapGetters(["resource"]),
   },
+  emits: ["input", "close"],
   methods: {
     setBody() {
       this.body.id = this.resource.id;

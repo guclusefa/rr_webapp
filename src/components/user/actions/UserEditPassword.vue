@@ -73,6 +73,7 @@ export default {
       },
     };
   },
+  emits: ["input", "close"],
   computed: {
     ...mapGetters(["profile", "user"]),
   },
@@ -91,9 +92,9 @@ export default {
           if (this.profile.id === this.user.id) {
             await this.updateUser(this.body);
           }
-          addSuccessToast(response);
           // Close modal (if any)
           this.$emit("close");
+          addSuccessToast(response);
           return;
         }
         // Error
