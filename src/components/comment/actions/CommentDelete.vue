@@ -42,7 +42,6 @@ export default {
         } else {
           this.reloadComments();
         }
-        this.$router.push({ name: "comments" });
         // Success
         addSuccessToast(response);
         return;
