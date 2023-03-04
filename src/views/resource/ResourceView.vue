@@ -42,8 +42,26 @@
         </div>
       </div>
     </section>
+
+    <!-- Resource Stats section -->
+    <section class="mb-5">
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>{{ $t("resource.stats_title") }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ResourceStats :resource="resource" />
+        </div>
+      </div>
+    </section>
   </section>
-  
+
   <LoadingSpinner v-else />
 </template>
 
@@ -55,6 +73,8 @@ import ResourceItem from "@/components/resource/ResourceItem";
 
 import CommentEdit from "@/components/comment/actions/CommentEdit";
 import CommentList from "@/components/comment/CommentList";
+
+import ResourceStats from "@/components/resource/ResourceStats";
 
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
@@ -121,6 +141,8 @@ export default {
 
     CommentEdit,
     CommentList,
+
+    ResourceStats,
 
     LoadingSpinner,
   },

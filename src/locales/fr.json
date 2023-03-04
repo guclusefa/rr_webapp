@@ -215,7 +215,16 @@
     "verified": "Vérifiée",
     "unverified": "Non vérifiée",
     "create": "Créer",
-    "draft": "Brouillon"
+    "draft": "Brouillon",
+    "stats_title": "Statistiques",
+    "stats": {
+      "likes": "Likes",
+      "comments": "Commentaires",
+      "shares": "Partages",
+      "exploits": "Exploitations",
+      "consults": "Consultations",
+      "saves": "Sauvegardes"
+    }
   },
   "resources": {
     "page": "Ressources",
