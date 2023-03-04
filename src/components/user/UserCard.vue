@@ -75,6 +75,9 @@ export default {
   },
   methods: {
     isOwner() {
+      if (!this.user) {
+        return false;
+      }
       return this.profile.id === this.user.id;
     },
     canEdit() {

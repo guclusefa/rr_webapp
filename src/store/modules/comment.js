@@ -77,6 +77,21 @@ const comment = {
                 return error;
             }
         },
+        async replyToComment({ }, payload) {
+            try {
+                const response = await api.post(`/comments/${payload.id}/reply`, payload)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
+        async reloadComment({ commit, dispatch }, id) {
+            // Reset comment
+            commit('SET_COMMENT', {})
+            // Make new request
+            dispatch('setComment', id)
+        },
 
         async setComments({ commit }, params) {
             try {

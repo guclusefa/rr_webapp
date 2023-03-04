@@ -126,6 +126,9 @@ export default {
   },
   methods: {
     isOwner() {
+      if (!this.user) {
+        return false;
+      }
       return this.resource.author.id === this.user.id;
     },
     canEdit() {

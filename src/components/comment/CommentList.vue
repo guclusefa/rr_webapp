@@ -16,7 +16,7 @@
     <!-- Cards -->
     <div class="row mb-3" v-for="comment in comments" :key="comment.id">
       <div class="col">
-        <CommentCard :comment="comment" />
+        <CommentItem :comment="comment" />
       </div>
     </div>
     <!-- Load more -->
@@ -51,7 +51,7 @@ import { mapGetters, mapActions } from "vuex";
 import { addErrorToast } from "@/services/toasts";
 
 import CommentFilterButton from "@/components/comment/CommentFilterButton.vue";
-import CommentCard from "@/components/comment/CommentCard";
+import CommentItem from "@/components/comment/CommentItem";
 import SubmitButton from "@/components/form/SubmitButton.vue";
 
 import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
@@ -80,7 +80,7 @@ export default {
   },
   components: {
     CommentFilterButton,
-    CommentCard,
+    CommentItem,
     SubmitButton,
 
     NoResultMessage,

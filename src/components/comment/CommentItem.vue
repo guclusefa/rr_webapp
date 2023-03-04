@@ -1,46 +1,47 @@
 <template>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <UserIdentifier :user="comment.author" v-if="comment.author" />
-          <span v-else>{{ $t("comment.anonymous") }}</span>
-          <span class="float-end" v-if="canEdit">
-            <CommentActionsButton :comment="comment" />
-          </span>
-        </div>
-        <div class="card-body">
-          <p class="card-text pre-line">
-            {{ comment.content }}
-          </p>
-        </div>
-        <div class="card-footer">
-          <router-link :to="`/resource/${comment.resource.id}`">
-            {{ comment.resource.title }}
-          </router-link>
-          <span class="text-muted float-end">
-            {{ formatDateTime(comment.createdAt) }}
-          </span>
-          <span class="text-muted float-end me-2">
-            <router-link :to="`/comment/${comment.id}`">
-              {{ $t("comment.replies", { count: comment.replies }) }}
-            </router-link>
-          </span>
-        </div>
+      <CommentCard :comment="comment" />
+    </div>
+  </div>
+  <div class="row" v-if="comment.replies > 0 && replies.length === 0">
+    <div class="col">
+      <form @submit.prevent="fetchReplies" class="float-end">
+        <SubmitButton :label="'comment.replies_load'" />
+      </form>
+    </div>
+  </div>
+  <div class="row" v-if="comment.replies > 0 && replies.length > 0">
+    <div class="col offset-1">
+      <div v-for="reply in replies" :key="reply.id" class="mb-3">
+        <CommentItem :comment="reply" />
       </div>
+    </div>
+  </div>
+  <!-- Load more -->
+  <div class="row" v-if="repliesMeta.next">
+    <div class="col">
+      <form @submit.prevent="fetchMoreReplies">
+        <SubmitButton :label="'comment.replies_load_more'" />
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import dateFormatter from "@/mixins/dateFormatter";
+import api from "@/services/api";
 
-import CommentActionsButton from "./CommentActionsButton.vue";
-import UserIdentifier from "../user/UserIdentifier.vue";
+import CommentCard from "@/components/comment/CommentCard.vue";
+import SubmitButton from "@/components/form/SubmitButton.vue";
 
 export default {
   name: "CommentItem",
-  mixins: [dateFormatter],
+  data() {
+    return {
+      replies: [],
+      repliesMeta: {},
+    };
+  },
   props: {
     comment: {
       type: Object,
@@ -52,9 +53,36 @@ export default {
       default: false,
     },
   },
+  methods: {
+    // get replies
+    async fetchReplies() {
+      try {
+        const response = await api.get(`/comments?replyto[]=${this.comment.id}`);
+        this.replies = response.data.data;
+        this.repliesMeta = response.data.meta;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // load more replies
+    async fetchMoreReplies() {
+      try {
+        const response = await api.get(
+          `/comments?replyto[]=${this.comment.id}&page=${
+            this.repliesMeta.page + 1
+          }`
+        );
+        // console log url
+        this.replies = [...this.replies, ...response.data.data];
+        this.repliesMeta = response.data.meta;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
   components: {
-    CommentActionsButton,
-    UserIdentifier,
+    CommentCard,
+    SubmitButton,
   },
 };
 </script>

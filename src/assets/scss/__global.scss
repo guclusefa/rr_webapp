@@ -12,6 +12,10 @@ footer {
     margin-top: auto;
 }
 
+.form-check-input[type=checkbox] {
+    border-radius: 0;
+}
+
 // Form
 label.required:after {
     content: "*";

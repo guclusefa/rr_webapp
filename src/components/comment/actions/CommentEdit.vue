@@ -9,7 +9,7 @@
           :placeholder="'comment.content_placeholder'"
           :required="true"
           :validate="validateContent"
-          :value="this.edit ? comment.content : body.content"
+          :value="this.edit && !this.replyTo ? comment.content : body.content"
         />
       </div>
     </div>
@@ -17,7 +17,13 @@
       <div class="col-6">
         <!-- Submit -->
         <SubmitButton
-          :label="this.edit ? 'comment.edit' : 'comment.create'"
+          :label="
+            this.edit
+              ? 'comment.edit'
+              : this.replyTo
+              ? 'comment.reply'
+              : 'comment.create'
+          "
           :disabled="!validateForm()"
         />
       </div>
@@ -62,24 +68,46 @@ export default {
       type: Object,
       required: true,
     },
+    replyTo: {
+      type: Object,
+      required: false,
+      default: null,
+    },
   },
   methods: {
-    setBody() {
+    setBodyCreate() {
+      this.body.resource = this.resource.id;
+    },
+    setBodyEdit() {
       this.body.id = this.comment.id;
       this.body.content = this.comment.content;
     },
-    ...mapActions(["updateComment", "createComment", "reloadComments"]),
+    setBodyReply() {
+      this.body.id = this.replyTo.id;
+    },
+    ...mapActions([
+      "updateComment",
+      "createComment",
+      "replyToComment",
+      "reloadComment",
+      "reloadComments",
+    ]),
     async submitForm() {
       withSubmitValidation(async function () {
-        // Set resource id
-        this.body.resource = this.resource.id;
         // Send request
         const response = this.edit
           ? await this.updateComment(this.body)
+          : this.replyTo
+          ? await this.replyToComment(this.body)
           : await this.createComment(this.body);
         // Success
         if (response.status >= 200 && response.status < 300) {
-          this.reloadComments();
+          // Reload comments
+          await this.reloadComments(this.resource);
+          // Reload comment if in comment/id view
+          if (this.$route.name == "comment") {
+            await this.reloadComment(this.$route.params.id);
+          }
 
           addSuccessToast(response);
           // Close modal (if any)
@@ -93,8 +121,14 @@ export default {
   },
   mounted() {
     if (this.edit) {
-      this.setBody();
+      this.setBodyEdit();
+      return;
     }
+    if (this.replyTo) {
+      this.setBodyReply();
+      return;
+    }
+    this.setBodyCreate();
   },
   components: {
     InputTextarea,

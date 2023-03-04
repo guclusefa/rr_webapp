@@ -297,6 +297,10 @@
     "content_required": "Veuillez entrer un contenu",
     "create": "Ajouter un commentaire",
     "anonymous": "Anonyme",
-    "replies": "{count} réponses"
+    "replies": "{count} réponses",
+    "reply": "Répondre",
+    "reply_title": "Répondre au commentaire : {content}",
+    "replies_load": "Charger les réponses",
+    "replies_load_more": "Charger plus de réponses"
   }
 }

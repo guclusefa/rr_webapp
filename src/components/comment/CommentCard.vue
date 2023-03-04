@@ -59,6 +59,9 @@ export default {
   },
   methods: {
     isOwner() {
+      if (!this.user) {
+        return false;
+      }
       if (!this.comment.author) {
         return false;
       }

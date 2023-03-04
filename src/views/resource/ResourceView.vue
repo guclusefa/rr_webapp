@@ -95,6 +95,7 @@ export default {
       const params = {
         ...this.commentsParamsDefault,
         resource: [this.id],
+        isnotreply: true,
       };
       await this.filterComments(params);
     },
