@@ -148,7 +148,8 @@
     "resources_sharedby_title": "Ressources partagées",
     "resources_exploitedby_title": "Ressources exploitées",
     "resources_savedby_title": "Ressources sauvegardées",
-    "resources_draftedby_title": "Ressources brouillonnées"
+    "resources_draftedby_title": "Ressources brouillonnées",
+    "comments_of_title": "Commentaires de {username}"
   },
   "profiles": {
     "page": "Profils",
@@ -300,7 +301,7 @@
     "replies": "{count} réponses",
     "reply": "Répondre",
     "reply_title": "Répondre au commentaire : {content}",
-    "replies_load": "Charger les réponses",
+    "replies_load": "Voir les réponses",
     "replies_load_more": "Charger plus de réponses"
   }
 }

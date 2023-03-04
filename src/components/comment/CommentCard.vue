@@ -32,16 +32,29 @@
           {{ $t("comment.replies", { count: comment.replies }) }}
         </router-link>
       </span>
+      <span class="text-muted float-end me-2">
+        <a
+          href="#"
+          @click="showCommentReplyModal()"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
+        >
+          {{ $t("comment.reply") }}
+        </a>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
+import { showModal } from "@/services/modals";
+
 import { mapGetters } from "vuex";
 
 import dateFormatter from "@/mixins/dateFormatter";
 
 import CommentActionsButton from "@/components/comment/CommentActionsButton.vue";
+import CommentEdit from "@/components/comment/actions/CommentEdit";
 
 import UserIdentifier from "../user/UserIdentifier.vue";
 
@@ -69,6 +82,17 @@ export default {
     },
     canEdit() {
       return this.isOwner();
+    },
+    showCommentReplyModal() {
+      showModal(
+        this.$t("comment.reply_title", { content: this.comment.content }),
+        CommentEdit,
+        {
+          replyTo: this.comment,
+          resource: this.comment.resource,
+          edit: false,
+        }
+      );
     },
   },
   components: {

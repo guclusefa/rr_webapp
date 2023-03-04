@@ -8,17 +8,6 @@
         <a
           class="dropdown-item"
           href="#"
-          @click="showCommentActionsModal('replyCommentModal')"
-          data-bs-toggle="modal"
-          data-bs-target="#modalDialog"
-        >
-          {{ $t("comment.reply") }}
-        </a>
-      </li>
-      <li>
-        <a
-          class="dropdown-item"
-          href="#"
           @click="showCommentActionsModal('editCommentModal')"
           data-bs-toggle="modal"
           data-bs-target="#modalDialog"
@@ -58,17 +47,6 @@ export default {
   methods: {
     showCommentActionsModal(type) {
       switch (type) {
-        case "replyCommentModal":
-          showModal(
-            this.$t("comment.reply_title", { content: this.comment.content }),
-            CommentEdit,
-            {
-              replyTo: this.comment,
-              resource: this.comment.resource,
-              edit: false,
-            }
-          );
-          break;
         case "editCommentModal":
           showModal(
             this.$t("comment.edit_title", { content: this.comment.content }),

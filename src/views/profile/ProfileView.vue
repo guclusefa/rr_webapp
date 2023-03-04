@@ -109,6 +109,32 @@
         </div>
       </div>
     </section>
+
+    <!-- User comments -->
+    <section class="mb-5">
+      <!-- Title -->
+      <div class="row mb-3">
+        <div class="col">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="me-auto">
+              <h1>
+                {{
+                  $t("profile.comments_of_title", {
+                    username: profile.username,
+                  })
+                }}
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Comments List -->
+      <div class="row mb-3">
+        <div class="col">
+          <CommentList />
+        </div>
+      </div>
+    </section>
   </section>
 
   <LoadingSpinner v-else />
@@ -123,12 +149,19 @@ import UserItem from "@/components/user/UserItem";
 import AddResourceButton from "@/components/resource/AddResourceButton";
 import ResourceList from "@/components/resource/ResourceList";
 
+import CommentList from "@/components/comment/CommentList";
+
 import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 
 export default {
   name: "ProfileView",
   computed: {
-    ...mapGetters(["user", "profile", "resourcesParamsDefault"]),
+    ...mapGetters([
+      "user",
+      "profile",
+      "resourcesParamsDefault",
+      "commentsParamsDefault",
+    ]),
     id() {
       return this.$route.params.id;
     },
@@ -143,7 +176,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setProfile", "filterResources", "clearResources"]),
+    ...mapActions([
+      "setProfile",
+      "filterResources",
+      "clearResources",
+      "filterComments",
+      "clearComments",
+    ]),
     async setProfileUser() {
       const response = await this.setProfile(this.id);
       // Success
@@ -201,12 +240,21 @@ export default {
       };
       await this.filterResources(params);
     },
+    async setProfileComments() {
+      const params = {
+        ...this.commentsParamsDefault,
+        author: [this.id],
+      };
+      await this.filterComments(params);
+    },
     loadProfile() {
       // Clear
       this.clearResources();
+      this.clearComments();
       // Set
       this.setProfileUser().then(() => {
         this.setProfileResources();
+        this.setProfileComments();
       });
     },
   },
@@ -223,6 +271,8 @@ export default {
 
     AddResourceButton,
     ResourceList,
+
+    CommentList,
 
     LoadingSpinner,
   },
