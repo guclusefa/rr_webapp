@@ -10,11 +10,13 @@
     :class="{ 'is-invalid': validateInput() }"
   ></select>
   <div class="invalid-feedback" v-if="validateInput() !== ''">
-    {{ $t(validateInput()) }} 
+    {{ $t(validateInput()) }}
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import $ from "jquery";
 import "select2/dist/css/select2.css";
 import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
@@ -65,6 +67,9 @@ export default {
       default: () => "",
     },
   },
+  computed: {
+    ...mapGetters(["token"]),
+  },
   methods: {
     // validate input
     validateInput() {
@@ -78,8 +83,7 @@ export default {
 
     createSelect2(field, placeholder, multiple, uri, text, values) {
       var select2 = $("#" + field);
-      // Fill select2 with values
-      this.setSelect2Values(select2, placeholder, multiple, uri, text);
+
       // Fill select2 with selected values
       if (values) {
         if (!multiple) {
@@ -90,6 +94,8 @@ export default {
           this.fillSelectedValues(select2, uri, value, text);
         });
       }
+      // Fill select2 with values
+      this.setSelect2Values(select2, placeholder, multiple, uri, text);
     },
     setSelect2Values(select2, placeholder, multiple, uri, text) {
       select2.select2({
@@ -133,6 +139,11 @@ export default {
     fillSelectedValues(select2, uri, id, text) {
       $.ajax({
         url: process.env.VUE_APP_API_URL + uri + "/" + id,
+
+        headers: {
+          Authorization: "Bearer " + this.token || null,
+        },
+
         dataType: "json",
         success: function (data) {
           // if data.data (idk why)

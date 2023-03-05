@@ -26,11 +26,6 @@
           </div>
         </div>
       </div>
-      <p class="card-text" v-if="resource.isVerified">
-        <span class="badge bg-success">
-          {{ $t("resource.verified") }}
-        </span>
-      </p>
       <p class="card-text" v-if="resource.visibility">
         <span class="badge bg-danger me-2" v-if="!resource.isPublished">
           {{ $t(`resource.draft`) }}
