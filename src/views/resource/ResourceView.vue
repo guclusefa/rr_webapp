@@ -44,7 +44,7 @@
     </section>
 
     <!-- Resource Stats section -->
-    <section class="mb-5">
+    <section class="mb-5" v-if="canEdit">
       <div class="row mb-3">
         <div class="col">
           <div class="d-flex align-items-center border-bottom">

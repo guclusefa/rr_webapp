@@ -147,6 +147,7 @@
     "resources_likeby_title": "Ressources aimées",
     "resources_sharedby_title": "Ressources partagées",
     "resources_exploitedby_title": "Ressources exploitées",
+    "resources_sharedto_title": "Ressources partagées à",
     "resources_savedby_title": "Ressources sauvegardées",
     "resources_draftedby_title": "Ressources brouillonnées",
     "comments_of_title": "Commentaires de {username}"

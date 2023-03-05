@@ -50,6 +50,12 @@ export default {
     return {
       chartOptions: {
         responsive: true,
+        // start at 0
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
       },
       chartData: {
         labels: [],
@@ -98,7 +104,7 @@ export default {
           },
         ],
       },
-      laoded: false,
+      loaded: false,
     };
   },
   methods: {

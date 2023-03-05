@@ -85,6 +85,15 @@
               <button
                 class="nav-link"
                 data-bs-toggle="tab"
+                @click="setProfileSharedToResources"
+              >
+                {{ $t("profile.resources_sharedto_title") }}
+              </button>
+            </li>
+            <li class="nav-item" v-if="isOwner">
+              <button
+                class="nav-link"
+                data-bs-toggle="tab"
                 @click="setProfileSavedByResources"
               >
                 {{ $t("profile.resources_savedby_title") }}
@@ -222,6 +231,13 @@ export default {
       const params = {
         ...this.resourcesParamsDefault,
         exploitedBy: this.id,
+      };
+      await this.filterResources(params);
+    },
+    async setProfileSharedToResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        sharedTo: this.id,
       };
       await this.filterResources(params);
     },
