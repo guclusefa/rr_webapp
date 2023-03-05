@@ -96,26 +96,12 @@
       <div class="row mt-auto">
         <div class="text-muted">
           <div class="d-flex">
-            <button class="btn btn-sm">
-              <i
-                class="bi bi-chat-fill text-primary me-1"
-                v-if="resource.isCommented"
-              ></i>
-              <i class="bi bi-chat me-1" v-else></i>
-              {{ resource.comments }}
-            </button>
+            <CommentResourceButton :resource="resource" />
             <ShareResourceButton :resource="resource" />
             <LikeResourceButton :resource="resource" />
             <ExploitResourceButton :resource="resource" />
             <SaveResourceButton :resource="resource" />
-            <button class="btn btn-sm">
-              <i
-                class="bi bi-bar-chart-fill me-1"
-                v-if="resource.isConsulted"
-              ></i>
-              <i class="bi bi-bar-chart me-1" v-else></i>
-              {{ resource.consults }}
-            </button>
+            <ConsultResourceButton :resource="resource" />
           </div>
         </div>
       </div>
@@ -129,10 +115,12 @@ import dateFormatter from "@/mixins/dateFormatter";
 import ResourceActionsButton from "@/components/resource/ResourceActionsButton.vue";
 import UserIdentifier from "@/components/user/UserIdentifier";
 
+import CommentResourceButton from "@/components/resource/CommentResourceButton.vue";
 import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
 import LikeResourceButton from "@/components/resource/LikeResourceButton.vue";
 import ExploitResourceButton from "@/components/resource/ExploitResourceButton.vue";
 import SaveResourceButton from "@/components/resource/SaveResourceButton.vue";
+import ConsultResourceButton from "@/components/resource/ConsultResourceButton.vue";
 
 export default {
   name: "ResourceItem",
@@ -152,10 +140,12 @@ export default {
     ResourceActionsButton,
     UserIdentifier,
 
+    CommentResourceButton,
     ShareResourceButton,
     LikeResourceButton,
     ExploitResourceButton,
     SaveResourceButton,
+    ConsultResourceButton,
   },
 };
 </script>

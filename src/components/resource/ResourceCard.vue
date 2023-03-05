@@ -77,23 +77,12 @@
     </div>
     <div class="card-footer">
       <div class="d-flex justify-content-between">
-        <button class="btn btn-sm">
-          <i
-            class="bi bi-chat-fill text-primary me-1"
-            v-if="resource.isCommented"
-          ></i>
-          <i class="bi bi-chat me-1" v-else></i>
-          {{ resource.comments }}
-        </button>
+        <CommentResourceButton :resource="resource" />
         <ShareResourceButton :resource="resource" />
         <LikeResourceButton :resource="resource" />
         <ExploitResourceButton :resource="resource" />
         <SaveResourceButton :resource="resource" />
-        <button class="btn btn-sm">
-          <i class="bi bi-bar-chart-fill me-1" v-if="resource.isConsulted"></i>
-          <i class="bi bi-bar-chart me-1" v-else></i>
-          {{ resource.consults }}
-        </button>
+        <ConsultResourceButton :resource="resource" />
       </div>
     </div>
   </div>
@@ -107,10 +96,12 @@ import dateFormatter from "@/mixins/dateFormatter";
 import UserIdentifier from "../user/UserIdentifier.vue";
 
 import ResourceActionsButton from "@/components/resource/ResourceActionsButton.vue";
+import CommentResourceButton from "@/components/resource/CommentResourceButton.vue";
 import ShareResourceButton from "@/components/resource/ShareResourceButton.vue";
 import LikeResourceButton from "@/components/resource/LikeResourceButton.vue";
 import ExploitResourceButton from "@/components/resource/ExploitResourceButton.vue";
 import SaveResourceButton from "@/components/resource/SaveResourceButton.vue";
+import ConsultResourceButton from "@/components/resource/ConsultResourceButton.vue";
 
 export default {
   name: "ResourceCard",
@@ -139,10 +130,13 @@ export default {
     UserIdentifier,
 
     ResourceActionsButton,
+
+    CommentResourceButton,
     ShareResourceButton,
     LikeResourceButton,
     ExploitResourceButton,
     SaveResourceButton,
+    ConsultResourceButton,
   },
 };
 </script>
