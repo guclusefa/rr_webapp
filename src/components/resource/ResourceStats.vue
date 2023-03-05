@@ -9,8 +9,10 @@
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
+import dateFormatter from "@/mixins/dateFormatter";
+
 import api from "@/services/api";
 import { addErrorToast } from "@/services/toasts";
 
@@ -40,6 +42,7 @@ ChartJS.register(
 
 export default {
   name: "ResourceStats",
+  mixins: [dateFormatter],
   props: {
     resource: {
       type: Object,
@@ -114,7 +117,7 @@ export default {
         const { data } = response.data;
         // format is createdAt 2023-03-04T11:43:25+01:00 format to 2023-03-04
         this.chartData.labels = data.map((item) =>
-          item.createdAt.split("T")[0].split("-").reverse().join("-")
+          this.formatDate(item.createdAt)
         );
         this.chartData.datasets[0].data = data.map((item) => item.nbComments);
         this.chartData.datasets[1].data = data.map((item) => item.nbShares);

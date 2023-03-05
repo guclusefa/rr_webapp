@@ -100,8 +100,8 @@
             <ShareResourceButton :resource="resource" />
             <LikeResourceButton :resource="resource" />
             <ExploitResourceButton :resource="resource" />
-            <SaveResourceButton :resource="resource" />
             <ConsultResourceButton :resource="resource" />
+            <SaveResourceButton :resource="resource" />
           </div>
         </div>
       </div>

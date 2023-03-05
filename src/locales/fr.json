@@ -225,7 +225,12 @@
       "exploits": "Exploitations",
       "consults": "Consultations",
       "saves": "Sauvegardes"
-    }
+    },
+    "likes_title": "Resource {title} aimée par",
+    "shares_title": "Resource {title} partagée par",
+    "exploits_title": "Resource {title} exploitée par",
+    "consults_title": "Resource {title} consultée par",
+    "likes_load_more": "Voir plus"
   },
   "resources": {
     "page": "Ressources",
