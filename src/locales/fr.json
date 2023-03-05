@@ -230,7 +230,8 @@
     "shares_title": "Resource {title} partagée par",
     "exploits_title": "Resource {title} exploitée par",
     "consults_title": "Resource {title} consultée par",
-    "likes_load_more": "Voir plus"
+    "likes_load_more": "Voir plus",
+    "not_found": "La ressource n'a pas été trouvée"
   },
   "resources": {
     "page": "Ressources",
@@ -317,6 +318,7 @@
     "reply": "Répondre",
     "reply_title": "Répondre au commentaire : {content}",
     "replies_load": "Voir les réponses",
-    "replies_load_more": "Charger plus de réponses"
+    "replies_load_more": "Charger plus de réponses",
+    "not_found": "Le commentaire n'a pas été trouvé"
   }
 }

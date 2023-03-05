@@ -104,7 +104,7 @@ export default {
         return;
       }
       // Error
-      if (response.status === 404) {
+      if (response.status === 404 || !response.status) {
         addErrorToast("resource.not_found");
       } else {
         addErrorToast(response);

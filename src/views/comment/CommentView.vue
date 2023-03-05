@@ -59,7 +59,7 @@ export default {
         return;
       }
       // Error
-      if (response.status === 404) {
+      if (response.status === 404  || !response.status) {
         addErrorToast("comment.not_found");
       } else {
         addErrorToast(response);
