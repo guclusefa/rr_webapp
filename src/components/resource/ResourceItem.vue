@@ -101,7 +101,7 @@
             <LikeResourceButton :resource="resource" />
             <ExploitResourceButton :resource="resource" />
             <ConsultResourceButton :resource="resource" />
-            <SaveResourceButton :resource="resource" />
+            <SaveResourceButton :resource="resource" v-if="isAuthenticated" />
           </div>
         </div>
       </div>
@@ -110,6 +110,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import dateFormatter from "@/mixins/dateFormatter";
 
 import ResourceActionsButton from "@/components/resource/ResourceActionsButton.vue";
@@ -135,6 +137,9 @@ export default {
       required: false,
       default: false,
     },
+  },
+  computed: {
+    ...mapGetters(["isAuthenticated"]),
   },
   components: {
     ResourceActionsButton,

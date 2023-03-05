@@ -77,7 +77,7 @@
         <LikeResourceButton :resource="resource" />
         <ExploitResourceButton :resource="resource" />
         <ConsultResourceButton :resource="resource" />
-        <SaveResourceButton :resource="resource" />
+        <SaveResourceButton :resource="resource" v-if="isAuthenticated" />
       </div>
     </div>
   </div>
@@ -108,7 +108,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user", "isAuthenticated"]),
   },
   methods: {
     isOwner() {

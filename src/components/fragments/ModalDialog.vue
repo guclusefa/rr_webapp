@@ -38,7 +38,9 @@ export default {
     ...mapActions(["setModal"]),
     closeModal() {
       // click on close button
-      document.getElementById("modalDialogCloseButton").click();
+      if (document.getElementById("modalDialogCloseButton")) {
+        document.getElementById("modalDialogCloseButton").click();
+      }
       document.getElementById("modalDialog").classList.remove("show");
       this.setModal({
         title: "",
@@ -73,11 +75,7 @@ export default {
   // watch class of modal dialog, if not show, set modal to null
   watch: {
     $route() {
-      this.setModal({
-        title: "",
-        body: null,
-        props: {},
-      });
+      this.closeModal();
     },
   },
 };
