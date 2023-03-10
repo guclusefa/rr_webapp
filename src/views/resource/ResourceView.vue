@@ -6,7 +6,7 @@
         <div class="col">
           <div class="d-flex align-items-center border-bottom">
             <div class="me-auto">
-              <h1>{{ $t("resource.title", { title: resource.title }) }}</h1>
+              <h1>{{ resource.title }}</h1>
             </div>
           </div>
         </div>

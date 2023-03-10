@@ -17,7 +17,7 @@
 
     <div class="row">
       <div class="col-12 mb-3">
-        <InputTextarea
+        <WysiwygEditor
           @input="$emit('input', (body.content = $event))"
           :field="'resourceEditContent'"
           :label="'resource.content'"
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="row">
+<!--     <div class="row">
       <div class="col-12 mb-3">
         <InputText
           @input="$emit('input', (body.link = $event))"
@@ -41,7 +41,7 @@
           :value="this.edit ? resource.link : body.link"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="col-12 mb-3">
@@ -123,7 +123,7 @@ import { withSubmitValidation } from "@/services/validators.js";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import InputText from "@/components/form/InputText.vue";
-import InputTextarea from "@/components/form/InputTextarea.vue";
+import WysiwygEditor from "@/components/form/WysiwygEditor.vue";
 import SelectField from "@/components/form/SelectField.vue";
 import Select2Field from "@/components/form/Select2Field.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
@@ -200,7 +200,7 @@ export default {
   },
   components: {
     InputText,
-    InputTextarea,
+    WysiwygEditor,
     SelectField,
     Select2Field,
     SubmitButton,

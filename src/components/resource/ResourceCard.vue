@@ -54,9 +54,9 @@
           {{ category.name }}
         </span>
       </p>
-      <p class="card-text" v-if="resource.content">
+<!--       <p class="card-text" v-if="resource.content">
         {{ resource.content }}
-      </p>
+      </p> -->
       <p class="card-text" v-if="resource.author">
         <UserIdentifier :user="resource.author" />
       </p>

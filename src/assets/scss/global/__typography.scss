@@ -1,4 +1,10 @@
 // Typography
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
 .pre-line {
     white-space: pre-line;
 }

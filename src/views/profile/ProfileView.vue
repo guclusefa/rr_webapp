@@ -7,7 +7,7 @@
         <div class="col">
           <div class="d-flex align-items-center border-bottom">
             <div class="me-auto">
-              <h1>{{ $t("profile.title", { username: profile.username }) }}</h1>
+              <h1>{{ profile.username }}</h1>
             </div>
           </div>
         </div>

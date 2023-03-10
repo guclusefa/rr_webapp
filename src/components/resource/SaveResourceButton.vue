@@ -1,14 +1,16 @@
 <template>
-  <button
-    class="btn btn-sm"
-    :focus-visible="false"
-    :focus="false"
-    @click="toggleLike"
-    :disabled="loading || !isAuthenticated"
-  >
-    <i class="bi bi-bookmark-fill text-primary me-1" v-if="isSaved"></i>
-    <i class="bi bi-bookmark me-1" v-else></i>
-  </button>
+  <div class="d-flex justify-content-center align-items-center">
+    <button
+      class="btn btn-sm"
+      :focus-visible="false"
+      :focus="false"
+      @click="toggleLike"
+      :disabled="loading || !isAuthenticated"
+    >
+      <i class="bi bi-bookmark-fill text-primary me-1" v-if="isSaved"></i>
+      <i class="bi bi-bookmark me-1" v-else></i>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -58,5 +60,8 @@ export default {
 .btn:disabled {
   outline: none;
   border-color: transparent !important;
+}
+.btn {
+  padding: 0;
 }
 </style>

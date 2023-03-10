@@ -1,12 +1,14 @@
 <template>
-  <button class="btn btn-sm" @click="redirect">
-    <i
-      class="bi bi-chat-fill text-primary me-1"
-      v-if="resource.isCommented"
-    ></i>
-    <i class="bi bi-chat me-1" v-else></i>
-    {{ resource.comments }}
-  </button>
+  <div>
+    <button class="btn btn-sm" @click="redirect">
+      <i
+        class="bi bi-chat-fill text-primary me-1"
+        v-if="resource.isCommented"
+      ></i>
+      <i class="bi bi-chat me-1" v-else></i>
+      {{ resource.comments }}
+    </button>
+  </div>
 </template>
 
 <script>
