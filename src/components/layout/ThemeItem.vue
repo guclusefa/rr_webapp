@@ -18,7 +18,7 @@ import { useDark, useToggle } from "@vueuse/core";
 
 const isDark = useDark({
   selector: "body", //element to add attribute to
-  attribute: "data-bs-theme", // attribute name
+  attribute: "class", // attribute name
   valueDark: "dark", // attribute value for dark mode
   valueLight: "light", // attribute value for light mode
 });

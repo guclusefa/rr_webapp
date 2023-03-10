@@ -1,8 +1,11 @@
-// All variables
-@import '__variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-// theme styles : TODO
-@import '__themes';
-// global styles
-@import '__global';
+
+// Variables
+@import '@/assets/scss/variables/variables';
+
+// Global
+@import '@/assets/scss/global/global';
+
+// Themes
+@import '@/assets/scss/themes/themes';

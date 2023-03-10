@@ -1,0 +1,13 @@
+@import '@/assets/scss/themes/__dark-theme-colors';
+
+// Dark theme
+body.dark {
+    color-scheme: dark;
+    background-color: $bg-color;
+    color: $txt-color;
+
+    .bg-light {
+        background-color: $bg-color-light !important;
+        color: $txt-color-light !important;
+    }
+}
