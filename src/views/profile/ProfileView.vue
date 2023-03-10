@@ -41,10 +41,11 @@
           </div>
         </div>
       </div>
+
       <!-- Resources Tabs -->
       <div class="row mb-3">
         <div class="col">
-          <ul class="nav nav-tabs" id="myTab">
+          <ul class="nav nav-tabs flex-nowrap" id="myTab">
             <li class="nav-item">
               <button
                 class="nav-link active"
