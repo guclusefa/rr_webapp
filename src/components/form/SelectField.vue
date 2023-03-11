@@ -33,12 +33,7 @@
         this.values.includes(parseInt(key))
       "
     >
-      <template v-if="isApiOptions">
-        {{ value }}
-      </template>
-      <template v-else>
-        {{ $t(value) }}
-      </template>
+      {{ $t(value) }}
     </option>
   </select>
 
@@ -48,8 +43,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-
 import $ from "jquery";
 import "select2/dist/css/select2.css";
 import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.css";
@@ -164,15 +157,7 @@ export default {
         50: "app.limits.50",
         100: "app.limits.100",
       },
-      stateOptions: {},
-      authorOptions: {},
-      relationOptions: {},
-      categoryOptions: {},
-      isApiOptions: false,
     };
-  },
-  computed: {
-    ...mapGetters(["states", "authors", "relations", "categories"]),
   },
   methods: {
     // handle input if multiple or not
@@ -196,53 +181,6 @@ export default {
     getOptions() {
       return this[this.options];
     },
-    // fill api options
-    ...mapActions([
-      "setStates",
-      "setAuthors",
-      "setResources",
-      "setRelations",
-      "setCategories",
-    ]),
-    fillOptions() {
-      switch (this.options) {
-        case "stateOptions":
-          this.isApiOptions = true;
-          this.setStates().then(() => {
-            for (const state of this.states) {
-              this.stateOptions[state.id] =
-                state.name + " (" + state.code + ")";
-            }
-          });
-          break;
-        case "authorOptions":
-          this.isApiOptions = true;
-          this.setAuthors().then(() => {
-            for (const author of this.authors) {
-              this.authorOptions[author.id] = author.username;
-            }
-          });
-          break;
-        case "relationOptions":
-          this.isApiOptions = true;
-          this.setRelations().then(() => {
-            for (const relation of this.relations) {
-              this.relationOptions[relation.id] = relation.name;
-            }
-          });
-          break;
-        case "categoryOptions":
-          this.isApiOptions = true;
-          this.setCategories().then(() => {
-            for (const category of this.categories) {
-              this.categoryOptions[category.id] = category.name;
-            }
-          });
-          break;
-        default:
-          break;
-      }
-    },
   },
   mounted() {
     if (this.select2) {
@@ -260,7 +198,6 @@ export default {
         this.$emit("input", select2.val());
       });
     }
-    this.fillOptions();
   },
 };
 </script>

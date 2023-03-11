@@ -19,10 +19,6 @@ const profile = {
             page: 1,
         },
         resourcesMeta: {},
-
-        authors: [],
-        relations: [],
-        categories: []
     },
     mutations: {
         SET_RESOURCE(state, payload) {
@@ -41,16 +37,6 @@ const profile = {
         ADD_RESOURCE(state, payload) {
             state.resources.push(payload)
         },
-
-        SET_AUTHORS(state, payload) {
-            state.authors = payload
-        },
-        SET_RELATIONS(state, payload) {
-            state.relations = payload
-        },
-        SET_CATEGORIES(state, payload) {
-            state.categories = payload
-        }
     },
     actions: {
         async createResource({ }, payload) {
@@ -197,37 +183,6 @@ const profile = {
             commit('SET_RESOURCES_META', {})
             commit('SET_RESOURCES_PARAMS', {})
         },
-
-        async setAuthors({ commit }) {
-            try {
-                const response = await api.get('/users')
-                commit('SET_AUTHORS', response.data.data)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-        async setRelations({ commit }) {
-            try {
-                const response = await api.get('/relations')
-                commit('SET_RELATIONS', response.data.data)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
-        async setCategories({ commit }) {
-            try {
-                const response = await api.get('/categories')
-                commit('SET_CATEGORIES', response.data.data)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        }
     },
     getters: {
         resource: state => state.resource,
@@ -236,10 +191,6 @@ const profile = {
         resourcesParams: state => state.resourcesParams,
         resourcesParamsDefault: state => state.resourcesParamsDefault,
         resourcesMeta: state => state.resourcesMeta,
-
-        authors: state => state.authors,
-        relations: state => state.relations,
-        categories: state => state.categories,
     }
 }
 

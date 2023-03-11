@@ -18,8 +18,6 @@ const profile = {
             page: 1,
         },
         profilesMeta: {},
-
-        states: []
     },
     mutations: {
         SET_PROFILE(state, payload) {
@@ -37,10 +35,6 @@ const profile = {
         },
         ADD_PROFILE(state, payload) {
             state.profiles.push(payload)
-        },
-
-        SET_STATES(state, payload) {
-            state.states = payload
         },
     },
     actions: {
@@ -169,17 +163,6 @@ const profile = {
             commit('SET_PROFILES_META', {})
             commit('SET_PROFILES_PARAMS', {})
         },
-
-        async setStates({ commit }) {
-            try {
-                const response = await api.get('/states')
-                commit('SET_STATES', response.data.data)
-                return response;
-            }
-            catch (error) {
-                return error;
-            }
-        },
     },
     getters: {
         profile: state => state.profile,
@@ -188,8 +171,6 @@ const profile = {
         profilesParams: state => state.profilesParams,
         profilesParamsDefault: state => state.profilesParamsDefault,
         profilesMeta: state => state.profilesMeta,
-
-        states: state => state.states
     }
 }
 
