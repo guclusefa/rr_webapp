@@ -70,7 +70,7 @@ export default {
           ["bold", "italic", "underline"],
           [{ color: [] }, { background: [] }],
           [{ list: "ordered" }, { list: "bullet" }],
-          ["code", "blockquote", "link"],
+          ["code", "blockquote", "link", "image"],
           ["clean"],
         ],
       },
