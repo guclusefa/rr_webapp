@@ -6,6 +6,7 @@
     data-bs-target="#offcanvasScrolling"
     @click="showResourceFilterOffCanvas"
   >
+    <i class="bi bi-funnel"></i>
     {{ $t("resources.filter") }}
   </button>
 </template>

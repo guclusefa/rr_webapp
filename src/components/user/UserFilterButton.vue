@@ -6,6 +6,7 @@
     data-bs-target="#offcanvasScrolling"
     @click="showUserFilterOffCanvas"
   >
+    <i class="bi bi-funnel"></i>
     {{ $t("profiles.filter") }}
   </button>
 </template>

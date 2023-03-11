@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-      {{ $t("profile.actions") }}
+    <button class="btn btn-primary" data-bs-toggle="dropdown">
+      <i class="bi bi-three-dots-vertical"></i>
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
       <li>

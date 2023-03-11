@@ -6,6 +6,7 @@
     data-bs-target="#offcanvasScrolling"
     @click="showCommentFilterOffCanvas"
   >
+    <i class="bi bi-funnel"></i>
     {{ $t("comments.filter") }}
   </button>
 </template>

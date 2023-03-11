@@ -6,6 +6,7 @@
     data-bs-toggle="modal"
     data-bs-target="#modalDialog"
   >
+    <i class="bi bi-file-earmark-plus"></i>
     {{ $t("resources.create") }}
   </button>
 </template>

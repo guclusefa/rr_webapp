@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6">
+      <div class="col-6 ms-auto text-end">
         <!-- Submit -->
         <SubmitButton
           :label="

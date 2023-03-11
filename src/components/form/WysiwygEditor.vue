@@ -8,7 +8,8 @@
         'invalid-content': validateInput() !== '',
       }"
     >
-      <div ref="editor" v-html="value"></div>
+      <div ref="editor" v-html="value" v-if="editMode"></div>
+      <div ref="editor" v-else></div>
     </div>
     <div class="invalid-message" v-if="validateInput() !== ''">
       {{ $t(validateInput()) }}
@@ -48,9 +49,15 @@ export default {
     value: {
       type: String,
       required: false,
+      default: "",
     },
   },
   emits: ["input"],
+  data() {
+    return {
+      editMode: false,
+    };
+  },
   methods: {
     validateInput() {
       // if validate is empty string than is valid
@@ -80,6 +87,11 @@ export default {
     this.editor.on("text-change", () => {
       this.$emit("input", this.editor.root.innerHTML);
     });
+  },
+  created() {
+    if (this.value) {
+      this.editMode = true;
+    }
   },
 };
 </script>

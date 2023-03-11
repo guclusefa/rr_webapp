@@ -26,13 +26,10 @@
             <div class="me-auto">
               <h1>{{ $t("resource.comments") }}</h1>
             </div>
+            <span class="ms-2">
+              <AddCommentButton :resource="resource" />
+            </span>
           </div>
-        </div>
-      </div>
-      <!-- Comment edit (add)-->
-      <div class="row mb-4">
-        <div class="col">
-          <CommentEdit :edit="false" :resource="resource" />
         </div>
       </div>
       <!-- Comments -->
@@ -71,7 +68,7 @@ import { addErrorToast } from "@/services/toasts";
 
 import ResourceItem from "@/components/resource/ResourceItem";
 
-import CommentEdit from "@/components/comment/actions/CommentEdit";
+import AddCommentButton from "@/components/comment/AddCommentButton.vue";
 import CommentList from "@/components/comment/CommentList";
 
 import ResourceStats from "@/components/resource/ResourceStats";
@@ -139,7 +136,7 @@ export default {
   components: {
     ResourceItem,
 
-    CommentEdit,
+    AddCommentButton,
     CommentList,
 
     ResourceStats,
