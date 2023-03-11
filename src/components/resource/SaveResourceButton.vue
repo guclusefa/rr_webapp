@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center">
+  <div class="d-flex align-items-center">
     <button
       class="btn btn-sm"
       :focus-visible="false"

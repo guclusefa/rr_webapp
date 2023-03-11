@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex align-items-center">
     <button
       class="btn btn-sm"
       :focus-visible="false"
@@ -83,5 +83,8 @@ export default {
 .btn:disabled {
   outline: none;
   border-color: transparent !important;
+}
+.btn {
+  padding: 0;
 }
 </style>

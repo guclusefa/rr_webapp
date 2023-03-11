@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <button
-      class="btn btn-sm"
-      :focus-visible="false"
-      :focus="false"
-    >
+  <div class="d-flex align-items-center">
+    <button class="btn btn-sm" :focus-visible="false" :focus="false">
       <i
         class="bi bi-bar-chart-fill me-1"
         @click="redirect"
@@ -54,3 +50,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn:disabled {
+  outline: none;
+  border-color: transparent !important;
+}
+.btn {
+  padding: 0;
+}
+</style>

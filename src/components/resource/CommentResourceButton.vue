@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="d-flex align-items-center">
     <button class="btn btn-sm" @click="redirect">
       <i
         class="bi bi-chat-fill text-primary me-1"
         v-if="resource.isCommented"
       ></i>
       <i class="bi bi-chat me-1" v-else></i>
-      {{ resource.comments }}
     </button>
+    {{ resource.comments }}
   </div>
 </template>
 
@@ -30,3 +30,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.btn:disabled {
+  outline: none;
+  border-color: transparent !important;
+}
+.btn {
+  padding: 0;
+}
+</style>
