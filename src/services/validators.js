@@ -100,6 +100,20 @@ export function validateTitle(title, submitted) {
     return "";
 }
 
+// wysiwyg
+export function validateWysiwyg(content, submitted) {
+    if (submitted) {
+        if (!content.trim()) {
+            return "resource.content_required";
+        }
+    }
+    // check if not empty html tags
+    if (content.replace(/<[^>]*>?/gm, "").trim() === "") {
+        return "resource.content_required";
+    }
+    return "";
+}
+
 // content
 export function validateContent(content, submitted) {
     if (submitted) {

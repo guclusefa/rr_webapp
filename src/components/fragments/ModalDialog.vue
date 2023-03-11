@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" id="modalDialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" :class="modal.large ? 'modal-lg' : ''">
       <div class="modal-content">
         <div class="modal-header" v-if="modal.title">
           <h1 class="modal-title fs-5">

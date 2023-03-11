@@ -3,8 +3,14 @@
     <label :for="field" class="form-label" :class="{ required: required }">
       {{ $t(label) }}
     </label>
-    <div ref="editor" v-html="value"></div>
-    <div v-if="validateInput() !== ''">
+    <div
+      :class="{
+        'invalid-content': validateInput() !== '',
+      }"
+    >
+      <div ref="editor" v-html="value"></div>
+    </div>
+    <div class="invalid-message" v-if="validateInput() !== ''">
       {{ $t(validateInput()) }}
     </div>
   </div>
@@ -77,3 +83,16 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.invalid-content {
+  border: 1px solid red !important;
+}
+
+.invalid-message {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
+</style>

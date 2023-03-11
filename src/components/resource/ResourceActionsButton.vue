@@ -75,7 +75,8 @@ export default {
           showModal(
             this.$t("resource.edit_title", { title: this.resource.title }),
             ResourceEdit,
-            { resource: this.resource }
+            { resource: this.resource },
+            true
           );
           break;
         case "editMediaResourceModal":

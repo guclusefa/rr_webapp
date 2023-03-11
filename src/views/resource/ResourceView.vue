@@ -24,7 +24,7 @@
         <div class="col">
           <div class="d-flex align-items-center border-bottom">
             <div class="me-auto">
-              <h1>{{ $t("comments.title") }}</h1>
+              <h1>{{ $t("resource.comments") }}</h1>
             </div>
           </div>
         </div>

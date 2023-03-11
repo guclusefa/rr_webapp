@@ -29,7 +29,7 @@
       </div>
     </div>
 
-<!--     <div class="row">
+    <!--     <div class="row">
       <div class="col-12 mb-3">
         <InputText
           @input="$emit('input', (body.link = $event))"
@@ -44,7 +44,7 @@
     </div> -->
 
     <div class="row">
-      <div class="col-12 mb-3">
+      <div class="col-6 mb-3">
         <SelectField
           @input="$emit('input', (body.visibility = $event))"
           :field="'resourceEditVisibility'"
@@ -54,10 +54,8 @@
           :value="this.edit ? resource.visibility : body.visibility"
         />
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-12 mb-3">
+      <div class="col-6 mb-3">
         <SelectField
           @input="$emit('input', (body.isPublished = $event))"
           :field="'resourceEditIsPublished'"

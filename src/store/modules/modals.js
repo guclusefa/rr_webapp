@@ -2,7 +2,8 @@ const modals = {
     state: {
         title: "",
         body: null,
-        props: {}
+        props: {},
+        large: false
     },
 
     mutations: {
@@ -10,6 +11,7 @@ const modals = {
             state.title = payload.title
             state.body = payload.body
             state.props = payload.props
+            state.large = payload.large
         }
     },
 

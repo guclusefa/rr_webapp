@@ -51,6 +51,9 @@
             {{ category.name }}
           </span>
         </div>
+        <div class="mb-2" v-if="resource.author">
+          <UserIdentifier :user="resource.author" />
+        </div>
         <div class="text-muted mb-2">
           {{
             $t(`resources.published_days_ago`, {
@@ -58,16 +61,15 @@
             })
           }}
         </div>
-        <div class="mb-2" v-if="resource.author">
-          <UserIdentifier :user="resource.author" />
-        </div>
-        <div class="d-flex justify-content-between mb-2">
-          <CommentResourceButton :resource="resource" />
-          <ShareResourceButton :resource="resource" />
-          <LikeResourceButton :resource="resource" />
-          <ExploitResourceButton :resource="resource" />
-          <ConsultResourceButton :resource="resource" />
-          <SaveResourceButton :resource="resource" v-if="isAuthenticated" />
+        <div class="mb-2">
+          <div class="d-flex justify-content-between mt-2 mb-2">
+            <CommentResourceButton :resource="resource" />
+            <ShareResourceButton :resource="resource" />
+            <LikeResourceButton :resource="resource" />
+            <ExploitResourceButton :resource="resource" />
+            <ConsultResourceButton :resource="resource" />
+            <SaveResourceButton :resource="resource" v-if="isAuthenticated" />
+          </div>
         </div>
       </div>
     </div>

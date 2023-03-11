@@ -1,11 +1,12 @@
 import store from "@/store";
 import { markRaw } from "vue";
 
-const showModal = (title, body, props = {}) => {
+const showModal = (title, body, props = {}, large = false) => {
     store.dispatch("setModal", {
         title: title,
         body: markRaw(body),
-        props: props
+        props: props,
+        large: large,
     });
 };
 

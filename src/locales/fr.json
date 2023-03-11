@@ -231,7 +231,8 @@
     "exploits_title": "Resource {title} exploitée par",
     "consults_title": "Resource {title} consultée par",
     "likes_load_more": "Voir plus",
-    "not_found": "La ressource n'a pas été trouvée"
+    "not_found": "La ressource n'a pas été trouvée",
+    "comments": "Commentaires"
   },
   "resources": {
     "page": "Ressources",

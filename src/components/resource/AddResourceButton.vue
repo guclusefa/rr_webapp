@@ -19,9 +19,12 @@ export default {
   name: "AddResource",
   methods: {
     showAddResourceModal() {
-      showModal(this.$t("resources.create"), ResourceEdit, {
-        edit: false,
-      });
+      showModal(
+        this.$t("resources.create"),
+        ResourceEdit,
+        { edit: false },
+        true
+      );
     },
   },
 };

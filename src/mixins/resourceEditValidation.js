@@ -1,6 +1,6 @@
 import {
     validateTitle,
-    validateContent,
+    validateWysiwyg as validateContent,
     validateLink,
     validateRelation,
 } from "@/services/validators";
