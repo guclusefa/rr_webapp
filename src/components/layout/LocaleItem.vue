@@ -7,8 +7,8 @@
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <span v-if="selectedLocale === 'fr'">🇫🇷</span>
-      <span v-else>🇬🇧</span>
+      <span class="fi fi-fr" v-if="selectedLocale === 'fr'"></span>
+      <span class="fi fi-gb" v-else></span>
     </a>
     <ul class="dropdown-menu">
       <li v-for="(locale, i) in locales" :key="`locale-${i}`">
@@ -17,6 +17,8 @@
           href="#"
           @click.prevent="selectedLocale = locale"
         >
+          <span class="fi fi-fr" v-if="locale === 'fr'"></span>
+          <span class="fi fi-gb" v-else></span>
           {{ localesLabels[locale] }}
         </a>
       </li>
@@ -25,6 +27,9 @@
 </template>
 
 <script>
+// flag icons
+import "/node_modules/flag-icons/css/flag-icons.min.css";
+
 export default {
   name: "LocaleItem",
   data() {
