@@ -30,12 +30,20 @@ export default {
   name: "ProfilesView",
   computed: {
     ...mapGetters(["profilesParamsDefault"]),
+    // search params ?search=...
+    searchQuery() {
+      return this.$route.query.search;
+    },
   },
   methods: {
     ...mapActions(["setProfiles", "clearProfiles"]),
     async fetchProfiles() {
+      const params = {
+        ...this.profilesParamsDefault,
+        search: this.searchQuery,
+      };
       // Request
-      const response = await this.setProfiles(this.profilesParamsDefault);
+      const response = await this.setProfiles(params);
       // Success
       if (response.status >= 200 && response.status < 300) {
         return;
@@ -45,10 +53,16 @@ export default {
     },
   },
   mounted() {
-    // Clear profiles and fetch profiles
     this.clearProfiles().then(() => {
       this.fetchProfiles();
     });
+  },
+  watch: {
+    searchQuery() {
+      this.clearProfiles().then(() => {
+        this.fetchProfiles();
+      });
+    },
   },
   components: {
     UserList,

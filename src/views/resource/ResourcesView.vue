@@ -34,12 +34,19 @@ export default {
   name: "ResourcesView",
   computed: {
     ...mapGetters(["resourcesParamsDefault", "isAuthenticated"]),
+    searchQuery() {
+      return this.$route.query.search;
+    },
   },
   methods: {
     ...mapActions(["setResources", "clearResources"]),
     async fetchResources() {
+      const params = {
+        ...this.resourcesParamsDefault,
+        search: this.searchQuery,
+      };
       // Request
-      const response = await this.setResources(this.resourcesParamsDefault);
+      const response = await this.setResources(params);
       // Success
       if (response.status >= 200 && response.status < 300) {
         return;
@@ -53,6 +60,14 @@ export default {
     this.clearResources().then(() => {
       this.fetchResources();
     });
+  },
+  watch: {
+    searchQuery() {
+      // Clear resources and fetch resources
+      this.clearResources().then(() => {
+        this.fetchResources();
+      });
+    },
   },
   components: {
     AddResourceButton,

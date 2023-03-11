@@ -21,7 +21,13 @@
       "light": "Clair",
       "dark": "Sombre"
     },
-    "search": "Rechercher"
+    "search": "Rechercher",
+    "search_placeholder": "Rechercher...",
+    "search_no_results": "Aucun résultat pour '{query}'",
+    "search_results": "Résultats de la recherche pour '{query}'",
+    "search_results_min_length": "Veuillez entrer au moins {min} caractères pour lancer une recherche",
+    "total_results": "{total} résultat(s) trouvé(s)",
+    "see_more": "Voir plus"
   },
   "toast": {
     "success": "Succès",

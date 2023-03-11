@@ -33,7 +33,7 @@
           </ul>
 
           <div class="d-flex">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0 gap-1">
               <li class="nav-item">
                 <SearchItem />
               </li>
