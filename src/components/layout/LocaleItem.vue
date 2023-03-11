@@ -7,7 +7,8 @@
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      {{ localesLabels[selectedLocale] }}
+      <span v-if="selectedLocale === 'fr'">🇫🇷</span>
+      <span v-else>🇬🇧</span>
     </a>
     <ul class="dropdown-menu">
       <li v-for="(locale, i) in locales" :key="`locale-${i}`">

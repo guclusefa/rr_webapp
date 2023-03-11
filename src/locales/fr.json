@@ -16,7 +16,12 @@
       "25": "25 par page",
       "50": "50 par page",
       "100": "100 par page"
-    }
+    },
+    "themes": {
+      "light": "Clair",
+      "dark": "Sombre"
+    },
+    "search": "Rechercher"
   },
   "toast": {
     "success": "Succès",

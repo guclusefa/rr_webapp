@@ -31,24 +31,28 @@
               }}</router-link>
             </li>
           </ul>
+
           <div class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <SearchItem />
+              </li>
               <li class="nav-item">
                 <ThemeItem />
               </li>
               <li class="nav-item">
                 <LocaleItem />
               </li>
-              <template v-if="isAuthenticated">
-                <ProfileItem />
-              </template>
-              <template v-else>
-                <li class="nav-item">
+              <li class="nav-item">
+                <template v-if="isAuthenticated">
+                  <ProfileItem />
+                </template>
+                <template v-else>
                   <router-link to="/login" class="nav-link">{{
                     $t("login.page")
                   }}</router-link>
-                </li>
-              </template>
+                </template>
+              </li>
             </ul>
           </div>
         </div>
@@ -59,6 +63,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import SearchItem from "@/components/layout/SearchItem.vue";
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "@/components/layout/LocaleItem.vue";
 import ProfileItem from "@/components/layout/ProfileItem.vue";
@@ -69,6 +74,7 @@ export default {
     ...mapGetters(["isAuthenticated"]),
   },
   components: {
+    SearchItem,
     ThemeItem,
     LocaleItem,
     ProfileItem,
