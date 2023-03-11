@@ -1,14 +1,23 @@
 <template>
   <div class="row mb-3">
     <div class="col-12">
-      <CommentCard :comment="comment" />
-    </div>
-  </div>
-  <div class="row" v-if="comment.replies > 0 && replies.length === 0">
-    <div class="col">
-      <form @submit.prevent="fetchReplies" class="float-end">
-        <SubmitButton :label="'comment.replies_load'" />
-      </form>
+      <CommentCard :comment="comment">
+        <template
+          #seeReplies
+          v-if="comment.replies > 0 && replies.length === 0"
+        >
+          <a @click="fetchReplies" class="float-end" style="cursor: pointer">
+            <template v-if="loading">
+              <span class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </span>
+            </template>
+            <template v-else>
+              {{ $t("comment.replies_load") }}
+            </template>
+          </a>
+        </template>
+      </CommentCard>
     </div>
   </div>
   <div class="row" v-if="comment.replies > 0 && replies.length > 0">
@@ -30,6 +39,7 @@
 
 <script>
 import api from "@/services/api";
+import { mapGetters } from "vuex";
 
 import CommentCard from "@/components/comment/CommentCard.vue";
 import SubmitButton from "@/components/form/SubmitButton.vue";
@@ -53,11 +63,16 @@ export default {
       default: false,
     },
   },
+  computed: {
+    ...mapGetters(["loading"]),
+  },
   methods: {
     // get replies
     async fetchReplies() {
       try {
-        const response = await api.get(`/comments?replyto[]=${this.comment.id}`);
+        const response = await api.get(
+          `/comments?replyto[]=${this.comment.id}`
+        );
         this.replies = response.data.data;
         this.repliesMeta = response.data.meta;
       } catch (error) {

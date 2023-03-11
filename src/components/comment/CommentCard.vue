@@ -27,6 +27,7 @@
       <span class="text-muted float-end">
         {{ formatDateTime(comment.createdAt) }}
       </span>
+      <slot name="seeReplies"></slot>
       <span class="text-muted float-end me-2">
         <router-link :to="`/comment/${comment.id}`">
           {{ $t("comment.replies", { count: comment.replies }) }}
