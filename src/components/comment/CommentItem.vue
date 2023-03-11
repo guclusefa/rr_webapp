@@ -6,16 +6,13 @@
           #seeReplies
           v-if="comment.replies > 0 && replies.length === 0"
         >
-          <a @click="fetchReplies" class="float-end" style="cursor: pointer">
-            <template v-if="loading">
-              <span class="spinner-border spinner-border-sm" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </span>
-            </template>
-            <template v-else>
-              {{ $t("comment.replies_load") }}
-            </template>
-          </a>
+          <div @click="fetchReplies" class="text-primary link cursor-pointer">
+            <span
+              class="spinner-border spinner-border-sm"
+              v-if="loading"
+            ></span>
+            <span v-else>{{ $t("comment.replies_load") }}</span>
+          </div>
         </template>
       </CommentCard>
     </div>

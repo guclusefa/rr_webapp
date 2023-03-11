@@ -1,10 +1,22 @@
 // Typography
 a {
     text-decoration: none;
+
     &:hover {
         text-decoration: underline;
     }
 }
+
 .pre-line {
     white-space: pre-line;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.link {
+    &:hover {
+        text-decoration: underline;
+    }
 }

@@ -2,9 +2,25 @@
   <div class="card">
     <div class="card-header">
       <div class="row">
-        <div class="col">
-          <UserIdentifier :user="comment.author" v-if="comment.author" />
-          <span v-else>{{ $t("comment.anonymous") }}</span>
+        <div class="col d-flex align-items-center">
+          <div>
+            <UserIdentifier :user="comment.author" v-if="comment.author" />
+            <span v-else>{{ $t("comment.anonymous") }}</span>
+          </div>
+          <div class="text-muted ms-2">
+            {{ formatDateTime(comment.createdAt) }}
+          </div>
+          <div class="ms-2">
+            <a
+              href="#"
+              @click="showCommentReplyModal()"
+              data-bs-toggle="modal"
+              data-bs-target="#modalDialog"
+            >
+              <i class="bi bi-reply"></i>
+              {{ $t("comment.reply") }}
+            </a>
+          </div>
         </div>
         <div class="col" v-if="canEdit()">
           <div class="float-end">
@@ -15,34 +31,23 @@
     </div>
     <div class="card-body">
       <p class="card-text pre-line">
-        <router-link :to="`/comment/${comment.id}`">
-          {{ comment.content }}
-        </router-link>
+        {{ comment.content }}
       </p>
     </div>
-    <div class="card-footer">
+    <div class="card-footer d-flex justify-content-between align-items-center">
       <router-link :to="`/resource/${comment.resource.id}`">
         {{ comment.resource.title }}
       </router-link>
-      <span class="text-muted float-end">
-        {{ formatDateTime(comment.createdAt) }}
-      </span>
-      <slot name="seeReplies"></slot>
-      <span class="text-muted float-end me-2">
-        <router-link :to="`/comment/${comment.id}`">
-          {{ $t("comment.replies", { count: comment.replies }) }}
-        </router-link>
-      </span>
-      <span class="text-muted float-end me-2">
-        <a
-          href="#"
-          @click="showCommentReplyModal()"
-          data-bs-toggle="modal"
-          data-bs-target="#modalDialog"
-        >
-          {{ $t("comment.reply") }}
-        </a>
-      </span>
+      <div class="d-flex align-items-center">
+        <div class="ms-1">
+          <router-link :to="`/comment/${comment.id}`">
+            {{ $t("comment.replies", { count: comment.replies }) }}
+          </router-link>
+        </div>
+        <div class="ms-1" v-if="$slots.seeReplies">
+          <slot name="seeReplies"></slot>
+        </div>
+      </div>
     </div>
   </div>
 </template>
