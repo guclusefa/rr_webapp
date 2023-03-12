@@ -60,6 +60,7 @@
                 class="nav-link"
                 data-bs-toggle="tab"
                 data-bs-target="#relations-tab-pane"
+                @click="getRelations"
               >
                 {{ $t("admin.relations_title") }}
               </button>
@@ -89,7 +90,9 @@
         <div class="tab-pane fade" id="categories-tab-pane">
           <CategoryList />
         </div>
-        <div class="tab-pane fade" id="relations-tab-pane">relations</div>
+        <div class="tab-pane fade" id="relations-tab-pane">
+          <RelationList />
+        </div>
         <div class="tab-pane fade" id="bans-tab-pane">bans</div>
       </div>
     </section>
@@ -105,6 +108,7 @@ import UserList from "@/components/user/UserList";
 import ResourceList from "@/components/resource/ResourceList";
 import CommentList from "@/components/comment/CommentList";
 import CategoryList from "@/components/admin/category/CategoryList";
+import RelationList from "@/components/admin/relation/RelationList";
 
 export default {
   name: "AdminView",
@@ -203,6 +207,25 @@ export default {
         this.fetchCategories();
       });
     },
+    ...mapActions(["setRelations", "clearRelations"]),
+    async fetchRelations() {
+      const params = {
+        ...this.categoriesParamsDefault,
+      };
+      // Request
+      const response = await this.setRelations(params);
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast(response);
+    },
+    getRelations() {
+      this.clearRelations().then(() => {
+        this.fetchRelations();
+      });
+    },
   },
   mounted() {
     this.getProfiles();
@@ -212,6 +235,7 @@ export default {
     ResourceList,
     CommentList,
     CategoryList,
+    RelationList,
   },
 };
 </script>

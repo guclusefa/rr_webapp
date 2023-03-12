@@ -8,6 +8,7 @@ import loading from '@/store/modules/loading'
 import modals from '@/store/modules/modals'
 import offcanvas from '@/store/modules/offcanvas'
 import profile from '@/store/modules/profile'
+import relation from '@/store/modules/relation'
 import resource from '@/store/modules/resource'
 import toasts from '@/store/modules/toasts'
 
@@ -20,6 +21,7 @@ export default createStore({
         modals,
         offcanvas,
         profile,
+        relation,
         resource,
         toasts
     },

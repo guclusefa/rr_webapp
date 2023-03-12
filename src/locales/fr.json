@@ -363,5 +363,24 @@
     "delete": "Supprimer",
     "delete_title": "Supprimer la catégorie : {name}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette catégorie ? Toutes les données associées seront perdues. Cette action est irréversible."
+  },
+  "relations": {
+    "meta": "Affichage de {end} relations sur un total de {total} relations",
+    "load_more": "Charger plus de relations",
+    "name": "Nom",
+    "createdAt": "Date de création",
+    "updatedAt": "Date de modification",
+    "actions": "Actions",
+    "create": "Créer une relation"
+  },
+  "relation": {
+    "name_field": "Nom",
+    "name_field_placeholder": "Nom de la relation",
+    "create": "Créer",
+    "edit": "Modifier",
+    "edit_title": "Modifier la relation : {name}",
+    "delete": "Supprimer",
+    "delete_title": "Supprimer la relation : {name}",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette relation ? Toutes les données associées seront perdues. Cette action est irréversible."
   }
 }
