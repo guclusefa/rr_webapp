@@ -168,3 +168,13 @@ export function validateComment(comment, submitted) {
     }
     return "";
 }
+
+// name
+export function validateName(name, submitted) {
+    if (submitted) {
+        if (!name.trim()) {
+            return "app.name_required";
+        }
+    }
+    return "";
+}

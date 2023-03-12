@@ -50,6 +50,7 @@
                 class="nav-link"
                 data-bs-toggle="tab"
                 data-bs-target="#categories-tab-pane"
+                @click="getCategories"
               >
                 {{ $t("admin.categories_title") }}
               </button>
@@ -94,7 +95,9 @@
         <div class="tab-pane fade" id="comments-tab-pane">
           <CommentList />
         </div>
-        <div class="tab-pane fade" id="categories-tab-pane">cat</div>
+        <div class="tab-pane fade" id="categories-tab-pane">
+          <CategoryList />
+        </div>
         <div class="tab-pane fade" id="relations-tab-pane">relations</div>
         <div class="tab-pane fade" id="states-tab-pane">states</div>
         <div class="tab-pane fade" id="bans-tab-pane">bans</div>
@@ -111,6 +114,7 @@ import { addErrorToast } from "@/services/toasts";
 import UserList from "@/components/user/UserList";
 import ResourceList from "@/components/resource/ResourceList";
 import CommentList from "@/components/comment/CommentList";
+import CategoryList from "@/components/admin/category/CategoryList";
 
 export default {
   name: "AdminView",
@@ -128,6 +132,7 @@ export default {
       "profiesParamsDefault",
       "resourcesParamsDefault",
       "commentsParamsDefault",
+      "categoriesParamsDefault",
     ]),
   },
   methods: {
@@ -189,6 +194,25 @@ export default {
         this.fetchComments();
       });
     },
+    ...mapActions(["setCategories", "clearCategories"]),
+    async fetchCategories() {
+      const params = {
+        ...this.categoriesParamsDefault,
+      };
+      // Request
+      const response = await this.setCategories(params);
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast(response);
+    },
+    getCategories() {
+      this.clearCategories().then(() => {
+        this.fetchCategories();
+      });
+    },
   },
   mounted() {
     this.getProfiles();
@@ -197,6 +221,7 @@ export default {
     UserList,
     ResourceList,
     CommentList,
+    CategoryList,
   },
 };
 </script>

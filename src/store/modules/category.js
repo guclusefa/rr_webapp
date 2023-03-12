@@ -7,7 +7,7 @@ const category = {
         categories: [],
         categoriesParams: {},
         categoriesParamsDefault: {
-            order: "createdAt",
+            order: "id",
             direction: "DESC",
             limit: 10,
             page: 1,
@@ -48,7 +48,7 @@ const category = {
 
         async createCategory({ }, payload) {
             try {
-                const response = await api.post('/categories', payload)
+                const response = await api.post('/admin/categories', payload)
                 return response;
             }
             catch (error) {
@@ -57,7 +57,7 @@ const category = {
         },
         async updateCategory({ }, payload) {
             try {
-                const response = await api.put(`/categories/${payload.id}`, payload)
+                const response = await api.put(`/admin/categories/${payload.id}`, payload)
                 return response;
             }
             catch (error) {
@@ -66,7 +66,7 @@ const category = {
         },
         async deleteCategory({ }, id) {
             try {
-                const response = await api.delete(`/categories/${id}`)
+                const response = await api.delete(`/admin/categories/${id}`)
                 return response;
             }
             catch (error) {

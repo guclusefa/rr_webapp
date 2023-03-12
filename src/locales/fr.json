@@ -28,7 +28,8 @@
     "search_results_min_length": "Veuillez entrer au moins {min} caractères pour lancer une recherche",
     "total_results": "{total} résultat(s) trouvé(s)",
     "see_more": "Voir plus",
-    "not_authorized": "Vous n'êtes pas autorisé à accéder à cette page"
+    "not_authorized": "Vous n'êtes pas autorisé à accéder à cette page",
+    "name_required": "Veuillez entrer un nom"
   },
   "toast": {
     "success": "Succès",
@@ -344,5 +345,24 @@
     "relations_title": "Relations",
     "states_title": "Départements",
     "bans_title": "Bannissements"
+  },
+  "categories": {
+    "meta": "Affichage de {end} catégories sur un total de {total} catégories",
+    "load_more": "Charger plus de catégories",
+    "name": "Nom",
+    "createdAt": "Date de création",
+    "updatedAt": "Date de modification",
+    "actions": "Actions",
+    "create": "Créer une catégorie"
+  },
+  "category": {
+    "name_field": "Nom",
+    "name_field_placeholder": "Nom de la catégorie",
+    "create": "Créer",
+    "edit": "Modifier",
+    "edit_title": "Modifier la catégorie : {name}",
+    "delete": "Supprimer",
+    "delete_title": "Supprimer la catégorie : {name}",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette catégorie ? Toutes les données associées seront perdues. Cette action est irréversible."
   }
 }
