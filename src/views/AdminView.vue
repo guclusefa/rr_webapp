@@ -68,15 +68,6 @@
               <button
                 class="nav-link"
                 data-bs-toggle="tab"
-                data-bs-target="#states-tab-pane"
-              >
-                {{ $t("admin.states_title") }}
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link"
-                data-bs-toggle="tab"
                 data-bs-target="#bans-tab-pane"
               >
                 {{ $t("admin.bans_title") }}
@@ -99,7 +90,6 @@
           <CategoryList />
         </div>
         <div class="tab-pane fade" id="relations-tab-pane">relations</div>
-        <div class="tab-pane fade" id="states-tab-pane">states</div>
         <div class="tab-pane fade" id="bans-tab-pane">bans</div>
       </div>
     </section>
