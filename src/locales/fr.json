@@ -338,9 +338,9 @@
   "admin": {
     "page": "Espaces d'administration",
     "title": "Espaces d'administration",
-    "profiles_title": "Profils à contrôler",
-    "resources_title": "Ressources à vérifier",
-    "comments_title": "Commentaires à contrôler",
+    "profiles_title": "Profils",
+    "resources_title": "Ressources",
+    "comments_title": "Commentaires",
     "categories_title": "Catégories",
     "relations_title": "Relations",
     "bans_title": "Bannissements"
