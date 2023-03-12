@@ -70,6 +70,7 @@
                 class="nav-link"
                 data-bs-toggle="tab"
                 data-bs-target="#bans-tab-pane"
+                @click="getBans"
               >
                 {{ $t("admin.bans_title") }}
               </button>
@@ -93,7 +94,9 @@
         <div class="tab-pane fade" id="relations-tab-pane">
           <RelationList />
         </div>
-        <div class="tab-pane fade" id="bans-tab-pane">bans</div>
+        <div class="tab-pane fade" id="bans-tab-pane">
+          <BanList />
+        </div>
       </div>
     </section>
   </section>
@@ -109,6 +112,7 @@ import ResourceList from "@/components/resource/ResourceList";
 import CommentList from "@/components/comment/CommentList";
 import CategoryList from "@/components/admin/category/CategoryList";
 import RelationList from "@/components/admin/relation/RelationList";
+import BanList from "@/components/admin/ban/BanList";
 
 export default {
   name: "AdminView",
@@ -127,6 +131,8 @@ export default {
       "resourcesParamsDefault",
       "commentsParamsDefault",
       "categoriesParamsDefault",
+      "relationsParamsDefault",
+      "bansParamsDefault",
     ]),
   },
   methods: {
@@ -210,7 +216,7 @@ export default {
     ...mapActions(["setRelations", "clearRelations"]),
     async fetchRelations() {
       const params = {
-        ...this.categoriesParamsDefault,
+        ...this.relationsParamsDefault,
       };
       // Request
       const response = await this.setRelations(params);
@@ -226,6 +232,25 @@ export default {
         this.fetchRelations();
       });
     },
+    ...mapActions(["setBans", "clearBans"]),
+    async fetchBans() {
+      const params = {
+        ...this.bansParamsDefault,
+      };
+      // Request
+      const response = await this.setBans(params);
+      // Success
+      if (response.status >= 200 && response.status < 300) {
+        return;
+      }
+      // Error
+      addErrorToast(response);
+    },
+    getBans() {
+      this.clearBans().then(() => {
+        this.fetchBans();
+      });
+    },
   },
   mounted() {
     this.getProfiles();
@@ -236,6 +261,7 @@ export default {
     CommentList,
     CategoryList,
     RelationList,
+    BanList,
   },
 };
 </script>

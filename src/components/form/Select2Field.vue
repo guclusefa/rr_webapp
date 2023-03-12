@@ -8,6 +8,7 @@
     :name="field"
     :multiple="multiple"
     :class="{ 'is-invalid': validateInput() }"
+    :disabled="disabled"
   ></select>
   <div class="invalid-feedback" v-if="validateInput() !== ''">
     {{ $t(validateInput()) }}
@@ -66,6 +67,11 @@ export default {
       required: false,
       default: () => "",
     },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   computed: {
     ...mapGetters(["token"]),
@@ -84,6 +90,8 @@ export default {
     createSelect2(field, placeholder, multiple, uri, text, values) {
       var select2 = $("#" + field);
 
+      // Fill select2 with values
+      this.setSelect2Values(select2, placeholder, multiple, uri, text);
       // Fill select2 with selected values
       if (values) {
         if (!multiple) {
@@ -94,8 +102,6 @@ export default {
           this.fillSelectedValues(select2, uri, value, text);
         });
       }
-      // Fill select2 with values
-      this.setSelect2Values(select2, placeholder, multiple, uri, text);
     },
     setSelect2Values(select2, placeholder, multiple, uri, text) {
       select2.select2({
@@ -155,6 +161,9 @@ export default {
           select2.append(option).trigger("change");
           // hide option
           select2.find("option[value='" + data.id + "']").hide();
+        },
+        error: function (error) {
+          console.log(error);
         },
       });
     },

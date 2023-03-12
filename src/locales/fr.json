@@ -382,5 +382,33 @@
     "delete": "Supprimer",
     "delete_title": "Supprimer la relation : {name}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette relation ? Toutes les données associées seront perdues. Cette action est irréversible."
+  },
+  "bans": {
+    "meta": "Affichage de {end} bannissements sur un total de {total} bannissements",
+    "load_more": "Charger plus de bannissements",
+    "user": "Utilisateur",
+    "author": "Auteur",
+    "reason": "Raison",
+    "endDate": "Date de fin",
+    "createdAt": "Date de création",
+    "updatedAt": "Date de modification",
+    "actions": "Actions",
+    "perma": "Permanent",
+    "create": "Créer un bannissement"
+  },
+  "ban": {
+    "create": "Créer",
+    "edit": "Modifier",
+    "edit_title": "Modifier le bannissement : {reason}",
+    "delete": "Supprimer",
+    "delete_title": "Supprimer le bannissement : {reason}",
+    "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce bannissement ? Toutes les données associées seront perdues. Cette action est irréversible.",
+    "user": "Utilisateur",
+    "user_placeholder_select": "Utilisateur à bannir",
+    "user_required": "Veuillez entrer un utilisateur",
+    "reason": "Raison",
+    "reason_field_placeholder": "Raison du bannissement",
+    "reason_required": "Veuillez entrer une raison",
+    "endDate": "Date de fin"
   }
 }

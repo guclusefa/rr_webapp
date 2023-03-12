@@ -54,6 +54,11 @@
       <div class="col">
         <NoResultMessage />
       </div>
+      <div class="col">
+        <div class="float-end">
+          <AddRelationButton />
+        </div>
+      </div>
     </div>
     <!-- Loading -->
     <LoadingSpinner v-else />

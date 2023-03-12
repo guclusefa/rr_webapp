@@ -178,3 +178,23 @@ export function validateName(name, submitted) {
     }
     return "";
 }
+
+// user
+export function validateUser(user, submitted) {
+    if (submitted) {
+        if (!user) {
+            return "ban.user_required";
+        }
+    }
+    return "";
+}
+
+// reason
+export function validateReason(reason, submitted) {
+    if (submitted) {
+        if (!reason.trim()) {
+            return "ban.reason_required";
+        }
+    }
+    return "";
+}
