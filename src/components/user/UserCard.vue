@@ -71,7 +71,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user", "isAdmin"]),
   },
   methods: {
     isOwner() {
@@ -81,7 +81,7 @@ export default {
       return this.profile.id === this.user.id;
     },
     canEdit() {
-      return this.isOwner();
+      return this.isOwner() || this.isAdmin;
     },
   },
   components: {

@@ -59,6 +59,30 @@
           {{ $t("profile.verify_email") }}</a
         >
       </li>
+      <template v-if="isAdmin">
+        <li v-if="!profile.isCertified">
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showUserActionModal('certifyUserModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("profile.certify") }}
+          </a>
+        </li>
+        <li v-else>
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showUserActionModal('uncertifyUserModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("profile.uncertify") }}
+          </a>
+        </li>
+      </template>
       <li>
         <a
           class="dropdown-item"
@@ -75,6 +99,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import { showModal } from "@/services/modals";
 
 import UserEdit from "@/components/user/actions/UserEdit";
@@ -82,6 +108,7 @@ import UserEditPhoto from "@/components/user/actions/UserEditPhoto";
 import UserEditPassword from "@/components/user/actions/UserEditPassword";
 import UserEditEmail from "@/components/user/actions/UserEditEmail";
 import UserConfirm from "@/components/user/actions/UserConfirm";
+import UserCertify from "@/components/user/actions/UserCertify";
 import UserDelete from "@/components/user/actions/UserDelete";
 
 export default {
@@ -91,6 +118,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(["isAdmin"]),
   },
   methods: {
     showUserActionModal(type) {
@@ -136,6 +166,24 @@ export default {
             }),
             UserConfirm,
             { profile: this.profile }
+          );
+          break;
+        case "certifyUserModal":
+          showModal(
+            this.$t("profile.certify_title", {
+              username: this.profile.username,
+            }),
+            UserCertify,
+            { profile: this.profile }
+          );
+          break;
+        case "uncertifyUserModal":
+          showModal(
+            this.$t("profile.uncertify_title", {
+              username: this.profile.username,
+            }),
+            UserCertify,
+            { profile: this.profile, uncertify: true }
           );
           break;
         case "deleteUserModal":

@@ -114,6 +114,15 @@ const profile = {
                 return error;
             }
         },
+        async certifyProfile({ }, id) {
+            try {
+                const response = await api.put(`/admin/users/${id}/certify`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
         async deleteProfile({ }, id) {
             try {
                 const response = await api.delete(`/users/${id}`)
