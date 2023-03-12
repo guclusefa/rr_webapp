@@ -9,7 +9,7 @@ const profile = {
         resourcesParamsDefault: {
             search: "",
             verified: "",
-            visibility: 0,
+            visibility: "",
             author: [],
             relation: [],
             category: [],

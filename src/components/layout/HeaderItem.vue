@@ -37,6 +37,9 @@
               <li class="nav-item">
                 <SearchItem />
               </li>
+              <li class="nav-item" v-if="isModerator">
+                <AdminItem />
+              </li>
               <li class="nav-item">
                 <ThemeItem />
               </li>
@@ -64,6 +67,7 @@
 <script>
 import { mapGetters } from "vuex";
 import SearchItem from "@/components/layout/SearchItem.vue";
+import AdminItem from "@/components/layout/AdminItem.vue";
 import ThemeItem from "@/components/layout/ThemeItem.vue";
 import LocaleItem from "@/components/layout/LocaleItem.vue";
 import ProfileItem from "@/components/layout/ProfileItem.vue";
@@ -71,10 +75,11 @@ import ProfileItem from "@/components/layout/ProfileItem.vue";
 export default {
   name: "HeaderItem",
   computed: {
-    ...mapGetters(["isAuthenticated"]),
+    ...mapGetters(["isAuthenticated", "isModerator"]),
   },
   components: {
     SearchItem,
+    AdminItem,
     ThemeItem,
     LocaleItem,
     ProfileItem,

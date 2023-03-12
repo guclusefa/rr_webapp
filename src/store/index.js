@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import auth from '@/store/modules/auth'
+import category from '@/store/modules/category'
 import comment from '@/store/modules/comment'
 import loading from '@/store/modules/loading'
 import modals from '@/store/modules/modals'
@@ -13,6 +14,7 @@ import toasts from '@/store/modules/toasts'
 export default createStore({
     modules: {
         auth,
+        category,
         comment,
         loading,
         modals,

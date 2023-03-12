@@ -27,7 +27,8 @@
     "search_results": "Résultats de la recherche pour '{query}'",
     "search_results_min_length": "Veuillez entrer au moins {min} caractères pour lancer une recherche",
     "total_results": "{total} résultat(s) trouvé(s)",
-    "see_more": "Voir plus"
+    "see_more": "Voir plus",
+    "not_authorized": "Vous n'êtes pas autorisé à accéder à cette page"
   },
   "toast": {
     "success": "Succès",
@@ -332,5 +333,16 @@
     "replies_load": "Voir les réponses",
     "replies_load_more": "Charger plus de réponses",
     "not_found": "Le commentaire n'a pas été trouvé"
+  },
+  "admin": {
+    "page": "Espaces d'administration",
+    "title": "Espaces d'administration",
+    "profiles_title": "Profils à contrôler",
+    "resources_title": "Ressources à vérifier",
+    "comments_title": "Commentaires à contrôler",
+    "categories_title": "Catégories",
+    "relations_title": "Relations",
+    "states_title": "Départements",
+    "bans_title": "Bannissements"
   }
 }

@@ -8,7 +8,7 @@ const profile = {
         profilesParams: {},
         profilesParamsDefault: {
             search: "",
-            certified: 0,
+            certified: "",
             role: [],
             state: [],
             gender: [],

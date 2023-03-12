@@ -20,6 +20,8 @@ import ResourceView from '@/views/resource/ResourceView.vue'
 // Comment views
 import CommentsView from '@/views/comment/CommentsView.vue'
 import CommentView from '@/views/comment/CommentView.vue'
+// Admin views
+import AdminView from '@/views/AdminView.vue'
 
 // Routes
 const routes = [
@@ -93,6 +95,11 @@ const routes = [
     name: 'comment',
     component: CommentView
   },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView
+  }
 ]
 // Router
 const router = createRouter({

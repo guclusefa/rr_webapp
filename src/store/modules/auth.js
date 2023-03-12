@@ -118,6 +118,15 @@ const auth = {
         isAuthenticated(state) {
             return state.token !== null
         },
+        isSuperAdmin(state) {
+            return state.user !== null && state.user.roles[0] == "ROLE_SUPER_ADMIN"
+        },
+        isAdmin(state) {
+            return state.user !== null && (state.user.roles[0] == "ROLE_ADMIN" || state.user.roles[0] == "ROLE_SUPER_ADMIN")
+        },
+        isModerator(state) {
+            return state.user !== null && (state.user.roles[0] == "ROLE_MODERATOR" || state.user.roles[0] == "ROLE_ADMIN" || state.user.roles[0] == "ROLE_SUPER_ADMIN")
+        },
         token(state) {
             return state.token
         },

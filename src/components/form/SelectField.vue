@@ -10,16 +10,14 @@
     :multiple="multiple"
     :class="{ 'is-invalid': validateInput(), 'd-none': select2 }"
   >
+    {{
+      value
+    }}
     <option
       value=""
       :disabled="required"
       v-if="placeholderSelect"
-      :selected="
-        !this.value ||
-        !this.values ||
-        this.value == '' ||
-        this.values.includes('')
-      "
+      :selected="this.value === ''"
     >
       {{ $t(placeholderSelect) }}
     </option>
@@ -29,6 +27,7 @@
       :value="key"
       :selected="
         this.value == key ||
+        this.value == parseInt(key) ||
         this.values.includes(key) ||
         this.values.includes(parseInt(key))
       "
@@ -89,6 +88,7 @@ export default {
     },
     value: {
       required: false,
+      default: "",
     },
     values: {
       type: Array,
