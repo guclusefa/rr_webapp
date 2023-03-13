@@ -1,51 +1,52 @@
 <template>
   <div class="card">
-    <div class="card-header">
-      <div class="row">
-        <div class="col d-flex align-items-center">
-          <div>
+    <div class="card-body">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3"
+      >
+        <div class="d-flex align-items-center mb-2 mb-md-0">
+          <div class="me-3">
             <UserIdentifier :user="comment.author" v-if="comment.author" />
             <span v-else>{{ $t("comment.anonymous") }}</span>
           </div>
-          <div class="text-muted ms-2">
+          <div class="text-muted">
             {{ formatDateTime(comment.createdAt) }}
           </div>
-          <div class="ms-2">
-            <a
-              href="#"
-              @click="showCommentReplyModal()"
-              data-bs-toggle="modal"
-              data-bs-target="#modalDialog"
-            >
+        </div>
+        <div class="d-flex align-items-center">
+          <div class="me-3">
+            <a href="#" @click="showCommentReplyModal()">
               <i class="bi bi-reply"></i>
               {{ $t("comment.reply") }}
             </a>
           </div>
-        </div>
-        <div class="col" v-if="canEdit()">
-          <div class="float-end">
+          <div v-if="canEdit()">
             <CommentActionsButton :comment="comment" />
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-body">
       <p class="card-text pre-line">
         {{ comment.content }}
       </p>
     </div>
-    <div class="card-footer d-flex justify-content-between align-items-center">
-      <router-link :to="`/resource/${comment.resource.id}`">
-        {{ comment.resource.title }}
-      </router-link>
-      <div class="d-flex align-items-center">
-        <div class="ms-1">
-          <router-link :to="`/comment/${comment.id}`">
-            {{ $t("comment.replies", { count: comment.replies }) }}
+    <div class="card-footer">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-md-center"
+      >
+        <div class="mb-2 mb-md-0">
+          <router-link :to="`/resource/${comment.resource.id}`">
+            {{ comment.resource.title }}
           </router-link>
         </div>
-        <div class="ms-1" v-if="$slots.seeReplies">
-          <slot name="seeReplies"></slot>
+        <div class="d-flex align-items-center">
+          <div class="me-3">
+            <router-link :to="`/comment/${comment.id}`">
+              {{ $t("comment.replies", { count: comment.replies }) }}
+            </router-link>
+          </div>
+          <div v-if="$slots.seeReplies">
+            <slot name="seeReplies"></slot>
+          </div>
         </div>
       </div>
     </div>
