@@ -123,6 +123,15 @@ const profile = {
                 return error;
             }
         },
+        async promoteProfile({ }, payload) {
+            try {
+                const response = await api.put(`/admin/users/${payload.id}/upgrade/${payload.role}`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
         async deleteProfile({ }, id) {
             try {
                 const response = await api.delete(`/users/${id}`)

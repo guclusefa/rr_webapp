@@ -82,6 +82,17 @@
             {{ $t("profile.uncertify") }}
           </a>
         </li>
+        <li v-if="isSuperAdmin">
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showUserActionModal('promoteUserModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("profile.promote") }}
+          </a>
+        </li>
       </template>
       <li>
         <a
@@ -109,6 +120,7 @@ import UserEditPassword from "@/components/user/actions/UserEditPassword";
 import UserEditEmail from "@/components/user/actions/UserEditEmail";
 import UserConfirm from "@/components/user/actions/UserConfirm";
 import UserCertify from "@/components/user/actions/UserCertify";
+import UserPromote from "@/components/user/actions/UserPromote";
 import UserDelete from "@/components/user/actions/UserDelete";
 
 export default {
@@ -120,7 +132,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isAdmin"]),
+    ...mapGetters(["isAdmin", "isSuperAdmin"]),
   },
   methods: {
     showUserActionModal(type) {
@@ -184,6 +196,15 @@ export default {
             }),
             UserCertify,
             { profile: this.profile, uncertify: true }
+          );
+          break;
+        case "promoteUserModal":
+          showModal(
+            this.$t("profile.promote_title", {
+              username: this.profile.username,
+            }),
+            UserPromote,
+            { profile: this.profile }
           );
           break;
         case "deleteUserModal":
