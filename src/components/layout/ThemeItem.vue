@@ -19,6 +19,7 @@
           class="dropdown-item"
           href="#"
           @click.prevent="isDark = theme === 'dark'"
+          @click="changeTheme(theme)"
         >
           <span v-if="theme === 'dark'">
             <i class="bi bi-moon-fill"></i>
@@ -45,4 +46,15 @@ const isDark = useDark({
   valueDark: "dark", // attribute value for dark mode
   valueLight: "light", // attribute value for light mode
 });
+
+// when changing theme usedark, make a transition to background color
+// to avoid white flash
+const changeTheme = (theme) => {
+  const body = document.querySelector("body");
+  body.style.transition = "background-color 0.5s ease";
+  isDark.value = theme === "dark";
+  setTimeout(() => {
+    body.style.transition = "";
+  }, 500);
+};
 </script>

@@ -16,7 +16,7 @@
               @{{ profile.username }}
             </router-link>
             <span v-if="profile.isCertified">
-              <i class="bi bi-patch-check-fill ms-1"></i>
+              <i class="bi bi-patch-check-fill ms-1 text-secondary"></i>
             </span>
           </h5>
         </div>
