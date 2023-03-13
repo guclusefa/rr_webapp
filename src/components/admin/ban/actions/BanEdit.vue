@@ -11,7 +11,7 @@
           :uri="'/users'"
           :text="'username'"
           :validate="validateUser"
-          :values="this.edit ? ban.user.id : body.user"
+          :values="this.edit ? ban.user : body.user"
           :disabled="this.edit"
         />
       </div>
@@ -91,6 +91,11 @@ export default {
       required: false,
       default: true,
     },
+    profile: {
+      type: Object,
+      required: false,
+      default: null,
+    },
   },
   methods: {
     setBody() {
@@ -98,6 +103,9 @@ export default {
       this.body.user = this.ban.user.id;
       this.body.reason = this.ban.reason;
       this.body.endDate = this.ban.endDate;
+    },
+    setProfile() {
+      this.body.user = this.profile.id;
     },
     // Form submit
     ...mapActions(["updateBan", "createBan", "reloadBans"]),
@@ -120,9 +128,12 @@ export default {
       }).apply(this);
     },
   },
-  mounted() {
+  beforeMount() {
     if (this.edit) {
       this.setBody();
+    }
+    if (this.profile) {
+      this.setProfile();
     }
   },
   components: {

@@ -93,6 +93,17 @@
             {{ $t("profile.promote") }}
           </a>
         </li>
+        <li>
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showUserActionModal('banUserModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("profile.ban") }}
+          </a>
+        </li>
       </template>
       <li>
         <a
@@ -121,6 +132,7 @@ import UserEditEmail from "@/components/user/actions/UserEditEmail";
 import UserConfirm from "@/components/user/actions/UserConfirm";
 import UserCertify from "@/components/user/actions/UserCertify";
 import UserPromote from "@/components/user/actions/UserPromote";
+import BanEdit from "@/components/admin/ban/actions/BanEdit.vue";
 import UserDelete from "@/components/user/actions/UserDelete";
 
 export default {
@@ -205,6 +217,15 @@ export default {
             }),
             UserPromote,
             { profile: this.profile }
+          );
+          break;
+        case "banUserModal":
+          showModal(
+            this.$t("profile.ban_title", {
+              username: this.profile.username,
+            }),
+            BanEdit,
+            { profile: this.profile, edit: false }
           );
           break;
         case "deleteUserModal":

@@ -161,6 +161,8 @@
     "role": "Rôle",
     "promote": "Promouvoir",
     "promote_title": "Promouvoir {username}",
+    "ban": "Bannir",
+    "ban_title": "Bannir {username}",
     "delete": "Supprimer compte",
     "delete_title": "Supprimer compte de {username}",
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer ce compte ? Toutes les données associées seront perdues. Cette action est irréversible.",
