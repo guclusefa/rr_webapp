@@ -108,7 +108,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user", "isAuthenticated"]),
+    ...mapGetters(["user", "isAuthenticated","isModerator"]),
   },
   methods: {
     isOwner() {
@@ -118,7 +118,7 @@ export default {
       return this.resource.author.id === this.user.id;
     },
     canEdit() {
-      return this.isOwner();
+      return this.isOwner() || this.isModerator;
     },
   },
   components: {

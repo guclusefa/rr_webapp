@@ -143,23 +143,20 @@ export default {
       });
     },
     fillSelectedValues(select2, uri, id, text) {
+      let headers = {};
+      if (this.token) {
+        headers.Authorization = "Bearer " + this.token;
+      }
       $.ajax({
         url: process.env.VUE_APP_API_URL + uri + "/" + id,
-
-        headers: {
-          Authorization: "Bearer " + this.token || null,
-        },
-
+        headers: headers,
         dataType: "json",
         success: function (data) {
-          // if data.data (idk why)
           if (data.data) {
             data = data.data;
           }
-          // create the option and append to Select2
           var option = new Option(data[text], data.id, true, true);
           select2.append(option).trigger("change");
-          // hide option
           select2.find("option[value='" + data.id + "']").hide();
         },
         error: function (error) {

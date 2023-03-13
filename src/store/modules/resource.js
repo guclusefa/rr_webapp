@@ -87,6 +87,15 @@ const profile = {
                 return error;
             }
         },
+        async verifyResource({ }, id) {
+            try {
+                const response = await api.put(`/moderator/resources/${id}/verify`)
+                return response;
+            }
+            catch (error) {
+                return error;
+            }
+        },
         async deleteResource({ }, id) {
             try {
                 const response = await api.delete(`/resources/${id}`)

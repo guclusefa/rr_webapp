@@ -37,6 +37,30 @@
           {{ $t("resource.edit_shareto") }}
         </a>
       </li>
+      <template v-if="isModerator">
+        <li v-if="!resource.isVerified">
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showRessourceActionModal('verifyResourceModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("resource.verify") }}
+          </a>
+        </li>
+        <li v-else>
+          <a
+            class="dropdown-item"
+            href="#"
+            @click="showRessourceActionModal('unverifyResourceModal')"
+            data-bs-toggle="modal"
+            data-bs-target="#modalDialog"
+          >
+            {{ $t("resource.unverify") }}
+          </a>
+        </li>
+      </template>
       <li>
         <a
           class="dropdown-item"
@@ -53,11 +77,14 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import { showModal } from "@/services/modals";
 
 import ResourceEdit from "@/components/resource/actions/ResourceEdit";
 import ResourceEditMedia from "@/components/resource/actions/ResourceEditMedia";
 import ResourceEditShareTo from "@/components/resource/actions/ResourceEditShareTo";
+import ResourceVerify from "@/components/resource/actions/ResourceVerify";
 import ResourceDelete from "@/components/resource/actions/ResourceDelete";
 
 export default {
@@ -67,6 +94,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(["isAuthenticated", "isModerator", "isAdmin"]),
   },
   methods: {
     showRessourceActionModal(type) {
@@ -95,6 +125,20 @@ export default {
             }),
             ResourceEditShareTo,
             { resource: this.resource }
+          );
+          break;
+        case "verifyResourceModal":
+          showModal(
+            this.$t("resource.verify_title", { title: this.resource.title }),
+            ResourceVerify,
+            { resource: this.resource }
+          );
+          break;
+        case "unverifyResourceModal":
+          showModal(
+            this.$t("resource.unverify_title", { title: this.resource.title }),
+            ResourceVerify,
+            { resource: this.resource, unverify: true }
           );
           break;
         case "deleteResourceModal":

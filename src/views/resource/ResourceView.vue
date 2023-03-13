@@ -78,7 +78,7 @@ import LoadingSpinner from "@/components/fragments/LoadingSpinner";
 export default {
   name: "ResourceView",
   computed: {
-    ...mapGetters(["user", "resource", "commentsParamsDefault"]),
+    ...mapGetters(["user", "isModerator", "resource", "commentsParamsDefault"]),
     id() {
       return this.$route.params.id;
     },
@@ -89,7 +89,7 @@ export default {
       return this.resource.author.id == this.user.id;
     },
     canEdit() {
-      return this.isOwner;
+      return this.isOwner || this.isModerator;
     },
   },
   methods: {
