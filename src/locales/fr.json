@@ -48,6 +48,10 @@
     "page": "À propos",
     "title": "À propos des Ressources (Re)lationnelles"
   },
+  "legal": {
+    "page": "Mentions légales & CGU",
+    "title": "Mentions légales & CGU"
+  },
   "login": {
     "page": "Connexion",
     "title": "Connexion à votre compte",

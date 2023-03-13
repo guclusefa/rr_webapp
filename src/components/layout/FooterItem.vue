@@ -1,12 +1,15 @@
 <template>
   <footer class="footer py-3 bg-light">
-    <div class="container">
-      <span class="text-muted">{{
-        $t("footer.copyright", { year: currentYear })
-      }}</span>
-      <router-link to="/about" class="float-end">{{
-        $t("about.page")
-      }}</router-link>
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="text-muted">
+        {{ $t("footer.copyright", { year: currentYear }) }}
+      </div>
+      <div>
+        <router-link to="/legal" class="me-3">{{ $t("legal.page") }}</router-link>
+        <router-link to="/about">{{
+          $t("about.page")
+        }}</router-link>
+      </div>
     </div>
   </footer>
 </template>

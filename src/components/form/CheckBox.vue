@@ -13,7 +13,14 @@
       class="form-check-label"
       :class="{ required: required }"
     >
-      {{ $t(label) }}
+      <template v-if="label === 'register.accept_terms'">
+        <router-link to="/legal" target="_blank">
+          {{ $t(label) }}
+        </router-link>
+      </template>
+      <template v-else>
+        {{ $t(label) }}
+      </template>
     </label>
     <div class="invalid-feedback" v-if="validateInput() !== ''">
       {{ $t(validateInput()) }}
