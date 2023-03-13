@@ -2,13 +2,11 @@
   <template v-if="bans.length > 0 && bansMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="col">
-        <h5>
-          {{ $t("bans.meta", bansMeta) }}
-        </h5>
-      </div>
-      <div class="col">
-        <div class="float-end">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <h5 v-html="$t('bans.meta', bansMeta)" />
+        </div>
+        <div class="order-last order-sm-0">
           <AddBanButton />
         </div>
       </div>
@@ -63,11 +61,11 @@
   <template v-else>
     <!-- Meta -->
     <div class="row mb-4" v-if="bansMeta.total === 0">
-      <div class="col">
-        <NoResultMessage />
-      </div>
-      <div class="col">
-        <div class="float-end">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <NoResultMessage />
+        </div>
+        <div class="order-last order-sm-0">
           <AddBanButton />
         </div>
       </div>

@@ -2,13 +2,11 @@
   <template v-if="categories.length > 0 && categoriesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="col">
-        <h5>
-          {{ $t("categories.meta", categoriesMeta) }}
-        </h5>
-      </div>
-      <div class="col">
-        <div class="float-end">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <h5 v-html="$t('categories.meta', categoriesMeta)" />
+        </div>
+        <div class="order-last order-sm-0">
           <AddCategoryButton />
         </div>
       </div>
@@ -51,11 +49,11 @@
   <template v-else>
     <!-- Meta -->
     <div class="row mb-4" v-if="categoriesMeta.total === 0">
-      <div class="col">
-        <NoResultMessage />
-      </div>
-      <div class="col">
-        <div class="float-end">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <NoResultMessage />
+        </div>
+        <div class="order-last order-sm-0">
           <AddCategoryButton />
         </div>
       </div>
