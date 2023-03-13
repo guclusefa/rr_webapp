@@ -4,24 +4,27 @@
       <div
         class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3"
       >
-        <div class="d-flex align-items-center mb-2 mb-md-0">
+        <div class="d-flex align-items-center mb-2 mb-md-0 me-3">
           <div class="me-3">
             <UserIdentifier :user="comment.author" v-if="comment.author" />
             <span v-else>{{ $t("comment.anonymous") }}</span>
           </div>
-          <div class="text-muted">
+          <div class="text-muted ms-auto d-none d-md-block">
             {{ formatDateTime(comment.createdAt) }}
           </div>
         </div>
-        <div class="d-flex align-items-center">
-          <div class="me-3">
-            <a href="#" @click="showCommentReplyModal()">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="text-muted d-md-none me-3">
+            {{ formatDateTime(comment.createdAt) }}
+          </div>
+          <div class="d-flex align-items-center">
+            <a href="#" @click="showCommentReplyModal()" data-bs-toggle="modal" data-bs-target="#modalDialog">
               <i class="bi bi-reply"></i>
               {{ $t("comment.reply") }}
             </a>
-          </div>
-          <div v-if="canEdit()">
-            <CommentActionsButton :comment="comment" />
+            <div v-if="canEdit()" class="ms-3">
+              <CommentActionsButton :comment="comment" />
+            </div>
           </div>
         </div>
       </div>
@@ -29,6 +32,7 @@
         {{ comment.content }}
       </p>
     </div>
+
     <div class="card-footer">
       <div
         class="d-flex flex-column flex-md-row justify-content-between align-items-md-center"
