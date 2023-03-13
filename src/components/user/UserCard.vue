@@ -29,14 +29,14 @@
           {{ profile.firstName }} {{ profile.lastName }}
         </span>
       </p>
-      <p class="card-text" v-if="profile.gender">
+      <p class="card-text">
         <span class="badge bg-dark me-1" v-if="profile.roles[0]">
           {{ $t(`user.roles.${profile.roles[0]}`) }}
         </span>
         <span class="badge bg-secondary me-1" v-if="profile.gender">
           {{ $t(`user.genders.${profile.gender}`) }}
         </span>
-        <span class="badge bg-info me-1">
+        <span class="badge bg-info me-1" v-if="profile.state">
           {{ profile.state.name }}
         </span>
       </p>
