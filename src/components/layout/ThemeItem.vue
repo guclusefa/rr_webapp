@@ -1,14 +1,17 @@
 <template>
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown fs-5">
     <a
-      class="nav-link dropdown-toggle"
+      class="nav-link"
       href="#"
       role="button"
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <span v-if="isDark"><i class="bi bi-moon-fill"></i></span>
-      <span v-else><i class="bi bi-sun-fill"></i></span>
+      <span class="border-end border-2 pe-3">
+        <i class="bi bi-moon-fill" v-if="isDark"></i>
+        <i class="bi bi-sun-fill" v-else></i>
+        <i class="ms-2 dropdown-toggle"></i>
+      </span>
     </a>
     <ul class="dropdown-menu">
       <li v-for="(theme, i) in themes" :key="`theme-${i}`">

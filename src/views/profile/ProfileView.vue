@@ -5,7 +5,7 @@
       <!-- Title -->
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>{{ profile.username }}</h1>
             </div>
@@ -25,7 +25,7 @@
       <!-- Title -->
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>
                 {{
@@ -125,7 +125,7 @@
       <!-- Title -->
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>
                 {{

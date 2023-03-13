@@ -4,7 +4,7 @@
     <section class="mb-5">
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>{{ resource.title }}</h1>
             </div>
@@ -22,7 +22,7 @@
     <section class="mb-5">
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>{{ $t("resource.comments") }}</h1>
             </div>
@@ -44,7 +44,7 @@
     <section class="mb-5" v-if="canEdit">
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center border-bottom">
+          <div class="d-flex align-items-center">
             <div class="me-auto">
               <h1>{{ $t("resource.stats_title") }}</h1>
             </div>

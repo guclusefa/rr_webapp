@@ -1,10 +1,20 @@
 <template>
   <header class="mb-3">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
       <div class="container">
-        <router-link to="/" class="navbar-brand">{{
-          $t("app.name_short")
-        }}</router-link>
+        <router-link
+          to="/"
+          class="navbar-brand d-flex align-items-center text-primary fw-bold"
+        >
+          <img
+            src="@/assets/images/logo.png"
+            alt="Logo"
+            width="60"
+            height="60"
+            class="me-2"
+          />
+          {{ $t("app.name_short") }}
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -14,25 +24,29 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-auto">
             <li class="nav-item">
-              <router-link to="/profiles" class="nav-link">{{
-                $t("profiles.page")
-              }}</router-link>
+              <router-link to="/profiles" class="nav-link fs-5">
+                <span class="border-end border-2 pe-2">
+                  {{ $t("profiles.page") }}
+                </span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/resources" class="nav-link">{{
-                $t("resources.page")
-              }}</router-link>
+              <router-link to="/resources" class="nav-link fs-5">
+                <span class="border-end border-2 pe-2">
+                  {{ $t("resources.page") }}
+                </span>
+              </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/comments" class="nav-link">{{
-                $t("comments.page")
-              }}</router-link>
+              <router-link to="/comments" class="nav-link fs-5">
+                {{ $t("comments.page") }}
+              </router-link>
             </li>
           </ul>
 
-          <div class="d-flex">
+          <div class="d-flex ms-auto">
             <ul class="navbar-nav me-auto mb-2 mb-md-0 gap-1">
               <li class="nav-item">
                 <SearchItem />
@@ -51,7 +65,7 @@
                   <ProfileItem />
                 </template>
                 <template v-else>
-                  <router-link to="/login" class="nav-link">{{
+                  <router-link to="/login" class="nav-link fs-5">{{
                     $t("login.page")
                   }}</router-link>
                 </template>

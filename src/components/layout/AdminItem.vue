@@ -1,13 +1,16 @@
 <template>
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown fs-5">
     <a
-      class="nav-link dropdown-toggle"
+      class="nav-link"
       href="#"
       role="button"
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <i class="bi bi-tools"></i>
+      <span class="border-end border-2 pe-3">
+        <i class="bi bi-tools"></i>
+        <i class="ms-2 dropdown-toggle"></i>
+      </span>
     </a>
     <ul class="dropdown-menu">
       <li>

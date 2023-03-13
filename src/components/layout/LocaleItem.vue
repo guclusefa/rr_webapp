@@ -1,14 +1,16 @@
 <template>
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown fs-5">
     <a
-      class="nav-link dropdown-toggle"
+      class="nav-link"
       href="#"
       role="button"
       data-bs-toggle="dropdown"
       aria-expanded="false"
     >
-      <span class="fi fi-fr" v-if="selectedLocale === 'fr'"></span>
-      <span class="fi fi-gb" v-else></span>
+      <span class="border-end border-2 pe-3">
+        <i class="bi bi-translate"></i> {{ selectedLocale.toUpperCase() }}
+        <i class="ms-2 dropdown-toggle"></i>
+      </span>
     </a>
     <ul class="dropdown-menu">
       <li v-for="(locale, i) in locales" :key="`locale-${i}`">
