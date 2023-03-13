@@ -2,12 +2,10 @@
   <template v-if="profiles.length > 0 && profilesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="col">
-        <h5>
-          {{ $t("profiles.meta", profilesMeta) }}
-        </h5>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <h5 v-html="$t('profiles.meta', profilesMeta)" />
       </div>
-      <div class="col">
+      <div class="col col-sm col-md col-lg col-xl">
         <div class="float-end">
           <UserFilterButton />
         </div>
@@ -34,10 +32,10 @@
   <template v-else>
     <!-- Meta -->
     <div class="row mb-4" v-if="profilesMeta.total === 0">
-      <div class="col">
+      <div class="col col-sm col-md col-lg col-xl">
         <NoResultMessage />
       </div>
-      <div class="col">
+      <div class="col col-sm col-md col-lg col-xl">
         <div class="float-end">
           <UserFilterButton />
         </div>

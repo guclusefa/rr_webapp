@@ -1,4 +1,5 @@
 // Layout
+// Body
 body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
@@ -6,8 +7,15 @@ body {
     flex-direction: column;
 }
 
+// Footer
 footer {
     margin-top: auto;
+}
+
+// Navs
+.nav-tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 // Scroll bar
@@ -27,8 +35,15 @@ footer {
     background: #555;
 }
 
-
-.nav-tabs {
-    overflow-x: auto;
-    overflow-y: hidden;
+// Cards
+.card {
+    h5 {
+        font-weight: 600;
+    }
+    &:hover {
+        box-shadow: 0 0 15px rgba(33,33,33,.2);
+        img {
+            filter: brightness(0.8);
+        }
+    }
 }

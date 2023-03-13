@@ -1,8 +1,8 @@
 <template>
   <div class="dropdown">
-    <button class="btn btn-primary" data-bs-toggle="dropdown">
-      <i class="bi bi-three-dots-vertical"></i>
-    </button>
+
+      <i class="bi bi-three-dots-vertical cursor-pointer" data-bs-toggle="dropdown"></i>
+ 
     <ul class="dropdown-menu dropdown-menu-end">
       <li>
         <a

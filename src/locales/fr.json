@@ -26,7 +26,7 @@
     "search_no_results": "Aucun résultat pour '{query}'",
     "search_results": "Résultats de la recherche pour '{query}'",
     "search_results_min_length": "Veuillez entrer au moins {min} caractères pour lancer une recherche",
-    "total_results": "{total} résultat(s) trouvé(s)",
+    "total_results": "<b>{total}</b> résultat(s) trouvé(s)",
     "see_more": "Voir plus",
     "not_authorized": "Vous n'êtes pas autorisé à accéder à cette page",
     "name_required": "Veuillez entrer un nom"
@@ -185,7 +185,7 @@
     "title": "Les profils",
     "see_profile": "Voir le profil",
     "load_more": "Charger plus de profils",
-    "meta": "Affichage de {end} profils sur un total de {total} profils",
+    "meta": "Affichage de <b>{end}</b> profils sur un total de <b>{total}</b> profils",
     "search": "Rechercher un profil",
     "search_placeholder": "Recherche par nom d'utilisateur, prénom, ou nom",
     "certified": "Certification des profils",
@@ -276,7 +276,7 @@
     "title": "Les ressources",
     "see_resource": "Voir la ressource",
     "load_more": "Charger plus de ressources",
-    "meta": "Affichage de {end} ressources sur un total de {total} ressources",
+    "meta": "Affichage de <b>{end}</b> ressources sur un total de <b>{total}</b> ressources",
     "search": "Rechercher une ressource",
     "search_placeholder": "Recherche par titre, description, ou tags",
     "verified": "Vérification des ressources",
@@ -321,7 +321,7 @@
     "title": "Les commentaires",
     "see_comment": "Voir le commentaire",
     "load_more": "Charger plus de commentaires",
-    "meta": "Affichage de {end} commentaires sur un total de {total} commentaires",
+    "meta": "Affichage de <b>{end}</b> commentaires sur un total de <b>{total}</b> commentaires",
     "search": "Rechercher un commentaire",
     "search_placeholder": "Recherche par contenu",
     "order": "Ordre d'affichage des commentaires",
@@ -370,7 +370,7 @@
     "bans_title": "Bannissements"
   },
   "categories": {
-    "meta": "Affichage de {end} catégories sur un total de {total} catégories",
+    "meta": "Affichage de <b>{end}</b> catégories sur un total de <b>{total}</b> catégories",
     "load_more": "Charger plus de catégories",
     "name": "Nom",
     "createdAt": "Date de création",
@@ -389,7 +389,7 @@
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette catégorie ? Toutes les données associées seront perdues. Cette action est irréversible."
   },
   "relations": {
-    "meta": "Affichage de {end} relations sur un total de {total} relations",
+    "meta": "Affichage de <b>{end}</b> relations sur un total de <b>{total}</b> relations",
     "load_more": "Charger plus de relations",
     "name": "Nom",
     "createdAt": "Date de création",
@@ -408,7 +408,7 @@
     "delete_confirmation": "Êtes-vous sûr de vouloir supprimer cette relation ? Toutes les données associées seront perdues. Cette action est irréversible."
   },
   "bans": {
-    "meta": "Affichage de {end} bannissements sur un total de {total} bannissements",
+    "meta": "Affichage de <b>{end}</b> bannissements sur un total de <b>{total}</b> bannissements",
     "load_more": "Charger plus de bannissements",
     "user": "Utilisateur",
     "author": "Auteur",

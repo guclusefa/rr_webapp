@@ -100,3 +100,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.router-link-active {
+  color: $primary !important;
+  font-weight: bold;
+}
+</style>

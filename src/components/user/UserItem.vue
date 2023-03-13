@@ -13,12 +13,16 @@
         <div class="col">
           <div class="row">
             <div class="col">
-              <div class="text-strong pb-1" v-if="profile.username">
-                @{{ profile.username }}
+              <h5 class="card-title">
+                <router-link
+                  :to="{ name: 'profile', params: { id: profile.id } }"
+                >
+                  @{{ profile.username }}
+                </router-link>
                 <span v-if="profile.isCertified">
                   <i class="bi bi-patch-check-fill ms-1"></i>
                 </span>
-              </div>
+              </h5>
             </div>
             <div class="col" v-if="canEdit">
               <div class="float-end">

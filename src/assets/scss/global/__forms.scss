@@ -1,17 +1,18 @@
 // Forms
-.form-check-input[type=checkbox] {
-    border-radius: 0;
-}
-
 label.required:after {
     content: "*";
     color: red;
 }
-
+.form-check-input[type=checkbox] {
+    border-radius: 0;
+}
+// Buttons
 .btn-primary {
-    color: #fff;
+    color: #fff !important;
+    font-weight: 700;
+    letter-spacing: 1px;
 
-    &:hover {
-        color: #fff;
+    &:hover, &:focus {
+        color: #fff !important;
     }
 }
