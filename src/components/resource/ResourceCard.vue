@@ -6,10 +6,17 @@
         controls
         v-if="resource.media.includes('.mp4')"
       />
-      <img :src="resource.media" class="card-img-top" v-else />
+      <router-link
+        :to="{ name: 'resource', params: { id: resource.id } }"
+        v-else
+      >
+        <img :src="resource.media" class="card-img-top" />
+      </router-link>
     </template>
     <template v-else>
-      <img src="@/assets/images/resource/default.png" class="card-img-top" />
+      <router-link :to="{ name: 'resource', params: { id: resource.id } }">
+        <img src="@/assets/images/resource/default.png" class="card-img-top" />
+      </router-link>
     </template>
     <div class="card-body">
       <div class="row">
@@ -54,7 +61,7 @@
           {{ category.name }}
         </span>
       </p>
-<!--       <p class="card-text" v-if="resource.content">
+      <!--       <p class="card-text" v-if="resource.content">
         {{ resource.content }}
       </p> -->
       <p class="card-text" v-if="resource.author">
@@ -108,7 +115,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user", "isAuthenticated","isModerator"]),
+    ...mapGetters(["user", "isAuthenticated", "isModerator"]),
   },
   methods: {
     isOwner() {

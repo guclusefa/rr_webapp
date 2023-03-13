@@ -2,13 +2,11 @@
   <template v-if="resources.length > 0 && resourcesMeta.total > 0">
     <!-- Meta -->
     <div class="row mb-4">
-      <div class="col">
-        <h5>
-          {{ $t("resources.meta", resourcesMeta) }}
-        </h5>
-      </div>
-      <div class="col">
-        <div class="float-end">
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <h5 v-html="$t('resources.meta', resourcesMeta)" />
+        </div>
+        <div class="order-last order-sm-0">
           <ResourceFilterButton />
         </div>
       </div>
@@ -32,10 +30,10 @@
   <template v-else>
     <!-- Meta -->
     <div class="row mb-4" v-if="resourcesMeta.total === 0">
-      <div class="col">
+      <div class="col col-sm col-md col-lg col-xl">
         <NoResultMessage />
       </div>
-      <div class="col">
+      <div class="col col-sm col-md col-lg col-xl">
         <div class="float-end">
           <ResourceFilterButton />
         </div>

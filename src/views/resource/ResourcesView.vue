@@ -4,13 +4,15 @@
     <section class="mb-5">
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center">
+          <div class="d-flex flex-wrap align-items-center">
             <div class="me-auto">
-              <h1>{{ $t("resources.title") }}</h1>
+              <h1 class="mb-0">{{ $t("resources.title") }}</h1>
             </div>
-            <span class="ms-2" v-if="isAuthenticated">
-              <AddResourceButton />
-            </span>
+            <div class="order-last order-sm-0">
+              <span v-if="isAuthenticated">
+                <AddResourceButton />
+              </span>
+            </div>
           </div>
         </div>
       </div>
