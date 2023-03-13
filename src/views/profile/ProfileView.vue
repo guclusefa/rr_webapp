@@ -168,6 +168,7 @@ export default {
   computed: {
     ...mapGetters([
       "user",
+      "isAdmin",
       "profile",
       "resourcesParamsDefault",
       "commentsParamsDefault",
@@ -182,7 +183,7 @@ export default {
       return this.user.id == this.id;
     },
     canEdit() {
-      return this.isOwner;
+      return this.isOwner || this.isAdmin;
     },
   },
   methods: {
