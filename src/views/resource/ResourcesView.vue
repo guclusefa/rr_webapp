@@ -44,6 +44,7 @@ export default {
       const params = {
         ...this.resourcesParamsDefault,
         search: this.searchQuery,
+        verified: 1,
       };
       // Request
       const response = await this.setResources(params);

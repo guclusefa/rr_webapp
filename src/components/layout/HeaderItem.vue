@@ -37,7 +37,7 @@
               <li class="nav-item">
                 <SearchItem />
               </li>
-              <li class="nav-item" v-if="isModerator">
+              <li class="nav-item" v-if="isAdmin">
                 <AdminItem />
               </li>
               <li class="nav-item">
@@ -75,7 +75,7 @@ import ProfileItem from "@/components/layout/ProfileItem.vue";
 export default {
   name: "HeaderItem",
   computed: {
-    ...mapGetters(["isAuthenticated", "isModerator"]),
+    ...mapGetters(["isAuthenticated", "isAdmin"]),
   },
   components: {
     SearchItem,

@@ -93,7 +93,7 @@
             {{ $t("profile.promote") }}
           </a>
         </li>
-        <li>
+        <li v-if="!isProfileSuperAdmin">
           <a
             class="dropdown-item"
             href="#"
@@ -145,6 +145,9 @@ export default {
   },
   computed: {
     ...mapGetters(["isAdmin", "isSuperAdmin"]),
+    isProfileSuperAdmin() {
+      return this.profile.roles[0] == "ROLE_SUPER_ADMIN";
+    },
   },
   methods: {
     showUserActionModal(type) {

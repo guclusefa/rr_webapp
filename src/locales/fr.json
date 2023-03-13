@@ -204,6 +204,9 @@
     "filter": "Filtrer les profils",
     "no_results": "Aucun profil n'a été trouvé"
   },
+  "profile-verify": {
+    "page": "Vérification du profil"
+  },
   "resource": {
     "page": "Ressource",
     "title": "Ressource : {title}",

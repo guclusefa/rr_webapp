@@ -4,7 +4,7 @@
       <i class="bi bi-three-dots-vertical"></i>
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
-      <li>
+      <li v-if="this.isModerator">
         <a
           class="dropdown-item"
           href="#"
@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import { showModal } from "@/services/modals";
 
 import CommentEdit from "@/components/comment/actions/CommentEdit";
@@ -43,6 +45,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  computed: {
+    ...mapGetters(["isModerator"]),
   },
   methods: {
     showCommentActionsModal(type) {

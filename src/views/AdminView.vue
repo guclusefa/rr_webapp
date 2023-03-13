@@ -117,14 +117,13 @@ import BanList from "@/components/admin/ban/BanList";
 export default {
   name: "AdminView",
   created() {
-    if (!this.isModerator) {
+    if (!this.isAdmin) {
       addErrorToast(this.$t("app.not_authorized"));
       this.$router.push("/");
     }
   },
   computed: {
     ...mapGetters([
-      "isModerator",
       "isAdmin",
       "isSuperAdmin",
       "profiesParamsDefault",

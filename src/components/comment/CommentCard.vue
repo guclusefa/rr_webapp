@@ -74,7 +74,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user"]),
+    ...mapGetters(["user", "isModerator"]),
   },
   methods: {
     isOwner() {
@@ -87,7 +87,7 @@ export default {
       return this.comment.author.id === this.user.id;
     },
     canEdit() {
-      return this.isOwner();
+      return this.isOwner() || this.isModerator;
     },
     showCommentReplyModal() {
       showModal(
