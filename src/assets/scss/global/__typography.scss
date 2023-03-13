@@ -7,6 +7,12 @@ a {
     }
 }
 
+.link {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 .pre-line {
     white-space: pre-line;
 }
@@ -15,8 +21,28 @@ a {
     cursor: pointer;
 }
 
-.link {
-    &:hover {
-        text-decoration: underline;
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+
+    &:before {
+        content: "";
+        display: inline-block;
+        background-image: url(@/assets/images/icons/ico-bar.svg);
+        width: 50px;
+        height: 10px;
+        vertical-align: middle;
+        margin-right: 10px;
+        
+
     }
 }
