@@ -10,7 +10,19 @@
           </div>
         </div>
       </div>
-      <ForgotPasswordForm />
+      <div class="row">
+        <div
+          class="col-lg-6 d-flex justify-content-center align-items-center py-5 border shadow-sm d-none d-lg-block"
+        >
+          <img
+            src="@/assets/images/icons/ico-forgot-password.svg"
+            class="img-fluid"
+          />
+        </div>
+        <div class="col-lg-6 p-lg-5 border shadow-sm no-shadow-lg">
+          <ForgotPasswordForm />
+        </div>
+      </div>
     </section>
   </section>
 </template>

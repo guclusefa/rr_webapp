@@ -54,7 +54,7 @@
   },
   "login": {
     "page": "Connexion",
-    "title": "Connexion à votre compte",
+    "title": "Connexion",
     "remember_me": "Se souvenir de moi",
     "forgot_password": "Mot de passe oublié ?",
     "register": "Pas encore inscrit ?",
@@ -73,6 +73,7 @@
   "forgot-password": {
     "page": "Mot de passe oublié",
     "title": "Mot de passe oublié",
+    "login": "Je me souviens de mon mot de passe",
     "submit": "Envoyer le lien de réinitialisation"
   },
   "forgot-password-reset": {
@@ -82,7 +83,7 @@
   },
   "logout": {
     "page": "Déconnexion",
-    "title": "Déconnexion de votre compte",
+    "title": "Déconnexion",
     "submit": "Se déconnecter",
     "success": "Vous vous êtes déconnecté avec succès",
     "error": "Vous n'êtes pas connecté"
@@ -182,7 +183,7 @@
   },
   "profiles": {
     "page": "Profils",
-    "title": "Les profils",
+    "title": "Profils",
     "see_profile": "Voir le profil",
     "load_more": "Charger plus de profils",
     "meta": "Affichage de <b>{end}</b> profils sur un total de <b>{total}</b> profils",
@@ -273,7 +274,7 @@
   },
   "resources": {
     "page": "Ressources",
-    "title": "Les ressources",
+    "title": "Ressources",
     "see_resource": "Voir la ressource",
     "load_more": "Charger plus de ressources",
     "meta": "Affichage de <b>{end}</b> ressources sur un total de <b>{total}</b> ressources",
@@ -318,7 +319,7 @@
   },
   "comments": {
     "page": "Commentaires",
-    "title": "Les commentaires",
+    "title": "Commentaires",
     "see_comment": "Voir le commentaire",
     "load_more": "Charger plus de commentaires",
     "meta": "Affichage de <b>{end}</b> commentaires sur un total de <b>{total}</b> commentaires",

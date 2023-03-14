@@ -26,6 +26,11 @@
             :validate="validatePasswordConfirmation"
           />
         </div>
+        <div class="mb-3">
+          <router-link to="/login">
+            {{ $t("forgot-password-reset.login") }}
+          </router-link>
+        </div>
         <!-- Submit -->
         <div class="mb-3">
           <SubmitButton
@@ -60,8 +65,8 @@ export default {
     return {
       body: {
         password: "",
-        password_confirmation: ""
-      }
+        password_confirmation: "",
+      },
     };
   },
   methods: {

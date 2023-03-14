@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 col-sm-12">
+          <div class="col">
             <!-- Username -->
             <div class="mb-3">
               <InputText
@@ -47,7 +47,9 @@
               />
             </div>
           </div>
-          <div class="col-md-4 col-sm-12">
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
             <!-- First name -->
             <div class="mb-3">
               <InputText
@@ -59,7 +61,7 @@
               />
             </div>
           </div>
-          <div class="col-md-4 col-sm-12">
+          <div class="col-md-6 col-sm-12">
             <!-- Last name -->
             <div class="mb-3">
               <InputText
@@ -153,7 +155,7 @@ export default {
         lastName: "",
         password: "",
         password_confirmation: "",
-        accept_terms: false
+        accept_terms: false,
       },
     };
   },

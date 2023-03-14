@@ -14,6 +14,11 @@
             :validate="validateEmail"
           />
         </div>
+        <div class="mb-3">
+          <router-link to="/login">
+            {{ $t("forgot-password.login") }}
+          </router-link>
+        </div>
         <!-- Submit -->
         <div class="mb-3">
           <SubmitButton
@@ -41,8 +46,8 @@ export default {
   data() {
     return {
       body: {
-        email: ""
-      }
+        email: "",
+      },
     };
   },
   methods: {

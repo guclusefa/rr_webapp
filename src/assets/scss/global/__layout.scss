@@ -40,10 +40,19 @@ footer {
     h5 {
         font-weight: 600;
     }
+
     &:hover {
-        box-shadow: 0 0 15px rgba(33,33,33,.2);
+        box-shadow: 0 0 15px rgba(33, 33, 33, .2);
+
         img {
             filter: brightness(0.8);
         }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .no-shadow-lg {
+        box-shadow: none !important;
+        border: none !important;
     }
 }
