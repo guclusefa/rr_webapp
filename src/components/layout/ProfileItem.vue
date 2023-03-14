@@ -1,5 +1,5 @@
 <template>
-  <li class="nav-item dropdown fs-5">
+  <li class="nav-item dropdown fs-5 profile-item">
     <a
       class="nav-link dropdown-toggle"
       href="#"

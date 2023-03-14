@@ -1,14 +1,16 @@
 <template>
-  <div class="nav-link fs-5">
-    <span class="border-end border-2 pe-3">
-      <i
-        class="bi bi-search cursor-pointer"
-        @click="showSearchModal"
-        data-bs-toggle="modal"
-        data-bs-target="#modalDialog"
-      ></i>
-    </span>
-  </div>
+  <li class="nav-item fs-5">
+    <a class="nav-link" href="#" role="button">
+      <span class="border-end border-2 pe-3">
+        <i
+          class="bi bi-search cursor-pointer"
+          @click="showSearchModal"
+          data-bs-toggle="modal"
+          data-bs-target="#modalDialog"
+        ></i>
+      </span>
+    </a>
+  </li>
 </template>
 
 <script>

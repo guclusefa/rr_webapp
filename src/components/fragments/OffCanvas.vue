@@ -1,25 +1,25 @@
 <template>
-  <aside
+  <div
     class="offcanvas offcanvas-start"
     data-bs-scroll="true"
     data-bs-backdrop="false"
     tabindex="-1"
     id="offcanvasScrolling"
   >
-    <div class="offcanvas-header border-bottom">
+    <div class="offcanvas-header bg-primary">
       <h5 class="offcanvas-title">
         {{ offCanvas.title }}
       </h5>
-      <button
-        type="button"
-        class="btn-close"
+      <i
+        class="bi bi-x-lg cursor-pointer fs-5"
+        id="offCanvasCloseButton"
         data-bs-dismiss="offcanvas"
-      ></button>
+      ></i>
     </div>
     <div class="offcanvas-body">
       <component :is="offCanvas.body" v-bind="offCanvas.props" />
     </div>
-  </aside>
+  </div>
 </template>
 
 <script>

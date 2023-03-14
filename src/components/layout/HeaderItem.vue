@@ -1,6 +1,6 @@
 <template>
   <header class="mb-3">
-    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-xl navbar-light bg-light shadow-sm">
       <div class="container">
         <router-link
           to="/"
@@ -20,8 +20,9 @@
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarCollapse"
+          @click="toggleNavbarIcon"
         >
-          <span class="navbar-toggler-icon"></span>
+          <i class="bi bi-list-task"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-auto">
@@ -48,28 +49,24 @@
 
           <div class="d-flex ms-auto">
             <ul class="navbar-nav me-auto mb-2 mb-md-0 gap-1">
-              <li class="nav-item">
-                <SearchItem />
-              </li>
-              <li class="nav-item" v-if="isAdmin">
-                <AdminItem />
-              </li>
-              <li class="nav-item">
-                <ThemeItem />
-              </li>
-              <li class="nav-item">
-                <LocaleItem />
-              </li>
-              <li class="nav-item">
-                <template v-if="isAuthenticated">
-                  <ProfileItem />
-                </template>
-                <template v-else>
+              <SearchItem />
+
+              <AdminItem v-if="isAdmin" />
+
+              <ThemeItem />
+
+              <LocaleItem />
+
+              <template v-if="isAuthenticated">
+                <ProfileItem />
+              </template>
+              <template v-else>
+                <li class="nav-item profile-item">
                   <router-link to="/login" class="nav-link fs-5">{{
                     $t("login.page")
                   }}</router-link>
-                </template>
-              </li>
+                </li>
+              </template>
             </ul>
           </div>
         </div>
@@ -90,6 +87,18 @@ export default {
   name: "HeaderItem",
   computed: {
     ...mapGetters(["isAuthenticated", "isAdmin"]),
+  },
+  methods: {
+    toggleNavbarIcon() {
+      const navbarIcon = document.querySelector(".navbar-toggler i");
+      if (navbarIcon.classList.contains("bi-list-task")) {
+        navbarIcon.classList.remove("bi-list-task");
+        navbarIcon.classList.add("bi-x-lg");
+      } else {
+        navbarIcon.classList.remove("bi-x-lg");
+        navbarIcon.classList.add("bi-list-task");
+      }
+    },
   },
   components: {
     SearchItem,

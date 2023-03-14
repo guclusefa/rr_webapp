@@ -2,17 +2,17 @@
   <div class="modal fade" id="modalDialog">
     <div class="modal-dialog" :class="modal.large ? 'modal-lg' : ''">
       <div class="modal-content">
-        <div class="modal-header" v-if="modal.title">
-          <h1 class="modal-title fs-5">
+        <div class="modal-header bg-primary" v-if="modal.title">
+          <h5 class="modal-title fs-5">
             {{ modal.title }}
-          </h1>
-          <button
+          </h5>
+
+          <i
+            class="bi bi-x-lg cursor-pointer fs-5"
             id="modalDialogCloseButton"
-            type="button"
-            class="btn-close"
             data-bs-dismiss="modal"
             data-bs-target="#modalDialog"
-          ></button>
+          ></i>
         </div>
         <div class="modal-body" v-if="modal.body">
           <component
