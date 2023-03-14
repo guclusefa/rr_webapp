@@ -6,7 +6,7 @@
     data-bs-toggle="modal"
     data-bs-target="#modalDialog"
   >
-    <i class="bi bi-file-earmark-plus"></i>
+    <i class="bi bi-hammer"></i>
     {{ $t("bans.create") }}
   </button>
 </template>

@@ -6,7 +6,7 @@
     data-bs-toggle="modal"
     data-bs-target="#modalDialog"
   >
-    <i class="bi bi-file-earmark-plus"></i>
+    <i class="bi bi-bookmark-heart"></i>
     {{ $t("relations.create") }}
   </button>
 </template>

@@ -41,8 +41,7 @@ export default {
         body: null,
         props: {},
       });
-      const offcanvas = document.getElementById("offcanvasScrolling");
-      const offcanvasClose = offcanvas.querySelector(".btn-close");
+      const offcanvasClose = document.getElementById("offCanvasCloseButton");
       offcanvasClose.click();
     },
   },
