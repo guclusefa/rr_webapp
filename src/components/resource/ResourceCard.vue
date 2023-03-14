@@ -54,7 +54,7 @@
       </p>
       <p class="card-text" v-if="resource.categories">
         <span
-          class="badge bg-secondary me-2"
+          class="badge bg-gray me-2"
           v-for="category in resource.categories"
           :key="category.id"
         >

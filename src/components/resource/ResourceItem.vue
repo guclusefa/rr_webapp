@@ -53,7 +53,7 @@
             </div>
             <div class="mb-2" v-if="resource.categories">
               <span
-                class="badge bg-secondary me-1"
+                class="badge bg-gray me-1"
                 v-for="category in resource.categories"
                 :key="category.id"
               >

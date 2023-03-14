@@ -1,23 +1,27 @@
 <template>
-  <div class="d-flex align-items-center">
-    <button class="btn btn-sm" :focus-visible="false" :focus="false">
-      <i
-        class="bi bi-bar-chart-fill me-1"
-        @click="redirect"
-        v-if="resource.isConsulted"
-      ></i>
-      <i class="bi bi-bar-chart" @click="redirect" v-else></i>
-    </button>
-    <a
-      v-if="resource.consults > 0"
-      href="#"
-      @click="showResourceConsults()"
-      data-bs-toggle="modal"
-      data-bs-target="#modalDialog"
-    >
-      {{ resource.consults }}
-    </a>
-    <span v-else>{{ resource.consults }}</span>
+  <div class="d-flex align-items-center gap-1">
+    <div>
+      <button class="btn btn-sm" :focus-visible="false" :focus="false">
+        <i
+          class="bi bi-bar-chart-fill me-1"
+          @click="redirect"
+          v-if="resource.isConsulted"
+        ></i>
+        <i class="bi bi-bar-chart" @click="redirect" v-else></i>
+      </button>
+    </div>
+    <div>
+      <a
+        v-if="resource.consults > 0"
+        href="#"
+        @click="showResourceConsults()"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDialog"
+      >
+        {{ resource.consults }}
+      </a>
+      <span v-else>{{ resource.consults }}</span>
+    </div>
   </div>
 </template>
 

@@ -1,28 +1,32 @@
 <template>
-  <div class="d-flex align-items-center">
-    <button
-      class="btn btn-sm"
-      :focus-visible="false"
-      :focus="false"
-      :disabled="loading || !isAuthenticated"
-    >
-      <i
-        class="bi bi-heart-fill text-danger me-1"
-        @click="toggleLike"
-        v-if="isLiked"
-      ></i>
-      <i class="bi bi-heart me-1" @click="toggleLike" v-else></i>
-    </button>
-    <a
-      v-if="likes > 0"
-      href="#"
-      @click="showResourceLikes()"
-      data-bs-toggle="modal"
-      data-bs-target="#modalDialog"
-    >
-      {{ likes }}
-    </a>
-    <span v-else>{{ likes }}</span>
+  <div class="d-flex align-items-center gap-1">
+    <div>
+      <button
+        class="btn btn-sm"
+        :focus-visible="false"
+        :focus="false"
+        :disabled="loading || !isAuthenticated"
+      >
+        <i
+          class="bi bi-heart-fill text-danger me-1"
+          @click="toggleLike"
+          v-if="isLiked"
+        ></i>
+        <i class="bi bi-heart me-1" @click="toggleLike" v-else></i>
+      </button>
+    </div>
+    <div>
+      <a
+        v-if="likes > 0"
+        href="#"
+        @click="showResourceLikes()"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDialog"
+      >
+        {{ likes }}
+      </a>
+      <span v-else>{{ likes }}</span>
+    </div>
   </div>
 </template>
 

@@ -315,7 +315,8 @@
     "relations_placeholder_select": "Toutes les relations",
     "categories": "Catégories des ressources",
     "categories_placeholder_select": "Toutes les catégories",
-    "create": "Créer une ressource"
+    "create": "Créer une ressource",
+    "load_more_likes": "Voir plus"
   },
   "comments": {
     "page": "Commentaires",

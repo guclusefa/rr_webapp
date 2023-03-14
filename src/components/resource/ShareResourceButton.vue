@@ -1,28 +1,32 @@
 <template>
-  <div class="d-flex align-items-center">
-    <button
-      class="btn btn-sm"
-      :focus-visible="false"
-      :focus="false"
-      :disabled="loading || !isAuthenticated"
-    >
-      <i
-        class="bi bi-repeat text-success me-1"
-        @click="toggleLike"
-        v-if="isShared"
-      ></i>
-      <i class="bi bi-repeat" @click="toggleLike" v-else></i>
-    </button>
-    <a
-      v-if="shares > 0"
-      href="#"
-      @click="showResourceShares()"
-      data-bs-toggle="modal"
-      data-bs-target="#modalDialog"
-    >
-      {{ shares }}
-    </a>
-    <span v-else>{{ shares }}</span>
+  <div class="d-flex align-items-center gap-1">
+    <div>
+      <button
+        class="btn btn-sm"
+        :focus-visible="false"
+        :focus="false"
+        :disabled="loading || !isAuthenticated"
+      >
+        <i
+          class="bi bi-repeat text-success me-1 fw-bold"
+          @click="toggleLike"
+          v-if="isShared"
+        ></i>
+        <i class="bi bi-repeat" @click="toggleLike" v-else></i>
+      </button>
+    </div>
+    <div>
+      <a
+        v-if="shares > 0"
+        href="#"
+        @click="showResourceShares()"
+        data-bs-toggle="modal"
+        data-bs-target="#modalDialog"
+      >
+        {{ shares }}
+      </a>
+      <span v-else>{{ shares }}</span>
+    </div>
   </div>
 </template>
 

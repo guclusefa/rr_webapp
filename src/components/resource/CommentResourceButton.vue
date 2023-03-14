@@ -1,13 +1,17 @@
 <template>
-  <div class="d-flex align-items-center">
-    <button class="btn btn-sm" @click="redirect">
-      <i
-        class="bi bi-chat-fill text-primary me-1"
-        v-if="resource.isCommented"
-      ></i>
-      <i class="bi bi-chat me-1" v-else></i>
-    </button>
-    {{ resource.comments }}
+  <div class="d-flex align-items-center gap-1">
+    <div>
+      <button class="btn btn-sm" @click="redirect">
+        <i
+          class="bi bi-chat-fill text-primary me-1"
+          v-if="resource.isCommented"
+        ></i>
+        <i class="bi bi-chat me-1" v-else></i>
+      </button>
+    </div>
+    <div>
+      {{ resource.comments }}
+    </div>
   </div>
 </template>
 
