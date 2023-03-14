@@ -1,7 +1,7 @@
 <template>
   <template v-if="profiles.length > 0 && profilesMeta.total > 0">
     <!-- Meta -->
-    <div class="row mb-4">
+    <div class="row mb-4" v-if="showOptions">
       <div class="d-flex flex-wrap align-items-center">
         <div class="me-auto">
           <h5 v-html="$t('profiles.meta', profilesMeta)" />
@@ -20,7 +20,7 @@
       </div>
     </div>
     <!-- Load more -->
-    <div class="row" v-if="profilesMeta.next">
+    <div class="row" v-if="profilesMeta.next && showOptions">
       <div class="col">
         <form @submit.prevent="fetchMoreProfiles">
           <SubmitButton :label="'profiles.load_more'" />
@@ -31,7 +31,7 @@
 
   <template v-else>
     <!-- Meta -->
-    <div class="row mb-4" v-if="profilesMeta.total === 0">
+    <div class="row mb-4" v-if="profilesMeta.total === 0 && showOptions">
       <div class="d-flex flex-wrap align-items-center">
         <div class="me-auto">
           <NoResultMessage />
@@ -59,6 +59,12 @@ import NoResultMessage from "@/components/fragments/NoResultMessage.vue";
 
 export default {
   name: "UserList",
+  props: {
+    showOptions: {
+      type: Boolean,
+      default: true,
+    },
+  },
   computed: {
     ...mapGetters(["profiles", "profilesParams", "profilesMeta"]),
   },
