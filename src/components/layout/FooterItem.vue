@@ -1,43 +1,37 @@
 <template>
-  <div class="bg-light">
+  <footer class="footer py-3 bg-light">
     <div class="container">
-      <footer
-        class="d-flex flex-wrap justify-content-between align-items-center py-2 my-2"
-      >
-        <p class="col-md-4 mb-0 text-muted">
-          {{ $t("footer.copyright", { year: currentYear }) }}
-        </p>
-
-        <ul class="nav col-md-4 justify-content-end">
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-muted hotfix"
-              ><router-link to="/legal">{{
-                $t("legal.page")
-              }}</router-link></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-muted"
-              ><router-link to="/accessibility">{{
-                $t("accessibility.page")
-              }}</router-link></a
-            >
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link px-2 text-muted"
-              ><router-link to="/about">{{
-                $t("about.page")
-              }}</router-link></a
-            >
-          </li>
-        </ul>
-      </footer>
+      <div class="d-flex flex-wrap align-items-center">
+        <div class="me-auto">
+          <span class="text-muted">
+            {{ $t("footer.copyright", { year: currentYear }) }}
+          </span>
+        </div>
+        <div class="order-last order-sm-0">
+          <div class="d-flex gap-2 ms-auto footer-links">
+            <div>
+              <span class="text-muted">
+                <router-link to="/legal">{{ $t("legal.page") }}</router-link>
+              </span>
+            </div>
+            <div>
+              <span class="text-muted">
+                <router-link to="/accessibility">{{
+                  $t("accessibility.page")
+                }}</router-link>
+              </span>
+            </div>
+            <div>
+              <span class="text-muted">
+                <router-link to="/about">{{ $t("about.page") }}</router-link>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
 </template>
-
-
-
 
 <script>
 export default {
@@ -49,11 +43,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-@media (max-width: 768px) {
-  .hotfix {
-    margin-left: -0.5rem;
-  }
-}
-</style>
