@@ -27,7 +27,7 @@ const addErrorToast = (error) => {
         if (Array.isArray(error.response.data.errors)) {
             message = error.response.data.errors[0].property_path + ": " + error.response.data.errors[0].message;
             for (let i = 1; i < error.response.data.errors.length; i++) {
-                let newMessage = error.response.data.errors[i].property_path + ": " + error.response.data.errors[i].message;
+                let newMessage = error.response.data.errors[i].message;
                 addErrorToast(newMessage);
             }
         } else {
