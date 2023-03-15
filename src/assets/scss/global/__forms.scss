@@ -16,3 +16,16 @@ label.required:after {
         color: #fff !important;
     }
 }
+
+.btn-outline-primary {
+    color: $primary !important;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-color: $primary !important;
+
+    &:hover, &:focus {
+        color: #fff !important;
+        background-color: $primary !important;
+        border-color: $primary !important;
+    }
+}
