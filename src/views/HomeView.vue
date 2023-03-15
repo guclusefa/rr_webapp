@@ -75,7 +75,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { addErrorToast } from "@/services/toasts";
 
 import ResourceList from "@/components/resource/ResourceList";
 import UserList from "@/components/user/UserList";
@@ -99,8 +98,6 @@ export default {
       if (response.status >= 200 && response.status < 300) {
         return;
       }
-      // Error
-      addErrorToast(response);
     },
     ...mapActions(["setProfiles", "clearProfiles"]),
     async fetchProfiles() {
@@ -114,8 +111,6 @@ export default {
       if (response.status >= 200 && response.status < 300) {
         return;
       }
-      // Error
-      addErrorToast(response);
     },
   },
   mounted() {

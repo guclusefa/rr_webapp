@@ -40,6 +40,12 @@ const routes = [
     name: 'legal',
     component: () => import(/* webpackChunkName: "legal" */ '../views/LegalView.vue')
   },
+  // 404
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "not-found" */ '../views/404View.vue')
+  },
   {
     path: '/login',
     name: 'login',

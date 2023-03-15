@@ -43,12 +43,12 @@
           </router-link>
         </div>
         <div class="d-flex align-items-center">
-          <div class="me-3">
+          <div>
             <router-link :to="`/comment/${comment.id}`">
               {{ $t("comment.replies", { count: comment.replies }) }}
             </router-link>
           </div>
-          <div v-if="$slots.seeReplies">
+          <div v-if="$slots.seeReplies" class="ms-3">
             <slot name="seeReplies"></slot>
           </div>
         </div>

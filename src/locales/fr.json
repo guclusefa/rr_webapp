@@ -55,6 +55,11 @@
     "page": "Mentions légales & CGU",
     "title": "Mentions légales & CGU"
   },
+  "not-found": {
+    "page": "Page introuvable",
+    "title": "Page introuvable",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée."
+  },
   "login": {
     "page": "Connexion",
     "title": "Connexion",
