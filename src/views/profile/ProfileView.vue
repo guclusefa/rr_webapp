@@ -25,7 +25,7 @@
       <!-- Title -->
       <div class="row mb-3">
         <div class="col">
-          <div class="d-flex align-items-center">
+          <div class="d-flex flex-wrap align-items-center">
             <div class="me-auto">
               <h1>
                 {{
@@ -35,9 +35,11 @@
                 }}
               </h1>
             </div>
-            <span class="ms-2" v-if="isOwner">
-              <AddResourceButton />
-            </span>
+            <div class="order-last order-sm-0">
+              <span v-if="isOwner">
+                <AddResourceButton />
+              </span>
+            </div>
           </div>
         </div>
       </div>

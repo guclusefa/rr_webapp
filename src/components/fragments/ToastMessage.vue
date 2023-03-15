@@ -1,7 +1,7 @@
 <template>
   <div
     ref="toastContainer"
-    class="toast-container position-absolute bottom-0 end-0 p-3"
+    class="toast-container position-fixed  bottom-0 end-0 p-3"
   ></div>
 </template>
 
@@ -67,3 +67,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.toast-container {
+  z-index: 9999;
+}
+</style>
