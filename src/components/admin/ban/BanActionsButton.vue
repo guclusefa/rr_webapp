@@ -18,7 +18,7 @@
       </li>
       <li>
         <a
-          class="dropdown-item"
+          class="dropdown-item text-danger fw-bold"
           href="#"
           @click="showBanActionsModal('deleteBanModal')"
           data-bs-toggle="modal"

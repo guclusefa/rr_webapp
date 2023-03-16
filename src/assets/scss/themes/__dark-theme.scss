@@ -97,18 +97,22 @@ body.dark {
         .text-muted {
             color: darken($txt-color, 10%) !important;
         }
+
         a {
-            color: $txt-color-light !important;
+            color: $txt-color-light;
         }
+
         .link {
             span {
                 color: $txt-color-light !important;
             }
+
             &:hover {
                 color: $txt-color-light !important;
             }
         }
-/* 
+
+        /* 
         h5 a {
             color: $primary !important;
         } */
@@ -116,15 +120,14 @@ body.dark {
 
     .text-muted,
     a {
-        color: $txt-color-light !important;
+        color: $txt-color-light;
     }
 
     .dropdown-menu {
         background-color: lighten($bg-color-light, 10%) !important;
-        color: $txt-color-light;
 
         .dropdown-item {
-            color: $txt-color-light !important;
+            color: $txt-color-light;
 
             &:hover {
                 background-color: $primary;
@@ -151,6 +154,15 @@ body.dark {
 
         .table-dark {
             color: $txt-color-light;
+        }
+
+        tr:hover {
+            background-color: lighten($bg-color-light, 10%);
+
+            td,
+            th {
+                color: $txt-color-light;
+            }
         }
     }
 

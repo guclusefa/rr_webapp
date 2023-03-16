@@ -1,6 +1,7 @@
 // Typography
 a {
     text-decoration: none;
+
     &:hover {
         text-decoration: underline;
     }
@@ -29,6 +30,11 @@ a {
     font-weight: 900;
     line-height: 1.2;
     letter-spacing: -2px;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: $primary !important;
 }
 
 .text-white {
@@ -69,4 +75,4 @@ h2 {
     h2 {
         font-size: 1.25rem;
     }
-  }
+}

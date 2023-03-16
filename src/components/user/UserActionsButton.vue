@@ -107,7 +107,7 @@
       </template>
       <li>
         <a
-          class="dropdown-item"
+          class="dropdown-item text-danger fw-bold"
           href="#"
           @click="showUserActionModal('deleteUserModal')"
           data-bs-toggle="modal"

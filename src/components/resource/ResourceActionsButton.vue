@@ -1,6 +1,9 @@
 <template>
   <div class="dropdown">
-    <i class="bi bi-three-dots-vertical cursor-pointer" data-bs-toggle="dropdown"></i>
+    <i
+      class="bi bi-three-dots-vertical cursor-pointer"
+      data-bs-toggle="dropdown"
+    ></i>
 
     <ul class="dropdown-menu dropdown-menu-end">
       <li>
@@ -62,7 +65,7 @@
       </template>
       <li>
         <a
-          class="dropdown-item"
+          class="dropdown-item text-danger fw-bold"
           href="#"
           @click="showRessourceActionModal('deleteResourceModal')"
           data-bs-toggle="modal"
