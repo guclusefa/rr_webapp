@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { addSuccessToast, addErrorToast } from "@/services/toasts";
 
 import SubmitButton from "@/components/form/SubmitButton.vue";
@@ -29,25 +29,33 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
     ...mapActions(["deleteProfile", "logout", "reloadProfiles"]),
     async deleteUserProfile() {
+      const idProfile = this.profile.id;
+      const idUser = this.user.id;
       const response = await this.deleteProfile(this.profile.id);
       if (response.status >= 200 && response.status < 300) {
+        // succes
+        addSuccessToast(response);
         // if user deletes own profile, logout
-        if (this.profile.id === this.user.id) {
+        if (idProfile == idUser) {
           this.logout();
+          this.$router.push({ name: "home" });
+          return;
         }
-        // close modal
-        this.$emit("close");
         // redirect to home
         if (this.$route.name == "profile") {
           this.$router.push({ name: "profiles" });
         } else {
+          // reload profiles
           this.reloadProfiles();
         }
-        // Success
-        addSuccessToast(response);
+        // close modal
+        this.$emit("close");
         return;
       }
       // Error
