@@ -14,7 +14,7 @@
 
     <!-- Hero section -->
     <section class="mb-5">
-      <div class="row mb-3 border-top py-3">
+      <div class="row mb-3 py-3">
         <div class="col-12 col-md-6 d-flex align-items-center">
           <div>
             <h2>{{ $t("app.name") }}</h2>

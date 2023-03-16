@@ -12,7 +12,11 @@
           @click="toggleLike"
           v-if="isLiked"
         ></i>
-        <i class="bi bi-heart me-1" @click="toggleLike" v-else></i>
+        <i
+          class="bi bi-heart me-1 dark-txt-white"
+          @click="toggleLike"
+          v-else
+        ></i>
       </button>
     </div>
     <div>
@@ -23,9 +27,10 @@
         data-bs-toggle="modal"
         data-bs-target="#modalDialog"
       >
-        {{ likes }}
+        <span :class="isLiked ? 'text-danger' : ''">
+          {{ likes }}
+        </span>
       </a>
-      <span v-else>{{ likes }}</span>
     </div>
   </div>
 </template>

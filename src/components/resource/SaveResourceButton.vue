@@ -8,7 +8,7 @@
       :disabled="loading || !isAuthenticated"
     >
       <i class="bi bi-bookmark-fill text-primary me-1" v-if="isSaved"></i>
-      <i class="bi bi-bookmark me-1" v-else></i>
+      <i class="bi bi-bookmark me-1 dark-txt-white" v-else></i>
     </button>
   </div>
 </template>

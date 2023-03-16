@@ -3,11 +3,11 @@
     <div>
       <button class="btn btn-sm" :focus-visible="false" :focus="false">
         <i
-          class="bi bi-bar-chart-fill me-1"
+          class="bi bi-bar-chart-fill me-1 dark-txt-white"
           @click="redirect"
           v-if="resource.isConsulted"
         ></i>
-        <i class="bi bi-bar-chart" @click="redirect" v-else></i>
+        <i class="bi bi-bar-chart dark-txt-white" @click="redirect" v-else></i>
       </button>
     </div>
     <div>

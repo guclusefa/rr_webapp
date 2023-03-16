@@ -1,5 +1,5 @@
 // Dark theme colors
-$bg-color: #282c34;
-$bg-color-light: #3e4451;
-$txt-color: #ffffff;
-$txt-color-light: #dddddd;
+$bg-color: #131313;
+$bg-color-light: lighten($bg-color, 8%);
+$txt-color: #dddddd;
+$txt-color-light: lighten($txt-color, 20%);

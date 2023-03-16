@@ -31,7 +31,7 @@
             </div>
           </div>
           <div
-            class="text-muted pb-1"
+            class="text-muted pb-1 mt-2"
             v-if="profile.roles[0] || profile.gender || profile.state"
           >
             <span class="badge bg-dark me-1" v-if="profile.roles[0]">
@@ -44,7 +44,7 @@
               {{ profile.state.name }}
             </span>
           </div>
-          <div class="text-muted pb-1" v-if="profile.email">
+          <div class="text-muted pb-1 mt-2" v-if="profile.email">
             {{ profile.email }}
             <span class="badge bg-success me-1" v-if="profile.isVerified">
               {{ $t("user.verified") }}
@@ -54,7 +54,7 @@
             </span>
           </div>
           <div
-            class="text-muted pb-1"
+            class="text-muted pb-1 mt-2"
             v-if="profile.firstName || profile.lastName"
           >
             <template v-if="profile.firstName">{{
@@ -64,10 +64,10 @@
               " " + profile.lastName
             }}</template>
           </div>
-          <div class="text-muted pb-1 pre-line" v-if="profile.bio">
+          <div class="text-muted pb-1 mt-2 pre-line" v-if="profile.bio">
             {{ profile.bio }}
           </div>
-          <div class="text-muted pb-1" v-if="profile.birthDate">
+          <div class="text-muted pb-1 mt-2" v-if="profile.birthDate">
             {{
               $t(`user.age`, {
                 birthDate: formatDate(profile.birthDate),
@@ -75,7 +75,7 @@
               })
             }}
           </div>
-          <div class="text-muted pb-1" v-if="profile.createdAt">
+          <div class="text-muted pb-1 mt-2" v-if="profile.createdAt">
             {{
               $t(`user.member_since`, {
                 createdAt: formatDate(profile.createdAt),

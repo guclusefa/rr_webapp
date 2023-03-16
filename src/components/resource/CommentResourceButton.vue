@@ -6,10 +6,10 @@
           class="bi bi-chat-fill text-primary me-1"
           v-if="resource.isCommented"
         ></i>
-        <i class="bi bi-chat me-1" v-else></i>
+        <i class="bi bi-chat me-1 dark-txt-white" v-else></i>
       </button>
     </div>
-    <div>
+    <div :class="resource.isCommented ? 'text-primary' : ''">
       {{ resource.comments }}
     </div>
   </div>

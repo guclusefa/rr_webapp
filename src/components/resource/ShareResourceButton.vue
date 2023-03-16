@@ -12,7 +12,7 @@
           @click="toggleLike"
           v-if="isShared"
         ></i>
-        <i class="bi bi-repeat" @click="toggleLike" v-else></i>
+        <i class="bi bi-repeat dark-txt-white" @click="toggleLike" v-else></i>
       </button>
     </div>
     <div>
@@ -23,7 +23,9 @@
         data-bs-toggle="modal"
         data-bs-target="#modalDialog"
       >
+      <span :class="isShared ? 'text-success' : ''">
         {{ shares }}
+      </span>
       </a>
       <span v-else>{{ shares }}</span>
     </div>
