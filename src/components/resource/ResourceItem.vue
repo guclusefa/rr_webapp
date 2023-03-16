@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col">
           <div class="mb-3">
-            <div class="float-end">
+            <div class="float-end" v-if="canEdit">
               <ResourceActionsButton :resource="resource" />
             </div>
             <div class="mb-2">
