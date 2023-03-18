@@ -45,7 +45,8 @@
         "title": "Welcome to (Re)lational Resources",
         "description": "The (Re)lational Resources website allows you to consult, share, and create resources in order to facilitate access to information and promote exchange between people.",
         "resources": "The most popular resources to discover!",
-        "profiles": "The latest registered members, Welcome!"
+        "profiles": "The latest registered members, Welcome!",
+        "alert": "<strong>New :</strong> Now available on <a href='https://expo.dev/artifacts/eas/vtHCYk4Egkxw1qb6f3FFhg.apk' class='alert-link'>mobile devices</a> !"
     },
     "about": {
         "page": "About",
