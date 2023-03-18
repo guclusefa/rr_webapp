@@ -1,5 +1,10 @@
 <template>
   <section class="container">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <i class="bi bi-info-circle-fill me-2"></i
+      ><span v-html="$t('home.alert')"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
     <section class="mb-5">
       <div class="row mb-3">
         <div class="col">

@@ -84,7 +84,7 @@
                 {{ $t("profile.resources_exploitedby_title") }}
               </button>
             </li>
-            <li class="nav-item" v-if="isOwner">
+            <li class="nav-item" v-if="canEdit">
               <button
                 class="nav-link"
                 data-bs-toggle="tab"
@@ -93,7 +93,7 @@
                 {{ $t("profile.resources_sharedto_title") }}
               </button>
             </li>
-            <li class="nav-item" v-if="isOwner">
+            <li class="nav-item" v-if="canEdit">
               <button
                 class="nav-link"
                 data-bs-toggle="tab"
@@ -102,7 +102,7 @@
                 {{ $t("profile.resources_savedby_title") }}
               </button>
             </li>
-            <li class="nav-item" v-if="isOwner">
+            <li class="nav-item" v-if="canEdit">
               <button
                 class="nav-link"
                 data-bs-toggle="tab"

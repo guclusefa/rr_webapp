@@ -45,7 +45,8 @@
     "title": "Bienvenue sur le site des Ressources (Re)lationnelles",
     "description": "Le site des Ressources (Re)lationnelles permet de consulter, partager et créer des ressources afin de faciliter l'accès à l'information et de favoriser l'échange entre les personnes.",
     "resources": "Les resources les plus populaires, à découvrir !",
-    "profiles": "Les derniers membres inscrits, Bienvenue !"
+    "profiles": "Les derniers membres inscrits, Bienvenue !",
+    "alert": "<strong>Nouveauté :</strong> Désormais disponible en <a href='https://expo.dev/artifacts/eas/vtHCYk4Egkxw1qb6f3FFhg.apk' class='alert-link'>version mobile</a> ! "
   },
   "about": {
     "page": "À propos",

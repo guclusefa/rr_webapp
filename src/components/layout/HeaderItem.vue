@@ -12,6 +12,7 @@
             width="60"
             height="60"
             class="me-2"
+            style="border-radius: 5px"
           />
           {{ $t("app.name_short") }}
         </router-link>
