@@ -5,5 +5,5 @@
 ## Installation
 - Clone the repository
 - Install dependencies with `npm install`
-- Run the server on a development environment with `npm run dev`
-- Run the server on a production environment with `npm run start`
+- Run the server on a development environment with `npm run serve`
+- Run the server on a production environment with `npm run build`
